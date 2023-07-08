@@ -10,8 +10,9 @@ const LoadingScreen = ({ route }) => {
     const navigation = useNavigation();
     const { navigateTo } = route.params;
 
+    // useEffect will be executed once the DOM is painted
     useEffect(() => {
-        console.log("he");
+        // Internal to setTimeout will be executed after specified timeout
         setTimeout(() => {
             navigation.navigate(navigateTo);
         }, randomNumber(3, 7) * 1000);

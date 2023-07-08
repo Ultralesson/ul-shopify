@@ -13,7 +13,6 @@ const HomeScreen = () => {
                 <Text
                     onPress={() => {
                         navigation.navigate(LOADING_SCREEN, { navigateTo: HOME_SCREEN });
-                        console.log("hello");
                     }}
                     className="text-red-500"
                 >
