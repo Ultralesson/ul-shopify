@@ -33,7 +33,7 @@ const App = () => {
             <NavigationContainer>
                 {/* There is small issue in both Android and iOS that small portion of input fields is over-layed with keyboard on display - visit later to resolve this */}
                 <KeyboardAvoidingView style={{ flex: 1 }} behavior={Platform.OS === "ios" ? "padding" : null}>
-                    <Stack.Navigator initialRouteName={HOME_SCREEN}>
+                    <Stack.Navigator initialRouteName={REGISTRATION_SCREEN}>
                         <Stack.Screen name={HOME_SCREEN} component={HomeScreen} options={stackOptions(HOME_SCREEN)} />
                         <Stack.Screen
                             name={REGISTRATION_SCREEN}

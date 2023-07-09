@@ -76,7 +76,7 @@ const LoginScreen = () => {
                 </View>
                 <View className="flex-1 justify-between">
                     <View className="flex-1">
-                        <ScrollView className="mt-10 flex-1" showsVerticalScrollIndicator={false}>
+                        <View className="mt-10 flex-1" showsVerticalScrollIndicator={false}>
                             <CustomInput
                                 label="Email"
                                 value={inputs.email}
@@ -110,7 +110,14 @@ const LoginScreen = () => {
                                     handleErrors(undefined, "password");
                                 }}
                             />
-                        </ScrollView>
+                            <View className="flex-row justify-end -mt-5">
+                                <TouchableOpacity>
+                                    <Text className="font-bold" style={{ color: QUATERNARY }}>
+                                        Forgot Password?
+                                    </Text>
+                                </TouchableOpacity>
+                            </View>
+                        </View>
                     </View>
 
                     <AuthButtonSection
