@@ -13,13 +13,16 @@ const AuthButtonSection = ({ buttonText, authQuestionText, navigateToText, navig
                 style={{
                     backgroundColor: SECONDARY_COLOR,
                 }}
-                className="p-5 rounded-lg"
+                className="p-2 pt-3 pb-3 rounded-lg"
                 onPress={() => {
                     validate();
                 }}
             >
-                <Text className="text-xl font-bold text-center">{buttonText}</Text>
+                <Text className="text-lg font-bold text-center">{buttonText}</Text>
             </TouchableOpacity>
+            <View className="flex-row justify-center">
+                <View className="mt-2 w-10/12 border-b-[0.23px] border-solid border-gray-400"></View>
+            </View>
             <View className="flex-row justify-center mt-3">
                 <Text className="items-center font-bold">{authQuestionText}</Text>
                 <TouchableOpacity
