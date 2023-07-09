@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Text, View, ScrollView, TouchableOpacity, Keyboard, Alert } from "react-native";
+import { Text, View, ScrollView, TouchableOpacity, Keyboard, Alert, Button } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { useNavigation } from "@react-navigation/native";
 import * as Yup from "yup";
@@ -18,9 +18,13 @@ import CustomInput from "../../components/common/CustomInput";
 import { QUATERNARY, SECONDARY_COLOR } from "../../constants/colors";
 import { HOME_SCREEN, LOADING_SCREEN, LOGIN_SCREEN } from "../../constants/screens";
 import AuthButtonSection from "../../components/app/AuthButtonSection";
+import { useDispatch } from "react-redux";
+import { login } from "../../store/slices/authSlice";
+import { changeRegistrationModalState } from "../../store/slices/modalsSlice";
 
 const RegistrationScreen = () => {
     const navigation = useNavigation();
+    const dispatch = useDispatch();
 
     const [inputs, setInputs] = useState({
         fullName: null,
@@ -79,8 +83,13 @@ const RegistrationScreen = () => {
     };
 
     const register = () => {
-        console.log(inputs);
         // Store the data here...
+        console.log(inputs);
+
+        // API call to register user goes here...
+
+        dispatch(login({ type: "register", status: true })); // Setting the login state
+        dispatch(changeRegistrationModalState()); // On successful registration show the popup
 
         navigation.navigate(LOADING_SCREEN, { navigateTo: HOME_SCREEN });
     };

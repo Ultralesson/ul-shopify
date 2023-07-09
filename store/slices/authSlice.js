@@ -1,10 +1,9 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
-    isAuthorized: false,
-    userDetails: {
-        username: null,
-        email: null,
+    isAuthorized: {
+        type: null,
+        status: false,
     },
 };
 
@@ -12,14 +11,14 @@ export const authSlice = createSlice({
     name: "auth",
     initialState: initialState,
     reducers: {
-        // action.payload should be an object -> { username: string, email: string }
         login: (state, action) => {
-            state.isAuthorized = true;
-            state.userDetails = action.payload; // payload = { username: "abc", email: "abc@gmail.com" }
+            state.isAuthorized = { ...action.payload };
         },
         logout: (state, action) => {
-            state.isAuthorized = false;
-            state.userDetails = { username: null, email: null };
+            state.isAuthorized = { type: null, status: false };
+        },
+        get: (state, action) => {
+            state.typeOfAuth = action.payload;
         },
     },
 });
@@ -27,7 +26,6 @@ export const authSlice = createSlice({
 export const { login, logout } = authSlice.actions;
 
 // selectors
-const selectAuthState = (state) => state.auth.isAuthorized;
-const selectUserDetails = (state) => state.auth.userDetails;
+export const selectAuthState = (state) => state.auth.isAuthorized;
 
 export default authSlice.reducer;
