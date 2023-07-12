@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Text, View, ScrollView, TouchableOpacity, Keyboard, Alert, Button } from "react-native";
+import { Text, View, ScrollView, Keyboard, TouchableOpacity } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { useNavigation } from "@react-navigation/native";
 import * as Yup from "yup";
@@ -15,16 +15,19 @@ import {
 
 import CustomInput from "../../components/common/CustomInput";
 
-import { QUATERNARY, SECONDARY_COLOR } from "../../constants/colors";
-import { HOME_SCREEN, LOADING_SCREEN, LOGIN_SCREEN } from "../../constants/screens";
+import { QUATERNARY_COLOR } from "../../constants/colors";
+import { HOME_SCREEN, LOADING_SCREEN, LOGIN_SCREEN, PROFILE_SCREEN } from "../../constants/screens";
 import AuthButtonSection from "../../components/app/AuthButtonSection";
 import { useDispatch } from "react-redux";
 import { login } from "../../store/slices/authSlice";
 import { changeRegistrationModalState } from "../../store/slices/modalsSlice";
+import CustomBackButton from "../../components/common/CustomBackButton";
+import useKeyboardStatus from "../../custom-hooks/useKeyboardStatus";
 
 const RegistrationScreen = () => {
     const navigation = useNavigation();
     const dispatch = useDispatch();
+    const isKeyboardVisible = useKeyboardStatus();
 
     const [inputs, setInputs] = useState({
         fullName: null,
@@ -97,21 +100,38 @@ const RegistrationScreen = () => {
     return (
         <SafeAreaView>
             <View className="p-3 h-full">
-                <View className="mt-10">
-                    <View className="flex-row items-center justify-between">
-                        <View className="flex-row items-end">
-                            <Text className="font-bold text-4xl">Register</Text>
-                            <Text className="pb-1 ml-2 font-bold" style={{ color: QUATERNARY }}>
-                                <Text className="italic">to</Text> Ul-Shopify
-                            </Text>
+                <View className="mt-5">
+                    <View className="flex-row">
+                        <View className="mr-3 flex-row items-center">
+                            <CustomBackButton navigateTo={PROFILE_SCREEN} />
                         </View>
-                        <UserPlusIcon size="40" color="black" />
+
+                        <View className="flex-row items-center justify-between flex-1">
+                            <View className="flex-row items-end">
+                                <Text className="font-bold text-4xl">Register</Text>
+                                <View className="flex-row space-x-1 mb-1">
+                                    <Text className="italic ml-2" style={{ color: QUATERNARY_COLOR }}>
+                                        to
+                                    </Text>
+                                    <TouchableOpacity
+                                        onPress={() => {
+                                            navigation.navigate(HOME_SCREEN);
+                                        }}
+                                    >
+                                        <Text className="font-bold" style={{ color: QUATERNARY_COLOR }}>
+                                            Ul-Shopify
+                                        </Text>
+                                    </TouchableOpacity>
+                                </View>
+                            </View>
+                            <UserPlusIcon size="40" color="black" />
+                        </View>
                     </View>
                     <Text className="text-gray-400 text-base mt-1">Enter your details to Register</Text>
                 </View>
                 <View className="flex-1 justify-between">
                     <View className="flex-1">
-                        <ScrollView className="mt-10 flex-1" showsVerticalScrollIndicator={false}>
+                        <ScrollView className="mt-6 flex-1" showsVerticalScrollIndicator={false}>
                             <CustomInput
                                 label="Full Name"
                                 value={inputs.fullName}
@@ -197,13 +217,15 @@ const RegistrationScreen = () => {
                         </ScrollView>
                     </View>
 
-                    <AuthButtonSection
-                        buttonText="Register"
-                        authQuestionText="Already have an account?"
-                        navigateToText="Login"
-                        navigateTo={LOGIN_SCREEN}
-                        validate={validate}
-                    />
+                    {!isKeyboardVisible && (
+                        <AuthButtonSection
+                            buttonText="Register"
+                            authQuestionText="Already have an account?"
+                            navigateToText="Login"
+                            navigateTo={LOGIN_SCREEN}
+                            validate={validate}
+                        />
+                    )}
                 </View>
             </View>
         </SafeAreaView>

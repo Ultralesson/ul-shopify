@@ -2,9 +2,10 @@ import { useNavigation } from "@react-navigation/native";
 import React from "react";
 import { Text, View, TouchableOpacity } from "react-native";
 
-import { QUATERNARY, SECONDARY_COLOR } from "../../constants/colors";
+import { QUATERNARY_COLOR, SECONDARY_COLOR } from "../../constants/colors";
+import GoogleAuthSection from "./GoogleAuthSection";
 
-const AuthButtonSection = ({ buttonText, authQuestionText, navigateToText, navigateTo, validate }) => {
+const AuthButtonSection = ({ buttonText, authQuestionText, navigateToText, navigateTo, validate, shortTitle }) => {
     const navigation = useNavigation();
 
     return (
@@ -20,6 +21,9 @@ const AuthButtonSection = ({ buttonText, authQuestionText, navigateToText, navig
             >
                 <Text className="text-lg font-bold text-center">{buttonText}</Text>
             </TouchableOpacity>
+
+            <GoogleAuthSection />
+
             <View className="flex-row justify-center">
                 <View className="mt-2 w-10/12 border-b-[0.23px] border-solid border-gray-400"></View>
             </View>
@@ -31,7 +35,7 @@ const AuthButtonSection = ({ buttonText, authQuestionText, navigateToText, navig
                         navigation.navigate(navigateTo);
                     }}
                 >
-                    <Text className="font-bold underline" style={{ color: QUATERNARY }}>
+                    <Text className="font-bold underline" style={{ color: QUATERNARY_COLOR }}>
                         {navigateToText}
                     </Text>
                 </TouchableOpacity>

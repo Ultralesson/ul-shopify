@@ -1,8 +1,7 @@
 import { useNavigation } from "@react-navigation/native";
 import React from "react";
-import { Text, View, Image, Button } from "react-native";
+import { Text, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
-import { HOME_SCREEN, LOADING_SCREEN } from "../../constants/screens";
 import CustomMessageModal from "../../components/common/CustomMessageModal";
 import { selectRegistrationModalState } from "../../store/slices/modalsSlice";
 import { useSelector } from "react-redux";
@@ -23,15 +22,9 @@ const HomeScreen = () => {
                     messages={["Registration is successful", "Welcome to Ul-Shopify"]}
                 />
             )}
-            <View>
-                <Text
-                    onPress={() => {
-                        navigation.navigate(LOADING_SCREEN, { navigateTo: HOME_SCREEN });
-                    }}
-                    className="text-red-500"
-                >
-                    Ul Shopify
-                </Text>
+            <View className="flex h-full justify-center items-center">
+                <Text className="font-bold text-xl">Welcome to UI-Shopify</Text>
+                <Text className="italic">Coming soon...</Text>
             </View>
         </SafeAreaView>
     );

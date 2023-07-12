@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import { Text, TouchableOpacity, View } from "react-native";
 import { Modal } from "react-native";
 import * as Animatable from "react-native-animatable";

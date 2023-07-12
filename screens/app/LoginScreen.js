@@ -8,12 +8,15 @@ import { EnvelopeIcon, LockClosedIcon, ArrowRightOnRectangleIcon } from "react-n
 
 import CustomInput from "../../components/common/CustomInput";
 
-import { QUATERNARY, SECONDARY_COLOR } from "../../constants/colors";
-import { HOME_SCREEN, LOADING_SCREEN, REGISTRATION_SCREEN } from "../../constants/screens";
+import { QUATERNARY_COLOR } from "../../constants/colors";
+import { HOME_SCREEN, LOADING_SCREEN, PROFILE_SCREEN, REGISTRATION_SCREEN } from "../../constants/screens";
 import AuthButtonSection from "../../components/app/AuthButtonSection";
+import CustomBackButton from "../../components/common/CustomBackButton";
+import useKeyboardStatus from "../../custom-hooks/useKeyboardStatus";
 
 const LoginScreen = () => {
     const navigation = useNavigation();
+    const isKeyboardVisible = useKeyboardStatus();
 
     const [inputs, setInputs] = useState({
         email: null,
@@ -56,27 +59,42 @@ const LoginScreen = () => {
         console.log(inputs);
         // Actual authentication to be done here...
 
-        navigation.navigate(LOADING_SCREEN, { navigateTo: HOME_SCREEN });
+        navigation.navigate(LOADING_SCREEN, { navigateTo: "home-tab-navigator" });
     };
 
     return (
         <SafeAreaView>
             <View className="p-3 h-full">
-                <View className="mt-10">
-                    <View className="flex-row items-center justify-between">
-                        <View className="flex-row items-end">
+                <View className="mt-5">
+                    <View className="flex-row">
+                        <View className="mr-3 flex-row items-center">
+                            <CustomBackButton navigateTo={PROFILE_SCREEN} />
+                        </View>
+
+                        <View className="flex-row items-end flex-1">
                             <Text className="font-bold text-4xl">Login</Text>
-                            <Text className="pb-1 ml-2 font-bold" style={{ color: QUATERNARY }}>
-                                <Text className="italic">to</Text> Ul-Shopify
-                            </Text>
+                            <View className="flex-row space-x-1 mb-1">
+                                <Text className="italic ml-2" style={{ color: QUATERNARY_COLOR }}>
+                                    to
+                                </Text>
+                                <TouchableOpacity
+                                    onPress={() => {
+                                        navigation.navigate(HOME_SCREEN);
+                                    }}
+                                >
+                                    <Text className="font-bold" style={{ color: QUATERNARY_COLOR }}>
+                                        Ul-Shopify
+                                    </Text>
+                                </TouchableOpacity>
+                            </View>
                         </View>
                         <ArrowRightOnRectangleIcon size="40" color="black" />
                     </View>
                     <Text className="text-gray-400 text-base mt-1">Enter your details to Register</Text>
                 </View>
                 <View className="flex-1 justify-between">
-                    <View className="flex-1">
-                        <View className="mt-10 flex-1" showsVerticalScrollIndicator={false}>
+                    <ScrollView className="flex-1">
+                        <View className="mt-6 flex-1" showsVerticalScrollIndicator={false}>
                             <CustomInput
                                 label="Email"
                                 value={inputs.email}
@@ -112,21 +130,23 @@ const LoginScreen = () => {
                             />
                             <View className="flex-row justify-end -mt-5">
                                 <TouchableOpacity>
-                                    <Text className="font-bold" style={{ color: QUATERNARY }}>
+                                    <Text className="font-bold" style={{ color: QUATERNARY_COLOR }}>
                                         Forgot Password?
                                     </Text>
                                 </TouchableOpacity>
                             </View>
                         </View>
-                    </View>
+                    </ScrollView>
 
-                    <AuthButtonSection
-                        buttonText="Login"
-                        authQuestionText="Don't have an account?"
-                        navigateToText="Register"
-                        navigateTo={REGISTRATION_SCREEN}
-                        validate={validate}
-                    />
+                    {!isKeyboardVisible && (
+                        <AuthButtonSection
+                            buttonText="Login"
+                            authQuestionText="Don't have an account?"
+                            navigateToText="Register"
+                            navigateTo={REGISTRATION_SCREEN}
+                            validate={validate}
+                        />
+                    )}
                 </View>
             </View>
         </SafeAreaView>

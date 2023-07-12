@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Text, TextInput, View, TouchableOpacity } from "react-native";
 import { EyeIcon, EyeSlashIcon } from "react-native-heroicons/outline";
-import { QUATERNARY } from "../../constants/colors";
+import { QUATERNARY_COLOR } from "../../constants/colors";
 
 const CustomInput = ({
     label,
@@ -21,7 +21,7 @@ const CustomInput = ({
 
     return (
         <View className="mb-5">
-            <Text className="mb-2 font-bold" style={{ color: QUATERNARY }}>
+            <Text className="mb-2 font-bold" style={{ color: QUATERNARY_COLOR }}>
                 {label}
             </Text>
 
