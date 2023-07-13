@@ -23,8 +23,12 @@ const HomeScreen = () => {
                 />
             )}
             <View className="flex h-full justify-center items-center">
-                <Text className="font-bold text-xl">Welcome to UI-Shopify</Text>
-                <Text className="italic">Coming soon...</Text>
+                <Text testID="welcome-message" accessibilityLabel="welcome-message" className="font-bold text-xl">
+                    Welcome to UI-Shopify
+                </Text>
+                <Text testID="coming-soon-message" accessibilityLabel="coming-soon-message" className="italic">
+                    Coming soon...
+                </Text>
             </View>
         </SafeAreaView>
     );

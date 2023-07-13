@@ -104,7 +104,6 @@ const getTabBarVisibility = (route) => {
     if (excludeTabNavigatorForDefaultTabScreens.includes(route.name)) {
         return "none";
     }
-    console.log(route, routeName)
     const toIncludeTheTabNavigator = [HOME_SCREEN, PROFILE_SCREEN]; // Include the screens in which we need to show tab navigator
     return routeName === undefined || toIncludeTheTabNavigator.includes(routeName) ? "flex" : "none";
 };
