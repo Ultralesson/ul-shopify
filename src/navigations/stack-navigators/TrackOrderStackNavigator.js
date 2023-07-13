@@ -3,7 +3,7 @@ import { createStackNavigator } from "@react-navigation/stack";
 import TrackOrderScreen from "../../screens/app/TrackOrderScreen";
 import LoadingScreen from "../../screens/common/LoadingScreen";
 
-import { LOADING_SCREEN, TRACK_ORDER_SCREEN } from "../../constants/screens";
+import { LOADING_SCREEN, TRACK_ORDER_SCREEN } from "../../../constants/screens";
 
 const Stack = createStackNavigator();
 

@@ -13,16 +13,16 @@ import {
     UserPlusIcon,
 } from "react-native-heroicons/outline";
 
-import CustomInput from "../../components/common/CustomInput";
+import CustomInput from "../../../components/common/CustomInput";
 
-import { QUATERNARY_COLOR } from "../../constants/colors";
-import { HOME_SCREEN, LOADING_SCREEN, LOGIN_SCREEN, PROFILE_SCREEN } from "../../constants/screens";
-import AuthButtonSection from "../../components/app/AuthButtonSection";
+import { QUATERNARY_COLOR } from "../../../constants/colors";
+import { HOME_SCREEN, LOADING_SCREEN, LOGIN_SCREEN, PROFILE_SCREEN } from "../../../constants/screens";
+import AuthButtonSection from "../../../components/app/AuthButtonSection";
 import { useDispatch } from "react-redux";
 import { login } from "../../store/slices/authSlice";
 import { changeRegistrationModalState } from "../../store/slices/modalsSlice";
-import CustomBackButton from "../../components/common/CustomBackButton";
-import useKeyboardStatus from "../../custom-hooks/useKeyboardStatus";
+import CustomBackButton from "../../../components/common/CustomBackButton";
+import useKeyboardStatus from "../../../custom-hooks/useKeyboardStatus";
 
 const RegistrationScreen = () => {
     const navigation = useNavigation();

@@ -2,10 +2,10 @@ import { useNavigation } from "@react-navigation/native";
 import React from "react";
 import { Text, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
-import CustomMessageModal from "../../components/common/CustomMessageModal";
-import { selectRegistrationModalState } from "../../store/slices/modalsSlice";
+import CustomMessageModal from "../../../components/common/CustomMessageModal";
+import { selectRegistrationModalState } from "../../../store/slices/modalsSlice";
 import { useSelector } from "react-redux";
-import { selectAuthState } from "../../store/slices/authSlice";
+import { selectAuthState } from "../../../store/slices/authSlice";
 
 const HomeScreen = () => {
     const navigation = useNavigation();

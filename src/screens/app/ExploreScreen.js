@@ -2,11 +2,11 @@ import React from "react";
 import { Text, TextInput, View } from "react-native";
 import { ChevronLeftIcon, MagnifyingGlassIcon } from "react-native-heroicons/outline";
 import { SafeAreaView } from "react-native-safe-area-context";
-import { ICON_SIZE_SMALL } from "../../constants/sizes";
-import { ICON_COLOR } from "../../constants/colors";
+import { ICON_SIZE_SMALL } from "../../../constants/sizes";
+import { ICON_COLOR } from "../../../constants/colors";
 import { TouchableOpacity } from "react-native-gesture-handler";
 import { useNavigation } from "@react-navigation/native";
-import { HOME_SCREEN } from "../../constants/screens";
+import { HOME_SCREEN } from "../../../constants/screens";
 
 const EXPLORE = {
     BACK_BUTTON: "btn-explore-back",
