@@ -6,16 +6,20 @@ import { QUATERNARY_COLOR, SECONDARY_COLOR } from "../../../constants/colors";
 import { TextInput } from "react-native-gesture-handler";
 import useKeyboardStatus from "../../hooks/useKeyboardStatus";
 import CustomButton from "../../components/common/CustomButton";
-import { HOME_TAB, LOADING_SCREEN } from "../../../constants/screens";
+import { HOME_TAB, LOADING_SCREEN, PROFILE_SCREEN } from "../../../constants/screens";
 import { useNavigation } from "@react-navigation/native";
+import { useDispatch } from "react-redux";
+import { changeQuitActionModal } from "../../store/slices/modalsSlice";
 
 const OtpScreen = () => {
     const OTP_TIMEOUT = 5;
 
-    const [counter, setCounter] = useState(OTP_TIMEOUT);
     const keyboardStatus = useKeyboardStatus();
-    const [verify, setVerify] = useState(false);
     const navigation = useNavigation();
+    const dispatch = useDispatch();
+
+    const [verify, setVerify] = useState(false);
+    const [counter, setCounter] = useState(OTP_TIMEOUT);
 
     const otpField1 = useRef(null);
     const otpField2 = useRef(null);
@@ -52,7 +56,17 @@ const OtpScreen = () => {
     return (
         <SafeAreaView className="bg-white flex-1">
             <View className="mt-5 ml-3 z-10">
-                <CustomBackButton />
+                <CustomBackButton
+                    onBackPress={() => {
+                        dispatch(
+                            changeQuitActionModal({
+                                question: "Do you want to quit ?",
+                                status: true,
+                                screen: PROFILE_SCREEN,
+                            })
+                        );
+                    }}
+                />
             </View>
             <View className="flex justify-center items-center">
                 <Image

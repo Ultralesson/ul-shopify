@@ -3,14 +3,10 @@ import React from "react";
 import { TouchableOpacity } from "react-native-gesture-handler";
 import { ChevronLeftIcon } from "react-native-heroicons/outline";
 
-const CustomBackButton = ({ navigateTo }) => {
+const CustomBackButton = ({ onBackPress }) => {
     const navigation = useNavigation();
     return (
-        <TouchableOpacity
-            onPress={() => {
-                navigation.navigate(navigateTo);
-            }}
-        >
+        <TouchableOpacity onPress={onBackPress}>
             <ChevronLeftIcon class size={30} color="black" />
         </TouchableOpacity>
     );

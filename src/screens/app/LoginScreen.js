@@ -68,7 +68,11 @@ const LoginScreen = () => {
                 <View className="mt-5">
                     <View className="flex-row">
                         <View className="mr-3 flex-row items-center">
-                            <CustomBackButton navigateTo={PROFILE_SCREEN} />
+                            <CustomBackButton
+                                onBackPress={() => {
+                                    navigation.navigate(PROFILE_SCREEN);
+                                }}
+                            />
                         </View>
 
                         <View className="flex-row items-end flex-1">

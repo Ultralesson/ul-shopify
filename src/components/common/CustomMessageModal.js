@@ -12,7 +12,10 @@ const CustomMessageModal = ({ gifOrImage, selector, typeOfMessage, messages }) =
 
     return (
         <Modal transparent visible={modalState}>
-            <View className="flex-1 justify-center items-center">
+            <View
+                className="flex-1 justify-center items-center"
+                style={{ backgroundColor: "rgba(128, 128, 128, 0.5)" }}
+            >
                 <View className="bg-white rounded-xl">
                     <View className="mt-3 mr-5 flex-row justify-end">
                         <TouchableOpacity onPress={() => dispatch(changeRegistrationModalState())}>
