@@ -9,13 +9,7 @@ import { EnvelopeIcon, LockClosedIcon, ArrowRightOnRectangleIcon } from "react-n
 import CustomInput from "../../components/common/CustomInput";
 
 import { QUATERNARY_COLOR } from "../../../constants/colors";
-import {
-    HOME_SCREEN,
-    LOADING_SCREEN,
-    OTP_SCREEN,
-    PROFILE_SCREEN,
-    REGISTRATION_SCREEN,
-} from "../../../constants/screens";
+import { HOME_SCREEN, LOADING_SCREEN, OTP_SCREEN, PROFILE_SCREEN } from "../../../constants/screens";
 import AuthButtonSection from "../../components/app/AuthButtonSection";
 import CustomBackButton from "../../components/common/CustomBackButton";
 import useKeyboardStatus from "../../hooks/useKeyboardStatus";
@@ -53,7 +47,7 @@ const LoginScreen = () => {
 
         try {
             await validationSchema.validate(inputs, { abortEarly: false });
-            register();
+            login();
         } catch (error) {
             error.inner.forEach((err) => {
                 handleErrors(err.message, err.path);
@@ -61,11 +55,11 @@ const LoginScreen = () => {
         }
     };
 
-    const register = () => {
+    const login = () => {
         console.log(inputs);
         // Actual authentication to be done here...
 
-        navigation.navigate(LOADING_SCREEN, { navigateTo: HOME_SCREEN });
+        navigation.navigate(LOADING_SCREEN, { navigateTo: OTP_SCREEN });
     };
 
     return (

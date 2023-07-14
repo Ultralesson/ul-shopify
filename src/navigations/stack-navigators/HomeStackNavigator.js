@@ -12,6 +12,7 @@ const stackOptions = (screen) => {
     switch (screen) {
         case HOME_SCREEN:
         case LOADING_SCREEN:
+        case EXPLORE_SCREEN:
             return {
                 headerShown: false,
             };
@@ -23,7 +24,7 @@ export const HomeStackNavigator = () => {
         <Stack.Navigator initialRouteName={HOME_SCREEN}>
             <Stack.Screen name={HOME_SCREEN} component={HomeScreen} options={stackOptions(HOME_SCREEN)} />
             <Stack.Screen name={LOADING_SCREEN} component={LoadingScreen} options={stackOptions(LOADING_SCREEN)} />
-            <Stack.Screen name={EXPLORE_SCREEN} component={ExploreScreen} options={stackOptions(LOADING_SCREEN)} />
+            <Stack.Screen name={EXPLORE_SCREEN} component={ExploreScreen} options={stackOptions(EXPLORE_SCREEN)} />
         </Stack.Navigator>
     );
 };

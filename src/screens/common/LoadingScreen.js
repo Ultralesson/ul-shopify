@@ -19,7 +19,7 @@ const LoadingScreen = ({ route }) => {
                 navigation.navigate(navigateTo);
             }, randomNumber(3, 7) * 1000);
         }
-    }, []);
+    }, [navigateTo]);
 
     return (
         <SafeAreaView className="flex flex-1 items-center justify-center">

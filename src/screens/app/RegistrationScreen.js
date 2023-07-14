@@ -16,7 +16,7 @@ import {
 import CustomInput from "../../components/common/CustomInput";
 
 import { QUATERNARY_COLOR } from "../../../constants/colors";
-import { HOME_SCREEN, LOADING_SCREEN, LOGIN_SCREEN, PROFILE_SCREEN } from "../../../constants/screens";
+import { HOME_SCREEN, LOADING_SCREEN, LOGIN_SCREEN, OTP_SCREEN, PROFILE_SCREEN } from "../../../constants/screens";
 import AuthButtonSection from "../../components/app/AuthButtonSection";
 import { useDispatch } from "react-redux";
 import { login } from "../../store/slices/authSlice";
@@ -94,7 +94,7 @@ const RegistrationScreen = () => {
         dispatch(login({ type: "register", status: true })); // Setting the login state
         dispatch(changeRegistrationModalState()); // On successful registration show the popup
 
-        navigation.navigate(LOADING_SCREEN, { navigateTo: HOME_SCREEN });
+        navigation.navigate(LOADING_SCREEN, { navigateTo: OTP_SCREEN });
     };
 
     return (

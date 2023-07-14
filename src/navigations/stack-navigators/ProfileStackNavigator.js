@@ -42,8 +42,8 @@ export const ProfileStackNavigator = () => {
             />
             <Stack.Screen name={LOGIN_SCREEN} component={LoginScreen} options={stackOptions(LOGIN_SCREEN)} />
             <Stack.Screen name={LOADING_SCREEN} component={LoadingScreen} options={stackOptions(LOADING_SCREEN)} />
-            <Stack.Screen name={HOME_SCREEN} component={HomeScreen} options={stackOptions(HOME_SCREEN)} />
             <Stack.Screen name={OTP_SCREEN} component={OtpScreen} options={stackOptions(OTP_SCREEN)} />
+            <Stack.Screen name={HOME_SCREEN} component={HomeScreen} options={stackOptions(HOME_SCREEN)} />
         </Stack.Navigator>
     );
 };

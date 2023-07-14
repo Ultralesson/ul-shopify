@@ -6,7 +6,8 @@ import { QUATERNARY_COLOR, SECONDARY_COLOR } from "../../../constants/colors";
 import { TextInput } from "react-native-gesture-handler";
 import useKeyboardStatus from "../../hooks/useKeyboardStatus";
 import CustomButton from "../../components/common/CustomButton";
-import { HOME_SCREEN } from "../../../constants/screens";
+import { HOME_TAB, LOADING_SCREEN } from "../../../constants/screens";
+import { useNavigation } from "@react-navigation/native";
 
 const OtpScreen = () => {
     const OTP_TIMEOUT = 5;
@@ -14,6 +15,7 @@ const OtpScreen = () => {
     const [counter, setCounter] = useState(OTP_TIMEOUT);
     const keyboardStatus = useKeyboardStatus();
     const [verify, setVerify] = useState(false);
+    const navigation = useNavigation();
 
     const otpField1 = useRef(null);
     const otpField2 = useRef(null);
@@ -113,7 +115,14 @@ const OtpScreen = () => {
                     </Text>
                 </View>
             </View>
-            <CustomButton text="Verify" disabled={verify} navigateTo={HOME_SCREEN} />
+            <CustomButton
+                text="Verify"
+                disabled={verify}
+                navigateTo={() => {
+                    // Handle if the OTP is incorrect issue then we should not navigate to home tab screen
+                    navigation.navigate(LOADING_SCREEN, { navigateTo: HOME_TAB });
+                }}
+            />
         </SafeAreaView>
     );
 };
