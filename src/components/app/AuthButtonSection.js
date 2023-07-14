@@ -2,8 +2,9 @@ import { useNavigation } from "@react-navigation/native";
 import React from "react";
 import { Text, View, TouchableOpacity } from "react-native";
 
-import { QUATERNARY_COLOR, SECONDARY_COLOR } from "../../constants/colors";
+import { QUATERNARY_COLOR, SECONDARY_COLOR } from "../../../constants/colors";
 import GoogleAuthSection from "./GoogleAuthSection";
+import { HOME_SCREEN } from "../../../constants/screens";
 
 const AuthButtonSection = ({ buttonText, authQuestionText, navigateToText, navigateTo, validate, shortTitle }) => {
     const navigation = useNavigation();

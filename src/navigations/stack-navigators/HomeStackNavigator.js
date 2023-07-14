@@ -3,7 +3,7 @@ import { createStackNavigator } from "@react-navigation/stack";
 import HomeScreen from "../../screens/app/HomeScreen";
 import LoadingScreen from "../../screens/common/LoadingScreen";
 
-import { EXPLORE_SCREEN, HOME_SCREEN, LOADING_SCREEN } from "../../constants/screens";
+import { EXPLORE_SCREEN, HOME_SCREEN, LOADING_SCREEN } from "../../../constants/screens";
 import ExploreScreen from "../../screens/app/ExploreScreen";
 
 const Stack = createStackNavigator();

@@ -8,11 +8,17 @@ import { EnvelopeIcon, LockClosedIcon, ArrowRightOnRectangleIcon } from "react-n
 
 import CustomInput from "../../components/common/CustomInput";
 
-import { QUATERNARY_COLOR } from "../../constants/colors";
-import { HOME_SCREEN, LOADING_SCREEN, PROFILE_SCREEN, REGISTRATION_SCREEN } from "../../constants/screens";
+import { QUATERNARY_COLOR } from "../../../constants/colors";
+import {
+    HOME_SCREEN,
+    LOADING_SCREEN,
+    OTP_SCREEN,
+    PROFILE_SCREEN,
+    REGISTRATION_SCREEN,
+} from "../../../constants/screens";
 import AuthButtonSection from "../../components/app/AuthButtonSection";
 import CustomBackButton from "../../components/common/CustomBackButton";
-import useKeyboardStatus from "../../custom-hooks/useKeyboardStatus";
+import useKeyboardStatus from "../../hooks/useKeyboardStatus";
 
 const LoginScreen = () => {
     const navigation = useNavigation();
@@ -59,7 +65,7 @@ const LoginScreen = () => {
         console.log(inputs);
         // Actual authentication to be done here...
 
-        navigation.navigate(LOADING_SCREEN, { navigateTo: "home-tab-navigator" });
+        navigation.navigate(LOADING_SCREEN, { navigateTo: HOME_SCREEN });
     };
 
     return (
@@ -143,7 +149,7 @@ const LoginScreen = () => {
                             buttonText="Login"
                             authQuestionText="Don't have an account?"
                             navigateToText="Register"
-                            navigateTo={REGISTRATION_SCREEN}
+                            navigateTo={HOME_SCREEN}
                             validate={validate}
                         />
                     )}

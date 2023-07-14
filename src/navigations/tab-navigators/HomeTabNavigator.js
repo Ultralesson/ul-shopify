@@ -12,7 +12,7 @@ import {
     TRACK_ORDER_TAB,
     HOME_SCREEN,
     PROFILE_SCREEN,
-} from "../../constants/screens";
+} from "../../../constants/screens";
 import {
     HomeIcon,
     MagnifyingGlassIcon,
@@ -20,7 +20,7 @@ import {
     TruckIcon,
     UserCircleIcon,
 } from "react-native-heroicons/outline";
-import { SECONDARY_COLOR } from "../../constants/colors";
+import { SECONDARY_COLOR } from "../../../constants/colors";
 import ExploreStackNavigator from "../stack-navigators/ExploreStackNavigator";
 import CartStackNavigator from "../stack-navigators/CartStackNavigator";
 import TrackOrderStackNavigator from "../stack-navigators/TrackOrderStackNavigator";
@@ -32,7 +32,6 @@ const HomeTabNavigator = () => {
         <>
             <Tab.Navigator
                 screenOptions={{
-                    tabBarShowLabel: false,
                     headerShown: false,
                     unmountOnBlur: true,
                     tabBarActiveTintColor: SECONDARY_COLOR,
@@ -44,6 +43,7 @@ const HomeTabNavigator = () => {
                     name={HOME_TAB}
                     component={HomeStackNavigator}
                     options={{
+                        tabBarLabel: "Home",
                         tabBarIcon: ({ size, color }) => {
                             return <HomeIcon size={size} color={color} />;
                         },
@@ -53,6 +53,12 @@ const HomeTabNavigator = () => {
                     name={CART_TAB}
                     component={CartStackNavigator}
                     options={{
+                        tabBarLabel: "Cart",
+                        tabBarBadge: 0,
+                        tabBarBadgeStyle: {
+                            backgroundColor: SECONDARY_COLOR,
+                            color: "gray",
+                        },
                         tabBarIcon: ({ size, color }) => {
                             return <ShoppingCartIcon size={size} color={color} />;
                         },
@@ -62,6 +68,7 @@ const HomeTabNavigator = () => {
                     name={EXPLORE_TAB}
                     component={ExploreStackNavigator}
                     options={({ route }) => ({
+                        tabBarLabel: "Explore",
                         tabBarStyle: {
                             display: getTabBarVisibility(route),
                         },
@@ -74,6 +81,7 @@ const HomeTabNavigator = () => {
                     name={TRACK_ORDER_TAB}
                     component={TrackOrderStackNavigator}
                     options={{
+                        tabBarLabel: "Track",
                         tabBarIcon: ({ size, color }) => {
                             return <TruckIcon size={size} color={color} />;
                         },
@@ -83,6 +91,7 @@ const HomeTabNavigator = () => {
                     name={PROFILE_TAB}
                     component={ProfileStackNavigator}
                     options={({ route }) => ({
+                        tabBarLabel: "Profile",
                         tabBarStyle: {
                             display: getTabBarVisibility(route),
                         },

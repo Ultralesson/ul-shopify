@@ -2,8 +2,8 @@ import { useNavigation } from "@react-navigation/native";
 import React, { useEffect } from "react";
 import { Text, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
-import { LOGIN_SCREEN, REGISTRATION_SCREEN } from "../../constants/screens";
-import { SECONDARY_COLOR } from "../../constants/colors";
+import { LOGIN_SCREEN, REGISTRATION_SCREEN } from "../../../constants/screens";
+import { SECONDARY_COLOR } from "../../../constants/colors";
 import { TouchableOpacity } from "react-native-gesture-handler";
 
 const ProfileScreen = () => {

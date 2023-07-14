@@ -4,7 +4,7 @@ import { SafeAreaView } from "react-native-safe-area-context";
 import * as Progress from "react-native-progress";
 import { Text } from "react-native";
 
-import { randomNumber } from "../../utilities/mathHelpers";
+import { randomNumber } from "../../../utilities/mathHelpers";
 
 const LoadingScreen = ({ route }) => {
     const navigation = useNavigation();

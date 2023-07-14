@@ -1,6 +1,6 @@
 import React from "react";
 import { View, Text, Image } from "react-native";
-import useKeyboardStatus from "../../custom-hooks/useKeyboardStatus";
+import useKeyboardStatus from "../../hooks/useKeyboardStatus";
 import { TouchableOpacity } from "react-native-gesture-handler";
 
 const GoogleAuthSection = () => {
@@ -17,7 +17,7 @@ const GoogleAuthSection = () => {
                     </View>
                     <View className="flex-row justify-start items-center">
                         <TouchableOpacity>
-                            <Image source={require("../../assets/icons/googleAuth.png")} className="h-10 w-10" />
+                            <Image source={require("../../../assets/icons/googleAuth.png")} className="h-10 w-10" />
                         </TouchableOpacity>
                     </View>
                 </View>

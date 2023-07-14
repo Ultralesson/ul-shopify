@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Text, TextInput, View, TouchableOpacity } from "react-native";
 import { EyeIcon, EyeSlashIcon } from "react-native-heroicons/outline";
-import { QUATERNARY_COLOR } from "../../constants/colors";
+import { QUATERNARY_COLOR } from "../../../constants/colors";
 
 const CustomInput = ({
     label,

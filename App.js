@@ -3,9 +3,9 @@ import { NavigationContainer } from "@react-navigation/native";
 import { Provider } from "react-redux";
 import { KeyboardAvoidingView, Platform } from "react-native";
 
-import { store } from "./store/store";
+import { store } from "./src/store/store";
 
-import HomeTabNavigator from "./navigations/tab-navigators/HomeTabNavigator";
+import HomeTabNavigator from "./src/navigations/tab-navigators/HomeTabNavigator";
 
 const App = () => {
     return (

@@ -12,3 +12,4 @@ export const PROFILE_SCREEN = "profile-screen";
 export const EXPLORE_SCREEN = "explore-screen";
 export const CART_SCREEN = "cart-screen";
 export const TRACK_ORDER_SCREEN = "track-order-screen";
+export const OTP_SCREEN = "otp-screen";
