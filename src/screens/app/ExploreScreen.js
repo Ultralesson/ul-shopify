@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Text, TextInput, View } from "react-native";
 import { ChevronLeftIcon, MagnifyingGlassIcon } from "react-native-heroicons/outline";
 import { SafeAreaView } from "react-native-safe-area-context";
@@ -6,7 +6,9 @@ import { ICON_SIZE_SMALL } from "../../../constants/sizes";
 import { ICON_COLOR } from "../../../constants/colors";
 import { TouchableOpacity } from "react-native-gesture-handler";
 import { useNavigation } from "@react-navigation/native";
-import { HOME_SCREEN } from "../../../constants/screens";
+import { EXPLORE_SCREEN, HOME_SCREEN, HOME_TAB } from "../../../constants/screens";
+import { useDispatch } from "react-redux";
+import { screenStack } from "../../store/slices/appStateSlice";
 
 const EXPLORE = {
     BACK_BUTTON: "btn-explore-back",
@@ -16,6 +18,11 @@ const EXPLORE = {
 
 const ExploreScreen = () => {
     const navigation = useNavigation();
+    const dispatch = useDispatch();
+
+    useEffect(() => {
+        dispatch(screenStack({ screen: EXPLORE_SCREEN, to: "push" }));
+    }, []);
 
     return (
         <SafeAreaView>
@@ -26,7 +33,7 @@ const ExploreScreen = () => {
                         accessibilityLabel={EXPLORE.BACK_BUTTON}
                         className="mr-2"
                         onPress={() => {
-                            navigation.navigate(HOME_SCREEN);
+                            navigation.navigate(HOME_TAB);
                         }}
                     >
                         <ChevronLeftIcon size={ICON_SIZE_SMALL} color={ICON_COLOR} />

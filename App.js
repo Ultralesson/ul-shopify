@@ -6,7 +6,7 @@ import { KeyboardAvoidingView, Platform } from "react-native";
 import { store } from "./src/store/store";
 
 import HomeTabNavigator from "./src/navigations/tab-navigators/HomeTabNavigator";
-import Modals from "./src/modals/Modals"
+import Modals from "./src/modals/Modals";
 
 const App = () => {
     return (

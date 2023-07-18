@@ -1,15 +1,22 @@
 import { useNavigation } from "@react-navigation/native";
-import React from "react";
+import React, { useEffect } from "react";
 import { Text, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import CustomMessageModal from "../../components/common/CustomMessageModal";
 import { selectRegistrationModalState } from "../../store/slices/modalsSlice";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { selectAuthState } from "../../store/slices/authSlice";
+import { screenStack } from "../../store/slices/appStateSlice";
+import { HOME_SCREEN } from "../../../constants/screens";
 
 const HomeScreen = () => {
     const navigation = useNavigation();
     const isAuthorized = useSelector(selectAuthState);
+    const dispatch = useDispatch();
+
+    useEffect(() => {
+        dispatch(screenStack({ screen: HOME_SCREEN, to: "push" }));
+    }, []);
 
     return (
         <SafeAreaView>

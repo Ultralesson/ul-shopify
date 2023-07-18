@@ -2,14 +2,20 @@ import { useNavigation } from "@react-navigation/native";
 import React, { useEffect } from "react";
 import { Text, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
-import { LOGIN_SCREEN, REGISTRATION_SCREEN } from "../../../constants/screens";
+import { LOGIN_SCREEN, PROFILE_SCREEN, REGISTRATION_SCREEN } from "../../../constants/screens";
 import { SECONDARY_COLOR } from "../../../constants/colors";
 import { TouchableOpacity } from "react-native-gesture-handler";
+import { screenStack } from "../../store/slices/appStateSlice";
+import { useDispatch } from "react-redux";
 
 const ProfileScreen = () => {
     const navigation = useNavigation();
+    const dispatch = useDispatch();
 
-    useEffect(() => {}, []);
+    useEffect(() => {
+        console.log("he")
+        dispatch(screenStack({ screen: PROFILE_SCREEN, to: "push" }));
+    }, []);
 
     return (
         <SafeAreaView>

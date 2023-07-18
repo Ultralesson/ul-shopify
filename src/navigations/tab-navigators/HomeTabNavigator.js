@@ -1,4 +1,4 @@
-import { getFocusedRouteNameFromRoute } from "@react-navigation/native";
+import { getFocusedRouteNameFromRoute, useNavigation } from "@react-navigation/native";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 
 import HomeStackNavigator from "../stack-navigators/HomeStackNavigator";
@@ -12,6 +12,8 @@ import {
     TRACK_ORDER_TAB,
     HOME_SCREEN,
     PROFILE_SCREEN,
+    CART_SCREEN,
+    TRACK_ORDER_SCREEN,
 } from "../../../constants/screens";
 import {
     HomeIcon,
@@ -24,10 +26,64 @@ import { SECONDARY_COLOR } from "../../../constants/colors";
 import ExploreStackNavigator from "../stack-navigators/ExploreStackNavigator";
 import CartStackNavigator from "../stack-navigators/CartStackNavigator";
 import TrackOrderStackNavigator from "../stack-navigators/TrackOrderStackNavigator";
+import { Animated, Dimensions } from "react-native";
+import { useEffect, useRef, useState } from "react";
+import { useSelector } from "react-redux";
+import { selectScreenStack } from "../../store/slices/appStateSlice";
 
 const Tab = createBottomTabNavigator();
 
 const HomeTabNavigator = () => {
+    const activeScreen = useSelector(selectScreenStack);
+
+    const tabOffsetValue = useRef(new Animated.Value(0)).current;
+    const [tabBarSlider, setTabBarSlider] = useState(true);
+
+    const getWidth = () => {
+        const width = Dimensions.get("window").width;
+        return width / 5;
+    };
+
+    const [activeTabBar, setActiveTabBar] = useState(0);
+
+    const getTabBarVisibility = (route) => {
+        const routeName = getFocusedRouteNameFromRoute(route);
+
+        // This is used to hide the tab navigator on default tab screen
+        const excludeTabNavigatorForDefaultTabScreens = [EXPLORE_TAB];
+        if (excludeTabNavigatorForDefaultTabScreens.includes(route.name)) {
+            return "none";
+        }
+        const toIncludeTheTabNavigator = [HOME_SCREEN, PROFILE_SCREEN]; // Include the screens in which we need to show tab navigator
+
+        return routeName === undefined || toIncludeTheTabNavigator.includes(routeName) ? "flex" : "none";
+    };
+
+    useEffect(() => {
+        // This logic handles the display of slide bar on only tab screens
+        const toIncludeSlideBar = [HOME_SCREEN, CART_SCREEN, TRACK_ORDER_SCREEN, PROFILE_SCREEN];
+        if (toIncludeSlideBar.includes(activeScreen)) {
+            setTabBarSlider(true);
+        } else {
+            setTabBarSlider(false);
+        }
+
+        switch (activeScreen) {
+            case HOME_SCREEN:
+                setActiveTabBar(0);
+                return;
+            case CART_SCREEN:
+                setActiveTabBar(getWidth());
+                return;
+            case TRACK_ORDER_SCREEN:
+                setActiveTabBar(getWidth() * 3);
+                return;
+            case PROFILE_SCREEN:
+                setActiveTabBar(getWidth() * 4);
+                return;
+        }
+    }, [activeScreen, activeTabBar]);
+
     return (
         <>
             <Tab.Navigator
@@ -37,6 +93,10 @@ const HomeTabNavigator = () => {
                     tabBarActiveTintColor: SECONDARY_COLOR,
                     tabBarInactiveBackgroundColor: "white",
                     tabBarInactiveTintColor: "gray",
+                    tabBarStyle: {
+                        shadowRadius: 10,
+                        shadowColor: "gray",
+                    },
                 }}
             >
                 <Tab.Screen
@@ -48,6 +108,14 @@ const HomeTabNavigator = () => {
                             return <HomeIcon size={size} color={color} />;
                         },
                     }}
+                    listeners={({ navigation, route }) => ({
+                        tabPress: (event) => {
+                            Animated.spring(tabOffsetValue, {
+                                toValue: activeTabBar,
+                                useNativeDriver: true,
+                            }).start();
+                        },
+                    })}
                 />
                 <Tab.Screen
                     name={CART_TAB}
@@ -63,6 +131,14 @@ const HomeTabNavigator = () => {
                             return <ShoppingCartIcon size={size} color={color} />;
                         },
                     }}
+                    listeners={({ navigation, route }) => ({
+                        tabPress: (event) => {
+                            Animated.spring(tabOffsetValue, {
+                                toValue: activeTabBar,
+                                useNativeDriver: true,
+                            }).start();
+                        },
+                    })}
                 />
                 <Tab.Screen
                     name={EXPLORE_TAB}
@@ -86,6 +162,14 @@ const HomeTabNavigator = () => {
                             return <TruckIcon size={size} color={color} />;
                         },
                     }}
+                    listeners={({ navigation, route }) => ({
+                        tabPress: (event) => {
+                            Animated.spring(tabOffsetValue, {
+                                toValue: activeTabBar,
+                                useNativeDriver: true,
+                            }).start();
+                        },
+                    })}
                 />
                 <Tab.Screen
                     name={PROFILE_TAB}
@@ -99,22 +183,30 @@ const HomeTabNavigator = () => {
                             return <UserCircleIcon size={size} color={color} />;
                         },
                     })}
+                    listeners={({ navigation, route }) => ({
+                        tabPress: (event) => {
+                            Animated.spring(tabOffsetValue, {
+                                toValue: activeTabBar,
+                                useNativeDriver: true,
+                            }).start();
+                        },
+                    })}
                 />
             </Tab.Navigator>
+            {tabBarSlider && (
+                <Animated.View
+                    style={{
+                        backgroundColor: SECONDARY_COLOR,
+                        height: 2,
+                        width: getWidth(),
+                        position: "absolute",
+                        bottom: 50,
+                        transform: [{ translateX: tabOffsetValue }],
+                    }}
+                ></Animated.View>
+            )}
         </>
     );
-};
-
-const getTabBarVisibility = (route) => {
-    const routeName = getFocusedRouteNameFromRoute(route);
-
-    // This is used to hide the tab navigator on default tab screen
-    const excludeTabNavigatorForDefaultTabScreens = [];
-    if (excludeTabNavigatorForDefaultTabScreens.includes(route.name)) {
-        return "none";
-    }
-    const toIncludeTheTabNavigator = [HOME_SCREEN, PROFILE_SCREEN]; // Include the screens in which we need to show tab navigator
-    return routeName === undefined || toIncludeTheTabNavigator.includes(routeName) ? "flex" : "none";
 };
 
 export default HomeTabNavigator;

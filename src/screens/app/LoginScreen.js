@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Text, View, ScrollView, TouchableOpacity, Keyboard } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { useNavigation } from "@react-navigation/native";
@@ -9,14 +9,24 @@ import { EnvelopeIcon, LockClosedIcon, ArrowRightOnRectangleIcon } from "react-n
 import CustomInput from "../../components/common/CustomInput";
 
 import { QUATERNARY_COLOR } from "../../../constants/colors";
-import { HOME_SCREEN, LOADING_SCREEN, OTP_SCREEN, PROFILE_SCREEN } from "../../../constants/screens";
+import {
+    HOME_SCREEN,
+    LOADING_SCREEN,
+    LOGIN_SCREEN,
+    OTP_SCREEN,
+    PROFILE_SCREEN,
+    REGISTRATION_SCREEN,
+} from "../../../constants/screens";
 import AuthButtonSection from "../../components/app/AuthButtonSection";
 import CustomBackButton from "../../components/common/CustomBackButton";
 import useKeyboardStatus from "../../hooks/useKeyboardStatus";
+import { screenStack } from "../../store/slices/appStateSlice";
+import { useDispatch } from "react-redux";
 
 const LoginScreen = () => {
     const navigation = useNavigation();
     const isKeyboardVisible = useKeyboardStatus();
+    const dispatch = useDispatch();
 
     const [inputs, setInputs] = useState({
         email: null,
@@ -62,6 +72,10 @@ const LoginScreen = () => {
         navigation.navigate(LOADING_SCREEN, { navigateTo: OTP_SCREEN });
     };
 
+    useEffect(() => {
+        dispatch(screenStack({ screen: LOGIN_SCREEN, to: "push" }));
+    }, []);
+
     return (
         <SafeAreaView>
             <View className="p-3 h-full">
@@ -70,6 +84,7 @@ const LoginScreen = () => {
                         <View className="mr-3 flex-row items-center">
                             <CustomBackButton
                                 onBackPress={() => {
+                                    dispatch(screenStack({ screen: PROFILE_SCREEN, to: "push" }));
                                     navigation.navigate(PROFILE_SCREEN);
                                 }}
                             />
@@ -147,7 +162,7 @@ const LoginScreen = () => {
                             buttonText="Login"
                             authQuestionText="Don't have an account?"
                             navigateToText="Register"
-                            navigateTo={HOME_SCREEN}
+                            navigateTo={REGISTRATION_SCREEN}
                             validate={validate}
                         />
                     )}

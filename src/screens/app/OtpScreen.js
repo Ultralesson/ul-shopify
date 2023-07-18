@@ -6,10 +6,11 @@ import { QUATERNARY_COLOR, SECONDARY_COLOR } from "../../../constants/colors";
 import { TextInput } from "react-native-gesture-handler";
 import useKeyboardStatus from "../../hooks/useKeyboardStatus";
 import CustomButton from "../../components/common/CustomButton";
-import { HOME_TAB, LOADING_SCREEN, PROFILE_SCREEN } from "../../../constants/screens";
+import { HOME_TAB, LOADING_SCREEN, OTP_SCREEN, PROFILE_SCREEN } from "../../../constants/screens";
 import { useNavigation } from "@react-navigation/native";
 import { useDispatch } from "react-redux";
 import { changeQuitActionModal } from "../../store/slices/modalsSlice";
+import { screenStack } from "../../store/slices/appStateSlice";
 
 const OtpScreen = () => {
     const OTP_TIMEOUT = 5;
@@ -17,6 +18,7 @@ const OtpScreen = () => {
     const keyboardStatus = useKeyboardStatus();
     const navigation = useNavigation();
     const dispatch = useDispatch();
+    const actionDispatched = useRef(false);
 
     const [verify, setVerify] = useState(false);
     const [counter, setCounter] = useState(OTP_TIMEOUT);
@@ -43,6 +45,11 @@ const OtpScreen = () => {
     };
 
     useEffect(() => {
+        if (!actionDispatched.current) {
+            dispatch(screenStack({ screen: OTP_SCREEN, to: "push" }));
+            actionDispatched.current = true;
+        }
+
         const timer =
             counter > 0 &&
             setTimeout(() => {
