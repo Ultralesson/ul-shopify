@@ -7,8 +7,8 @@ import { ICON_COLOR } from "../../../constants/colors";
 import { TouchableOpacity } from "react-native-gesture-handler";
 import { useNavigation } from "@react-navigation/native";
 import { EXPLORE_SCREEN, HOME_SCREEN, HOME_TAB } from "../../../constants/screens";
-import { useDispatch } from "react-redux";
-import { screenStack } from "../../store/slices/appStateSlice";
+import { useDispatch, useSelector } from "react-redux";
+import { screenStack, selectNavigateBackScreen, selectScreenStack } from "../../store/slices/appStateSlice";
 
 const EXPLORE = {
     BACK_BUTTON: "btn-explore-back",
@@ -19,6 +19,8 @@ const EXPLORE = {
 const ExploreScreen = () => {
     const navigation = useNavigation();
     const dispatch = useDispatch();
+    const activeScreen = useSelector(selectScreenStack);
+    const navigateBackScreen = useSelector(selectNavigateBackScreen);
 
     useEffect(() => {
         dispatch(screenStack({ screen: EXPLORE_SCREEN, to: "push" }));
@@ -33,7 +35,10 @@ const ExploreScreen = () => {
                         accessibilityLabel={EXPLORE.BACK_BUTTON}
                         className="mr-2"
                         onPress={() => {
-                            navigation.navigate(HOME_TAB);
+                            // Here we are manipulating the screen to navigate to tab
+                            const TAB_NAVIGATION = navigateBackScreen.split("-screen")[0] + "-tab";
+                            dispatch(screenStack({ to: "pop" })); // Once navigated pop-off the earlier screen
+                            navigation.navigate(TAB_NAVIGATION);
                         }}
                     >
                         <ChevronLeftIcon size={ICON_SIZE_SMALL} color={ICON_COLOR} />

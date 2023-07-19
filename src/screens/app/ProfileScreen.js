@@ -13,7 +13,6 @@ const ProfileScreen = () => {
     const dispatch = useDispatch();
 
     useEffect(() => {
-        console.log("he")
         dispatch(screenStack({ screen: PROFILE_SCREEN, to: "push" }));
     }, []);
 

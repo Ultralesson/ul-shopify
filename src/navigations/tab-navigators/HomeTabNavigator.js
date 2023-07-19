@@ -44,8 +44,6 @@ const HomeTabNavigator = () => {
         return width / 5;
     };
 
-    const [activeTabBar, setActiveTabBar] = useState(0);
-
     const getTabBarVisibility = (route) => {
         const routeName = getFocusedRouteNameFromRoute(route);
 
@@ -67,22 +65,7 @@ const HomeTabNavigator = () => {
         } else {
             setTabBarSlider(false);
         }
-
-        switch (activeScreen) {
-            case HOME_SCREEN:
-                setActiveTabBar(0);
-                return;
-            case CART_SCREEN:
-                setActiveTabBar(getWidth());
-                return;
-            case TRACK_ORDER_SCREEN:
-                setActiveTabBar(getWidth() * 3);
-                return;
-            case PROFILE_SCREEN:
-                setActiveTabBar(getWidth() * 4);
-                return;
-        }
-    }, [activeScreen, activeTabBar]);
+    }, [activeScreen]);
 
     return (
         <>
@@ -111,7 +94,7 @@ const HomeTabNavigator = () => {
                     listeners={({ navigation, route }) => ({
                         tabPress: (event) => {
                             Animated.spring(tabOffsetValue, {
-                                toValue: activeTabBar,
+                                toValue: 0,
                                 useNativeDriver: true,
                             }).start();
                         },
@@ -134,7 +117,7 @@ const HomeTabNavigator = () => {
                     listeners={({ navigation, route }) => ({
                         tabPress: (event) => {
                             Animated.spring(tabOffsetValue, {
-                                toValue: activeTabBar,
+                                toValue: getWidth(),
                                 useNativeDriver: true,
                             }).start();
                         },
@@ -165,7 +148,7 @@ const HomeTabNavigator = () => {
                     listeners={({ navigation, route }) => ({
                         tabPress: (event) => {
                             Animated.spring(tabOffsetValue, {
-                                toValue: activeTabBar,
+                                toValue: getWidth() * 3,
                                 useNativeDriver: true,
                             }).start();
                         },
@@ -186,7 +169,7 @@ const HomeTabNavigator = () => {
                     listeners={({ navigation, route }) => ({
                         tabPress: (event) => {
                             Animated.spring(tabOffsetValue, {
-                                toValue: activeTabBar,
+                                toValue: getWidth() * 4,
                                 useNativeDriver: true,
                             }).start();
                         },
