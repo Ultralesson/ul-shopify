@@ -2,6 +2,7 @@ import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
     screenStack: [],
+    actionsForLater: {},
 };
 
 export const appStateSlice = createSlice({
@@ -26,12 +27,26 @@ export const appStateSlice = createSlice({
                     state.screenStack = _screenStack;
             }
         },
+
+        executeActions: (state, action) => {
+            const { actionName, actionPayload, to } = action.payload;
+            switch (to) {
+                case "STORE":
+                    state.actionsForLater = { ...state.actionsForLater, [actionName]: actionPayload };
+                    return;
+                case "REMOVE":
+                    const _tempActionsForLater = state.actionsForLater;
+                    delete _tempActionsForLater[actionName];
+                    state.actionsForLater = _tempActionsForLater;
+            }
+        },
     },
 });
 
-export const { screenStack } = appStateSlice.actions;
+export const { screenStack, executeActions } = appStateSlice.actions;
 
 export const selectScreenStack = (state) => state.appState.screenStack[state.appState.screenStack.length - 1];
 export const selectNavigateBackScreen = (state) => state.appState.screenStack[state.appState.screenStack.length - 2];
+export const selectActions = (state) => state.appState.actionsForLater;
 
 export default appStateSlice.reducer;

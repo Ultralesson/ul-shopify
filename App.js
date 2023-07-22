@@ -2,6 +2,7 @@ import { NavigationContainer } from "@react-navigation/native";
 
 import { Provider } from "react-redux";
 import { KeyboardAvoidingView, Platform } from "react-native";
+import Alert from "./src/modals/Alert";
 
 import { store } from "./src/store/store";
 
@@ -16,6 +17,7 @@ const App = () => {
                 <KeyboardAvoidingView style={{ flex: 1 }} behavior={Platform.OS === "ios" ? "padding" : null}>
                     {/* Modals are not part of any DOM structure, they are independent entities */}
                     <Modals />
+                    <Alert />
                     <HomeTabNavigator />
                 </KeyboardAvoidingView>
             </NavigationContainer>

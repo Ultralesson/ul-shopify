@@ -4,7 +4,6 @@ import { Text, View, TouchableOpacity } from "react-native";
 
 import { QUATERNARY_COLOR, SECONDARY_COLOR } from "../../../constants/colors";
 import GoogleAuthSection from "./GoogleAuthSection";
-import { HOME_SCREEN } from "../../../constants/screens";
 
 const AuthButtonSection = ({ buttonText, authQuestionText, navigateToText, navigateTo, validate, shortTitle }) => {
     const navigation = useNavigation();
@@ -16,7 +15,7 @@ const AuthButtonSection = ({ buttonText, authQuestionText, navigateToText, navig
                     backgroundColor: SECONDARY_COLOR,
                 }}
                 className="p-2 pt-3 pb-3 rounded-lg"
-                onPress={() => {
+                onPress={async () => {
                     validate();
                 }}
             >

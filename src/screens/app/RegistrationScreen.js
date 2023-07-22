@@ -17,7 +17,7 @@ import CustomInput from "../../components/common/CustomInput";
 
 import { QUATERNARY_COLOR } from "../../../constants/colors";
 import {
-    HOME_SCREEN,
+    HOME_TAB,
     LOADING_SCREEN,
     LOGIN_SCREEN,
     OTP_SCREEN,
@@ -25,17 +25,19 @@ import {
     REGISTRATION_SCREEN,
 } from "../../../constants/screens";
 import AuthButtonSection from "../../components/app/AuthButtonSection";
-import { useDispatch } from "react-redux";
-import { login } from "../../store/slices/authSlice";
-import { changeRegistrationModalState } from "../../store/slices/modalsSlice";
+import { useDispatch, useSelector } from "react-redux";
+import { getTempState, login } from "../../store/slices/authSlice";
+import { changeAlertModalState, changeRegistrationModalState } from "../../store/slices/modalsSlice";
 import CustomBackButton from "../../components/common/CustomBackButton";
 import useKeyboardStatus from "../../hooks/useKeyboardStatus";
-import { screenStack } from "../../store/slices/appStateSlice";
+import { executeActions, screenStack, selectActions } from "../../store/slices/appStateSlice";
+import { userModel } from "../../../utilities/asyncStorage";
 
 const RegistrationScreen = () => {
     const navigation = useNavigation();
     const dispatch = useDispatch();
     const isKeyboardVisible = useKeyboardStatus();
+    const actions = useSelector(selectActions);
 
     const [inputs, setInputs] = useState({
         fullName: null,
@@ -93,20 +95,41 @@ const RegistrationScreen = () => {
         }
     };
 
-    const register = () => {
-        // Store the data here...
-        console.log(inputs);
+    const register = async () => {
+        const cachedData = await userModel("GET_USER", { email: inputs.email });
 
-        // API call to register user goes here...
+        if (cachedData.message === "EMAIL_IS_FOUND") {
+            dispatch(
+                executeActions({
+                    actionName: "emailAlreadyRegisteredAlert",
+                    actionPayload: { status: true, text: "Email already registered" },
+                    to: "STORE",
+                })
+            );
+            navigation.navigate(LOADING_SCREEN, { navigateTo: LOGIN_SCREEN });
+        } else {
+            dispatch(login({ type: "register", status: false }));
+            dispatch(getTempState({ ...inputs }));
+            navigation.navigate(LOADING_SCREEN, { navigateTo: OTP_SCREEN });
+        }
+    };
 
-        dispatch(login({ type: "register", status: true })); // Setting the login state
-        dispatch(changeRegistrationModalState()); // On successful registration show the popup
-
-        navigation.navigate(LOADING_SCREEN, { navigateTo: OTP_SCREEN });
+    const handleEmailNotRegisteredAlert = () => {
+        if ("emailNotRegisteredAlert" in actions) {
+            dispatch(changeAlertModalState(actions["emailNotRegisteredAlert"]));
+        }
+        dispatch(
+            executeActions({
+                actionName: "emailNotRegisteredAlert",
+                to: "REMOVE",
+            })
+        );
     };
 
     useEffect(() => {
         dispatch(screenStack({ screen: REGISTRATION_SCREEN, to: "push" }));
+
+        handleEmailNotRegisteredAlert();
     }, []);
 
     return (
@@ -132,7 +155,7 @@ const RegistrationScreen = () => {
                                     </Text>
                                     <TouchableOpacity
                                         onPress={() => {
-                                            navigation.navigate(HOME_SCREEN);
+                                            navigation.navigate(HOME_TAB);
                                         }}
                                     >
                                         <Text className="font-bold" style={{ color: QUATERNARY_COLOR }}>

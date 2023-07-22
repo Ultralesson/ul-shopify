@@ -6,14 +6,20 @@ import { QUATERNARY_COLOR, SECONDARY_COLOR } from "../../../constants/colors";
 import { TextInput } from "react-native-gesture-handler";
 import useKeyboardStatus from "../../hooks/useKeyboardStatus";
 import CustomButton from "../../components/common/CustomButton";
-import { HOME_TAB, LOADING_SCREEN, OTP_SCREEN, PROFILE_SCREEN } from "../../../constants/screens";
+import {  LOADING_SCREEN, OTP_SCREEN, PROFILE_SCREEN, PROFILE_TAB } from "../../../constants/screens";
 import { useNavigation } from "@react-navigation/native";
-import { useDispatch } from "react-redux";
-import { changeQuitActionModal } from "../../store/slices/modalsSlice";
+import { useDispatch, useSelector } from "react-redux";
+import {
+    changeAlertModalState,
+    changeQuitActionModal,
+    changeRegistrationModalState,
+} from "../../store/slices/modalsSlice";
 import { screenStack } from "../../store/slices/appStateSlice";
+import { getTempState, login, selectAuthState, selectTempState } from "../../store/slices/authSlice";
+import { userModel } from "../../../utilities/asyncStorage";
 
 const OtpScreen = () => {
-    const OTP_TIMEOUT = 5;
+    const OTP_TIMEOUT = 10;
 
     const keyboardStatus = useKeyboardStatus();
     const navigation = useNavigation();
@@ -23,31 +29,74 @@ const OtpScreen = () => {
     const [verify, setVerify] = useState(false);
     const [counter, setCounter] = useState(OTP_TIMEOUT);
 
+    const isAuthorized = useSelector(selectAuthState);
+    const tempState = useSelector(selectTempState);
+
     const otpField1 = useRef("");
     const otpField2 = useRef("");
     const otpField3 = useRef("");
     const otpField4 = useRef("");
 
+    const [otpInputs, setOtpInputs] = useState({
+        otp1: "",
+        otp2: "",
+        otp3: "",
+        otp4: "",
+    });
+
     const focusNextInOtpFields = (nextToFocus) => {
         nextToFocus.current.focus();
     };
-    const onOtpEntering = (text, nextToFocus) => {
+
+    const onOtpEntering = ({ text, nextToFocus, currentValueToSet }) => {
         if (text.length === 1) {
-            focusNextInOtpFields(nextToFocus);
+            switch (currentValueToSet) {
+                case "otp1":
+                    setOtpInputs((prevState) => {
+                        return { ...prevState, otp1: text };
+                    });
+                    focusNextInOtpFields(nextToFocus);
+                    break;
+                case "otp2":
+                    setOtpInputs((prevState) => {
+                        return { ...prevState, otp2: text };
+                    });
+                    focusNextInOtpFields(nextToFocus);
+
+                    break;
+
+                case "otp3":
+                    setOtpInputs((prevState) => {
+                        return { ...prevState, otp3: text };
+                    });
+                    focusNextInOtpFields(nextToFocus);
+
+                    break;
+
+                case "otp4":
+                    Keyboard.dismiss();
+                    setVerify(true);
+
+                    setOtpInputs((prevState) => {
+                        return { ...prevState, otp4: text };
+                    });
+                    break;
+            }
         }
-    };
-
-    const activateVerifyButton = () => {
-        // Actual verification of OTP
-
-        Keyboard.dismiss();
-        setVerify(true);
     };
 
     useEffect(() => {
         if (counter === 0) {
             Keyboard.dismiss();
-            otpField1.current.value = otpField2.current.value = otpField3.current.value = otpField4.current.value = "";
+            setOtpInputs((prevState) => {
+                return {
+                    otp1: "",
+                    otp2: "",
+                    otp3: "",
+                    otp4: "",
+                };
+            });
+            setVerify(false);
         }
 
         if (!actionDispatched.current) {
@@ -91,44 +140,50 @@ const OtpScreen = () => {
                     </Text>
                     <Text className="italic ml-2 font-bold">secure verifier</Text>
                 </View>
-                <Text className="mt-3 ml-1 mr-1 ">We have sent an OTP code to verify your mobile number</Text>
+                <Text className="mt-3 ml-1 mr-1 ">We have sent an OTP code to your verified mobile number</Text>
                 <View className="flex-row gap-5 mt-5">
                     <TextInput
-                        value={otpField1.current.value}
+                        value={otpInputs.otp1}
                         editable={counter === 0 ? false : true}
                         selectTextOnFocus={counter === 0 ? false : true}
                         ref={otpField1}
-                        onChangeText={(text) => onOtpEntering(text, otpField2)}
+                        onChangeText={(text) =>
+                            onOtpEntering({ text, nextToFocus: otpField2, currentValueToSet: "otp1" })
+                        }
                         className={`border-[0.50px] border-solid p-3 mt rounded-xl text-center ${
                             counter === 0 ? "bg-gray-100 border-0" : ""
                         }`}
                     />
                     <TextInput
-                        value={otpField2.current.value}
+                        value={otpInputs.otp2}
                         editable={counter === 0 ? false : true}
                         selectTextOnFocus={counter === 0 ? false : true}
                         ref={otpField2}
-                        onChangeText={(text) => onOtpEntering(text, otpField3)}
+                        onChangeText={(text) =>
+                            onOtpEntering({ text, nextToFocus: otpField3, currentValueToSet: "otp2" })
+                        }
                         className={`border-[0.50px] border-solid p-3 mt rounded-xl text-center ${
                             counter === 0 ? "bg-gray-100 border-0" : ""
                         }`}
                     />
                     <TextInput
-                        value={otpField3.current.value}
+                        value={otpInputs.otp3}
                         editable={counter === 0 ? false : true}
                         selectTextOnFocus={counter === 0 ? false : true}
                         ref={otpField3}
-                        onChangeText={(text) => onOtpEntering(text, otpField4)}
+                        onChangeText={(text) =>
+                            onOtpEntering({ text, nextToFocus: otpField4, currentValueToSet: "otp3" })
+                        }
                         className={`border-[0.50px] border-solid p-3 mt rounded-xl text-center ${
                             counter === 0 ? "bg-gray-100 border-0" : ""
                         }`}
                     />
                     <TextInput
-                        value={otpField4.current.value}
+                        value={otpInputs.otp4}
                         editable={counter === 0 ? false : true}
                         selectTextOnFocus={counter === 0 ? false : true}
                         ref={otpField4}
-                        onChangeText={activateVerifyButton}
+                        onChangeText={(text) => onOtpEntering({ text, currentValueToSet: "otp4" })}
                         className={`border-[0.50px] border-solid p-3 mt rounded-xl text-center ${
                             counter === 0 ? "bg-gray-100 border-0" : ""
                         }`}
@@ -164,9 +219,23 @@ const OtpScreen = () => {
             <CustomButton
                 text="Verify"
                 disabled={verify}
-                navigateTo={() => {
-                    // TODO: Handle if the OTP is incorrect issue then we should not navigate to home tab screen
-                    navigation.navigate(LOADING_SCREEN, { navigateTo: HOME_TAB });
+                navigateTo={async () => {
+                    if (verify) {
+                        if (isAuthorized.type === "register") {
+                            const cachedData = await userModel("CREATE_USER", { ...tempState }); // Creating the user
+                            dispatch(getTempState(null)); // Resetting the temp state after creating the account
+
+                            if (cachedData.message === "CREATED_USER") {
+                                dispatch(login({ type: "register", status: true })); // status can be used within the application to enable certain features for logged-in and logged-out user
+                                dispatch(changeRegistrationModalState()); // On successful registration show the popup
+                            }
+                        }
+
+                        // TODO: Handle if the OTP is incorrect issue then we should not navigate to home tab screen
+                        navigation.navigate(LOADING_SCREEN, { navigateTo: PROFILE_SCREEN });
+                    } else {
+                        dispatch(changeAlertModalState({ status: true, text: "OTP cannot be empty" }));
+                    }
                 }}
             />
         </SafeAreaView>

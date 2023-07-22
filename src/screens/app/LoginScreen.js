@@ -21,10 +21,16 @@ import {
 import AuthButtonSection from "../../components/app/AuthButtonSection";
 import CustomBackButton from "../../components/common/CustomBackButton";
 import useKeyboardStatus from "../../hooks/useKeyboardStatus";
-import { screenStack } from "../../store/slices/appStateSlice";
+import { executeActions, screenStack, selectActions } from "../../store/slices/appStateSlice";
 import { useDispatch, useSelector } from "react-redux";
-import { changePasswordResetModalState, selectPasswordResetModalState } from "../../store/slices/modalsSlice";
+import {
+    changeAlertModalState,
+    changePasswordResetModalState,
+    selectPasswordResetModalState,
+} from "../../store/slices/modalsSlice";
 import CustomMessageModal from "../../components/common/CustomMessageModal";
+import { userModel } from "../../../utilities/asyncStorage";
+import CustomAlert from "../../modals/Alert";
 
 const LoginScreen = () => {
     const navigation = useNavigation();
@@ -32,6 +38,7 @@ const LoginScreen = () => {
     const dispatch = useDispatch();
 
     const selectPasswordResetState = useSelector(selectPasswordResetModalState);
+    const actions = useSelector(selectActions);
 
     const [inputs, setInputs] = useState({
         email: null,
@@ -70,19 +77,55 @@ const LoginScreen = () => {
         }
     };
 
-    const login = () => {
-        console.log(inputs);
-        // Actual authentication to be done here...
+    const login = async () => {
+        const cachedData = await userModel("GET_USER", { email: inputs.email });
+        if (cachedData.message === "EMAIL_IS_NOT_FOUND") {
+            dispatch(
+                executeActions({
+                    actionName: "emailNotRegisteredAlert",
+                    actionPayload: {
+                        status: true,
+                        text: "Email is not registered",
+                    },
+                    to: "STORE",
+                })
+            );
 
-        navigation.navigate(LOADING_SCREEN, { navigateTo: OTP_SCREEN });
+            navigation.navigate(LOADING_SCREEN, { navigateTo: REGISTRATION_SCREEN });
+        } else if (cachedData.message === "EMAIL_IS_FOUND") {
+            if (inputs.password !== cachedData.data.password) {
+                setInputs((prevState) => {
+                    return { ...prevState, password: "" };
+                });
+                dispatch(changeAlertModalState({ status: true, text: "Password is wrong" }));
+
+                return;
+            }
+            navigation.navigate(LOADING_SCREEN, { navigateTo: OTP_SCREEN });
+        }
+    };
+
+    const handleEmailAlreadyRegisteredAlert = () => {
+        if ("emailAlreadyRegisteredAlert" in actions) {
+            dispatch(changeAlertModalState(actions["emailAlreadyRegisteredAlert"]));
+        }
+        dispatch(
+            executeActions({
+                actionName: "emailAlreadyRegisteredAlert",
+                to: "REMOVE",
+            })
+        );
     };
 
     useEffect(() => {
         dispatch(screenStack({ screen: LOGIN_SCREEN, to: "push" }));
+
+        handleEmailAlreadyRegisteredAlert();
     }, []);
 
     return (
         <SafeAreaView>
+            <CustomAlert text={"Password is wrong"} />
             {selectPasswordResetState && (
                 <CustomMessageModal
                     gifOrImage={require("../../../assets/images/passwordResetSuccessful.jpg")}
