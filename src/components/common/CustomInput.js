@@ -15,6 +15,7 @@ const CustomInput = ({
     mode,
     onChangeText,
     onFocus,
+    customStyle,
 }) => {
     const [isFocused, setIsFocused] = useState(false);
     const [hidePassword, setHidePassword] = useState(true);
@@ -27,8 +28,8 @@ const CustomInput = ({
 
             <View
                 className={`flex-row p-3 mb-2 rounded-lg bg-gray-200 ${
-                    isFocused ? "border border-solid border-black" : ""
-                }`}
+                    isFocused ? "border-[0.23px] border-solid border-gray-600" : ""
+                } ${customStyle ? customStyle : ""} `}
             >
                 <Icon size={iconSize} color={iconColor} />
                 <View className="ml-3 border-[0.20px] border-solid border-gray-500 border-1"></View>

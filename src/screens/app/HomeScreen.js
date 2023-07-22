@@ -3,7 +3,7 @@ import React, { useEffect } from "react";
 import { Text, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import CustomMessageModal from "../../components/common/CustomMessageModal";
-import { selectRegistrationModalState } from "../../store/slices/modalsSlice";
+import { changeRegistrationModalState, selectRegistrationModalState } from "../../store/slices/modalsSlice";
 import { useDispatch, useSelector } from "react-redux";
 import { selectAuthState } from "../../store/slices/authSlice";
 import { screenStack } from "../../store/slices/appStateSlice";
@@ -25,6 +25,7 @@ const HomeScreen = () => {
                 <CustomMessageModal
                     gifOrImage={require("../../../assets/gifs/success.gif")}
                     selector={selectRegistrationModalState}
+                    resetState={changeRegistrationModalState}
                     typeOfMessage="success"
                     messages={["Registration is successful", "Welcome to Ul-Shopify"]}
                 />

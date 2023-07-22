@@ -6,9 +6,9 @@ import { ICON_SIZE_SMALL } from "../../../constants/sizes";
 import { ICON_COLOR } from "../../../constants/colors";
 import { TouchableOpacity } from "react-native-gesture-handler";
 import { useNavigation } from "@react-navigation/native";
-import { EXPLORE_SCREEN, HOME_SCREEN, HOME_TAB } from "../../../constants/screens";
+import { EXPLORE_SCREEN } from "../../../constants/screens";
 import { useDispatch, useSelector } from "react-redux";
-import { screenStack, selectNavigateBackScreen, selectScreenStack } from "../../store/slices/appStateSlice";
+import { screenStack, selectNavigateBackScreen } from "../../store/slices/appStateSlice";
 
 const EXPLORE = {
     BACK_BUTTON: "btn-explore-back",
@@ -19,7 +19,6 @@ const EXPLORE = {
 const ExploreScreen = () => {
     const navigation = useNavigation();
     const dispatch = useDispatch();
-    const activeScreen = useSelector(selectScreenStack);
     const navigateBackScreen = useSelector(selectNavigateBackScreen);
 
     useEffect(() => {

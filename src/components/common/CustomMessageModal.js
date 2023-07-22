@@ -6,7 +6,7 @@ import { XMarkIcon } from "react-native-heroicons/outline";
 import { useDispatch, useSelector } from "react-redux";
 import { changeRegistrationModalState } from "../../store/slices/modalsSlice";
 
-const CustomMessageModal = ({ gifOrImage, selector, typeOfMessage, messages }) => {
+const CustomMessageModal = ({ gifOrImage, selector, resetState, typeOfMessage, messages }) => {
     const dispatch = useDispatch();
     const modalState = useSelector(selector);
 
@@ -18,7 +18,7 @@ const CustomMessageModal = ({ gifOrImage, selector, typeOfMessage, messages }) =
             >
                 <View className="bg-white rounded-xl">
                     <View className="mt-3 mr-5 flex-row justify-end">
-                        <TouchableOpacity onPress={() => dispatch(changeRegistrationModalState())}>
+                        <TouchableOpacity onPress={() => dispatch(resetState())}>
                             <XMarkIcon size="30" color="black" />
                         </TouchableOpacity>
                     </View>
@@ -29,7 +29,7 @@ const CustomMessageModal = ({ gifOrImage, selector, typeOfMessage, messages }) =
                                     source={gifOrImage}
                                     animation="slideInUp"
                                     iterationCount={1}
-                                    className="h-20 w-20 rounded-full"
+                                    className="h-32 w-32 rounded-full"
                                 />
                             )}
 

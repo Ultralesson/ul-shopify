@@ -7,6 +7,7 @@ const initialState = {
         status: false,
         screen: null,
     },
+    passwordResetModalState: false,
 };
 
 export const modalsSlice = createSlice({
@@ -23,12 +24,17 @@ export const modalsSlice = createSlice({
                 screen: action.payload.screen,
             };
         },
+        changePasswordResetModalState: (state, action) => {
+            state.passwordResetModalState = !state.passwordResetModalState;
+        },
     },
 });
 
-export const { changeRegistrationModalState, changeQuitActionModal } = modalsSlice.actions;
+export const { changeRegistrationModalState, changeQuitActionModal, changePasswordResetModalState } =
+    modalsSlice.actions;
 
 export const selectRegistrationModalState = (state) => state.modals.registrationModalState;
+export const selectPasswordResetModalState = (state) => state.modals.passwordResetModalState;
 export const selectQuitActionModalState = (state) => state.modals.quitActionModal;
 
 export default modalsSlice.reducer;

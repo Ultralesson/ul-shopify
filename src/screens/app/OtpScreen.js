@@ -23,10 +23,10 @@ const OtpScreen = () => {
     const [verify, setVerify] = useState(false);
     const [counter, setCounter] = useState(OTP_TIMEOUT);
 
-    const otpField1 = useRef(null);
-    const otpField2 = useRef(null);
-    const otpField3 = useRef(null);
-    const otpField4 = useRef(null);
+    const otpField1 = useRef("");
+    const otpField2 = useRef("");
+    const otpField3 = useRef("");
+    const otpField4 = useRef("");
 
     const focusNextInOtpFields = (nextToFocus) => {
         nextToFocus.current.focus();
@@ -45,6 +45,11 @@ const OtpScreen = () => {
     };
 
     useEffect(() => {
+        if (counter === 0) {
+            Keyboard.dismiss();
+            otpField1.current.value = otpField2.current.value = otpField3.current.value = otpField4.current.value = "";
+        }
+
         if (!actionDispatched.current) {
             dispatch(screenStack({ screen: OTP_SCREEN, to: "push" }));
             actionDispatched.current = true;
@@ -89,24 +94,44 @@ const OtpScreen = () => {
                 <Text className="mt-3 ml-1 mr-1 ">We have sent an OTP code to verify your mobile number</Text>
                 <View className="flex-row gap-5 mt-5">
                     <TextInput
+                        value={otpField1.current.value}
+                        editable={counter === 0 ? false : true}
+                        selectTextOnFocus={counter === 0 ? false : true}
                         ref={otpField1}
                         onChangeText={(text) => onOtpEntering(text, otpField2)}
-                        className="border-[0.50px] border-solid p-3 mt rounded-xl text-center"
+                        className={`border-[0.50px] border-solid p-3 mt rounded-xl text-center ${
+                            counter === 0 ? "bg-gray-100 border-0" : ""
+                        }`}
                     />
                     <TextInput
+                        value={otpField2.current.value}
+                        editable={counter === 0 ? false : true}
+                        selectTextOnFocus={counter === 0 ? false : true}
                         ref={otpField2}
                         onChangeText={(text) => onOtpEntering(text, otpField3)}
-                        className="border-[0.50px] border-solid p-3 mt rounded-xl text-center"
+                        className={`border-[0.50px] border-solid p-3 mt rounded-xl text-center ${
+                            counter === 0 ? "bg-gray-100 border-0" : ""
+                        }`}
                     />
                     <TextInput
+                        value={otpField3.current.value}
+                        editable={counter === 0 ? false : true}
+                        selectTextOnFocus={counter === 0 ? false : true}
                         ref={otpField3}
                         onChangeText={(text) => onOtpEntering(text, otpField4)}
-                        className="border-[0.50px] border-solid p-3 mt rounded-xl text-center"
+                        className={`border-[0.50px] border-solid p-3 mt rounded-xl text-center ${
+                            counter === 0 ? "bg-gray-100 border-0" : ""
+                        }`}
                     />
                     <TextInput
+                        value={otpField4.current.value}
+                        editable={counter === 0 ? false : true}
+                        selectTextOnFocus={counter === 0 ? false : true}
                         ref={otpField4}
                         onChangeText={activateVerifyButton}
-                        className="border-[0.50px] border-solid p-3 mt rounded-xl text-center"
+                        className={`border-[0.50px] border-solid p-3 mt rounded-xl text-center ${
+                            counter === 0 ? "bg-gray-100 border-0" : ""
+                        }`}
                     />
                 </View>
                 <View className="flex-row gap-2 mt-5">
@@ -140,7 +165,7 @@ const OtpScreen = () => {
                 text="Verify"
                 disabled={verify}
                 navigateTo={() => {
-                    // Handle if the OTP is incorrect issue then we should not navigate to home tab screen
+                    // TODO: Handle if the OTP is incorrect issue then we should not navigate to home tab screen
                     navigation.navigate(LOADING_SCREEN, { navigateTo: HOME_TAB });
                 }}
             />

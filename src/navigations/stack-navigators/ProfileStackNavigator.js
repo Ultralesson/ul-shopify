@@ -7,6 +7,7 @@ import RegistrationScreen from "../../screens/app/RegistrationScreen";
 import LoadingScreen from "../../screens/common/LoadingScreen";
 
 import {
+    FORGOT_PASSWORD_SCREEN,
     HOME_SCREEN,
     LOADING_SCREEN,
     LOGIN_SCREEN,
@@ -15,6 +16,7 @@ import {
     REGISTRATION_SCREEN,
 } from "../../../constants/screens";
 import OtpScreen from "../../screens/app/OtpScreen";
+import ForgotPasswordScreen from "../../screens/app/ForgotPasswordScreen";
 
 const Stack = createStackNavigator();
 
@@ -25,6 +27,7 @@ const stackOptions = (screen) => {
         case LOGIN_SCREEN:
         case LOADING_SCREEN:
         case OTP_SCREEN:
+        case FORGOT_PASSWORD_SCREEN:
             return {
                 headerShown: false,
             };
@@ -44,6 +47,11 @@ export const ProfileStackNavigator = () => {
             <Stack.Screen name={LOADING_SCREEN} component={LoadingScreen} options={stackOptions(LOADING_SCREEN)} />
             <Stack.Screen name={OTP_SCREEN} component={OtpScreen} options={stackOptions(OTP_SCREEN)} />
             <Stack.Screen name={HOME_SCREEN} component={HomeScreen} options={stackOptions(HOME_SCREEN)} />
+            <Stack.Screen
+                name={FORGOT_PASSWORD_SCREEN}
+                component={ForgotPasswordScreen}
+                options={stackOptions(FORGOT_PASSWORD_SCREEN)}
+            />
         </Stack.Navigator>
     );
 };

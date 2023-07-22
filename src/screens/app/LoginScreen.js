@@ -10,7 +10,8 @@ import CustomInput from "../../components/common/CustomInput";
 
 import { QUATERNARY_COLOR } from "../../../constants/colors";
 import {
-    HOME_SCREEN,
+    FORGOT_PASSWORD_SCREEN,
+    HOME_TAB,
     LOADING_SCREEN,
     LOGIN_SCREEN,
     OTP_SCREEN,
@@ -21,12 +22,16 @@ import AuthButtonSection from "../../components/app/AuthButtonSection";
 import CustomBackButton from "../../components/common/CustomBackButton";
 import useKeyboardStatus from "../../hooks/useKeyboardStatus";
 import { screenStack } from "../../store/slices/appStateSlice";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { changePasswordResetModalState, selectPasswordResetModalState } from "../../store/slices/modalsSlice";
+import CustomMessageModal from "../../components/common/CustomMessageModal";
 
 const LoginScreen = () => {
     const navigation = useNavigation();
     const isKeyboardVisible = useKeyboardStatus();
     const dispatch = useDispatch();
+
+    const selectPasswordResetState = useSelector(selectPasswordResetModalState);
 
     const [inputs, setInputs] = useState({
         email: null,
@@ -78,6 +83,15 @@ const LoginScreen = () => {
 
     return (
         <SafeAreaView>
+            {selectPasswordResetState && (
+                <CustomMessageModal
+                    gifOrImage={require("../../../assets/images/passwordResetSuccessful.jpg")}
+                    selector={selectPasswordResetModalState}
+                    resetState={changePasswordResetModalState}
+                    typeOfMessage="success"
+                    messages={["Your password has been reset", "Successfully"]}
+                />
+            )}
             <View className="p-3 h-full">
                 <View className="mt-5">
                     <View className="flex-row">
@@ -98,7 +112,7 @@ const LoginScreen = () => {
                                 </Text>
                                 <TouchableOpacity
                                     onPress={() => {
-                                        navigation.navigate(HOME_SCREEN);
+                                        navigation.navigate(HOME_TAB);
                                     }}
                                 >
                                     <Text className="font-bold" style={{ color: QUATERNARY_COLOR }}>
@@ -148,7 +162,11 @@ const LoginScreen = () => {
                                 }}
                             />
                             <View className="flex-row justify-end -mt-5">
-                                <TouchableOpacity>
+                                <TouchableOpacity
+                                    onPress={() => {
+                                        navigation.navigate(FORGOT_PASSWORD_SCREEN);
+                                    }}
+                                >
                                     <Text className="font-bold" style={{ color: QUATERNARY_COLOR }}>
                                         Forgot Password?
                                     </Text>
