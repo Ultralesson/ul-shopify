@@ -9,8 +9,8 @@ const initialState = {
     },
     passwordResetModalState: false,
     alertModalState: {
-        status: true,
-        text: "null",
+        status: false,
+        text: null,
         type: null,
     },
 };
@@ -33,8 +33,8 @@ export const modalsSlice = createSlice({
             state.passwordResetModalState = !state.passwordResetModalState;
         },
         changeToastModalState: (state, action) => {
-            const { status, text } = action.payload;
-            state.alertModalState = { status, text };
+            const { status, text, type } = action.payload;
+            state.alertModalState = { status, text, type };
         },
     },
 });

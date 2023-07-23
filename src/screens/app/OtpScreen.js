@@ -6,7 +6,7 @@ import { QUATERNARY_COLOR, SECONDARY_COLOR } from "../../../constants/colors";
 import { TextInput } from "react-native-gesture-handler";
 import useKeyboardStatus from "../../hooks/useKeyboardStatus";
 import CustomButton from "../../components/common/CustomButton";
-import { LOADING_SCREEN, OTP_SCREEN, PROFILE_SCREEN, PROFILE_TAB } from "../../../constants/screens";
+import { HOME_TAB, LOADING_SCREEN, OTP_SCREEN, PROFILE_SCREEN, PROFILE_TAB } from "../../../constants/screens";
 import { useNavigation } from "@react-navigation/native";
 import { useDispatch, useSelector } from "react-redux";
 import {
@@ -232,7 +232,7 @@ const OtpScreen = () => {
                         }
 
                         // TODO: Handle if the OTP is incorrect issue then we should not navigate to home tab screen
-                        navigation.navigate(LOADING_SCREEN, { navigateTo: PROFILE_SCREEN });
+                        navigation.navigate(LOADING_SCREEN, { navigateTo: HOME_TAB });
                     } else {
                         dispatch(changeToastModalState({ status: true, text: "OTP cannot be empty" }));
                     }

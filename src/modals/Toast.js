@@ -1,8 +1,7 @@
 import React, { useEffect } from "react";
 import { Text, TouchableOpacity, View } from "react-native";
 import { Modal } from "react-native";
-import { ICON_COLOR, QUATERNARY_COLOR } from "../../constants/colors";
-import { ICON_SIZE_LARGE, ICON_SIZE_MEDIUM, ICON_SIZE_SMALL, ICON_ULTRA_SMALL } from "../../constants/sizes";
+import { ICON_SIZE_MEDIUM } from "../../constants/sizes";
 
 import { useDispatch, useSelector } from "react-redux";
 
@@ -26,15 +25,13 @@ const Toast = () => {
         if (alertModalState.status) {
             timer = setTimeout(() => {
                 dispatch(changeToastModalState({ status: false, text: null }));
-            }, 4000);
+            }, 5000); // Displaying the toast message for duration of 5 seconds
         }
 
         return () => {
             clearTimeout(timer);
         };
     });
-
-    console.log(alertModalState);
 
     return (
         <Modal transparent visible={alertModalState.status}>
