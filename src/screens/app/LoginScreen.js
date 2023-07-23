@@ -24,13 +24,13 @@ import useKeyboardStatus from "../../hooks/useKeyboardStatus";
 import { executeActions, screenStack, selectActions } from "../../store/slices/appStateSlice";
 import { useDispatch, useSelector } from "react-redux";
 import {
-    changeAlertModalState,
+    changeToastModalState,
     changePasswordResetModalState,
     selectPasswordResetModalState,
 } from "../../store/slices/modalsSlice";
 import CustomMessageModal from "../../components/common/CustomMessageModal";
 import { userModel } from "../../../utilities/asyncStorage";
-import CustomAlert from "../../modals/Alert";
+import CustomToast from "../../modals/Toast";
 
 const LoginScreen = () => {
     const navigation = useNavigation();
@@ -82,10 +82,11 @@ const LoginScreen = () => {
         if (cachedData.message === "EMAIL_IS_NOT_FOUND") {
             dispatch(
                 executeActions({
-                    actionName: "emailNotRegisteredAlert",
+                    actionName: "emailNotRegisteredToast",
                     actionPayload: {
                         status: true,
                         text: "Email is not registered",
+                        type: "error",
                     },
                     to: "STORE",
                 })
@@ -97,7 +98,7 @@ const LoginScreen = () => {
                 setInputs((prevState) => {
                     return { ...prevState, password: "" };
                 });
-                dispatch(changeAlertModalState({ status: true, text: "Password is wrong" }));
+                dispatch(changeToastModalState({ status: true, text: "Password is wrong", type: "error" }));
 
                 return;
             }
@@ -105,13 +106,13 @@ const LoginScreen = () => {
         }
     };
 
-    const handleEmailAlreadyRegisteredAlert = () => {
-        if ("emailAlreadyRegisteredAlert" in actions) {
-            dispatch(changeAlertModalState(actions["emailAlreadyRegisteredAlert"]));
+    const handleEmailAlreadyRegisteredToast = () => {
+        if ("emailAlreadyRegisteredToast" in actions) {
+            dispatch(changeToastModalState(actions["emailAlreadyRegisteredToast"]));
         }
         dispatch(
             executeActions({
-                actionName: "emailAlreadyRegisteredAlert",
+                actionName: "emailAlreadyRegisteredToast",
                 to: "REMOVE",
             })
         );
@@ -120,12 +121,12 @@ const LoginScreen = () => {
     useEffect(() => {
         dispatch(screenStack({ screen: LOGIN_SCREEN, to: "push" }));
 
-        handleEmailAlreadyRegisteredAlert();
+        handleEmailAlreadyRegisteredToast();
     }, []);
 
     return (
         <SafeAreaView>
-            <CustomAlert text={"Password is wrong"} />
+            <CustomToast text={"Password is wrong"} />
             {selectPasswordResetState && (
                 <CustomMessageModal
                     gifOrImage={require("../../../assets/images/passwordResetSuccessful.jpg")}

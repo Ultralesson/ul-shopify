@@ -27,7 +27,7 @@ import {
 import AuthButtonSection from "../../components/app/AuthButtonSection";
 import { useDispatch, useSelector } from "react-redux";
 import { getTempState, login } from "../../store/slices/authSlice";
-import { changeAlertModalState, changeRegistrationModalState } from "../../store/slices/modalsSlice";
+import { changeToastModalState, changeRegistrationModalState } from "../../store/slices/modalsSlice";
 import CustomBackButton from "../../components/common/CustomBackButton";
 import useKeyboardStatus from "../../hooks/useKeyboardStatus";
 import { executeActions, screenStack, selectActions } from "../../store/slices/appStateSlice";
@@ -101,8 +101,8 @@ const RegistrationScreen = () => {
         if (cachedData.message === "EMAIL_IS_FOUND") {
             dispatch(
                 executeActions({
-                    actionName: "emailAlreadyRegisteredAlert",
-                    actionPayload: { status: true, text: "Email already registered" },
+                    actionName: "emailAlreadyRegisteredToast",
+                    actionPayload: { status: true, text: "Email already registered", type: "error" },
                     to: "STORE",
                 })
             );
@@ -114,13 +114,13 @@ const RegistrationScreen = () => {
         }
     };
 
-    const handleEmailNotRegisteredAlert = () => {
-        if ("emailNotRegisteredAlert" in actions) {
-            dispatch(changeAlertModalState(actions["emailNotRegisteredAlert"]));
+    const handleEmailNotRegisteredToast = () => {
+        if ("emailNotRegisteredToast" in actions) {
+            dispatch(changeToastModalState(actions["emailNotRegisteredToast"]));
         }
         dispatch(
             executeActions({
-                actionName: "emailNotRegisteredAlert",
+                actionName: "emailNotRegisteredToast",
                 to: "REMOVE",
             })
         );
@@ -129,7 +129,7 @@ const RegistrationScreen = () => {
     useEffect(() => {
         dispatch(screenStack({ screen: REGISTRATION_SCREEN, to: "push" }));
 
-        handleEmailNotRegisteredAlert();
+        handleEmailNotRegisteredToast();
     }, []);
 
     return (
