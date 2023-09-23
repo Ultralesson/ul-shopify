@@ -176,6 +176,7 @@ const HomeTabNavigator = () => {
                     })}
                 />
             </Tab.Navigator>
+
             {tabBarSlider && (
                 <Animated.View
                     style={{
