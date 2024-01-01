@@ -1,4 +1,4 @@
-import { getFocusedRouteNameFromRoute, useNavigation } from "@react-navigation/native";
+import { getFocusedRouteNameFromRoute } from "@react-navigation/native";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 
 import HomeStackNavigator from "../stack-navigators/HomeStackNavigator";
@@ -30,11 +30,13 @@ import { Animated, Dimensions } from "react-native";
 import { useEffect, useRef, useState } from "react";
 import { useSelector } from "react-redux";
 import { selectScreenStack } from "../../store/slices/appStateSlice";
+import { selectIsTabBarVisible } from "../../store/slices/appUIStateSlice";
 
 const Tab = createBottomTabNavigator();
 
 const HomeTabNavigator = () => {
     const activeScreen = useSelector(selectScreenStack);
+    const isTabBarVisible = useSelector(selectIsTabBarVisible);
 
     const tabOffsetValue = useRef(new Animated.Value(0)).current;
     const [tabBarSlider, setTabBarSlider] = useState(true);
@@ -79,6 +81,9 @@ const HomeTabNavigator = () => {
                     tabBarStyle: {
                         shadowRadius: 10,
                         shadowColor: "gray",
+                        // Sometimes when we want to hide the tab navigator by performing some actions in the screen
+                        // Then we set the state isTabBarVisible to false for not to display and true to be displayed
+                        display: isTabBarVisible === true ? "flex" : "none",
                     },
                 }}
             >
@@ -177,7 +182,7 @@ const HomeTabNavigator = () => {
                 />
             </Tab.Navigator>
 
-            {tabBarSlider && (
+            {isTabBarVisible && tabBarSlider && (
                 <Animated.View
                     style={{
                         backgroundColor: SECONDARY_COLOR,

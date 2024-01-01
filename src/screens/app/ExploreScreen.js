@@ -9,6 +9,7 @@ import { useNavigation } from "@react-navigation/native";
 import { EXPLORE_SCREEN } from "../../../constants/screens";
 import { useDispatch, useSelector } from "react-redux";
 import { screenStack, selectNavigateBackScreen } from "../../store/slices/appStateSlice";
+import { selectIsTabBarVisible, showTabBar } from "../../store/slices/appUIStateSlice";
 
 const EXPLORE = {
     BACK_BUTTON: "btn-explore-back",
@@ -20,6 +21,7 @@ const ExploreScreen = () => {
     const navigation = useNavigation();
     const dispatch = useDispatch();
     const navigateBackScreen = useSelector(selectNavigateBackScreen);
+    const isTabBarVisible = useSelector(selectIsTabBarVisible);
 
     useEffect(() => {
         dispatch(screenStack({ screen: EXPLORE_SCREEN, to: "push" }));
@@ -34,10 +36,18 @@ const ExploreScreen = () => {
                         accessibilityLabel={EXPLORE.BACK_BUTTON}
                         className="mr-2"
                         onPress={() => {
-                            // Here we are manipulating the screen to navigate to tab
-                            const TAB_NAVIGATION = navigateBackScreen.split("-screen")[0] + "-tab";
+                            // If the navigation is happening within the screen then we will operate on screen
+                            let NAVIGATE_BACK_TO = null;
+                            // isTabBarVisible is used to get the state of visibility of tab bar,
+                            // As it's false indicates we have modified within the screen else we have navigated to explore screen via tabs
+                            if (isTabBarVisible === false) {
+                                NAVIGATE_BACK_TO = navigateBackScreen;
+                            } else {
+                                NAVIGATE_BACK_TO = navigateBackScreen.split("-screen")[0] + "-tab";
+                            }
                             dispatch(screenStack({ to: "pop" })); // Once navigated pop-off the earlier screen
-                            navigation.navigate(TAB_NAVIGATION);
+                            dispatch(showTabBar());
+                            navigation.navigate(NAVIGATE_BACK_TO);
                         }}
                     >
                         <ChevronLeftIcon size={ICON_SIZE_SMALL} color={ICON_COLOR} />
