@@ -3,6 +3,7 @@
 -   Profile screen
 -   use of bottom sheet
 -   fix the slider issue
+-   Fix the register modal appearing after login, which shouldn't it should only appear after register
 
 ## Commands
 

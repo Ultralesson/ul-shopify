@@ -17,14 +17,12 @@ export const userModel = async (action, data) => {
             };
         case "GET_USER":
             cachedData = (await getFromLocalStorage("user")).data;
-            if (cachedData) {
-                const user = cachedData.find((item) => item.email === data.email);
-                if (user) {
-                    return {
-                        message: "EMAIL_IS_FOUND",
-                        data: user,
-                    };
-                }
+            const user = cachedData.find((item) => item.email === data.email);
+            if (user) {
+                return {
+                    message: "EMAIL_IS_FOUND",
+                    data: user,
+                };
             } else {
                 return {
                     message: "EMAIL_IS_NOT_FOUND",

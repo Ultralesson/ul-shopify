@@ -234,7 +234,7 @@ const OtpScreen = () => {
                         // TODO: Handle if the OTP is incorrect issue then we should not navigate to home tab screen
                         navigation.navigate(LOADING_SCREEN, { navigateTo: HOME_TAB });
                     } else {
-                        dispatch(changeToastModalState({ status: true, text: "OTP cannot be empty" }));
+                        dispatch(changeToastModalState({ status: true, text: "OTP cannot be empty" , type: "error"}));
                     }
                 }}
             />
