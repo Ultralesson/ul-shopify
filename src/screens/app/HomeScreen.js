@@ -16,6 +16,9 @@ import {
 } from "react-native-heroicons/outline";
 import { TERNARY_COLOR } from "../../../constants/colors";
 import { hideTabBar } from "../../store/slices/appUIStateSlice";
+import { ScrollView } from "react-native-gesture-handler";
+import CategoryScreen from "../../components/app/CategoriesScreen";
+import FeaturedRow from "../../components/app/FeaturedRow";
 
 const HomeScreen = () => {
     const navigation = useNavigation();
@@ -62,11 +65,21 @@ const HomeScreen = () => {
                             navigation.navigate(EXPLORE_SCREEN);
                         }}
                     >
-                        <Text>Restaurant and cuisines</Text>
+                        <Text className="text-gray-400">Restaurant and cuisines</Text>
                     </TouchableOpacity>
                 </View>
                 <AdjustmentsVerticalIcon color={TERNARY_COLOR} />
             </View>
+
+            <ScrollView
+                className="bg-gray-100"
+                contentContainerStyle={{
+                    paddingBottom: 100,
+                }}
+            >
+                <CategoryScreen />
+                <FeaturedRow title  />
+            </ScrollView>
         </SafeAreaView>
     );
 };
