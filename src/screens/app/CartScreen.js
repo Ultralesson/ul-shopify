@@ -5,7 +5,7 @@ import { useDispatch } from "react-redux";
 import { screenStack } from "../../store/slices/appStateSlice";
 import { CART_SCREEN } from "../../../constants/screens";
 
-const CartScreen = () => {
+export const CartScreen = () => {
     const dispatch = useDispatch();
 
     useEffect(() => {
@@ -21,5 +21,3 @@ const CartScreen = () => {
         </SafeAreaView>
     );
 };
-
-export default CartScreen;

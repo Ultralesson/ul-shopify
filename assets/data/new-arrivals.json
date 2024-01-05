@@ -7,7 +7,7 @@
             "name": "Elegant Suite",
             "description": "A sophisticated and stylish suit, perfect for business or formal occasions. Tailored for a sleek fit with premium materials.",
             "category": "clothing",
-            "brand": "EcoFashion",
+            "brand": "Eco Fashion",
             "price": 249.99,
             "discounted_price": 199.99,
             "stock_quantity": 30,
@@ -34,15 +34,24 @@
             "name": "Running Sneakers",
             "description": "High-performance running shoes with enhanced cushioning and durability for long-distance runners.",
             "category": "shoes",
-            "brand": "RunFast",
+            "brand": "Run Fast",
             "price": 119.99,
             "discounted_price": 99.99,
             "stock_quantity": 60,
             "image_url": "https://drive.google.com/uc?export=view&id=1FpxoBwaEyuPP3acsiuy4Xa7IOYi6tBFU",
             "features": [
-                "Breathable mesh upper",
-                "Advanced sole technology",
-                "Lightweight design"
+                {
+                    "id": 1,
+                    "description": "Breathable mesh upper"
+                },
+                {
+                    "id": 2,
+                    "description": "Advanced sole technology"
+                },
+                {
+                    "id": 3,
+                    "description": "Lightweight design"
+                }
             ],
             "rating": 4.8,
             "reviews_count": 200,
@@ -62,16 +71,28 @@
             "name": "High-Fidelity Headphones",
             "description": "Experience unparalleled sound quality with these High-Fidelity Headphones. Designed for audiophiles, these headphones offer crisp, detailed audio reproduction and comfortable, long-wearing design.",
             "category": "audio equipment",
-            "brand": "SoundMaster",
+            "brand": "Sound Master",
             "price": 199.99,
             "discounted_price": 159.99,
             "stock_quantity": 45,
             "image_url": "https://drive.google.com/uc?export=view&id=1oQ2i-ERZ6OaysI2Ks4_iyuVtYAJkvB1G",
             "features": [
-                "Superior sound clarity and deep bass",
-                "Noise cancellation technology",
-                "Comfortable over-ear design",
-                "Wireless connectivity with long battery life"
+                {
+                    "id": 1,
+                    "description": "Superior sound clarity and deep bass"
+                },
+                {
+                    "id": 2,
+                    "description": "Noise cancellation technology"
+                },
+                {
+                    "id": 3,
+                    "description": "Comfortable over-ear design"
+                },
+                {
+                    "id": 4,
+                    "description": "Wireless connectivity with long battery life"
+                }
             ],
             "rating": 4.8,
             "reviews_count": 180,
@@ -91,15 +112,24 @@
             "name": "Modern Accent Chair",
             "description": "A stylish and comfortable accent chair that adds a modern touch to any room. Its elegant design is perfect for lounging or as a decorative piece in your living space.",
             "category": "furniture",
-            "brand": "HomeArt",
+            "brand": "Home Art",
             "price": 159.99,
             "discounted_price": 129.99,
             "stock_quantity": 35,
             "image_url": "https://drive.google.com/uc?export=view&id=1BZzFnvbKHZaAWbX78egIEwkqM7Rom25l",
             "features": [
-                "Ergonomic design with plush seating",
-                "Durable wooden frame with a contemporary finish",
-                "Easy to assemble and maintain"
+                {
+                    "id": 1,
+                    "description": "Ergonomic design with plush seating"
+                },
+                {
+                    "id": 2,
+                    "description": "Durable wooden frame with a contemporary finish"
+                },
+                {
+                    "id": 3,
+                    "description": "Easy to assemble and maintain"
+                }
             ],
             "rating": 4.6,
             "reviews_count": 95,
@@ -119,15 +149,24 @@
             "name": "Vintage Denim Jacket",
             "description": "A classic vintage-style denim jacket that combines timeless fashion with durable construction. Perfect for casual outings and versatile enough for various styles.",
             "category": "clothing",
-            "brand": "RetroWear",
+            "brand": "Retro Wear",
             "price": 99.99,
             "discounted_price": 79.99,
             "stock_quantity": 50,
             "image_url": "https://drive.google.com/uc?export=view&id=1ej-ketHRNcdgvpkAdByCC-IOMRvET5N_",
             "features": [
-                "High-quality denim material",
-                "Stylish vintage design",
-                "Comfortable and fits true to size"
+                {
+                    "id": 1,
+                    "description": "High-quality denim material"
+                },
+                {
+                    "id": 2,
+                    "description": "Stylish vintage design"
+                },
+                {
+                    "id": 3,
+                    "description": "Comfortable and fits true to size"
+                }
             ],
             "rating": 4.7,
             "reviews_count": 110,
@@ -147,15 +186,24 @@
             "name": "Eco-Friendly Canvas Sneakers",
             "description": "Fashionable and eco-friendly canvas sneakers, perfect for everyday wear. Made with sustainable materials, they offer comfort and style while being kind to the planet.",
             "category": "shoes",
-            "brand": "GreenStep",
+            "brand": "Green Step",
             "price": 89.99,
             "discounted_price": 69.99,
             "stock_quantity": 60,
             "image_url": "https://drive.google.com/uc?export=view&id=1PTQzWoMmg499G0yE8iBN7PGxliYNopSl",
             "features": [
-                "Made from recycled materials",
-                "Breathable design with cushioned soles",
-                "Available in various colors"
+                {
+                    "id": 1,
+                    "description": "Made from recycled materials"
+                },
+                {
+                    "id": 2,
+                    "description": "Breathable design with cushioned soles"
+                },
+                {
+                    "id": 3,
+                    "description": "Available in various colors"
+                }
             ],
             "rating": 4.8,
             "reviews_count": 190,
@@ -175,15 +223,24 @@
             "name": "Contemporary Coffee Table",
             "description": "A sleek and modern coffee table, perfect for any contemporary living space. Its minimalist design is both functional and stylish, making it a great centerpiece.",
             "category": "furniture",
-            "brand": "ModernLiving",
+            "brand": "Modern Living",
             "price": 199.99,
             "discounted_price": 169.99,
             "stock_quantity": 25,
             "image_url": "https://drive.google.com/uc?export=view&id=1WW5B4wdED1VhkWBlIUB3861k56A7ek9J",
             "features": [
-                "Elegant glass top",
-                "Sturdy metal frame",
-                "Easy to clean and maintain"
+                {
+                    "id": 1,
+                    "description": "Elegant glass top"
+                },
+                {
+                    "id": 2,
+                    "description": "Sturdy metal frame"
+                },
+                {
+                    "id": 3,
+                    "description": "Easy to clean and maintain"
+                }
             ],
             "rating": 4.8,
             "reviews_count": 85,
@@ -203,15 +260,24 @@
             "name": "Remote Control Car",
             "description": "An exciting and fast remote control car that provides endless fun for kids and adults alike. Built for speed and durability, it's perfect for outdoor racing.",
             "category": "toys",
-            "brand": "SpeedRacers",
+            "brand": "Speed Racers",
             "price": 59.99,
             "discounted_price": 49.99,
             "stock_quantity": 40,
             "image_url": "https://drive.google.com/uc?export=view&id=18V3vNqmy_6uSCFOuM9X4qaU08-f7stB7",
             "features": [
-                "High-speed performance",
-                "Durable design for all terrains",
-                "Long-range remote control"
+                {
+                    "id": 1,
+                    "description": "High-speed performance"
+                },
+                {
+                    "id": 2,
+                    "description": "Durable design for all terrains"
+                },
+                {
+                    "id": 3,
+                    "description": "Long-range remote control"
+                }
             ],
             "rating": 4.9,
             "reviews_count": 200,
