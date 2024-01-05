@@ -8,7 +8,7 @@ import { randomNumber } from "../../../utilities/mathHelpers";
 
 const LoadingScreen = ({ route }) => {
     const navigation = useNavigation();
-    const { navigateTo } = route.params;
+    const { navigateTo, ...otherParams } = route.params;
 
     // useEffect will be executed once the DOM is painted
     useEffect(() => {
@@ -16,7 +16,9 @@ const LoadingScreen = ({ route }) => {
         if (navigateTo) {
             // Internal to setTimeout will be executed after specified timeout
             setTimeout(() => {
-                navigation.navigate(navigateTo);
+                navigation.navigate(navigateTo, {
+                    ...otherParams, // Apart from the navigateTo param if we have other params then we pass onto navigateTo screen
+                });
             }, randomNumber(3, 7) * 1000);
         }
     }, [navigateTo]);
