@@ -9,9 +9,17 @@ export const basketSlice = createSlice({
     initialState,
     reducers: {
         addToBasket: (state, action) => {
-            console.log("HE;");
-            console.log(action.payload);
-            state.items = [...state.items, action.payload.product];
+            const existingItemIndex = state.items.findIndex(
+                (item) => item.product_id === action.payload.product.product_id
+            );
+
+            if (existingItemIndex !== -1) {
+                // Item exists, increment quantity
+                state.items[existingItemIndex].quantity += 1;
+            } else {
+                // Item doesn't exist, add new item
+                state.items = [...state.items, { ...action.payload.product, quantity: 1 }];
+            }
         },
 
         incrementQuantity: (state, action) => {
@@ -49,7 +57,13 @@ export const selectBasketItems = (state) => state.basket.items;
 export const selectBasketItemsWithId = (state, id) => {
     state.basket.items.filter((item) => item.id === id);
 };
-
-export const selectBasketTotal = (state) => state.basket.items.reduce((total, item) => (total += item.price), 0);
-
+export const selectBasketTotal = (state) => {
+    return parseFloat(
+        state.basket.items
+            .reduce((total, item) => {
+                return total + item.price * item.quantity;
+            }, 0)
+            .toFixed(2)
+    );
+};
 export default basketSlice.reducer;

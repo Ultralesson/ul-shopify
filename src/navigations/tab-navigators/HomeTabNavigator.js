@@ -12,8 +12,6 @@ import {
     TRACK_ORDER_TAB,
     HOME_SCREEN,
     PROFILE_SCREEN,
-    CART_SCREEN,
-    TRACK_ORDER_SCREEN,
 } from "../../../constants/screens";
 import {
     HomeIcon,
@@ -26,15 +24,15 @@ import { SECONDARY_COLOR } from "../../../constants/colors";
 import ExploreStackNavigator from "../stack-navigators/ExploreStackNavigator";
 import CartStackNavigator from "../stack-navigators/CartStackNavigator";
 import TrackOrderStackNavigator from "../stack-navigators/TrackOrderStackNavigator";
-import { useEffect } from "react";
 import { useSelector } from "react-redux";
-import { selectScreenStack } from "../../store/slices/appStateSlice";
 import { selectIsTabBarVisible } from "../../store/slices/appUIStateSlice";
+import { selectBasketItems } from "../../store/slices/basketSlice";
 
 const Tab = createBottomTabNavigator();
 
 const HomeTabNavigator = () => {
     const isTabBarVisible = useSelector(selectIsTabBarVisible);
+    const basketItems = useSelector(selectBasketItems);
 
     const getTabBarVisibility = (route) => {
         const routeName = getFocusedRouteNameFromRoute(route);
@@ -85,7 +83,7 @@ const HomeTabNavigator = () => {
                     component={CartStackNavigator}
                     options={{
                         tabBarLabel: "Cart",
-                        tabBarBadge: 0,
+                        tabBarBadge: basketItems.length,
                         tabBarBadgeStyle: {
                             backgroundColor: SECONDARY_COLOR,
                             color: "gray",

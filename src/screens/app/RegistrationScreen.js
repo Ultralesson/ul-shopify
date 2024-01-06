@@ -27,7 +27,7 @@ import {
 import AuthButtonSection from "../../components/app/AuthButtonSection";
 import { useDispatch, useSelector } from "react-redux";
 import { getTempState, login } from "../../store/slices/authSlice";
-import { changeToastModalState, changeRegistrationModalState } from "../../store/slices/modalsSlice";
+import { changeToastModalState } from "../../store/slices/modalsSlice";
 import CustomBackButton from "../../components/common/CustomBackButton";
 import useKeyboardStatus from "../../hooks/useKeyboardStatus";
 import { executeActions, selectActions } from "../../store/slices/appStateSlice";
