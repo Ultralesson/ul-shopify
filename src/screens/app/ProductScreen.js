@@ -11,11 +11,13 @@ import {
     StarIcon,
     PlusIcon,
     ShoppingCartIcon,
+    PlusCircleIcon,
 } from "react-native-heroicons/outline";
-import { QUATERNARY_COLOR, TERNARY_COLOR } from "../../../constants/colors";
+import { QUATERNARY_COLOR, SECONDARY_COLOR, TERNARY_COLOR } from "../../../constants/colors";
 import { CART_SCREEN, HOME_SCREEN, LOADING_SCREEN } from "../../../constants/screens";
-import { useDispatch } from "react-redux";
-import { hideTabBar } from "../../store/slices/appUIStateSlice";
+import { useDispatch, useSelector } from "react-redux";
+import { hideTabBar, showTabBar } from "../../store/slices/appUIStateSlice";
+import { addToBasket, selectBasketItems } from "../../store/slices/basketSlice";
 
 const Label = ({ type, text }) => {
     return (
@@ -28,11 +30,13 @@ const Label = ({ type, text }) => {
 
 export const ProductScreen = () => {
     const [showFeatures, setShowFeatures] = useState(false);
+    const [isItemAddedToCart, setItemAddedToCart] = useState(false);
     const {
         params: { product },
     } = useRoute();
     const navigation = useNavigation();
     const dispatch = useDispatch();
+    const basketItems = useSelector(selectBasketItems);
 
     useEffect(() => {
         dispatch(hideTabBar());
@@ -40,43 +44,44 @@ export const ProductScreen = () => {
 
     return (
         <SafeAreaView className="bg-white flex-1">
+            <View className="absolute top-8 left-5 rounded-full p-2 mt-4 bg-white z-10">
+                <TouchableOpacity
+                    onPress={() => {
+                        dispatch(showTabBar());
+                        navigation.navigate(HOME_SCREEN);
+                    }}
+                >
+                    <ArrowLeftIcon size={25} color="#000000" />
+                </TouchableOpacity>
+            </View>
+
+            {/* Shopping Cart Button */}
+            <View className="absolute top-8 right-5 p-2 rounded-full mt-4 bg-gray-50 z-10">
+                <TouchableOpacity
+                    onPress={() => {
+                        dispatch(hideTabBar());
+                        navigation.navigate(LOADING_SCREEN, {
+                            navigateTo: CART_SCREEN,
+                        });
+                    }}
+                >
+                    <ShoppingCartIcon size={40} color="#000000" />
+                </TouchableOpacity>
+            </View>
+            <View
+                className="absolute top-6 right-5 rounded-full mt-4 p-1 z-10"
+                style={{ backgroundColor: TERNARY_COLOR }}
+            >
+                <Text className="font-bold text-xs text-white">{basketItems.length}</Text>
+            </View>
             <ScrollView>
-                <View className="relative pb-5">
+                <View className="relative">
                     <Image
                         className="w-full h-96 bg-gray-300"
                         source={{
                             uri: product.image_url,
                         }}
                     />
-                    <View className="absolute top-8 left-5 rounded-full p-2 bg-white">
-                        <TouchableOpacity
-                            onPress={() => {
-                                navigation.navigate(HOME_SCREEN);
-                            }}
-                        >
-                            <ArrowLeftIcon size={25} color="#000000" />
-                        </TouchableOpacity>
-                    </View>
-
-                    <View className="absolute top-8 right-5 p-2 rounded-full bg-gray-50">
-                        <TouchableOpacity
-                            onPress={() => {
-                                dispatch(hideTabBar());
-                                navigation.navigate(LOADING_SCREEN, {
-                                    navigateTo: CART_SCREEN,
-                                });
-                            }}
-                        >
-                            <ShoppingCartIcon size={40} color="#000000" />
-                        </TouchableOpacity>
-                    </View>
-
-                    <View
-                        className="absolute top-5 right-4 rounded-full p-1"
-                        style={{ backgroundColor: TERNARY_COLOR }}
-                    >
-                        <Text className="font-bold text-white">10</Text>
-                    </View>
 
                     <View className="bg-white">
                         <View className="px-4 pt-4">
@@ -119,15 +124,46 @@ export const ProductScreen = () => {
                             {product.features.map((feature) => {
                                 return (
                                     <View className="flex-row items-center pt-4 space-x-2">
-                                        <PlusIcon size={15} color={TERNARY_COLOR} />
+                                        <PlusIcon size={15} color={QUATERNARY_COLOR} />
                                         <Text className="italic text-gray-500" key={feature.id}>
-                                            {feature}
+                                            {feature.description}
                                         </Text>
                                     </View>
                                 );
                             })}
                         </View>
                     )}
+                </View>
+                <View className="w-full pt-8 pb-8">
+                    <TouchableOpacity
+                        className="mx-5 p-3 rounded-lg flex-row"
+                        style={{ backgroundColor: SECONDARY_COLOR }}
+                        onPress={() => {
+                            if (!isItemAddedToCart) {
+                                dispatch(
+                                    addToBasket({
+                                        product: {
+                                            ...product,
+                                            quantity: 1,
+                                        },
+                                    })
+                                );
+                                setItemAddedToCart(true);
+                            } else {
+                                navigation.navigate(LOADING_SCREEN, {
+                                    navigateTo: CART_SCREEN,
+                                });
+                            }
+                        }}
+                    >
+                        {!isItemAddedToCart ? (
+                            <Text className="flex-1 text-white  font-bold text-lg text-center">Add To Cart</Text>
+                        ) : (
+                            <Text className="flex-1 text-white  font-bold text-lg text-center">Go To Cart</Text>
+                        )}
+
+                        <PlusCircleIcon size={30} color="#ffffff" opacity={0.9} />
+                    </TouchableOpacity>
                 </View>
             </ScrollView>
         </SafeAreaView>

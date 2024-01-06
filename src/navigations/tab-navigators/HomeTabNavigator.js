@@ -28,7 +28,7 @@ import CartStackNavigator from "../stack-navigators/CartStackNavigator";
 import TrackOrderStackNavigator from "../stack-navigators/TrackOrderStackNavigator";
 import { Animated, Dimensions } from "react-native";
 import { useEffect, useRef, useState } from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { selectScreenStack } from "../../store/slices/appStateSlice";
 import { selectIsTabBarVisible } from "../../store/slices/appUIStateSlice";
 
@@ -37,7 +37,6 @@ const Tab = createBottomTabNavigator();
 const HomeTabNavigator = () => {
     const activeScreen = useSelector(selectScreenStack);
     const isTabBarVisible = useSelector(selectIsTabBarVisible);
-
     const tabOffsetValue = useRef(new Animated.Value(0)).current;
     const [tabBarSlider, setTabBarSlider] = useState(true);
 
@@ -182,7 +181,7 @@ const HomeTabNavigator = () => {
                 />
             </Tab.Navigator>
 
-            {isTabBarVisible && tabBarSlider && (
+            {/* {isTabBarVisible && tabBarSlider && (
                 <Animated.View
                     style={{
                         backgroundColor: SECONDARY_COLOR,
@@ -193,7 +192,7 @@ const HomeTabNavigator = () => {
                         transform: [{ translateX: tabOffsetValue }],
                     }}
                 ></Animated.View>
-            )}
+            )} */}
         </>
     );
 };

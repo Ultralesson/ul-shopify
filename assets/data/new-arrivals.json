@@ -13,8 +13,14 @@
             "stock_quantity": 30,
             "image_url": "https://drive.google.com/uc?export=view&id=1i3gRGONfIgw4rtM4sODHVrqDADaCROz7",
             "features": [
-                "Premium wool blend",
-                "Slim fit design"
+                {
+                    "id": 1,
+                    "description": "Premium wool blend"
+                },
+                {
+                    "id": 2,
+                    "description": "Slim fit design"
+                }
             ],
             "rating": 4.9,
             "reviews_count": 75,

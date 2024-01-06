@@ -10,9 +10,6 @@ const LoadingScreen = ({ route }) => {
     const navigation = useNavigation();
     const { navigateTo, ...otherParams } = route.params;
 
-    console.log("HH");
-    console.log(navigateTo);
-
     // useEffect will be executed once the DOM is painted
     useEffect(() => {
         // Loading functionality will be triggered only if the navigateTo is given
