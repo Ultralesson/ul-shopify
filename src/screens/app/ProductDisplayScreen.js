@@ -2,8 +2,8 @@ import React from "react";
 import { ScrollView, View, Text, Image, TouchableOpacity } from "react-native";
 import { useNavigation, useRoute } from "@react-navigation/native";
 import { useDispatch } from "react-redux";
-import { ArrowLeftIcon, StarIcon } from "react-native-heroicons/outline";
-import { HOME_SCREEN, HOME_TAB, LOADING_SCREEN, PRODUCT_SCREEN } from "../../../constants/screens";
+import { AdjustmentsVerticalIcon, ArrowLeftIcon, StarIcon } from "react-native-heroicons/outline";
+import { HOME_SCREEN, LOADING_SCREEN, PRODUCT_SCREEN } from "../../../constants/screens";
 import { TERNARY_COLOR } from "../../../constants/colors";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { hideTabBar, showTabBar } from "../../store/slices/appUIStateSlice";
@@ -56,19 +56,24 @@ export const ProductDisplayScreen = () => {
 
     return (
         <SafeAreaView>
-            <View className="flex-row items-center">
-                <View className="mx-3">
-                    <TouchableOpacity
-                        onPress={() => {
-                            dispatch(showTabBar());
-                            navigation.navigate(HOME_SCREEN);
-                        }}
-                    >
-                        <ArrowLeftIcon size={25} color="#000000" />
-                    </TouchableOpacity>
+            <View className="flex-row items-center justify-between">
+                <View className="flex-row items-center">
+                    <View className="mx-3">
+                        <TouchableOpacity
+                            onPress={() => {
+                                dispatch(showTabBar());
+                                navigation.navigate(HOME_SCREEN);
+                            }}
+                        >
+                            <ArrowLeftIcon size={25} color="#000000" />
+                        </TouchableOpacity>
+                    </View>
+                    <View>
+                        <Text className="font-bold pt-2 text-xl pb-3">{title ? title : "Explore More!!"}</Text>
+                    </View>
                 </View>
-                <View>
-                    <Text className="font-bold pt-2 text-xl pb-3">{title ? title : "Explore More!!"}</Text>
+                <View className="pr-2">
+                    <AdjustmentsVerticalIcon size={25} color={TERNARY_COLOR} />
                 </View>
             </View>
             <ScrollView className="mb-16">

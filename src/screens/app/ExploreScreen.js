@@ -3,7 +3,7 @@ import { Text, TextInput, View, TouchableOpacity, FlatList, Image } from "react-
 import { ChevronLeftIcon, MagnifyingGlassIcon } from "react-native-heroicons/outline";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { ICON_SIZE_SMALL } from "../../../constants/sizes";
-import { ICON_COLOR } from "../../../constants/colors";
+import { ICON_COLOR, SECONDARY_COLOR, TERNARY_COLOR } from "../../../constants/colors";
 import { useNavigation } from "@react-navigation/native";
 import {
     EXPLORE_SCREEN,
@@ -59,6 +59,18 @@ const ExploreScreen = () => {
     const [searchTerm, setSearchTerm] = useState("");
     const [filteredProducts, setFilteredProducts] = useState([]);
 
+    const [showMore, setShowMore] = useState(false);
+
+    const displayedProducts = showMore ? filteredProducts : filteredProducts.slice(0, 3);
+
+    const handleShowMore = () => {
+        // navigate to the Product Display screen with all filtered products
+        navigation.navigate(PRODUCT_DISPLAY_SCREEN, {
+            products: filteredProducts,
+            title: "Your Curated Selection!!",
+        });
+    };
+
     useEffect(() => {
         if (searchTerm) {
             const results = allProducts.filter(
@@ -82,7 +94,7 @@ const ExploreScreen = () => {
                         className="mr-2"
                         onPress={() => {
                             dispatch(showTabBar());
-                            navigation.navigate(HOME_TAB);
+                            navigation.navigate(HOME_SCREEN);
                         }}
                     >
                         <ChevronLeftIcon size={24} color="black" />
@@ -116,14 +128,26 @@ const ExploreScreen = () => {
                         <Text className="text-center text-lg">No products found.</Text>
                     </View>
                 ) : (
-                    <FlatList
-                        data={filteredProducts}
-                        keyExtractor={(item) => item.product_id}
-                        renderItem={({ item }) => (
-                            // Assuming you have a ProductItem component to render each item
-                            <ProductItem product={item} />
+                    <>
+                        <FlatList
+                            data={displayedProducts}
+                            keyExtractor={(item) => item.product_id}
+                            renderItem={({ item }) => <ProductItem product={item} />}
+                        />
+                        {filteredProducts.length > 3 && !showMore && (
+                            <TouchableOpacity
+                                className="items-center justify-center p-4"
+                                onPress={() => setShowMore(true)}
+                            >
+                                <Text
+                                    className="text-center text-md text-white font-bold px-10 py-3 rounded-xl"
+                                    style={{ backgroundColor: SECONDARY_COLOR }}
+                                >
+                                    More
+                                </Text>
+                            </TouchableOpacity>
                         )}
-                    />
+                    </>
                 )}
             </View>
         </SafeAreaView>

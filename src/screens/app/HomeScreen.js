@@ -7,7 +7,7 @@ import { changeRegistrationModalState, selectRegistrationModalState } from "../.
 import { useDispatch, useSelector } from "react-redux";
 import { selectAuthState } from "../../store/slices/authSlice";
 import { EXPLORE_SCREEN } from "../../../constants/screens";
-import { AdjustmentsVerticalIcon, ChevronDownIcon, MagnifyingGlassIcon } from "react-native-heroicons/outline";
+import { ChevronDownIcon, MagnifyingGlassIcon } from "react-native-heroicons/outline";
 import { TERNARY_COLOR } from "../../../constants/colors";
 import { hideTabBar, showTabBar } from "../../store/slices/appUIStateSlice";
 import { ScrollView } from "react-native-gesture-handler";
@@ -61,7 +61,6 @@ const HomeScreen = () => {
                         <Text className="text-gray-400">Search for more!!</Text>
                     </TouchableOpacity>
                 </View>
-                <AdjustmentsVerticalIcon color={TERNARY_COLOR} />
             </View>
 
             <ScrollView
