@@ -48,15 +48,16 @@ const FeatureGridRowCards = ({ product }) => {
 
 export const ProductDisplayScreen = () => {
     const {
-        params: { products },
+        params: { products, title },
     } = useRoute();
+    console.log(title);
     const navigation = useNavigation();
     const dispatch = useDispatch();
 
     return (
         <SafeAreaView>
             <View className="flex-row items-center">
-                <View className="mx-2">
+                <View className="mx-3">
                     <TouchableOpacity
                         onPress={() => {
                             dispatch(showTabBar());
@@ -67,7 +68,7 @@ export const ProductDisplayScreen = () => {
                     </TouchableOpacity>
                 </View>
                 <View>
-                    <Text className="font-bold pt-2 text-xl pb-3">Explore More!!</Text>
+                    <Text className="font-bold pt-2 text-xl pb-3">{title ? title : "Explore More!!"}</Text>
                 </View>
             </View>
             <ScrollView className="mb-16">

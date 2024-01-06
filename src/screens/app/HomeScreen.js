@@ -6,14 +6,8 @@ import CustomMessageModal from "../../components/common/CustomMessageModal";
 import { changeRegistrationModalState, selectRegistrationModalState } from "../../store/slices/modalsSlice";
 import { useDispatch, useSelector } from "react-redux";
 import { selectAuthState } from "../../store/slices/authSlice";
-import { screenStack } from "../../store/slices/appStateSlice";
-import { EXPLORE_SCREEN, HOME_SCREEN } from "../../../constants/screens";
-import {
-    AdjustmentsVerticalIcon,
-    ChevronDownIcon,
-    MagnifyingGlassIcon,
-    UserIcon,
-} from "react-native-heroicons/outline";
+import { EXPLORE_SCREEN } from "../../../constants/screens";
+import { AdjustmentsVerticalIcon, ChevronDownIcon, MagnifyingGlassIcon } from "react-native-heroicons/outline";
 import { TERNARY_COLOR } from "../../../constants/colors";
 import { hideTabBar, showTabBar } from "../../store/slices/appUIStateSlice";
 import { ScrollView } from "react-native-gesture-handler";
@@ -56,7 +50,7 @@ const HomeScreen = () => {
                 </View>
             </View>
             <View className="flex-row items-center space-x-2 pb-2 mx-2">
-                <View className="flex-row flex-1 space-x-2 bg-gray-200 p-2 rounded-md">
+                <View className="flex-row flex-1 space-x-2 bg-gray-200 p-2 rounded-md items-center">
                     <MagnifyingGlassIcon color={TERNARY_COLOR} />
                     <TouchableOpacity
                         onPress={() => {
@@ -64,7 +58,7 @@ const HomeScreen = () => {
                             navigation.navigate(EXPLORE_SCREEN);
                         }}
                     >
-                        <Text className="text-gray-400">Restaurant and cuisines</Text>
+                        <Text className="text-gray-400">Search for more!!</Text>
                     </TouchableOpacity>
                 </View>
                 <AdjustmentsVerticalIcon color={TERNARY_COLOR} />

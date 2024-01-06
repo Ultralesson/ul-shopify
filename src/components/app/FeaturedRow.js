@@ -51,7 +51,7 @@ export const FeatureRowCard = ({ product }) => {
 const FeaturedRow = ({ title, description, productsList }) => {
     const navigation = useNavigation();
     const dispatch = useDispatch();
-    productsList = fetchRandomElements(productsList, 3);
+    const products = fetchRandomElements([...productsList], 3);
     return (
         <View>
             <View className="mt-4 flex-row items-center justify-between px-4">
@@ -78,7 +78,7 @@ const FeaturedRow = ({ title, description, productsList }) => {
                 showsHorizontalScrollIndicator={false}
                 className="pt-4"
             >
-                {productsList.map((product) => {
+                {products.map((product) => {
                     return <FeatureRowCard key={product.product_id} product={product} />;
                 })}
                 <TouchableOpacity
