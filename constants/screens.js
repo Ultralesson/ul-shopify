@@ -15,3 +15,5 @@ export const TRACK_ORDER_SCREEN = "track-order-screen";
 export const OTP_SCREEN = "otp-screen";
 export const FORGOT_PASSWORD_SCREEN = "forgot-password-screen";
 export const PRODUCT_SCREEN = "product-screen";
+export const PREPARING_ORDER_SCREEN = "preparing-order-screen";
+export const THANKYOU_SCREEN = "thankyou-screen";

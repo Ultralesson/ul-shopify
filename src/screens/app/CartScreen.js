@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import { Image, ScrollView, Text, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { useDispatch, useSelector } from "react-redux";
-import { CART_SCREEN, HOME_SCREEN, HOME_TAB } from "../../../constants/screens";
+import { CART_SCREEN, HOME_SCREEN, HOME_TAB, PREPARING_ORDER_SCREEN } from "../../../constants/screens";
 import basketSlice, {
     decrementQuantity,
     deleteItem,
@@ -147,7 +147,13 @@ export const CartScreen = () => {
                                 className="px-10 rounded-xl justify-center"
                                 style={{ backgroundColor: SECONDARY_COLOR }}
                             >
-                                <Text className="text-lg font-bold text-white">Place Order</Text>
+                                <TouchableOpacity
+                                    onPress={() => {
+                                        navigation.navigate(PREPARING_ORDER_SCREEN);
+                                    }}
+                                >
+                                    <Text className="text-lg font-bold text-white">Place Order</Text>
+                                </TouchableOpacity>
                             </View>
                         </View>
                     </View>
