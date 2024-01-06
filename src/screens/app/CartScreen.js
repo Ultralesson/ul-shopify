@@ -2,7 +2,6 @@ import React, { useEffect } from "react";
 import { Image, ScrollView, Text, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { useDispatch, useSelector } from "react-redux";
-import { screenStack } from "../../store/slices/appStateSlice";
 import { CART_SCREEN, HOME_SCREEN, HOME_TAB } from "../../../constants/screens";
 import { decrementQuantity, deleteItem, incrementQuantity, selectBasketItems } from "../../store/slices/basketSlice";
 import { TouchableOpacity } from "react-native-gesture-handler";
@@ -15,11 +14,9 @@ export const CartScreen = () => {
     const dispatch = useDispatch();
     const navigation = useNavigation();
     const basketItems = useSelector(selectBasketItems);
-    console.log(basketItems);
 
     useEffect(() => {
         dispatch(hideTabBar());
-        dispatch(screenStack({ screen: CART_SCREEN, to: "push" }));
     }, []);
 
     return (
@@ -31,7 +28,7 @@ export const CartScreen = () => {
                     <TouchableOpacity
                         onPress={() => {
                             dispatch(showTabBar());
-                            navigation.navigate(HOME_TAB);
+                            navigation.navigate(HOME_SCREEN);
                         }}
                     >
                         <Text

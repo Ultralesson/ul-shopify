@@ -14,7 +14,6 @@ import {
     changeQuitActionModal,
     changeRegistrationModalState,
 } from "../../store/slices/modalsSlice";
-import { screenStack } from "../../store/slices/appStateSlice";
 import { getTempState, login, selectAuthState, selectTempState } from "../../store/slices/authSlice";
 import { userModel } from "../../../utilities/asyncStorage";
 
@@ -100,7 +99,6 @@ const OtpScreen = () => {
         }
 
         if (!actionDispatched.current) {
-            dispatch(screenStack({ screen: OTP_SCREEN, to: "push" }));
             actionDispatched.current = true;
         }
 
@@ -234,7 +232,7 @@ const OtpScreen = () => {
                         // TODO: Handle if the OTP is incorrect issue then we should not navigate to home tab screen
                         navigation.navigate(LOADING_SCREEN, { navigateTo: HOME_TAB });
                     } else {
-                        dispatch(changeToastModalState({ status: true, text: "OTP cannot be empty" , type: "error"}));
+                        dispatch(changeToastModalState({ status: true, text: "OTP cannot be empty", type: "error" }));
                     }
                 }}
             />

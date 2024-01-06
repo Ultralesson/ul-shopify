@@ -6,7 +6,7 @@ import { ICON_SIZE_SMALL } from "../../../constants/sizes";
 import { ICON_COLOR } from "../../../constants/colors";
 import { TouchableOpacity } from "react-native-gesture-handler";
 import { useNavigation } from "@react-navigation/native";
-import { EXPLORE_SCREEN } from "../../../constants/screens";
+import { EXPLORE_SCREEN, HOME_SCREEN, HOME_TAB } from "../../../constants/screens";
 import { useDispatch, useSelector } from "react-redux";
 import { screenStack, selectNavigateBackScreen } from "../../store/slices/appStateSlice";
 import { selectIsTabBarVisible, showTabBar } from "../../store/slices/appUIStateSlice";
@@ -20,12 +20,6 @@ const EXPLORE = {
 const ExploreScreen = () => {
     const navigation = useNavigation();
     const dispatch = useDispatch();
-    const navigateBackScreen = useSelector(selectNavigateBackScreen);
-    const isTabBarVisible = useSelector(selectIsTabBarVisible);
-
-    useEffect(() => {
-        dispatch(screenStack({ screen: EXPLORE_SCREEN, to: "push" }));
-    }, []);
 
     return (
         <SafeAreaView>
@@ -36,18 +30,8 @@ const ExploreScreen = () => {
                         accessibilityLabel={EXPLORE.BACK_BUTTON}
                         className="mr-2"
                         onPress={() => {
-                            // If the navigation is happening within the screen then we will operate on screen
-                            let NAVIGATE_BACK_TO = null;
-                            // isTabBarVisible is used to get the state of visibility of tab bar,
-                            // As it's false indicates we have modified within the screen else we have navigated to explore screen via tabs
-                            if (isTabBarVisible === false) {
-                                NAVIGATE_BACK_TO = navigateBackScreen;
-                            } else {
-                                NAVIGATE_BACK_TO = navigateBackScreen.split("-screen")[0] + "-tab";
-                            }
-                            dispatch(screenStack({ to: "pop" })); // Once navigated pop-off the earlier screen
                             dispatch(showTabBar());
-                            navigation.navigate(NAVIGATE_BACK_TO);
+                            navigation.navigate(HOME_TAB);
                         }}
                     >
                         <ChevronLeftIcon size={ICON_SIZE_SMALL} color={ICON_COLOR} />

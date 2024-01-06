@@ -87,9 +87,7 @@ const ForgotPasswordScreen = () => {
         setHideInputs({ email: false, newPassword: false, confirmPassword: false });
     };
 
-    useEffect(() => {
-        dispatch(screenStack({ screen: FORGOT_PASSWORD_SCREEN, to: "push" }));
-    }, []);
+    useEffect(() => {}, []);
 
     return (
         <SafeAreaView className="bg-white h-full flex-1">

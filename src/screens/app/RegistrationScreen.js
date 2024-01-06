@@ -30,10 +30,15 @@ import { getTempState, login } from "../../store/slices/authSlice";
 import { changeToastModalState, changeRegistrationModalState } from "../../store/slices/modalsSlice";
 import CustomBackButton from "../../components/common/CustomBackButton";
 import useKeyboardStatus from "../../hooks/useKeyboardStatus";
-import { executeActions, screenStack, selectActions } from "../../store/slices/appStateSlice";
+import { executeActions, selectActions } from "../../store/slices/appStateSlice";
 import { userModel } from "../../../utilities/asyncStorage";
+import { hideTabBar } from "../../store/slices/appUIStateSlice";
 
 const RegistrationScreen = () => {
+    useEffect(() => {
+        dispatch(hideTabBar());
+    });
+
     const navigation = useNavigation();
     const dispatch = useDispatch();
     const isKeyboardVisible = useKeyboardStatus();
@@ -127,8 +132,6 @@ const RegistrationScreen = () => {
     };
 
     useEffect(() => {
-        dispatch(screenStack({ screen: REGISTRATION_SCREEN, to: "push" }));
-
         handleEmailNotRegisteredToast();
     }, []);
 
@@ -140,7 +143,6 @@ const RegistrationScreen = () => {
                         <View className="mr-3 flex-row items-center">
                             <CustomBackButton
                                 onBackPress={() => {
-                                    dispatch(screenStack({ screen: PROFILE_SCREEN, to: "push" }));
                                     navigation.navigate(PROFILE_SCREEN);
                                 }}
                             />

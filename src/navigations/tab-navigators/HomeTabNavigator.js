@@ -26,24 +26,15 @@ import { SECONDARY_COLOR } from "../../../constants/colors";
 import ExploreStackNavigator from "../stack-navigators/ExploreStackNavigator";
 import CartStackNavigator from "../stack-navigators/CartStackNavigator";
 import TrackOrderStackNavigator from "../stack-navigators/TrackOrderStackNavigator";
-import { Animated, Dimensions } from "react-native";
-import { useEffect, useRef, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useEffect } from "react";
+import { useSelector } from "react-redux";
 import { selectScreenStack } from "../../store/slices/appStateSlice";
 import { selectIsTabBarVisible } from "../../store/slices/appUIStateSlice";
 
 const Tab = createBottomTabNavigator();
 
 const HomeTabNavigator = () => {
-    const activeScreen = useSelector(selectScreenStack);
     const isTabBarVisible = useSelector(selectIsTabBarVisible);
-    const tabOffsetValue = useRef(new Animated.Value(0)).current;
-    const [tabBarSlider, setTabBarSlider] = useState(true);
-
-    const getWidth = () => {
-        const width = Dimensions.get("window").width;
-        return width / 5;
-    };
 
     const getTabBarVisibility = (route) => {
         const routeName = getFocusedRouteNameFromRoute(route);
@@ -57,16 +48,6 @@ const HomeTabNavigator = () => {
 
         return routeName === undefined || toIncludeTheTabNavigator.includes(routeName) ? "flex" : "none";
     };
-
-    useEffect(() => {
-        // This logic handles the display of slide bar on only tab screens
-        const toIncludeSlideBar = [HOME_SCREEN, CART_SCREEN, TRACK_ORDER_SCREEN, PROFILE_SCREEN];
-        if (toIncludeSlideBar.includes(activeScreen)) {
-            setTabBarSlider(true);
-        } else {
-            setTabBarSlider(false);
-        }
-    }, [activeScreen]);
 
     return (
         <>
@@ -96,12 +77,7 @@ const HomeTabNavigator = () => {
                         },
                     }}
                     listeners={({ navigation, route }) => ({
-                        tabPress: (event) => {
-                            Animated.spring(tabOffsetValue, {
-                                toValue: 0,
-                                useNativeDriver: true,
-                            }).start();
-                        },
+                        tabPress: (event) => {},
                     })}
                 />
                 <Tab.Screen
@@ -119,12 +95,7 @@ const HomeTabNavigator = () => {
                         },
                     }}
                     listeners={({ navigation, route }) => ({
-                        tabPress: (event) => {
-                            Animated.spring(tabOffsetValue, {
-                                toValue: getWidth(),
-                                useNativeDriver: true,
-                            }).start();
-                        },
+                        tabPress: (event) => {},
                     })}
                 />
                 <Tab.Screen
@@ -150,12 +121,7 @@ const HomeTabNavigator = () => {
                         },
                     }}
                     listeners={({ navigation, route }) => ({
-                        tabPress: (event) => {
-                            Animated.spring(tabOffsetValue, {
-                                toValue: getWidth() * 3,
-                                useNativeDriver: true,
-                            }).start();
-                        },
+                        tabPress: (event) => {},
                     })}
                 />
                 <Tab.Screen
@@ -171,28 +137,10 @@ const HomeTabNavigator = () => {
                         },
                     })}
                     listeners={({ navigation, route }) => ({
-                        tabPress: (event) => {
-                            Animated.spring(tabOffsetValue, {
-                                toValue: getWidth() * 4,
-                                useNativeDriver: true,
-                            }).start();
-                        },
+                        tabPress: (event) => {},
                     })}
                 />
             </Tab.Navigator>
-
-            {/* {isTabBarVisible && tabBarSlider && (
-                <Animated.View
-                    style={{
-                        backgroundColor: SECONDARY_COLOR,
-                        height: 2,
-                        width: getWidth(),
-                        position: "absolute",
-                        bottom: 50,
-                        transform: [{ translateX: tabOffsetValue }],
-                    }}
-                ></Animated.View>
-            )} */}
         </>
     );
 };

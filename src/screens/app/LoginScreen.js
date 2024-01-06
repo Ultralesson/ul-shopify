@@ -21,7 +21,7 @@ import {
 import AuthButtonSection from "../../components/app/AuthButtonSection";
 import CustomBackButton from "../../components/common/CustomBackButton";
 import useKeyboardStatus from "../../hooks/useKeyboardStatus";
-import { executeActions, screenStack, selectActions } from "../../store/slices/appStateSlice";
+import { executeActions, selectActions } from "../../store/slices/appStateSlice";
 import { useDispatch, useSelector } from "react-redux";
 import {
     changeToastModalState,
@@ -119,8 +119,6 @@ const LoginScreen = () => {
     };
 
     useEffect(() => {
-        dispatch(screenStack({ screen: LOGIN_SCREEN, to: "push" }));
-
         handleEmailAlreadyRegisteredToast();
     }, []);
 
@@ -142,7 +140,6 @@ const LoginScreen = () => {
                         <View className="mr-3 flex-row items-center">
                             <CustomBackButton
                                 onBackPress={() => {
-                                    dispatch(screenStack({ screen: PROFILE_SCREEN, to: "push" }));
                                     navigation.navigate(PROFILE_SCREEN);
                                 }}
                             />

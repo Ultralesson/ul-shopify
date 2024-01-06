@@ -27,8 +27,6 @@ const HomeScreen = () => {
     const dispatch = useDispatch();
 
     useEffect(() => {
-        dispatch(screenStack({ screen: HOME_SCREEN, to: "push" }));
-
         // On home screen dispatch show the tab bar, as it may have hidden due to hide tab bar dispatch in some other screen
         dispatch(showTabBar());
     }, []);
