@@ -7,7 +7,7 @@ import { TextInput } from "react-native-gesture-handler";
 import useKeyboardStatus from "../../hooks/useKeyboardStatus";
 import CustomButton from "../../components/common/CustomButton";
 import { HOME_TAB, LOADING_SCREEN, OTP_SCREEN, PROFILE_SCREEN, PROFILE_TAB } from "../../../constants/screens";
-import { useNavigation } from "@react-navigation/native";
+import { useNavigation, useRoute } from "@react-navigation/native";
 import { useDispatch, useSelector } from "react-redux";
 import {
     changeToastModalState,
@@ -16,6 +16,7 @@ import {
 } from "../../store/slices/modalsSlice";
 import { getTempState, login, selectAuthState, selectTempState } from "../../store/slices/authSlice";
 import { userModel } from "../../../utilities/asyncStorage";
+import { executeActions, selectActions } from "../../store/slices/appStateSlice";
 
 const OtpScreen = () => {
     const OTP_TIMEOUT = 10;
@@ -24,6 +25,8 @@ const OtpScreen = () => {
     const navigation = useNavigation();
     const dispatch = useDispatch();
     const actionDispatched = useRef(false);
+    const actions = useSelector(selectActions);
+    const { params: type } = useRoute();
 
     const [verify, setVerify] = useState(false);
     const [counter, setCounter] = useState(OTP_TIMEOUT);
@@ -229,7 +232,13 @@ const OtpScreen = () => {
                             }
                         }
 
-                        // TODO: Handle if the OTP is incorrect issue then we should not navigate to home tab screen
+                        dispatch(login(actions[type.authType]));
+                        dispatch(
+                            executeActions({
+                                actionName: type.authType,
+                                to: "REMOVE",
+                            })
+                        );
                         navigation.navigate(LOADING_SCREEN, { navigateTo: HOME_TAB });
                     } else {
                         dispatch(changeToastModalState({ status: true, text: "OTP cannot be empty", type: "error" }));

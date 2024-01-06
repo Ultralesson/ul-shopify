@@ -113,9 +113,20 @@ const RegistrationScreen = () => {
             );
             navigation.navigate(LOADING_SCREEN, { navigateTo: LOGIN_SCREEN });
         } else {
-            dispatch(login({ type: "register", status: false }));
+            // dispatch(login({ type: "register", status: true, email: inputs.email }));
+            dispatch(
+                executeActions({
+                    actionName: "register",
+                    actionPayload: {
+                        status: true,
+                        type: "register",
+                        email: inputs.email,
+                    },
+                    to: "STORE",
+                })
+            );
             dispatch(getTempState({ ...inputs }));
-            navigation.navigate(LOADING_SCREEN, { navigateTo: OTP_SCREEN });
+            navigation.navigate(LOADING_SCREEN, { navigateTo: OTP_SCREEN, authType: "register" });
         }
     };
 

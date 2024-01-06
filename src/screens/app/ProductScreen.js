@@ -1,7 +1,6 @@
 import { useNavigation, useRoute } from "@react-navigation/native";
 import React, { useEffect, useState } from "react";
-import { Image, Text, View, ScrollView } from "react-native";
-import { TouchableOpacity } from "react-native-gesture-handler";
+import { Image, Text, View, ScrollView, TouchableOpacity } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import {
     ArrowLeftIcon,
@@ -14,10 +13,18 @@ import {
     PlusCircleIcon,
 } from "react-native-heroicons/outline";
 import { QUATERNARY_COLOR, SECONDARY_COLOR, TERNARY_COLOR } from "../../../constants/colors";
-import { CART_SCREEN, HOME_SCREEN, LOADING_SCREEN } from "../../../constants/screens";
+import {
+    CART_SCREEN,
+    HOME_SCREEN,
+    LOADING_SCREEN,
+    PRODUCT_SCREEN,
+    PROFILE_SCREEN,
+    PROFILE_TAB,
+} from "../../../constants/screens";
 import { useDispatch, useSelector } from "react-redux";
 import { hideTabBar, showTabBar } from "../../store/slices/appUIStateSlice";
 import { addToBasket, selectBasketItems } from "../../store/slices/basketSlice";
+import { selectAuthState } from "../../store/slices/authSlice";
 
 const Label = ({ type, text }) => {
     return (
@@ -37,10 +44,7 @@ export const ProductScreen = () => {
     const navigation = useNavigation();
     const dispatch = useDispatch();
     const basketItems = useSelector(selectBasketItems);
-
-    useEffect(() => {
-        dispatch(hideTabBar());
-    });
+    const isAuthorized = useSelector(selectAuthState);
 
     return (
         <SafeAreaView className="bg-white flex-1">
@@ -139,20 +143,25 @@ export const ProductScreen = () => {
                         className="mx-5 p-3 rounded-lg flex-row"
                         style={{ backgroundColor: SECONDARY_COLOR }}
                         onPress={() => {
-                            if (!isItemAddedToCart) {
-                                dispatch(
-                                    addToBasket({
-                                        product: {
-                                            ...product,
-                                            quantity: 1,
-                                        },
-                                    })
-                                );
-                                setItemAddedToCart(true);
+                            if (!isAuthorized.type) {
+                                dispatch(showTabBar());
+                                navigation.navigate(PROFILE_TAB);
                             } else {
-                                navigation.navigate(LOADING_SCREEN, {
-                                    navigateTo: CART_SCREEN,
-                                });
+                                if (!isItemAddedToCart) {
+                                    dispatch(
+                                        addToBasket({
+                                            product: {
+                                                ...product,
+                                                quantity: 1,
+                                            },
+                                        })
+                                    );
+                                    setItemAddedToCart(true);
+                                } else {
+                                    navigation.navigate(LOADING_SCREEN, {
+                                        navigateTo: CART_SCREEN,
+                                    });
+                                }
                             }
                         }}
                     >

@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Text, View, ScrollView, TouchableOpacity, Keyboard } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
-import { useNavigation } from "@react-navigation/native";
+import { useNavigation, useRoute } from "@react-navigation/native";
 import * as Yup from "yup";
 
 import { EnvelopeIcon, LockClosedIcon, ArrowRightOnRectangleIcon } from "react-native-heroicons/outline";
@@ -31,6 +31,7 @@ import {
 import CustomMessageModal from "../../components/common/CustomMessageModal";
 import { userModel } from "../../../utilities/asyncStorage";
 import CustomToast from "../../modals/Toast";
+import { login } from "../../store/slices/authSlice";
 
 const LoginScreen = () => {
     const navigation = useNavigation();
@@ -69,7 +70,7 @@ const LoginScreen = () => {
 
         try {
             await validationSchema.validate(inputs, { abortEarly: false });
-            login();
+            _login();
         } catch (error) {
             error.inner.forEach((err) => {
                 handleErrors(err.message, err.path);
@@ -77,7 +78,8 @@ const LoginScreen = () => {
         }
     };
 
-    const login = async () => {
+    // Adding the underscore to differentiate from the slice action in authSlice
+    const _login = async () => {
         const cachedData = await userModel("GET_USER", { email: inputs.email });
         if (cachedData.message === "EMAIL_IS_NOT_FOUND") {
             dispatch(
@@ -102,7 +104,18 @@ const LoginScreen = () => {
 
                 return;
             }
-            navigation.navigate(LOADING_SCREEN, { navigateTo: OTP_SCREEN });
+            dispatch(
+                executeActions({
+                    actionName: "login",
+                    actionPayload: {
+                        status: true,
+                        type: "login",
+                        email: inputs.email,
+                    },
+                    to: "STORE",
+                })
+            );
+            navigation.navigate(LOADING_SCREEN, { navigateTo: OTP_SCREEN, authType: "login" });
         }
     };
 

@@ -1,10 +1,9 @@
 import React, { useEffect } from "react";
-import { Text, TextInput, View } from "react-native";
+import { Text, TextInput, View, TouchableOpacity } from "react-native";
 import { ChevronLeftIcon, MagnifyingGlassIcon } from "react-native-heroicons/outline";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { ICON_SIZE_SMALL } from "../../../constants/sizes";
 import { ICON_COLOR } from "../../../constants/colors";
-import { TouchableOpacity } from "react-native-gesture-handler";
 import { useNavigation } from "@react-navigation/native";
 import { EXPLORE_SCREEN, HOME_SCREEN, HOME_TAB } from "../../../constants/screens";
 import { useDispatch, useSelector } from "react-redux";

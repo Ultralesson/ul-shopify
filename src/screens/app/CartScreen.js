@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { Image, ScrollView, Text, View } from "react-native";
+import { Image, ScrollView, Text, View, TouchableOpacity } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { useDispatch, useSelector } from "react-redux";
 import { CART_SCREEN, HOME_SCREEN, HOME_TAB, PREPARING_ORDER_SCREEN } from "../../../constants/screens";
@@ -10,7 +10,6 @@ import basketSlice, {
     selectBasketItems,
     selectBasketTotal,
 } from "../../store/slices/basketSlice";
-import { TouchableOpacity } from "react-native-gesture-handler";
 import { QUATERNARY_COLOR, SECONDARY_COLOR, TERNARY_COLOR } from "../../../constants/colors";
 import { hideTabBar, showTabBar } from "../../store/slices/appUIStateSlice";
 import { ArrowLeftIcon, TrashIcon } from "react-native-heroicons/outline";

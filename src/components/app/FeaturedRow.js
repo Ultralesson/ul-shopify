@@ -5,11 +5,11 @@ import { ArrowRightIcon, PlusCircleIcon, StarIcon } from "react-native-heroicons
 import { QUATERNARY_COLOR, TERNARY_COLOR } from "../../../constants/colors";
 import { fetchRandomElements } from "../../../utilities/arrayHelpers";
 import { useNavigation } from "@react-navigation/native";
-import { LOADING_SCREEN, PRODUCT_SCREEN } from "../../../constants/screens";
+import { LOADING_SCREEN, PRODUCT_DISPLAY_SCREEN, PRODUCT_SCREEN } from "../../../constants/screens";
 import { useDispatch } from "react-redux";
 import { hideTabBar } from "../../store/slices/appUIStateSlice";
 
-const FeatureRowCard = ({ product }) => {
+export const FeatureRowCard = ({ product }) => {
     const { name: title, description, category, rating, image_url: imgUrl, price } = product;
     const navigation = useNavigation();
     const dispatch = useDispatch();
@@ -50,12 +50,21 @@ const FeatureRowCard = ({ product }) => {
 
 const FeaturedRow = ({ title, description, productsList }) => {
     const navigation = useNavigation();
-    productsList = fetchRandomElements(productsList, productsList.length);
+    const dispatch = useDispatch();
+    productsList = fetchRandomElements(productsList, 3);
     return (
         <View>
             <View className="mt-4 flex-row items-center justify-between px-4">
                 <Text className="font-bold text-lg">{title}</Text>
-                <TouchableOpacity>
+                <TouchableOpacity
+                    onPress={() => {
+                        dispatch(hideTabBar());
+                        navigation.navigate(LOADING_SCREEN, {
+                            navigateTo: PRODUCT_DISPLAY_SCREEN,
+                            products: productsList,
+                        });
+                    }}
+                >
                     <ArrowRightIcon size={22} color={QUATERNARY_COLOR} />
                 </TouchableOpacity>
             </View>
@@ -72,8 +81,17 @@ const FeaturedRow = ({ title, description, productsList }) => {
                 {productsList.map((product) => {
                     return <FeatureRowCard key={product.product_id} product={product} />;
                 })}
-                <TouchableOpacity className="flex-1 justify-center ml-8 mr-4 items-center">
-                    <Text className="text-xl text-gray-500 text-bold mb-2 italic">Explore More</Text>
+                <TouchableOpacity
+                    className="flex-1 justify-center ml-8 mr-4 items-center"
+                    onPress={() => {
+                        dispatch(hideTabBar());
+                        navigation.navigate(LOADING_SCREEN, {
+                            navigateTo: PRODUCT_DISPLAY_SCREEN,
+                            products: productsList,
+                        });
+                    }}
+                >
+                    <Text className="text-md text-gray-500 text-bold mb-2 italic">Explore More</Text>
                     <PlusCircleIcon color={TERNARY_COLOR} size={40} />
                 </TouchableOpacity>
             </ScrollView>

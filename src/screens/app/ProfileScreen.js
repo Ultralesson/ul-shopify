@@ -1,10 +1,9 @@
 import { useNavigation } from "@react-navigation/native";
 import React from "react";
-import { Text, View } from "react-native";
+import { Text, View, TouchableOpacity } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { LOGIN_SCREEN, PROFILE_SCREEN, REGISTRATION_SCREEN } from "../../../constants/screens";
 import { SECONDARY_COLOR } from "../../../constants/colors";
-import { TouchableOpacity } from "react-native-gesture-handler";
 import { useDispatch } from "react-redux";
 
 const ProfileScreen = () => {

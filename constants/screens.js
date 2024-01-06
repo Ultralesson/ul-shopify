@@ -17,3 +17,4 @@ export const FORGOT_PASSWORD_SCREEN = "forgot-password-screen";
 export const PRODUCT_SCREEN = "product-screen";
 export const PREPARING_ORDER_SCREEN = "preparing-order-screen";
 export const THANKYOU_SCREEN = "thankyou-screen";
+export const PRODUCT_DISPLAY_SCREEN = "product-display-screen";

@@ -1,7 +1,6 @@
 import React from "react";
-import { Text, View } from "react-native";
+import { Text, View, TouchableOpacity } from "react-native";
 import * as Animatable from "react-native-animatable";
-import { TouchableOpacity } from "react-native-gesture-handler";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { SECONDARY_COLOR, TERNARY_COLOR } from "../../../constants/colors";
 import { useNavigation } from "@react-navigation/native";

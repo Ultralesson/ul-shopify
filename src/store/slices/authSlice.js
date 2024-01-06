@@ -4,6 +4,7 @@ const initialState = {
     isAuthorized: {
         type: null,
         status: false,
+        email: null,
     },
     tempState: null,
 };

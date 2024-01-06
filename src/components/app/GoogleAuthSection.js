@@ -1,7 +1,6 @@
 import React from "react";
-import { View, Text, Image } from "react-native";
+import { View, Text, Image, TouchableOpacity } from "react-native";
 import useKeyboardStatus from "../../hooks/useKeyboardStatus";
-import { TouchableOpacity } from "react-native-gesture-handler";
 
 const GoogleAuthSection = () => {
     const isKeyboardVisible = useKeyboardStatus();
