@@ -6,7 +6,7 @@ import CustomMessageModal from "../../components/common/CustomMessageModal";
 import { changeRegistrationModalState, selectRegistrationModalState } from "../../store/slices/modalsSlice";
 import { useDispatch, useSelector } from "react-redux";
 import { selectAuthState } from "../../store/slices/authSlice";
-import { EXPLORE_SCREEN } from "../../../constants/screens";
+import { EXPLORE_SCREEN, HOME_TAB } from "../../../constants/screens";
 import { ChevronDownIcon, MagnifyingGlassIcon } from "react-native-heroicons/outline";
 import { TERNARY_COLOR } from "../../../constants/colors";
 import { hideTabBar, showTabBar } from "../../store/slices/appUIStateSlice";
@@ -23,6 +23,7 @@ const HomeScreen = () => {
     useEffect(() => {
         // On home screen dispatch show the tab bar, as it may have hidden due to hide tab bar dispatch in some other screen
         dispatch(showTabBar());
+        navigation.navigate(HOME_TAB);
     }, []);
 
     return (

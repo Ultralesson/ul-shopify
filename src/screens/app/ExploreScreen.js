@@ -2,20 +2,19 @@ import React, { useEffect, useState } from "react";
 import { Text, TextInput, View, TouchableOpacity, FlatList, Image } from "react-native";
 import { ChevronLeftIcon, MagnifyingGlassIcon } from "react-native-heroicons/outline";
 import { SafeAreaView } from "react-native-safe-area-context";
-import { ICON_SIZE_SMALL } from "../../../constants/sizes";
-import { ICON_COLOR, SECONDARY_COLOR, TERNARY_COLOR } from "../../../constants/colors";
+import { SECONDARY_COLOR } from "../../../constants/colors";
 import { useNavigation } from "@react-navigation/native";
 import {
-    EXPLORE_SCREEN,
     HOME_SCREEN,
     HOME_TAB,
     LOADING_SCREEN,
     PRODUCT_DISPLAY_SCREEN,
     PRODUCT_SCREEN,
 } from "../../../constants/screens";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { hideTabBar, showTabBar } from "../../store/slices/appUIStateSlice";
 import newArrivals from "../../../assets/data/new-arrivals.json";
+import { changeToastModalState } from "../../store/slices/modalsSlice";
 
 const EXPLORE = {
     BACK_BUTTON: "btn-explore-back",
@@ -63,14 +62,6 @@ const ExploreScreen = () => {
 
     const displayedProducts = showMore ? filteredProducts : filteredProducts.slice(0, 3);
 
-    const handleShowMore = () => {
-        // navigate to the Product Display screen with all filtered products
-        navigation.navigate(PRODUCT_DISPLAY_SCREEN, {
-            products: filteredProducts,
-            title: "Your Curated Selection!!",
-        });
-    };
-
     useEffect(() => {
         if (searchTerm) {
             const results = allProducts.filter(
@@ -107,11 +98,21 @@ const ExploreScreen = () => {
                     />
                     <TouchableOpacity
                         onPress={() => {
-                            navigation.navigate(LOADING_SCREEN, {
-                                navigateTo: PRODUCT_DISPLAY_SCREEN,
-                                products: filteredProducts,
-                                title: "Your Curated Selection!!",
-                            });
+                            if (filteredProducts.length !== 0) {
+                                navigation.navigate(LOADING_SCREEN, {
+                                    navigateTo: PRODUCT_DISPLAY_SCREEN,
+                                    products: filteredProducts,
+                                    title: "Your Curated Selection!!",
+                                });
+                            } else {
+                                dispatch(
+                                    changeToastModalState({
+                                        status: true,
+                                        text: "Search field cannot be empty",
+                                        type: "error",
+                                    })
+                                );
+                            }
                         }}
                     >
                         <MagnifyingGlassIcon size={24} color="black" />

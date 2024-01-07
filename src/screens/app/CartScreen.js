@@ -6,20 +6,24 @@ import { CART_SCREEN, HOME_SCREEN, HOME_TAB, PREPARING_ORDER_SCREEN } from "../.
 import basketSlice, {
     decrementQuantity,
     deleteItem,
+    emptyBasket,
     incrementQuantity,
     selectBasketItems,
     selectBasketTotal,
 } from "../../store/slices/basketSlice";
-import { QUATERNARY_COLOR, SECONDARY_COLOR, TERNARY_COLOR } from "../../../constants/colors";
+import { SECONDARY_COLOR, TERNARY_COLOR } from "../../../constants/colors";
 import { hideTabBar, showTabBar } from "../../store/slices/appUIStateSlice";
 import { ArrowLeftIcon, TrashIcon } from "react-native-heroicons/outline";
 import { useNavigation } from "@react-navigation/native";
+import { userModel } from "../../../utilities/asyncStorage";
+import { selectAuthState } from "../../store/slices/authSlice";
 
 export const CartScreen = () => {
     const dispatch = useDispatch();
     const navigation = useNavigation();
     const basketItems = useSelector(selectBasketItems);
     const basketTotal = useSelector(selectBasketTotal);
+    const isAuthorized = useSelector(selectAuthState);
 
     useEffect(() => {
         dispatch(hideTabBar());
@@ -148,7 +152,13 @@ export const CartScreen = () => {
                             >
                                 <TouchableOpacity
                                     onPress={() => {
-                                        navigation.navigate(PREPARING_ORDER_SCREEN);
+                                        userModel("ADD_ORDER_DETAILS", {
+                                            email: isAuthorized.email,
+                                            cartItems: basketItems,
+                                        }).then((data) => {
+                                            dispatch(emptyBasket());
+                                            navigation.navigate(PREPARING_ORDER_SCREEN);
+                                        });
                                     }}
                                 >
                                     <Text className="text-lg font-bold text-white">Place Order</Text>

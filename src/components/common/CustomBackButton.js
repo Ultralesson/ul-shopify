@@ -1,5 +1,6 @@
 import { useNavigation } from "@react-navigation/native";
-import React, { TouchableOpacity } from "react";
+import React from "react";
+import { TouchableOpacity } from "react-native";
 import { ChevronLeftIcon } from "react-native-heroicons/outline";
 
 const CustomBackButton = ({ onBackPress }) => {

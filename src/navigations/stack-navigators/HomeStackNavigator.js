@@ -13,6 +13,7 @@ import {
     PRODUCT_SCREEN,
     PROFILE_SCREEN,
     THANKYOU_SCREEN,
+    TRACK_ORDER_SCREEN,
 } from "../../../constants/screens";
 import ExploreScreen from "../../screens/app/ExploreScreen";
 import { ProductScreen } from "../../screens/app/ProductScreen";
@@ -21,6 +22,7 @@ import { PreparingOrderScreen } from "../../screens/app/PreparingOrderScreen";
 import { ThankyouScreen } from "../../screens/app/ThankyouScreen";
 import ProfileScreen from "../../screens/app/ProfileScreen";
 import { ProductDisplayScreen } from "../../screens/app/ProductDisplayScreen";
+import TrackOrderScreen from "../../screens/app/TrackOrderScreen";
 
 const Stack = createStackNavigator();
 
@@ -35,6 +37,7 @@ const stackOptions = (screen) => {
         case THANKYOU_SCREEN:
         case PROFILE_SCREEN:
         case PRODUCT_DISPLAY_SCREEN:
+        case TRACK_ORDER_SCREEN:
             return {
                 headerShown: false,
             };
@@ -60,6 +63,11 @@ export const HomeStackNavigator = () => {
                 name={PRODUCT_DISPLAY_SCREEN}
                 component={ProductDisplayScreen}
                 options={stackOptions(PRODUCT_DISPLAY_SCREEN)}
+            />
+            <Stack.Screen
+                name={TRACK_ORDER_SCREEN}
+                component={TrackOrderScreen}
+                options={stackOptions(TRACK_ORDER_SCREEN)}
             />
         </Stack.Navigator>
     );

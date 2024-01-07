@@ -38,7 +38,7 @@ const HomeTabNavigator = () => {
         const routeName = getFocusedRouteNameFromRoute(route);
 
         // This is used to hide the tab navigator on default tab screen
-        const excludeTabNavigatorForDefaultTabScreens = [EXPLORE_TAB];
+        const excludeTabNavigatorForDefaultTabScreens = [EXPLORE_TAB, PROFILE_TAB];
         if (excludeTabNavigatorForDefaultTabScreens.includes(route.name)) {
             return "none";
         }

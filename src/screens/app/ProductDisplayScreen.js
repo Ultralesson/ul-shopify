@@ -261,7 +261,6 @@ export const ProductDisplayScreen = () => {
                     </View>
                 </View>
             </ScrollView>
-            {/* Clear Filter Button */}
         </SafeAreaView>
     );
 };

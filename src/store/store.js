@@ -4,6 +4,7 @@ import modalsSlice from "./slices/modalsSlice";
 import appStateSlice from "./slices/appStateSlice";
 import appUIStateSlice from "./slices/appUIStateSlice";
 import basketSlice from "./slices/basketSlice";
+import userSlice from "./slices/userSlice";
 
 export const store = configureStore({
     reducer: {
@@ -12,5 +13,6 @@ export const store = configureStore({
         appState: appStateSlice,
         appUIState: appUIStateSlice,
         basket: basketSlice,
+        user: userSlice,
     },
 });

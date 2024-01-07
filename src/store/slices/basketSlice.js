@@ -47,10 +47,15 @@ export const basketSlice = createSlice({
                 state.items.splice(index, 1);
             }
         },
+
+        emptyBasket: (state) => {
+            state.items = [];
+        },
     },
 });
 
-export const { addToBasket, removeFromBasket, incrementQuantity, decrementQuantity, deleteItem } = basketSlice.actions;
+export const { addToBasket, removeFromBasket, incrementQuantity, decrementQuantity, deleteItem, emptyBasket } =
+    basketSlice.actions;
 
 export const selectBasketItems = (state) => state.basket.items;
 
