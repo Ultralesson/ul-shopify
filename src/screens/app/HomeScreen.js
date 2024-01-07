@@ -1,5 +1,5 @@
 import { useNavigation } from "@react-navigation/native";
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { Image, Text, TouchableOpacity, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import CustomMessageModal from "../../components/common/CustomMessageModal";
@@ -14,13 +14,18 @@ import { ScrollView } from "react-native-gesture-handler";
 import CategoryScreen from "../../components/app/CategoriesScreen";
 import FeaturedRow from "../../components/app/FeaturedRow";
 import newArrivals from "../../../assets/data/new-arrivals.json";
+import { userModel } from "../../../utilities/asyncStorage";
 
 const HomeScreen = () => {
     const navigation = useNavigation();
     const isAuthorized = useSelector(selectAuthState);
     const dispatch = useDispatch();
+    const [username, setUsername] = useState("");
 
     useEffect(() => {
+        userModel("GET_USER", { email: isAuthorized.email }).then((response) => {
+            setUsername(response.data?.fullName);
+        });
         // On home screen dispatch show the tab bar, as it may have hidden due to hide tab bar dispatch in some other screen
         dispatch(showTabBar());
         navigation.navigate(HOME_TAB);
@@ -42,9 +47,13 @@ const HomeScreen = () => {
                 <Image source={require("../../../assets/icons/shopping-bag.png")} className="h-7 w-7  p-4 rounded" />
                 <View className="flex-1">
                     <Text className="font-bold text-gray-400 text-xs">Browser & Buy!</Text>
-                    <Text className="font-bold text-xl">
-                        Current Location <ChevronDownIcon size={20} color={TERNARY_COLOR} />
-                    </Text>
+                    {!username ? (
+                        <Text className="font-bold text-xl">Welcome Back!!</Text>
+                    ) : (
+                        <Text className="font-bold text-xl">
+                            {username.charAt(0).toUpperCase() + username.slice(1)}
+                        </Text>
+                    )}
                 </View>
                 <View className="pr-1">
                     <Image source={require("../../../assets/icons/ultralesson-logo.png")} className="h-10 w-14" />
@@ -65,7 +74,7 @@ const HomeScreen = () => {
             </View>
 
             <ScrollView
-                className="bg-gray-100"
+                className="bg-gray-100 mb-5"
                 contentContainerStyle={{
                     paddingBottom: 100,
                 }}

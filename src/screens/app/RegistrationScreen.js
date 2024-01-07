@@ -100,34 +100,33 @@ const RegistrationScreen = () => {
         }
     };
 
-    const register = async () => {
-        const cachedData = await userModel("GET_USER", { email: inputs.email });
-
-        if (cachedData.message === "EMAIL_IS_FOUND") {
-            dispatch(
-                executeActions({
-                    actionName: "emailAlreadyRegisteredToast",
-                    actionPayload: { status: true, text: "Email already registered", type: "error" },
-                    to: "STORE",
-                })
-            );
-            navigation.navigate(LOADING_SCREEN, { navigateTo: LOGIN_SCREEN });
-        } else {
-            // dispatch(login({ type: "register", status: true, email: inputs.email }));
-            dispatch(
-                executeActions({
-                    actionName: "register",
-                    actionPayload: {
-                        status: true,
-                        type: "register",
-                        email: inputs.email,
-                    },
-                    to: "STORE",
-                })
-            );
-            dispatch(getTempState({ ...inputs }));
-            navigation.navigate(LOADING_SCREEN, { navigateTo: OTP_SCREEN, authType: "register" });
-        }
+    const register = () => {
+        userModel("GET_USER", { email: inputs.email }).then((response) => {
+            if (response.message === "EMAIL_IS_FOUND") {
+                dispatch(
+                    executeActions({
+                        actionName: "emailAlreadyRegisteredToast",
+                        actionPayload: { status: true, text: "Email already registered", type: "error" },
+                        to: "STORE",
+                    })
+                );
+                navigation.navigate(LOADING_SCREEN, { navigateTo: LOGIN_SCREEN });
+            } else {
+                dispatch(
+                    executeActions({
+                        actionName: "register",
+                        actionPayload: {
+                            status: true,
+                            type: "register",
+                            email: inputs.email,
+                        },
+                        to: "STORE",
+                    })
+                );
+                dispatch(getTempState({ ...inputs }));
+                navigation.navigate(LOADING_SCREEN, { navigateTo: OTP_SCREEN, authType: "register" });
+            }
+        });
     };
 
     const handleEmailNotRegisteredToast = () => {

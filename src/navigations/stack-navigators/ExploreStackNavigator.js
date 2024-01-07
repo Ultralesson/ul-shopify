@@ -2,7 +2,7 @@ import { createStackNavigator } from "@react-navigation/stack";
 
 import ExploreScreen from "../../screens/app/ExploreScreen";
 import LoadingScreen from "../../screens/common/LoadingScreen";
-import ProductScreen from "../../screens/common/LoadingScreen";
+import { ProductScreen } from "../../screens/app/ProductScreen";
 
 import {
     EXPLORE_SCREEN,

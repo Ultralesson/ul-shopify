@@ -19,7 +19,7 @@ import { userModel } from "../../../utilities/asyncStorage";
 import { executeActions, selectActions } from "../../store/slices/appStateSlice";
 
 const OtpScreen = () => {
-    const OTP_TIMEOUT = 10;
+    const OTP_TIMEOUT = 30;
 
     const keyboardStatus = useKeyboardStatus();
     const navigation = useNavigation();
@@ -222,24 +222,34 @@ const OtpScreen = () => {
                 disabled={verify}
                 navigateTo={async () => {
                     if (verify) {
-                        if (isAuthorized.type === "register") {
-                            const cachedData = await userModel("CREATE_USER", { ...tempState }); // Creating the user
-                            dispatch(getTempState(null)); // Resetting the temp state after creating the account
+                        if (type.authType === "register") {
+                            userModel("CREATE_USER", { ...tempState, cart: [] }).then((response) => {
+                                console.log(response + "ress");
+                                dispatch(getTempState(null)); // Resetting the temp state after creating the account
 
-                            if (cachedData.message === "CREATED_USER") {
-                                dispatch(login({ type: "register", status: true })); // status can be used within the application to enable certain features for logged-in and logged-out user
-                                dispatch(changeRegistrationModalState()); // On successful registration show the popup
-                            }
+                                if (response.message === "CREATED_USER") {
+                                    dispatch(changeRegistrationModalState()); // On successful registration show the popup
+                                }
+
+                                dispatch(login(actions[type.authType]));
+                                dispatch(
+                                    executeActions({
+                                        actionName: type.authType,
+                                        to: "REMOVE",
+                                    })
+                                );
+                                navigation.navigate(LOADING_SCREEN, { navigateTo: HOME_TAB });
+                            });
+                        } else if (type.authType === "login") {
+                            dispatch(login(actions[type.authType]));
+                            dispatch(
+                                executeActions({
+                                    actionName: type.authType,
+                                    to: "REMOVE",
+                                })
+                            );
+                            navigation.navigate(LOADING_SCREEN, { navigateTo: HOME_TAB });
                         }
-
-                        dispatch(login(actions[type.authType]));
-                        dispatch(
-                            executeActions({
-                                actionName: type.authType,
-                                to: "REMOVE",
-                            })
-                        );
-                        navigation.navigate(LOADING_SCREEN, { navigateTo: HOME_TAB });
                     } else {
                         dispatch(changeToastModalState({ status: true, text: "OTP cannot be empty", type: "error" }));
                     }

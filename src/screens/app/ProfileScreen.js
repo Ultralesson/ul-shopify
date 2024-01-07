@@ -1,21 +1,26 @@
 import { useNavigation } from "@react-navigation/native";
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { Text, View, TouchableOpacity, Image } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { HOME_SCREEN, HOME_TAB, LOGIN_SCREEN, PROFILE_SCREEN, REGISTRATION_SCREEN } from "../../../constants/screens";
 import { SECONDARY_COLOR, TERNARY_COLOR } from "../../../constants/colors";
 import { useDispatch, useSelector } from "react-redux";
-import { selectAuthState } from "../../store/slices/authSlice";
-import { hideTabBar, selectIsTabBarVisible, showTabBar } from "../../store/slices/appUIStateSlice";
+import { logout, selectAuthState } from "../../store/slices/authSlice";
+import { showTabBar } from "../../store/slices/appUIStateSlice";
 import { ArrowLeftIcon } from "react-native-heroicons/outline";
+import { userModel } from "../../../utilities/asyncStorage";
 
 const ProfileScreen = () => {
     const navigation = useNavigation();
     const dispatch = useDispatch();
     const isAuthorized = useSelector(selectAuthState);
-    const a = useSelector(selectIsTabBarVisible);
+    const [username, setUsername] = useState("");
 
-    useEffect(() => {});
+    useEffect(() => {
+        userModel("GET_USER", { email: isAuthorized.email }).then((response) => {
+            setUsername(response.data?.fullName);
+        });
+    });
 
     return (
         <>
@@ -34,10 +39,15 @@ const ProfileScreen = () => {
                         <Text className="text-2xl font-bold text-center mb-4">Your Profile</Text>
                         <View className="bg-white p-6 rounded-lg shadow-md">
                             <View className=" items-center">
-                                <Text className="text-lg font-semibold">Jack Sparrow</Text>
-                                <Text className="text-gray-600 mt-1 mb-3">jacksparrow@gmail.com</Text>
+                                <Text className="text-lg font-semibold">{username}</Text>
+                                <Text className="text-gray-600 mt-1 mb-3">{isAuthorized.email}</Text>
                             </View>
-                            <TouchableOpacity className="bg-red-400 p-3 rounded-lg" onPress={() => {}}>
+                            <TouchableOpacity
+                                className="bg-red-400 p-3 rounded-lg"
+                                onPress={() => {
+                                    dispatch(logout());
+                                }}
+                            >
                                 <Text className="text-white text-center font-bold">Logout</Text>
                             </TouchableOpacity>
                         </View>
@@ -74,33 +84,6 @@ const ProfileScreen = () => {
             </SafeAreaView>
         </>
     );
-
-    // return (
-    //     <SafeAreaView>
-    //         <View className="flex h-full justify-center items-center">
-    //             <Text className="font-bold text-xl">Profile Screen</Text>
-    //             <Text className="italic">Coming soon...</Text>
-    //             <TouchableOpacity
-    //                 onPress={() => {
-    //                     navigation.navigate(REGISTRATION_SCREEN);
-    //                 }}
-    //             >
-    //                 <Text className="p-3 font-bold rounded-lg mt-5" style={{ backgroundColor: SECONDARY_COLOR }}>
-    //                     Navigate to Registration Screen
-    //                 </Text>
-    //             </TouchableOpacity>
-    //             <TouchableOpacity
-    //                 onPress={() => {
-    //                     navigation.navigate(LOGIN_SCREEN);
-    //                 }}
-    //             >
-    //                 <Text className="p-3 font-bold rounded-lg mt-5" style={{ backgroundColor: SECONDARY_COLOR }}>
-    //                     Navigate to Login Screen
-    //                 </Text>
-    //             </TouchableOpacity>
-    //         </View>
-    //     </SafeAreaView>
-    // );
 };
 
 export default ProfileScreen;

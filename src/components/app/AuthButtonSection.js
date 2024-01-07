@@ -16,7 +16,7 @@ const AuthButtonSection = ({ buttonText, authQuestionText, navigateToText, navig
                 }}
                 className="p-2 pt-3 pb-3 rounded-lg"
                 onPress={async () => {
-                    validate();
+                    await validate();
                 }}
             >
                 <Text className="text-lg font-bold text-center">{buttonText}</Text>
