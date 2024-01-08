@@ -47,9 +47,7 @@ const ProductItem = ({ product }) => {
 const ExploreScreen = () => {
     const navigation = useNavigation();
     const dispatch = useDispatch();
-    const {
-        params: { navigateBackTo, product },
-    } = useRoute();
+    const { params } = useRoute();
 
     const allProducts = [...newArrivals.products]; // Assuming newArrivals is an array of products
     const [searchTerm, setSearchTerm] = useState("");
@@ -81,14 +79,15 @@ const ExploreScreen = () => {
                     <TouchableOpacity
                         className="mr-2"
                         onPress={() => {
-                            if (navigateBackTo) {
+                            if (params?.navigateBackTo) {
                                 navigation.navigate(PRODUCT_SCREEN, {
-                                    product,
+                                    product: params?.product,
                                 });
                                 return;
+                            } else {
+                                dispatch(showTabBar());
+                                navigation.navigate(HOME_SCREEN);
                             }
-                            dispatch(showTabBar());
-                            navigation.navigate(HOME_SCREEN);
                         }}
                     >
                         <ChevronLeftIcon size={24} color="black" />

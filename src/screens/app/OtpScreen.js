@@ -2,7 +2,7 @@ import React, { useState, useEffect, useRef } from "react";
 import { View, Text, Image, TouchableOpacity, Keyboard } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import CustomBackButton from "../../components/common/CustomBackButton";
-import { QUATERNARY_COLOR, SECONDARY_COLOR } from "../../../constants/colors";
+import { QUATERNARY_COLOR, SECONDARY_COLOR, TERNARY_COLOR } from "../../../constants/colors";
 import { TextInput } from "react-native-gesture-handler";
 import useKeyboardStatus from "../../hooks/useKeyboardStatus";
 import CustomButton from "../../components/common/CustomButton";
@@ -154,6 +154,9 @@ const OtpScreen = () => {
                         className={`border-[0.50px] border-solid p-3 mt rounded-xl text-center ${
                             counter === 0 ? "bg-gray-100 border-0" : ""
                         }`}
+                        style={{
+                            borderColor: TERNARY_COLOR,
+                        }}
                     />
                     <TextInput
                         value={otpInputs.otp2}
@@ -166,6 +169,9 @@ const OtpScreen = () => {
                         className={`border-[0.50px] border-solid p-3 mt rounded-xl text-center ${
                             counter === 0 ? "bg-gray-100 border-0" : ""
                         }`}
+                        style={{
+                            borderColor: TERNARY_COLOR,
+                        }}
                     />
                     <TextInput
                         value={otpInputs.otp3}
@@ -178,6 +184,9 @@ const OtpScreen = () => {
                         className={`border-[0.50px] border-solid p-3 mt rounded-xl text-center ${
                             counter === 0 ? "bg-gray-100 border-0" : ""
                         }`}
+                        style={{
+                            borderColor: TERNARY_COLOR,
+                        }}
                     />
                     <TextInput
                         value={otpInputs.otp4}
@@ -188,6 +197,9 @@ const OtpScreen = () => {
                         className={`border-[0.50px] border-solid p-3 mt rounded-xl text-center ${
                             counter === 0 ? "bg-gray-100 border-0" : ""
                         }`}
+                        style={{
+                            borderColor: TERNARY_COLOR,
+                        }}
                     />
                 </View>
                 <View className="flex-row gap-2 mt-5">

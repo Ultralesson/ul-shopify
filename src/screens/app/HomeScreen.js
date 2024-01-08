@@ -7,7 +7,7 @@ import { changeRegistrationModalState, selectRegistrationModalState } from "../.
 import { useDispatch, useSelector } from "react-redux";
 import { selectAuthState } from "../../store/slices/authSlice";
 import { EXPLORE_SCREEN, HOME_TAB } from "../../../constants/screens";
-import { ChevronDownIcon, MagnifyingGlassIcon } from "react-native-heroicons/outline";
+import { MagnifyingGlassIcon } from "react-native-heroicons/outline";
 import { TERNARY_COLOR } from "../../../constants/colors";
 import { hideTabBar, showTabBar } from "../../store/slices/appUIStateSlice";
 import { ScrollView } from "react-native-gesture-handler";
@@ -60,17 +60,19 @@ const HomeScreen = () => {
                 </View>
             </View>
             <View className="flex-row items-center space-x-2 pb-2 mx-2">
-                <View className="flex-row flex-1 space-x-2 bg-gray-200 p-2 rounded-md items-center">
-                    <MagnifyingGlassIcon color={TERNARY_COLOR} />
-                    <TouchableOpacity
-                        onPress={() => {
-                            dispatch(hideTabBar());
-                            navigation.navigate(EXPLORE_SCREEN);
-                        }}
-                    >
+                <TouchableOpacity
+                    className="flex-row flex-1 space-x-2 bg-gray-50 rounded-md items-center"
+                    onPress={() => {
+                        dispatch(hideTabBar());
+                        navigation.navigate(EXPLORE_SCREEN);
+                    }}
+                >
+                    <View className="flex-row flex-1 space-x-2 bg-gray-200 p-2 rounded-md items-center">
+                        <MagnifyingGlassIcon color={TERNARY_COLOR} />
+
                         <Text className="text-gray-400">Search for more!!</Text>
-                    </TouchableOpacity>
-                </View>
+                    </View>
+                </TouchableOpacity>
             </View>
 
             <ScrollView

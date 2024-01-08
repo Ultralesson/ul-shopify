@@ -9,7 +9,7 @@ const CustomButton = ({ text, disabled, navigateTo }) => {
                 className="text-lg font-bold text-center pt-3 pb-3 rounded-lg"
                 style={{
                     backgroundColor: disabled ? SECONDARY_COLOR : PRIMARY_COLOR,
-                    color: disabled ? "black" : "gray",
+                    color: disabled ? "white" : "gray",
                 }}
             >
                 {text}

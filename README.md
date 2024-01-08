@@ -8,3 +8,8 @@
 ## Note:
 
 -   Give credit to unsplash images website while drafting the images
+-   Webview - 2 pages
+-   screen rotation
+-   zoom in
+-   map
+-   pull to refresh
