@@ -224,7 +224,6 @@ const OtpScreen = () => {
                     if (verify) {
                         if (type.authType === "register") {
                             userModel("CREATE_USER", { ...tempState, cart: [] }).then((response) => {
-                                console.log(response + "ress");
                                 dispatch(getTempState(null)); // Resetting the temp state after creating the account
 
                                 if (response.message === "CREATED_USER") {

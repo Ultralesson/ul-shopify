@@ -29,7 +29,6 @@ export const userModel = async (action, data) => {
             };
         case "GET_USER":
             cachedData = (await getFromLocalStorage("user")).data || [];
-            console.log(cachedData);
 
             const user = cachedData.find((item) => item.email === data.email);
             if (user) {

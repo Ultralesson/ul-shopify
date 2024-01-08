@@ -157,7 +157,6 @@ export const CartScreen = () => {
                                             cartItems: basketItems,
                                         }).then((data) => {
                                             dispatch(emptyBasket());
-                                            console.log(data);
                                             navigation.navigate(PREPARING_ORDER_SCREEN);
                                         });
                                     }}
