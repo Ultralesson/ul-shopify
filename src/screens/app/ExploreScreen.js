@@ -3,14 +3,8 @@ import { Text, TextInput, View, TouchableOpacity, FlatList, Image } from "react-
 import { ChevronLeftIcon, MagnifyingGlassIcon } from "react-native-heroicons/outline";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { SECONDARY_COLOR } from "../../../constants/colors";
-import { useNavigation } from "@react-navigation/native";
-import {
-    HOME_SCREEN,
-    HOME_TAB,
-    LOADING_SCREEN,
-    PRODUCT_DISPLAY_SCREEN,
-    PRODUCT_SCREEN,
-} from "../../../constants/screens";
+import { useNavigation, useRoute } from "@react-navigation/native";
+import { HOME_SCREEN, LOADING_SCREEN, PRODUCT_DISPLAY_SCREEN, PRODUCT_SCREEN } from "../../../constants/screens";
 import { useDispatch } from "react-redux";
 import { hideTabBar, showTabBar } from "../../store/slices/appUIStateSlice";
 import newArrivals from "../../../assets/data/new-arrivals.json";
@@ -53,6 +47,9 @@ const ProductItem = ({ product }) => {
 const ExploreScreen = () => {
     const navigation = useNavigation();
     const dispatch = useDispatch();
+    const {
+        params: { navigateBackTo, product },
+    } = useRoute();
 
     const allProducts = [...newArrivals.products]; // Assuming newArrivals is an array of products
     const [searchTerm, setSearchTerm] = useState("");
@@ -84,6 +81,12 @@ const ExploreScreen = () => {
                     <TouchableOpacity
                         className="mr-2"
                         onPress={() => {
+                            if (navigateBackTo) {
+                                navigation.navigate(PRODUCT_SCREEN, {
+                                    product,
+                                });
+                                return;
+                            }
                             dispatch(showTabBar());
                             navigation.navigate(HOME_SCREEN);
                         }}

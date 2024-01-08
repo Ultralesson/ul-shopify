@@ -33,7 +33,7 @@ const ProfileScreen = () => {
             >
                 <ArrowLeftIcon size={25} color="#000000" />
             </TouchableOpacity>
-            <SafeAreaView className="flex-1  bg-gray-100">
+            <SafeAreaView className="flex-1  bg-white-100">
                 {isAuthorized.status ? (
                     <View className="w-full px-4 justify-start">
                         <Text className="text-2xl font-bold text-center mb-4">Your Profile</Text>

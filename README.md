@@ -1,14 +1,3 @@
-## Next things
-
--   Profile screen
--   use of bottom sheet
--   fix the slider issue
--   Fix the register modal appearing after login, which shouldn't it should only appear after register
--   If the user is not registered then redirect them to profile screen
--   search screen
--   product display screen
--   filter screen
-
 ## Commands
 
 -   npm i -g eas-cli

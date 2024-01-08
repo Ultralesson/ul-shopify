@@ -12,6 +12,7 @@ import {
     PRODUCT_DISPLAY_SCREEN,
     PRODUCT_SCREEN,
     PROFILE_SCREEN,
+    SPLASH_SCREEN,
     THANKYOU_SCREEN,
     TRACK_ORDER_SCREEN,
 } from "../../../constants/screens";
@@ -23,6 +24,7 @@ import { ThankyouScreen } from "../../screens/app/ThankyouScreen";
 import ProfileScreen from "../../screens/app/ProfileScreen";
 import { ProductDisplayScreen } from "../../screens/app/ProductDisplayScreen";
 import TrackOrderScreen from "../../screens/app/TrackOrderScreen";
+import { SplashScreen } from "../../screens/common/SplashScreen";
 
 const Stack = createStackNavigator();
 
@@ -38,6 +40,7 @@ const stackOptions = (screen) => {
         case PROFILE_SCREEN:
         case PRODUCT_DISPLAY_SCREEN:
         case TRACK_ORDER_SCREEN:
+        case SPLASH_SCREEN:
             return {
                 headerShown: false,
             };
@@ -46,7 +49,8 @@ const stackOptions = (screen) => {
 
 export const HomeStackNavigator = () => {
     return (
-        <Stack.Navigator initialRouteName={HOME_SCREEN}>
+        <Stack.Navigator initialRouteName={SPLASH_SCREEN}>
+            <Stack.Screen name={SPLASH_SCREEN} component={SplashScreen} options={stackOptions(SPLASH_SCREEN)} />
             <Stack.Screen name={HOME_SCREEN} component={HomeScreen} options={stackOptions(HOME_SCREEN)} />
             <Stack.Screen name={LOADING_SCREEN} component={LoadingScreen} options={stackOptions(LOADING_SCREEN)} />
             <Stack.Screen name={EXPLORE_SCREEN} component={ExploreScreen} options={stackOptions(EXPLORE_SCREEN)} />

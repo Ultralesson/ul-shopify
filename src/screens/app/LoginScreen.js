@@ -177,7 +177,6 @@ const LoginScreen = () => {
                         </View>
                         <ArrowRightOnRectangleIcon size="40" color="black" />
                     </View>
-                    <Text className="text-gray-400 text-base mt-1">Enter your details to Register</Text>
                 </View>
                 <View className="flex-1 justify-between">
                     <ScrollView className="flex-1">

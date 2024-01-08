@@ -12,6 +12,7 @@ import {
     TRACK_ORDER_TAB,
     HOME_SCREEN,
     PROFILE_SCREEN,
+    SPLASH_SCREEN,
 } from "../../../constants/screens";
 import {
     HomeIcon,

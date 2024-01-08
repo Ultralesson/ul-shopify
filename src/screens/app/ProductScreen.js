@@ -11,14 +11,15 @@ import {
     PlusIcon,
     ShoppingCartIcon,
     PlusCircleIcon,
+    MagnifyingGlassIcon,
 } from "react-native-heroicons/outline";
 import { QUATERNARY_COLOR, SECONDARY_COLOR, TERNARY_COLOR } from "../../../constants/colors";
 import {
     CART_SCREEN,
+    EXPLORE_SCREEN,
     HOME_SCREEN,
     LOADING_SCREEN,
     PRODUCT_SCREEN,
-    PROFILE_SCREEN,
     PROFILE_TAB,
 } from "../../../constants/screens";
 import { useDispatch, useSelector } from "react-redux";
@@ -59,6 +60,25 @@ export const ProductScreen = () => {
                 </TouchableOpacity>
             </View>
 
+            <View
+                className="absolute top-8 p-2 rounded-full mt-4 bg-gray-50 z-10"
+                style={{
+                    right: 75,
+                }}
+            >
+                <TouchableOpacity
+                    onPress={() => {
+                        dispatch(hideTabBar());
+                        navigation.navigate(EXPLORE_SCREEN, {
+                            navigateBackTo: PRODUCT_SCREEN,
+                            product,
+                        });
+                    }}
+                >
+                    <MagnifyingGlassIcon size={25} color="#000000" />
+                </TouchableOpacity>
+            </View>
+
             {/* Shopping Cart Button */}
             <View className="absolute top-8 right-5 p-2 rounded-full mt-4 bg-gray-50 z-10">
                 <TouchableOpacity
@@ -69,7 +89,7 @@ export const ProductScreen = () => {
                         });
                     }}
                 >
-                    <ShoppingCartIcon size={40} color="#000000" />
+                    <ShoppingCartIcon size={25} color="#000000" />
                 </TouchableOpacity>
             </View>
             <View
@@ -78,7 +98,7 @@ export const ProductScreen = () => {
             >
                 <Text className="font-bold text-xs text-white">{basketItems.length}</Text>
             </View>
-            <ScrollView>
+            <ScrollView className="mb-5">
                 <View className="relative">
                     <Image
                         className="w-full h-96 bg-gray-300"
@@ -110,7 +130,7 @@ export const ProductScreen = () => {
                     <Label type={"seller"} text={product.seller.seller_name} />
 
                     <TouchableOpacity
-                        className="bg-white flex-row items-center space-x-2 p-4 border-b border-gray-300"
+                        className="bg-white flex-row items-center space-x-2 p-4 "
                         onPress={() => {
                             setShowFeatures(!showFeatures);
                         }}
@@ -127,54 +147,53 @@ export const ProductScreen = () => {
                         <View className="bg-white pb-4 px-4">
                             {product.features.map((feature) => {
                                 return (
-                                    <View className="flex-row items-center pt-4 space-x-2">
+                                    <View key={feature.id} className="flex-row items-center pt-4 space-x-2">
                                         <PlusIcon size={15} color={QUATERNARY_COLOR} />
-                                        <Text className="italic text-gray-500" key={feature.id}>
-                                            {feature.description}
-                                        </Text>
+                                        <Text className="italic text-gray-500">{feature.description}</Text>
                                     </View>
                                 );
                             })}
                         </View>
                     )}
                 </View>
-                <View className="w-full pt-8 pb-8">
-                    <TouchableOpacity
-                        className="mx-5 p-3 rounded-lg flex-row"
-                        style={{ backgroundColor: SECONDARY_COLOR }}
-                        onPress={() => {
-                            if (!isAuthorized.type) {
-                                dispatch(showTabBar());
-                                navigation.navigate(PROFILE_TAB);
-                            } else {
-                                if (!isItemAddedToCart) {
-                                    dispatch(
-                                        addToBasket({
-                                            product: {
-                                                ...product,
-                                                quantity: 1,
-                                            },
-                                        })
-                                    );
-                                    setItemAddedToCart(true);
-                                } else {
-                                    navigation.navigate(LOADING_SCREEN, {
-                                        navigateTo: CART_SCREEN,
-                                    });
-                                }
-                            }
-                        }}
-                    >
-                        {!isItemAddedToCart ? (
-                            <Text className="flex-1 text-white  font-bold text-lg text-center">Add To Cart</Text>
-                        ) : (
-                            <Text className="flex-1 text-white  font-bold text-lg text-center">Go To Cart</Text>
-                        )}
-
-                        <PlusCircleIcon size={30} color="#ffffff" opacity={0.9} />
-                    </TouchableOpacity>
-                </View>
             </ScrollView>
+
+            <View className="mb-5">
+                <TouchableOpacity
+                    className="mx-5 p-3 rounded-lg flex-row"
+                    style={{ backgroundColor: SECONDARY_COLOR }}
+                    onPress={() => {
+                        if (!isAuthorized.type) {
+                            dispatch(showTabBar());
+                            navigation.navigate(PROFILE_TAB);
+                        } else {
+                            if (!isItemAddedToCart) {
+                                dispatch(
+                                    addToBasket({
+                                        product: {
+                                            ...product,
+                                            quantity: 1,
+                                        },
+                                    })
+                                );
+                                setItemAddedToCart(true);
+                            } else {
+                                navigation.navigate(LOADING_SCREEN, {
+                                    navigateTo: CART_SCREEN,
+                                });
+                            }
+                        }
+                    }}
+                >
+                    {!isItemAddedToCart ? (
+                        <Text className="flex-1 text-white  font-bold text-lg text-center">Add To Cart</Text>
+                    ) : (
+                        <Text className="flex-1 text-white  font-bold text-lg text-center">Go To Cart</Text>
+                    )}
+
+                    <PlusCircleIcon size={30} color="#ffffff" opacity={0.9} />
+                </TouchableOpacity>
+            </View>
         </SafeAreaView>
     );
 };

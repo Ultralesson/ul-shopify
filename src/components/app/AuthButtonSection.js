@@ -19,10 +19,8 @@ const AuthButtonSection = ({ buttonText, authQuestionText, navigateToText, navig
                     await validate();
                 }}
             >
-                <Text className="text-lg font-bold text-center">{buttonText}</Text>
+                <Text className="text-lg font-bold text-center text-white">{buttonText}</Text>
             </TouchableOpacity>
-
-            <GoogleAuthSection />
 
             <View className="flex-row justify-center">
                 <View className="mt-2 w-10/12 border-b-[0.23px] border-solid border-gray-400"></View>
