@@ -131,6 +131,8 @@ const productDetailsHTML = (products) => {
 
       var products = ${JSON.stringify(products)};
 
+      console.log(products[0].image_url);
+
       function initiateSearch() {
           var input = document.getElementById('search-input').value.toLowerCase();
           var filtered = products.filter(function(product) {
@@ -211,7 +213,7 @@ function resetState() {
             .map(
                 (product) => `
           <div class="product-card" key="${product.product_id}">
-            <img class="product-image" src="${product.image_url}" alt="${product.name}" onerror="handleImageError(this)">
+            <img class="product-image" src="${product.image_url}" alt="${product.name}">
             <div class="product-info">
               <div class="product-name">${product.name}</div>
               <div class="product-description">${product.description}</div>
@@ -231,7 +233,6 @@ export const WebviewScreen = () => {
     const dispatch = useDispatch();
 
     useEffect(() => {
-        console.log("Hi");
         dispatch(hideTabBar());
     }, []);
 
@@ -261,7 +262,8 @@ export const WebviewScreen = () => {
                 });
                 break;
             case "initiateSearch":
-                navigation.navigate(PRODUCT_DISPLAY_SCREEN, {
+                navigation.navigate(LOADING_SCREEN, {
+                    navigateTo: PRODUCT_DISPLAY_SCREEN,
                     products: eventData.filteredProducts,
                     title: "Search Results",
                 });
