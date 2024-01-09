@@ -15,6 +15,7 @@ import {
     SPLASH_SCREEN,
     THANKYOU_SCREEN,
     TRACK_ORDER_SCREEN,
+    WEBVIEW_SCREEN,
 } from "../../../constants/screens";
 import ExploreScreen from "../../screens/app/ExploreScreen";
 import { ProductScreen } from "../../screens/app/ProductScreen";
@@ -25,6 +26,7 @@ import ProfileScreen from "../../screens/app/ProfileScreen";
 import { ProductDisplayScreen } from "../../screens/app/ProductDisplayScreen";
 import TrackOrderScreen from "../../screens/app/TrackOrderScreen";
 import { SplashScreen } from "../../screens/common/SplashScreen";
+import { WebviewScreen } from "../../screens/common/WebViewScreen";
 
 const Stack = createStackNavigator();
 
@@ -41,6 +43,7 @@ const stackOptions = (screen) => {
         case PRODUCT_DISPLAY_SCREEN:
         case TRACK_ORDER_SCREEN:
         case SPLASH_SCREEN:
+        case WEBVIEW_SCREEN:
             return {
                 headerShown: false,
             };
@@ -51,6 +54,7 @@ export const HomeStackNavigator = () => {
     return (
         <Stack.Navigator initialRouteName={SPLASH_SCREEN}>
             <Stack.Screen name={SPLASH_SCREEN} component={SplashScreen} options={stackOptions(SPLASH_SCREEN)} />
+            <Stack.Screen name={WEBVIEW_SCREEN} component={WebviewScreen} options={stackOptions(WEBVIEW_SCREEN)} />
             <Stack.Screen name={HOME_SCREEN} component={HomeScreen} options={stackOptions(HOME_SCREEN)} />
             <Stack.Screen name={LOADING_SCREEN} component={LoadingScreen} options={stackOptions(LOADING_SCREEN)} />
             <Stack.Screen name={EXPLORE_SCREEN} component={ExploreScreen} options={stackOptions(EXPLORE_SCREEN)} />

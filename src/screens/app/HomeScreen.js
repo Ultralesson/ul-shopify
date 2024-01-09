@@ -6,7 +6,7 @@ import CustomMessageModal from "../../components/common/CustomMessageModal";
 import { changeRegistrationModalState, selectRegistrationModalState } from "../../store/slices/modalsSlice";
 import { useDispatch, useSelector } from "react-redux";
 import { selectAuthState } from "../../store/slices/authSlice";
-import { EXPLORE_SCREEN, HOME_TAB } from "../../../constants/screens";
+import { EXPLORE_SCREEN, HOME_TAB, LOADING_SCREEN, WEBVIEW_SCREEN } from "../../../constants/screens";
 import { MagnifyingGlassIcon } from "react-native-heroicons/outline";
 import { TERNARY_COLOR } from "../../../constants/colors";
 import { hideTabBar, showTabBar } from "../../store/slices/appUIStateSlice";
@@ -44,7 +44,19 @@ const HomeScreen = () => {
                 />
             )}
             <View className="flex-row pb-3 items-center mx-4 space-x-2">
-                <Image source={require("../../../assets/icons/shopping-bag.png")} className="h-7 w-7  p-4 rounded" />
+                <TouchableOpacity
+                    onPress={() => {
+                        dispatch(hideTabBar());
+                        navigation.navigate(LOADING_SCREEN, {
+                            navigateTo: WEBVIEW_SCREEN,
+                        });
+                    }}
+                >
+                    <Image
+                        source={require("../../../assets/icons/shopping-bag.png")}
+                        className="h-7 w-7  p-4 rounded"
+                    />
+                </TouchableOpacity>
                 <View className="flex-1">
                     <Text className="font-bold text-gray-400 text-xs">Browser & Buy!</Text>
                     {!username ? (
