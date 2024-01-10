@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
-import { screenStack } from "../../store/slices/appStateSlice";
-import { FORGOT_PASSWORD_SCREEN, LOADING_SCREEN, LOGIN_SCREEN } from "../../../constants/screens";
+import { LOADING_SCREEN, LOGIN_SCREEN, REGISTRATION_SCREEN } from "../../../constants/screens";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { Image, Keyboard, ScrollView, Text, View, TouchableOpacity } from "react-native";
 import CustomInput from "../../components/common/CustomInput";
@@ -13,7 +12,8 @@ import { useNavigation } from "@react-navigation/native";
 import * as Yup from "yup";
 import CustomButton from "../../components/common/CustomButton";
 import useKeyboardStatus from "../../hooks/useKeyboardStatus";
-import { changePasswordResetModalState } from "../../store/slices/modalsSlice";
+import { changePasswordResetModalState, changeToastModalState } from "../../store/slices/modalsSlice";
+import { userModel } from "../../../utilities/asyncStorage";
 
 const ForgotPasswordScreen = () => {
     const dispatch = useDispatch();
@@ -103,14 +103,27 @@ const ForgotPasswordScreen = () => {
                 </View>
             </View>
 
-            <View className={`w-full h-1/2 -z-10  ${isKeyboardVisible ? "h-1/3" : ""}`}>
-                <Image source={require("../../../assets/images/forgotPassword.jpg")} className={`w-full h-full mb-3`} />
+            <View className={`w-full h-48 -z-10  ${isKeyboardVisible ? "h-1/3" : ""}`}>
+                <Image
+                    testID="img-forgot-password"
+                    nativeID="img-forgot-password"
+                    accessibilityLabel="img-forgot-password"
+                    source={require("../../../assets/images/forgotPassword.jpg")}
+                    resizeMode="contain"
+                    className={`w-full h-full mb-3`}
+                />
             </View>
 
             <View className="flex-1 m-4">
                 <View className="">
                     <View className="mb-3">
-                        <Text className="text-3xl" style={{ color: QUATERNARY_COLOR }}>
+                        <Text
+                            className="text-3xl"
+                            style={{ color: QUATERNARY_COLOR }}
+                            testID="txt-forgot-password"
+                            nativeID="txt-forgot-password"
+                            accessibilityLabel="txt-forgot-password"
+                        >
                             Forgot <Text className="text-xl font-bold">password?</Text>
                         </Text>
                     </View>
@@ -156,7 +169,7 @@ const ForgotPasswordScreen = () => {
                     )}
 
                     {hideInputs.newPassword && (
-                        <ScrollView className="">
+                        <View className="">
                             <CustomInput
                                 customStyle={"bg-gray-100"}
                                 password={true}
@@ -193,7 +206,7 @@ const ForgotPasswordScreen = () => {
                                     handleErrors(undefined, "confirmPassword");
                                 }}
                             />
-                        </ScrollView>
+                        </View>
                     )}
                 </View>
                 {/* Do not show the reset button when email field is displayed and also when the keyboard is shown */}
@@ -206,10 +219,14 @@ const ForgotPasswordScreen = () => {
                                 Keyboard.dismiss();
 
                                 if (await validate(await validatePasswordField())) {
+                                    const updatePasswordInfo = await userModel("UPDATE_PASSWORD", {
+                                        email: inputs.email,
+                                        newPassword: inputs.newPassword,
+                                    });
+
                                     resetStates();
                                     dispatch(changePasswordResetModalState());
-                                    dispatch(screenStack({ screen: LOGIN_SCREEN, to: "push" }));
-                                    navigation.navigate(LOADING_SCREEN, { navigateTo: LOGIN_SCREEN });
+                                    navigation.navigate(LOGIN_SCREEN);
                                 }
                             }}
                         />

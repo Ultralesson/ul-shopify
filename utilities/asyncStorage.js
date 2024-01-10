@@ -42,6 +42,24 @@ export const userModel = async (action, data) => {
                     data: null,
                 };
             }
+        case "UPDATE_PASSWORD":
+            let usersToUpdate = (await getFromLocalStorage("user")).data;
+            let foundUserIndex = usersToUpdate.findIndex((user) => user.email === data.email);
+
+            if (foundUserIndex !== -1) {
+                usersToUpdate[foundUserIndex].password = data.newPassword; // Update the password
+                await setToLocalStorage("user", usersToUpdate); // Save the updated users array
+
+                return {
+                    message: "PASSWORD_UPDATED",
+                    data: usersToUpdate[foundUserIndex],
+                };
+            } else {
+                return {
+                    message: "USER_NOT_FOUND",
+                    data: null,
+                };
+            }
         case "ADD_ORDER_DETAILS":
             let users = (await getFromLocalStorage("user")).data;
             let userIndex = users.findIndex((user) => user.email === data.email);

@@ -3,7 +3,7 @@ import React, { useDebugValue, useEffect } from "react";
 import { SafeAreaView } from "react-native-safe-area-context";
 import WebView from "react-native-webview";
 import { useDispatch } from "react-redux";
-import { hideTabBar } from "../../store/slices/appUIStateSlice";
+import { hideTabBar, showTabBar } from "../../store/slices/appUIStateSlice";
 import {
     EXPLORE_SCREEN,
     HOME_SCREEN,
@@ -250,6 +250,7 @@ export const WebviewScreen = () => {
                 });
                 return;
             case "goBack":
+                dispatch(showTabBar());
                 navigation.navigate(HOME_SCREEN);
                 return;
             case "search":

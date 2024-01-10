@@ -220,7 +220,7 @@ export const ProductDisplayScreen = () => {
     );
 
     return (
-        <SafeAreaView className="mb-16">
+        <SafeAreaView className=" bg-white flex-1">
             <View className="flex-row items-center justify-between">
                 <View className="flex-row items-center">
                     <View className="mx-3">
@@ -252,15 +252,26 @@ export const ProductDisplayScreen = () => {
                 </TouchableOpacity>
             )}
             {renderFilterDrawer()}
-            <ScrollView className="mb">
-                <View className="px-4">
-                    <View className="flex-row flex-wrap justify-between">
-                        {filteredProducts.map((product) => (
-                            <FeatureGridRowCards key={product.product_id} product={product} />
-                        ))}
-                    </View>
+            {products.length === 0 ? (
+                <View className="">
+                    <Image
+                        className="h-56 w-full"
+                        source={require("../../../assets/images/not-found.jpg")} // Update with the path to your image
+                        resizeMode="contain"
+                    />
+                    <Text className="text-center text-lg">No products found.</Text>
                 </View>
-            </ScrollView>
+            ) : (
+                <ScrollView className="">
+                    <View className="px-4">
+                        <View className="flex-row flex-wrap justify-between">
+                            {filteredProducts.map((product) => (
+                                <FeatureGridRowCards key={product.product_id} product={product} />
+                            ))}
+                        </View>
+                    </View>
+                </ScrollView>
+            )}
         </SafeAreaView>
     );
 };

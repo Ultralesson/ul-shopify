@@ -2,8 +2,8 @@ import React, { useEffect } from "react";
 import { Image, ScrollView, Text, View, TouchableOpacity } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { useDispatch, useSelector } from "react-redux";
-import { CART_SCREEN, HOME_SCREEN, HOME_TAB, PREPARING_ORDER_SCREEN } from "../../../constants/screens";
-import basketSlice, {
+import { HOME_SCREEN, PREPARING_ORDER_SCREEN } from "../../../constants/screens";
+import {
     decrementQuantity,
     deleteItem,
     emptyBasket,

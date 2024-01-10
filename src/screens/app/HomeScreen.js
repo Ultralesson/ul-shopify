@@ -58,17 +58,41 @@ const HomeScreen = () => {
                     />
                 </TouchableOpacity>
                 <View className="flex-1">
-                    <Text className="font-bold text-gray-400 text-xs">Browser & Buy!</Text>
+                    <Text
+                        testID="txt-browse-and-buy"
+                        nativeID="txt-browse-and-buy"
+                        accessibilityLabel="txt-browse-and-buy"
+                        className="font-bold text-gray-400 text-xs"
+                    >
+                        Browser & Buy!
+                    </Text>
                     {!username ? (
-                        <Text className="font-bold text-xl">Welcome Back!!</Text>
+                        <Text
+                            testID="txt-welcome-back"
+                            nativeID="txt-welcome-back"
+                            accessibilityLabel="txt-welcome-back"
+                            className="font-bold text-xl"
+                        >
+                            Welcome Back!!
+                        </Text>
                     ) : (
-                        <Text className="font-bold text-xl">
+                        <Text
+                            testID="txt-username"
+                            nativeID="txt-username"
+                            accessibilityLabel="txt-username"
+                            className="font-bold text-xl"
+                        >
                             {username.charAt(0).toUpperCase() + username.slice(1)}
                         </Text>
                     )}
                 </View>
                 <View className="pr-1">
-                    <Image source={require("../../../assets/icons/ultralesson-logo.png")} className="h-10 w-14" />
+                    <Image
+                        testID="img-ultralesson-logo"
+                        accessibilityLabel="img-ultralesson-logo"
+                        source={require("../../../assets/icons/ultralesson-logo.png")}
+                        className="h-10 w-14"
+                    />
                 </View>
             </View>
             <View className="flex-row items-center space-x-2 pb-2 mx-2">
@@ -80,9 +104,21 @@ const HomeScreen = () => {
                     }}
                 >
                     <View className="flex-row flex-1 space-x-2 bg-gray-200 p-2 rounded-md items-center">
-                        <MagnifyingGlassIcon color={TERNARY_COLOR} />
+                        <MagnifyingGlassIcon
+                            testID="img-search-icon"
+                            accessibilityLabel="img-search-icon"
+                            nativeID="img-search-icon"
+                            color={TERNARY_COLOR}
+                        />
 
-                        <Text className="text-gray-400">Search for more!!</Text>
+                        <Text
+                            testID="txt-search-for-more"
+                            nativeID="txt-search-for-more"
+                            accessibilityLabel="txt-search-for-more"
+                            className="text-gray-400"
+                        >
+                            Search for more!!
+                        </Text>
                     </View>
                 </TouchableOpacity>
             </View>
