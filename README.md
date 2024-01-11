@@ -23,7 +23,26 @@ UI-Shopify includes a number of user flow simulations that are essential for com
       <img src="./videos/register-flow.gif" width="200" height="350">
     </td>
     <td>
-      <img src="./videos/error-modal-flow.gif" width="200" height="350">
+      <img src="https://github.com/Ultralesson/ul-shopify/blob/main/videos/error-modal-flow.gif" width="200" height="350">
+    </td>
+        <td>
+      <img src="./videos/forgotten-password-flow.gif" width="200" height="350">
+    </td>
+  </tr>
+</table>
+
+<table>
+  <tr>
+    <th>Filtering Flow</th>
+    <th>Cart Manipulation Flow</th>
+    <th>Forgotten Password Flow</th>
+  </tr>
+  <tr>
+    <td>
+      <img src="./videos/filtering-flow.gif" width="200" height="350">
+    </td>
+    <td>
+      <img src="./videos/cart-manipulation-flow.gif" width="200" height="350">
     </td>
         <td>
       <img src="./videos/forgotten-password-flow.gif" width="200" height="350">
