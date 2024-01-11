@@ -20,13 +20,13 @@ UI-Shopify includes a number of user flow simulations that are essential for com
   </tr>
   <tr>
     <td>
-      <img src="./videos/register-flow.gif" width="200" height="350">
+      <img src="https://github.com/Ultralesson/ul-shopify/blob/gif-videos/videos/register-flow.gif" width="200" height="350">
     </td>
     <td>
-      <img src="https://github.com/Ultralesson/ul-shopify/blob/main/videos/error-modal-flow.gif" width="200" height="350">
+      <img src="https://github.com/Ultralesson/ul-shopify/blob/gif-videos/videos/error-modal-flow.gif" width="200" height="350">
     </td>
         <td>
-      <img src="./videos/forgotten-password-flow.gif" width="200" height="350">
+      <img src="https://github.com/Ultralesson/ul-shopify/blob/gif-videos/videos/forgotten-password-flow.gif" width="200" height="350">
     </td>
   </tr>
 </table>
@@ -39,13 +39,10 @@ UI-Shopify includes a number of user flow simulations that are essential for com
   </tr>
   <tr>
     <td>
-      <img src="./videos/filtering-flow.gif" width="200" height="350">
+      <img src="https://github.com/Ultralesson/ul-shopify/blob/gif-videos/videos/filtering-flow.gif" width="200" height="350">
     </td>
     <td>
-      <img src="./videos/cart-manipulation-flow.gif" width="200" height="350">
-    </td>
-        <td>
-      <img src="./videos/forgotten-password-flow.gif" width="200" height="350">
+      <img src="https://github.com/Ultralesson/ul-shopify/blob/gif-videos/videos/cart-manipulation-flow.gif" width="200" height="350">
     </td>
   </tr>
 </table>
