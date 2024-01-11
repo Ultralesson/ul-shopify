@@ -8,8 +8,18 @@ import { store } from "./src/store/store";
 
 import HomeTabNavigator from "./src/navigations/tab-navigators/HomeTabNavigator";
 import Modals from "./src/modals/Modals";
+import { useEffect } from "react";
+import { dummyAccountCreation } from "./utilities/asyncStorage";
 
 const App = () => {
+    useEffect(() => {
+        async function create() {
+            await dummyAccountCreation();
+        }
+        // Ensuring to have a dummy account for automation purposes for login state
+        create();
+    }, []);
+
     return (
         <Provider store={store}>
             <NavigationContainer>

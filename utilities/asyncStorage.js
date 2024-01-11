@@ -1,11 +1,44 @@
 import AsyncStorage from "@react-native-async-storage/async-storage";
+import newArrivals from "../assets/data/new-arrivals.json";
 
 const PREFIX = "cache_";
+const products = newArrivals.products;
+
+export const dummyAccountCreation = async () => {
+    const DUMMY_ACCOUNT_EMAIL = "ulshopify@ultralesson.com";
+    const DUMMY_ACCOUNT = {
+        email: DUMMY_ACCOUNT_EMAIL,
+        password: "12345",
+        confirmPassword: "12345",
+        fullName: "Jack Sparrow",
+        mobileNumber: "1234567890",
+        cart: [
+            {
+                ...products[0],
+                quantity: 2,
+                status: "placed",
+                date: new Date(),
+            },
+        ],
+    };
+    try {
+        let users = (await getFromLocalStorage("user")).data || [];
+
+        // Check if the dummy account already exists
+        if (!users.some((user) => user.email === DUMMY_ACCOUNT_EMAIL)) {
+            users.push(DUMMY_ACCOUNT); // Add the dummy account
+            await setToLocalStorage("user", users); // Update the local storage
+        }
+    } catch (error) {
+        console.log("Error ensuring dummy account: ", error);
+    }
+};
 
 export const userModel = async (action, data) => {
     let cachedData = null;
     switch (action) {
         case "CREATE_USER":
+            console.log(data);
             // Get existing users from local storage
             let existingUsers = (await getFromLocalStorage("user")).data || [];
 

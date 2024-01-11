@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
-import { LOADING_SCREEN, LOGIN_SCREEN, REGISTRATION_SCREEN } from "../../../constants/screens";
+import { LOGIN_SCREEN } from "../../../constants/screens";
 import { SafeAreaView } from "react-native-safe-area-context";
-import { Image, Keyboard, ScrollView, Text, View, TouchableOpacity } from "react-native";
+import { Image, Keyboard, Text, View, TouchableOpacity } from "react-native";
 import CustomInput from "../../components/common/CustomInput";
 import { ArrowRightIcon, EnvelopeIcon, LockClosedIcon } from "react-native-heroicons/outline";
 import { ICON_SIZE_SMALL } from "../../../constants/sizes";
@@ -12,7 +12,7 @@ import { useNavigation } from "@react-navigation/native";
 import * as Yup from "yup";
 import CustomButton from "../../components/common/CustomButton";
 import useKeyboardStatus from "../../hooks/useKeyboardStatus";
-import { changePasswordResetModalState, changeToastModalState } from "../../store/slices/modalsSlice";
+import { changePasswordResetModalState } from "../../store/slices/modalsSlice";
 import { userModel } from "../../../utilities/asyncStorage";
 
 const ForgotPasswordScreen = () => {
@@ -30,6 +30,7 @@ const ForgotPasswordScreen = () => {
         confirmPassword: false,
     });
     const [errors, setErrors] = useState({});
+    const [displayResetButton, setResetButtonState] = useState(false);
 
     const handleOnChangeText = (text, label) => {
         setInputs((prevState) => {
@@ -134,6 +135,9 @@ const ForgotPasswordScreen = () => {
                         <View className="flex-row items-center">
                             <View className="flex-1 justify-center">
                                 <CustomInput
+                                    test_id={"txt-email"}
+                                    accessibility_label={"txt-email"}
+                                    native_id={"txt-email"}
                                     customStyle={"bg-gray-100"}
                                     label="Email"
                                     value={inputs.email}
@@ -154,6 +158,7 @@ const ForgotPasswordScreen = () => {
                             <TouchableOpacity
                                 className={`ml-3 ${errors.email ? "-mt-4" : ""}`}
                                 onPress={async () => {
+                                    setResetButtonState(true);
                                     // Check for the email to be registered from storage cache if not then new password section should not appear
                                     Keyboard.dismiss();
                                     if (await validate(await validateEmailField())) {
@@ -208,30 +213,30 @@ const ForgotPasswordScreen = () => {
                             />
                         </View>
                     )}
+                    {/* Do not show the reset button when email field is displayed and also when the keyboard is shown */}
+                    {displayResetButton && !isKeyboardVisible && (
+                        <View className="mb-1">
+                            <CustomButton
+                                text="Reset password"
+                                disabled={true}
+                                navigateTo={async () => {
+                                    Keyboard.dismiss();
+
+                                    if (await validate(await validatePasswordField())) {
+                                        const updatePasswordInfo = await userModel("UPDATE_PASSWORD", {
+                                            email: inputs.email,
+                                            newPassword: inputs.newPassword,
+                                        });
+
+                                        resetStates();
+                                        dispatch(changePasswordResetModalState());
+                                        navigation.navigate(LOGIN_SCREEN);
+                                    }
+                                }}
+                            />
+                        </View>
+                    )}
                 </View>
-                {/* Do not show the reset button when email field is displayed and also when the keyboard is shown */}
-                {inputs.email && !isKeyboardVisible && (
-                    <View className="mb-1">
-                        <CustomButton
-                            text="Reset password"
-                            disabled={true}
-                            navigateTo={async () => {
-                                Keyboard.dismiss();
-
-                                if (await validate(await validatePasswordField())) {
-                                    const updatePasswordInfo = await userModel("UPDATE_PASSWORD", {
-                                        email: inputs.email,
-                                        newPassword: inputs.newPassword,
-                                    });
-
-                                    resetStates();
-                                    dispatch(changePasswordResetModalState());
-                                    navigation.navigate(LOGIN_SCREEN);
-                                }
-                            }}
-                        />
-                    </View>
-                )}
             </View>
         </SafeAreaView>
     );
