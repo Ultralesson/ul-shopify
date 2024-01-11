@@ -1,6 +1,6 @@
-import blackList from "metro-config/src/defaults/exclusionList";
+const blackList = require("metro-config/src/defaults/exclusionList");
 
-export default {
+module.exports = {
     resolver: {
         blacklistRE: blackList([/videos\/.*/]),
     },

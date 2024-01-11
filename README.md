@@ -8,6 +8,29 @@ The primary purpose of UI-Shopify is to serve as a sandbox for automation purpos
 
 Absolutely, providing clear explanations on how AsyncStorage works and under what conditions the data is stored or deleted can be critical for users to understand the app's functionality, especially in the context of an automation testing environment. Here's the updated section for the README:
 
+## UI-Shopify Automation Flows
+
+UI-Shopify includes a number of user flow simulations that are essential for comprehensive automation testing. Below are the animated GIFs demonstrating each key flow within the application.
+
+<table>
+  <tr>
+    <th>Registration Flow</th>
+    <th>Error Toast Flow</th>
+    <th>Forgotten Password Flow</th>
+  </tr>
+  <tr>
+    <td>
+      <img src="./videos/register-flow.gif" width="200" height="350">
+    </td>
+    <td>
+      <img src="./videos/error-modal-flow.gif" width="200" height="350">
+    </td>
+        <td>
+      <img src="./videos/forgotten-password-flow.gif" width="200" height="350">
+    </td>
+  </tr>
+</table>
+
 ## Data Privacy and Storage with AsyncStorage
 
 UI-Shopify is committed to ensuring user privacy and providing a reliable automation testing environment. To achieve this, we use React Native's AsyncStorage, a simple, unencrypted, asynchronous, persistent, key-value storage system that is global to the app. Here's how it operates:
@@ -101,5 +124,3 @@ This app is designed to work seamlessly with automation tools. The locators for 
 ## Contributing
 
 While UI-Shopify is primarily for testing automation, contributions are welcome. If you have suggestions to enhance the testing experience, please share them.
-
-<img src="./videos/register-flow.gif" width="200" height="350">
