@@ -102,4 +102,4 @@ This app is designed to work seamlessly with automation tools. The locators for 
 
 While UI-Shopify is primarily for testing automation, contributions are welcome. If you have suggestions to enhance the testing experience, please share them.
 
-<img src="./videos/register-flow.gif" width="200" height="400">
+<img src="./videos/register-flow.gif" width="230" height="400">
