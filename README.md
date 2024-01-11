@@ -35,7 +35,6 @@ UI-Shopify includes a number of user flow simulations that are essential for com
   <tr>
     <th>Filtering Flow</th>
     <th>Cart Manipulation Flow</th>
-    <th>Forgotten Password Flow</th>
   </tr>
   <tr>
     <td>
