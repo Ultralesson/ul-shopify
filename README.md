@@ -173,10 +173,6 @@ To maintain consistency and readability, we follow a specific naming convention 
 
 When implementing these locators, ensure they are unique within the screen and, if possible, within the app to avoid clashes. Use meaningful suffixes that reflect the element's purpose or the text it displays.
 
-Sure, let's add a section to the README about the bundle identifier and package name for both Android and iOS platforms:
-
----
-
 ## Bundle Identifier and Package Name
 
 In UI-Shopify, the bundle identifier for iOS and the package name for Android are set to: `com.ultralesson.ulshopify`
