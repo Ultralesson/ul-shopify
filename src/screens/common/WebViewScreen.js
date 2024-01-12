@@ -1,5 +1,5 @@
 import { useNavigation } from "@react-navigation/native";
-import React, { useDebugValue, useEffect } from "react";
+import React, { useDebugValue, useEffect, useState } from "react";
 import { SafeAreaView } from "react-native-safe-area-context";
 import WebView from "react-native-webview";
 import { useDispatch } from "react-redux";
@@ -12,6 +12,7 @@ import {
     PRODUCT_SCREEN,
 } from "../../../constants/screens";
 import newArrivals from "../../../assets/data/new-arrivals.json";
+import { extractKeyFromUrl, thumbnailImage, viewImage } from "../../../utilities/imageConstructors";
 
 const productDetailsHTML = (products) => {
     return `
@@ -49,15 +50,19 @@ const productDetailsHTML = (products) => {
         padding: 5px;
         }
         .product-card { 
+          display: flex; 
+          align-items: center; 
         width: calc(100% - 10px); 
         margin: 5px; 
         box-shadow: 0 2px 4px rgba(0,0,0,0.1);
         margin-bottom: 20px
         }
-        .product-image { 
-        width: 100%; 
-        height: 200px; 
-        object-fit: cover;
+.product-image { 
+          width: 100px;  /* Adjust to your preferred thumbnail width */
+          height: 100px; /* Adjust to your preferred thumbnail height */
+          object-fit: cover;
+          border-radius: 20%; /* Makes the image rounded */
+          margin-right: 10px; /* Adds spacing between image and text */
         }
         .product-info { 
         padding: 10px;
@@ -75,7 +80,7 @@ const productDetailsHTML = (products) => {
         color: #666; 
         margin-top: 5px;
         }
-        .details-button { 
+          .details-button { 
             font-weight: bold;
         background-color: #a0d9ef;
         color: white; 
@@ -85,6 +90,7 @@ const productDetailsHTML = (products) => {
         margin-top: 10px; 
         text-decoration: none; 
         border-radius: 5px; 
+        border: 1px solid  #a0d9ef;
         cursor: pointer;
         }
         .suggestions .suggestion-item {
@@ -130,8 +136,6 @@ const productDetailsHTML = (products) => {
       <script>
 
       var products = ${JSON.stringify(products)};
-
-      console.log(products[0].image_url);
 
       function initiateSearch() {
           var input = document.getElementById('search-input').value.toLowerCase();
@@ -213,11 +217,13 @@ function resetState() {
             .map(
                 (product) => `
           <div class="product-card" key="${product.product_id}">
-            <img class="product-image" src="${product.image_url}" alt="${product.name}">
+            <div class="product-image-container">
+              <img class="product-image" src="${product.image_url}" alt="${product.name}">
+            </div>
             <div class="product-info">
               <div class="product-name">${product.name}</div>
               <div class="product-description">${product.description}</div>
-              <a class="details-button" onclick="navigateToDetails('${product.product_id}')">View Details</a>
+              <button class="details-button" onclick="navigateToDetails('${product.product_id}')">View Details</button>
             </div>
           </div>
         `
@@ -231,19 +237,27 @@ function resetState() {
 export const WebviewScreen = () => {
     const navigation = useNavigation();
     const dispatch = useDispatch();
+    const [products, setProducts] = useState([...newArrivals.products]);
 
     useEffect(() => {
         dispatch(hideTabBar());
+        const _products = products.map((product) => {
+            const imageKey = extractKeyFromUrl(product.image_url);
+            const imageThumbnailURL = thumbnailImage(imageKey);
+            product.image_url = imageThumbnailURL;
+            return product;
+        });
+        setProducts(_products);
     }, []);
-
-    const products = [...newArrivals.products];
 
     // Function to handle messages from the WebView
     const onMessage = (event) => {
         const eventData = JSON.parse(event.nativeEvent.data);
         const product = products.find((product) => product.product_id === eventData.productId);
+
         switch (eventData.type) {
             case "navigateToDetails":
+                product.image_url = viewImage(extractKeyFromUrl(product.image_url));
                 navigation.navigate(LOADING_SCREEN, {
                     navigateTo: PRODUCT_SCREEN,
                     product,
@@ -258,14 +272,21 @@ export const WebviewScreen = () => {
                 return;
             case "selectProduct":
                 const selectedProduct = products.find((p) => p.product_id === eventData.productId);
+                selectedProduct.image_url = viewImage(extractKeyFromUrl(selectedProduct.image_url));
                 navigation.navigate(PRODUCT_SCREEN, {
                     product: selectedProduct,
                 });
                 break;
             case "initiateSearch":
+                const _filteredProducts = eventData.filteredProducts.map((product) => {
+                    const imageKey = extractKeyFromUrl(product.image_url);
+                    const imageThumbnailURL = viewImage(imageKey);
+                    product.image_url = imageThumbnailURL;
+                    return product;
+                });
                 navigation.navigate(LOADING_SCREEN, {
                     navigateTo: PRODUCT_DISPLAY_SCREEN,
-                    products: eventData.filteredProducts,
+                    products: _filteredProducts,
                     title: "Search Results",
                 });
                 break;
