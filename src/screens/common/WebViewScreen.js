@@ -295,7 +295,13 @@ export const WebviewScreen = () => {
 
     return (
         <SafeAreaView className="flex-1">
-            <WebView source={{ html: productDetailsHTML(products) }} onMessage={onMessage}></WebView>
+            <WebView
+                source={{ html: productDetailsHTML(products) }}
+                javaScriptEnabled={true}
+                domStorageEnabled={true}
+                startInLoadingState={true}
+                onMessage={onMessage}
+            ></WebView>
         </SafeAreaView>
     );
 };
