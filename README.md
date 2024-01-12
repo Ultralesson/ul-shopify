@@ -35,6 +35,7 @@ UI-Shopify includes a number of user flow simulations that are essential for com
   <tr>
     <th>Filtering Flow</th>
     <th>Cart Manipulation Flow</th>
+    <th>Web view Flow</th>
   </tr>
   <tr>
     <td>
@@ -42,6 +43,9 @@ UI-Shopify includes a number of user flow simulations that are essential for com
     </td>
     <td>
       <img src="https://github.com/Ultralesson/ul-shopify/blob/gif-videos/videos/cart-manipulation-flow.gif" width="200" height="350">
+    </td>
+        <td>
+      <img src="https://github.com/Ultralesson/ul-shopify/blob/gif-videos/videos/web-view.gif" width="200" height="350">
     </td>
   </tr>
 </table>
@@ -100,6 +104,18 @@ Upon installation, the AsyncStorage is initially empty. However, we have automat
 
 -   **Email**: `ulshopify@ultralesson.com`
 -   **Password**: `12345`
+
+<table>
+  <tr>
+    <th>Cart Manipulation Flow</th>
+  </tr>
+  <tr>
+    <td>
+      <img src="https://github.com/Ultralesson/ul-shopify/blob/gif-videos/videos/dummy-email.gif" width="200" height="350">
+    </td>
+   
+  </tr>
+</table>
 
 #### Advantages of Preconfiguration:
 
