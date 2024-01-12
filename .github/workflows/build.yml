@@ -27,7 +27,7 @@ jobs:
               eas build --local \
               --non-interactive \
               --output=./app-build \
-              --platform=android
+              --platform=android \
               --profile=preview
 
       - name: Upload Artifact
