@@ -302,7 +302,7 @@ export const WebviewScreen = () => {
                 domStorageEnabled={true}
                 startInLoadingState={true}
                 onMessage={onMessage}
-            ></WebView>
+            />
         </SafeAreaView>
     );
 };
