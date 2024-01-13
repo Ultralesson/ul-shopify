@@ -28,7 +28,7 @@ jobs:
         run: |
           cd ios
           xcodebuild -workspace ulshopify.xcworkspace \
-                     -scheme YourSchemeName \
+                     -scheme ulshopify \
                      -sdk iphonesimulator \
                      -configuration Debug \
                      -derivedDataPath ./build
