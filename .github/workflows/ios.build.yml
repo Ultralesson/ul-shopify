@@ -1,4 +1,4 @@
-name: Experimenting EAS iOS Build
+name: iOS Build Workflow
 
 on:
   workflow_dispatch:
