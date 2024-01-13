@@ -296,8 +296,7 @@ export const WebviewScreen = () => {
     return (
         <SafeAreaView className="flex-1">
             <WebView
-                // source={{ html: productDetailsHTML(products) }}
-                source={{ uri: "https://www.google.com" }}
+                source={{ html: productDetailsHTML(products) }}
                 javaScriptEnabled={true}
                 domStorageEnabled={true}
                 startInLoadingState={true}
