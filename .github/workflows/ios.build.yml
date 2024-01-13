@@ -1,0 +1,48 @@
+name: Experimenting EAS iOS Build
+
+on:
+  workflow_dispatch:
+
+jobs:
+  build-ios:
+    runs-on: macos-latest
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v3
+
+      - name: Setup Node
+        uses: actions/setup-node@v3
+        with:
+          node-version: '18'
+
+      - name: Install npm dependencies
+        run: npm ci
+
+      - name: Install CocoaPods dependencies
+        run: |
+          cd ios
+          sudo gem install cocoapods
+          pod install
+
+      - name: Build iOS .app for Simulator
+        run: |
+          cd ios
+          xcodebuild -workspace ulshopify.xcworkspace \
+                     -scheme YourSchemeName \
+                     -sdk iphonesimulator \
+                     -configuration Debug \
+                     -derivedDataPath ./build
+
+      - name: Rename .app for Simulator
+        run: |
+          APP_PATH=$(find ios/build -name "*.app" -type d | head -n 1)
+          if [ -n "$APP_PATH" ]; then
+            mv "$APP_PATH" "ios/build/Products/Debug-iphonesimulator/ul-shopify.app"
+          fi
+        id: rename-app
+
+      - name: Upload .app Artifact
+        uses: actions/upload-artifact@v3
+        with:
+          name: ul-shopify-app
+          path: ios/build/Products/Debug-iphonesimulator/ul-shopify.app

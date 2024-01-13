@@ -1,6 +1,6 @@
 import { useNavigation, useRoute } from "@react-navigation/native";
 import React, { useEffect, useState } from "react";
-import { Image, Text, View, ScrollView, TouchableOpacity } from "react-native";
+import { Image, Text, View, ScrollView, TouchableOpacity, Platform } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import {
     ArrowLeftIcon,
@@ -49,7 +49,11 @@ export const ProductScreen = () => {
 
     return (
         <SafeAreaView className="bg-white flex-1">
-            <View className="absolute top-8 left-5 rounded-full p-2 mt-4 bg-white z-10">
+            <View
+                className={`absolute left-5 rounded-full p-2 mt-4 bg-white z-10 ${
+                    Platform.OS === "ios" ? "top-16" : "top-8"
+                }`}
+            >
                 <TouchableOpacity
                     onPress={() => {
                         dispatch(showTabBar());
@@ -61,7 +65,9 @@ export const ProductScreen = () => {
             </View>
 
             <View
-                className="absolute top-8 p-2 rounded-full mt-4 bg-gray-50 z-10"
+                className={`absolute p-2 rounded-full mt-4 bg-gray-50 z-10 ${
+                    Platform.OS === "ios" ? "top-16" : "top-8"
+                }`}
                 style={{
                     right: 75,
                 }}
@@ -80,7 +86,11 @@ export const ProductScreen = () => {
             </View>
 
             {/* Shopping Cart Button */}
-            <View className="absolute top-8 right-5 p-2 rounded-full mt-4 bg-gray-50 z-10">
+            <View
+                className={`absolute right-5 p-2 rounded-full mt-4 bg-gray-50 z-10 ${
+                    Platform.OS === "ios" ? "top-16" : "top-8"
+                }`}
+            >
                 <TouchableOpacity
                     onPress={() => {
                         dispatch(hideTabBar());
@@ -93,7 +103,7 @@ export const ProductScreen = () => {
                 </TouchableOpacity>
             </View>
             <View
-                className="absolute top-6 right-5 rounded-full mt-4 p-1 z-10"
+                className={`absolute right-5 rounded-full mt-4 p-1 z-10 ${Platform.OS === "ios" ? "top-14" : "top-6"}`}
                 style={{ backgroundColor: TERNARY_COLOR }}
             >
                 <Text className="font-bold text-xs text-white">{basketItems.length}</Text>

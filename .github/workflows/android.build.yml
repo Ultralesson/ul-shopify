@@ -1,0 +1,60 @@
+name: Android Build and Release Workflow
+
+on:
+  workflow_dispatch:
+
+jobs:
+  build-and-release-android:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Setup Node
+        uses: actions/setup-node@v3
+        with:
+          node-version: '18'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Setup Java Environment
+        uses: actions/setup-java@v3
+        with:
+          java-version: '11'
+          distribution: 'adopt'
+
+      - name: Cache Gradle
+        uses: actions/cache@v3
+        with:
+          path: |
+            ~/.gradle/caches
+            ~/.gradle/wrapper
+          key: ${{ runner.os }}-gradle-${{ hashFiles('**/*.gradle*', '**/gradle-wrapper.properties') }}
+          restore-keys: |
+            ${{ runner.os }}-gradle-
+
+      - name: Build Android APK
+        run: |
+          cd android
+          ./gradlew assembleRelease
+
+      - name: Rename APK
+        run: |
+          mv android/app/build/outputs/apk/release/app-release.apk android/app/build/outputs/apk/release/ul-shopify.apk
+
+      - name: Generate release number
+        id: versioning
+        run: echo "RELEASE_VERSION=$(date +'%Y%m%d%H%M%S')" >> $GITHUB_ENV
+
+      - name: Create Release
+        id: create_release
+        run: |
+          gh release create ${{ env.RELEASE_VERSION }} \
+            --title "UL Shopify Release ${{ env.RELEASE_VERSION }}" \
+            --draft
+
+      - name: Upload APK to Release
+        run: |
+          gh release upload ${{ env.RELEASE_VERSION }} android/app/build/outputs/apk/release/ul-shopify.apk --clobber
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
