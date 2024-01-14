@@ -1,7 +1,7 @@
 import { NavigationContainer } from "@react-navigation/native";
 
 import { Provider } from "react-redux";
-import { KeyboardAvoidingView, Platform } from "react-native";
+import { KeyboardAvoidingView, Platform, LogBox } from "react-native";
 import Toast from "./src/modals/Toast";
 
 import { store } from "./src/store/store";
@@ -13,6 +13,7 @@ import { dummyAccountCreation } from "./utilities/asyncStorage";
 
 const App = () => {
     useEffect(() => {
+        LogBox.ignoreAllLogs(true);
         async function create() {
             await dummyAccountCreation();
         }
