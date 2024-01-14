@@ -1,0 +1,149 @@
+name: Android & iOS Build Release Workflow
+
+on:
+  workflow_dispatch:
+
+jobs:
+  build-android:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Setup Node
+        uses: actions/setup-node@v3
+        with:
+          node-version: '18'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Setup Java Environment
+        uses: actions/setup-java@v3
+        with:
+          java-version: '11'
+          distribution: 'adopt'
+
+      - name: Cache Gradle
+        uses: actions/cache@v3
+        with:
+          path: |
+            ~/.gradle/caches
+            ~/.gradle/wrapper
+          key: ${{ runner.os }}-gradle-${{ hashFiles('**/*.gradle*', '**/gradle-wrapper.properties') }}
+          restore-keys: |
+            ${{ runner.os }}-gradle-
+
+      - name: Build Android APK
+        run: |
+          cd android
+          ./gradlew assembleRelease
+
+      - name: Rename APK
+        run: |
+          mv android/app/build/outputs/apk/release/app-release.apk android/app/build/outputs/apk/release/ul-shopify.apk
+
+      - name: Upload Artifact
+        uses: actions/upload-artifact@v3
+        with:
+          name: ul-shopify-apk
+          path: android/app/build/outputs/apk/release/ul-shopify.apk
+
+  build-ios:
+    runs-on: macos-latest
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v3
+
+      - name: Setup Node
+        uses: actions/setup-node@v3
+        with:
+          node-version: '18'
+
+      - name: Install npm dependencies
+        run: npm ci
+
+      - name: Install CocoaPods dependencies
+        run: |
+          cd ios
+          sudo gem install cocoapods
+          pod install
+
+      - name: Build iOS .app for Simulator
+        run: |
+          cd ios
+          xcodebuild -workspace ulshopify.xcworkspace \
+                     -scheme ulshopify \
+                     -sdk iphonesimulator \
+                     -configuration Debug \
+                     -derivedDataPath ./build
+
+      - name: Rename .app for Simulator
+        run: |
+          APP_PATH=$(find ios/build -name "*.app" -type d | head -n 1)
+          echo "$APP_PATH"
+          if [ -n "$APP_PATH" ]; then
+            mkdir -p "ios/build/Products/Debug-iphonesimulator/ul-shopify.app"
+            cp -R "$APP_PATH"/* "ios/build/Products/Debug-iphonesimulator/ul-shopify.app"
+          fi
+        id: rename-app
+
+      - name: Zip the .app directory
+        run: |
+          cd ios/build/Products/Debug-iphonesimulator
+          zip -r ul-shopify.app.zip ul-shopify.app
+        id: zip-app
+
+      - name: Upload .app Artifact
+        uses: actions/upload-artifact@v3
+        with:
+          name: ul-shopify-app
+          path: ios/build/Products/Debug-iphonesimulator/ul-shopify.app.zip
+
+  create-release:
+    needs: [build-android, build-ios]
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Download APK Artifact
+        uses: actions/download-artifact@v3
+        with:
+          name: ul-shopify-apk
+          path: android/app/build/outputs/apk/release
+
+      - name: Download iOS App Artifact
+        uses: actions/download-artifact@v3
+        with:
+          name: ul-shopify-app
+          path: ios/build/Products/Debug-iphonesimulator
+
+      - name: Create Release
+        id: create_release
+        uses: actions/create-release@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.ACCESS_TOKEN }}
+        with:
+          tag_name: ul-shopify-build-${{ github.run_number }}
+          release_name: UL Shopify Build for Android and iOS - ${{ github.run_number }}
+          draft: false
+          prerelease: false
+
+      - name: Upload APK to Release
+        uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.ACCESS_TOKEN }}
+        with:
+          upload_url: ${{ steps.create_release.outputs.upload_url }}
+          asset_path: android/app/build/outputs/apk/release/ul-shopify.apk
+          asset_name: ul-shopify.apk
+          asset_content_type: application/vnd.android.package-archive
+
+      - name: Upload iOS App to Release
+        uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.ACCESS_TOKEN }}
+        with:
+          upload_url: ${{ steps.create_release.outputs.upload_url }}
+          asset_path: ios/build/Products/Debug-iphonesimulator/ul-shopify.app.zip
+          asset_name: ul-shopify.app.zip
+          asset_content_type: application/zip
