@@ -15,7 +15,7 @@ const OrderDetailCard = ({ order }) => {
 
     return (
         <View className="mb-4 flex-row rounded-xl bg-gray-100 p-4  justify-center mt-5">
-            <View className="">
+            <View>
                 <Image
                     source={{ uri: order.image_url }}
                     className="h-20 w-20 rounded-xl mr-4"

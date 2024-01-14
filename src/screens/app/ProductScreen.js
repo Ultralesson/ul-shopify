@@ -55,6 +55,9 @@ export const ProductScreen = () => {
                 }`}
             >
                 <TouchableOpacity
+                    testID="btn-back"
+                    accessibilityLabel="btn-back"
+                    nativeID="btn-back"
                     onPress={() => {
                         dispatch(showTabBar());
                         navigation.navigate(HOME_SCREEN);
@@ -73,6 +76,9 @@ export const ProductScreen = () => {
                 }}
             >
                 <TouchableOpacity
+                    testID="btn-search"
+                    accessibilityLabel="btn-search"
+                    nativeID="btn-search"
                     onPress={() => {
                         dispatch(hideTabBar());
                         navigation.navigate(EXPLORE_SCREEN, {
@@ -92,6 +98,9 @@ export const ProductScreen = () => {
                 }`}
             >
                 <TouchableOpacity
+                    testID="btn-cart"
+                    accessibilityLabel="btn-cart"
+                    nativeID="btn-cart"
                     onPress={() => {
                         dispatch(hideTabBar());
                         navigation.navigate(LOADING_SCREEN, {
@@ -106,11 +115,21 @@ export const ProductScreen = () => {
                 className={`absolute right-5 rounded-full mt-4 p-1 z-10 ${Platform.OS === "ios" ? "top-14" : "top-6"}`}
                 style={{ backgroundColor: TERNARY_COLOR }}
             >
-                <Text className="font-bold text-xs text-white">{basketItems.length}</Text>
+                <Text
+                    testID="txt-cart-count"
+                    accessibilityLabel="txt-cart-count"
+                    nativeID="txt-cart-count"
+                    className="font-bold text-xs text-white"
+                >
+                    {basketItems.length}
+                </Text>
             </View>
             <ScrollView className="mb-5">
                 <View className="relative">
                     <Image
+                        testID="img-product"
+                        accessibilityLabel="img-product"
+                        nativeID="img-product"
                         className="w-full h-96 bg-gray-300"
                         source={{
                             uri: product.image_url,
@@ -119,38 +138,119 @@ export const ProductScreen = () => {
 
                     <View className="bg-white">
                         <View className="px-4 pt-4">
-                            <Text className="text-2xl font-bold">{product.name}</Text>
+                            <Text
+                                testID="txt-product-name"
+                                accessibilityLabel="txt-product-name"
+                                nativeID="txt-product-name"
+                                className="text-2xl font-bold"
+                            >
+                                {product.name}
+                            </Text>
                             <View className="flex-row items-center justify-between">
                                 <View className="flex-row items-center space-x-1 mt-2">
-                                    <StarIcon size={22} opacity={0.5} color={TERNARY_COLOR} fill={TERNARY_COLOR} />
-                                    <Text className="text-xs text-gray-400 font-bold">
+                                    <StarIcon
+                                        testID="icon-rating"
+                                        accessibilityLabel="icon-rating"
+                                        nativeID="icon-rating"
+                                        size={22}
+                                        opacity={0.5}
+                                        color={TERNARY_COLOR}
+                                        fill={TERNARY_COLOR}
+                                    />
+                                    <Text
+                                        testID="txt-rating-category"
+                                        accessibilityLabel="txt-rating-category"
+                                        nativeID="txt-rating-category"
+                                        className="text-xs text-gray-400 font-bold"
+                                    >
                                         <Text className="mx-1">{product.rating}</Text> . {product.category}
                                     </Text>
                                 </View>
                                 <View className="flex-row items-end space-x-1">
-                                    <Text className="mb-1">₹</Text>
-                                    <Text className="text-xl font-bold">{product.price}</Text>
+                                    <Text
+                                        testID="txt-rupee-symbol"
+                                        accessibilityLabel="txt-rupee-symbol"
+                                        nativeID="txt-rupee-symbol"
+                                        className="mb-1"
+                                    >
+                                        ₹
+                                    </Text>
+                                    <Text
+                                        testID="txt-product-price"
+                                        accessibilityLabel="txt-product-price"
+                                        nativeID="txt-product-price"
+                                        className="text-xl font-bold"
+                                    >
+                                        {product.price}
+                                    </Text>
                                 </View>
                             </View>
-                            <Text className="text-gray-500 mt-2 pb-4 leading-5">{product.description}</Text>
+                            <Text
+                                testID="txt-product-description"
+                                accessibilityLabel="txt-product-description"
+                                nativeID="txt-product-description"
+                                className="text-gray-500 mt-2 pb-4 leading-5"
+                            >
+                                {product.description}
+                            </Text>
                         </View>
                     </View>
 
-                    <Label type={"brand"} text={product.brand} />
-                    <Label type={"seller"} text={product.seller.seller_name} />
+                    <Label
+                        testID="label-product-brand"
+                        accessibilityLabel="label-product-brand"
+                        nativeID="label-product-brand"
+                        type={"brand"}
+                        text={product.brand}
+                    />
+                    <Label
+                        testID="txt-product-seller-name"
+                        accessibilityLabel="txt-product-seller-name"
+                        nativeID="txt-product-seller-name"
+                        type={"seller"}
+                        text={product.seller.seller_name}
+                    />
 
                     <TouchableOpacity
+                        testID="btn-display-features"
+                        accessibilityLabel="btn-display-features"
+                        nativeID="btn-display-features"
                         className="bg-white flex-row items-center space-x-2 p-4 "
                         onPress={() => {
                             setShowFeatures(!showFeatures);
                         }}
                     >
-                        <InformationCircleIcon size={25} color={TERNARY_COLOR} />
-                        <Text className="pl-2 flex-1 text-md font-bold">Features</Text>
+                        <InformationCircleIcon
+                            testID="icon-information"
+                            accessibilityLabel="icon-information"
+                            nativeID="icon-information"
+                            size={25}
+                            color={TERNARY_COLOR}
+                        />
+                        <Text
+                            testID="txt-features"
+                            accessibilityLabel="txt-features"
+                            nativeID="txt-features"
+                            className="pl-2 flex-1 text-md font-bold"
+                        >
+                            Features
+                        </Text>
                         {showFeatures === false ? (
-                            <ChevronDownIcon size={25} color={TERNARY_COLOR} />
+                            <ChevronDownIcon
+                                testID="icon-down"
+                                accessibilityLabel="icon-down"
+                                nativeID="icon-down"
+                                size={25}
+                                color={TERNARY_COLOR}
+                            />
                         ) : (
-                            <ChevronUpIcon size={25} color={TERNARY_COLOR} />
+                            <ChevronUpIcon
+                                testID="icon-up"
+                                accessibilityLabel="icon-up"
+                                nativeID="icon-up"
+                                size={25}
+                                color={TERNARY_COLOR}
+                            />
                         )}
                     </TouchableOpacity>
                     {showFeatures && (
@@ -158,8 +258,21 @@ export const ProductScreen = () => {
                             {product.features.map((feature) => {
                                 return (
                                     <View key={feature.id} className="flex-row items-center pt-4 space-x-2">
-                                        <PlusIcon size={15} color={QUATERNARY_COLOR} />
-                                        <Text className="italic text-gray-500">{feature.description}</Text>
+                                        <PlusIcon
+                                            testID="icon-plus"
+                                            accessibilityLabel="icon-plus"
+                                            nativeID="icon-plus"
+                                            size={15}
+                                            color={QUATERNARY_COLOR}
+                                        />
+                                        <Text
+                                            testID="txt-feature-description"
+                                            accessibilityLabel="txt-feature-description"
+                                            nativeID="txt-feature-description"
+                                            className="italic text-gray-500"
+                                        >
+                                            {feature.description}
+                                        </Text>
                                     </View>
                                 );
                             })}
@@ -170,6 +283,9 @@ export const ProductScreen = () => {
 
             <View className="mb-5">
                 <TouchableOpacity
+                    testID="btn-cart"
+                    accessibilityLabel="btn-cart"
+                    nativeID="btn-cart"
                     className="mx-5 p-3 rounded-lg flex-row"
                     style={{ backgroundColor: SECONDARY_COLOR }}
                     onPress={() => {
@@ -196,12 +312,33 @@ export const ProductScreen = () => {
                     }}
                 >
                     {!isItemAddedToCart ? (
-                        <Text className="flex-1 text-white  font-bold text-lg text-center">Add To Cart</Text>
+                        <Text
+                            testID="txt-add-to-cart"
+                            accessibilityLabel="txt-add-to-cart"
+                            nativeID="txt-add-to-cart"
+                            className="flex-1 text-white  font-bold text-lg text-center"
+                        >
+                            Add To Cart
+                        </Text>
                     ) : (
-                        <Text className="flex-1 text-white  font-bold text-lg text-center">Go To Cart</Text>
+                        <Text
+                            testID="txt-go-to-cart"
+                            accessibilityLabel="txt-go-to-cart"
+                            nativeID="txt-go-to-cart"
+                            className="flex-1 text-white  font-bold text-lg text-center"
+                        >
+                            Go To Cart
+                        </Text>
                     )}
 
-                    <PlusCircleIcon size={30} color="#ffffff" opacity={0.9} />
+                    <PlusCircleIcon
+                        testID="icon-plus"
+                        accessibilityLabel="icon-plus"
+                        nativeID="icon-plus"
+                        size={30}
+                        color="#ffffff"
+                        opacity={0.9}
+                    />
                 </TouchableOpacity>
             </View>
         </SafeAreaView>

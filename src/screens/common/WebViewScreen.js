@@ -1,5 +1,5 @@
 import { useNavigation } from "@react-navigation/native";
-import React, { useDebugValue, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { SafeAreaView } from "react-native-safe-area-context";
 import WebView from "react-native-webview";
 import { useDispatch } from "react-redux";

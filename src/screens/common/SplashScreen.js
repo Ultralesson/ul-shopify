@@ -31,6 +31,9 @@ export const SplashScreen = () => {
     return (
         <View className="flex-1 items-center justify-center">
             <Animatable.Image
+                testID="icon-ul"
+                accessibilityLabel="icon-ul"
+                nativeID="icon-ul"
                 animation={"zoomIn"}
                 iterationCount={10}
                 easing={"ease"}
@@ -38,7 +41,12 @@ export const SplashScreen = () => {
                 source={require("../../../assets/icons/ultralesson-logo.png")}
             />
             <View className="mt-4 flex-row items-center">
-                <Text className="font-bold text-sm">
+                <Text
+                    className="font-bold text-sm"
+                    testID="txt-launching-ul-shopify"
+                    accessibilityLabel="txt-launching-ul-shopify"
+                    nativeID="txt-launching-ul-shopify"
+                >
                     Launching your{" "}
                     <Text className="text-lg" style={{ color: TERNARY_COLOR }}>
                         UL-Shopify...

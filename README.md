@@ -157,6 +157,7 @@ To maintain consistency and readability, we follow a specific naming convention 
 
 -   `txt`: Prefix for text elements.
 -   `btn`: Prefix for button elements.
+-   `ele`: Prefix for group of elements.
 -   `img`: Prefix for image elements.
 -   `chk`: Prefix for checkbox elements.
 
