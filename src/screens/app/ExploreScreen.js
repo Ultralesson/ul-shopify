@@ -10,17 +10,14 @@ import { hideTabBar, showTabBar } from "../../store/slices/appUIStateSlice";
 import newArrivals from "../../../assets/data/new-arrivals.json";
 import { changeToastModalState } from "../../store/slices/modalsSlice";
 
-const EXPLORE = {
-    BACK_BUTTON: "btn-explore-back",
-    SEARCH_BUTTON: "btn-explore-search",
-    INPUT_FIELD: "tf-explore",
-};
-
 const ProductItem = ({ product }) => {
     const navigation = useNavigation();
     const dispatch = useDispatch();
     return (
         <TouchableOpacity
+            testID="ele-auto-suggestion"
+            accessibilityLabel="ele-auto-suggestion"
+            nativeID="ele-auto-suggestion"
             className="p-4 flex-row items-center bg-gray-100 rounded-xl mx-3 mb-4  border-b-2 border-gray-300"
             onPress={() => {
                 dispatch(hideTabBar());
@@ -31,12 +28,28 @@ const ProductItem = ({ product }) => {
             }}
         >
             <Image
+                testID={`img-product-${product.name.toLowerCase().split(" ").join("-")}`}
+                accessibilityLabel={`img-product-${product.name.toLowerCase().split(" ").join("-")}`}
+                nativeID={`img-product-${product.name.toLowerCase().split(" ").join("-")}`}
                 source={{ uri: product.image_url }}
                 style={{ width: 50, height: 50, borderRadius: 25, marginRight: 10 }}
             />
             <View className="flex-1">
-                <Text className="text-sm font-bold">{product.name}</Text>
-                <Text className="text-gray-600 leading-4 text-xs" numberOfLines={1}>
+                <Text
+                    testID="txt-product-name"
+                    accessibilityLabel="txt-product-name"
+                    nativeID="txt-product-name"
+                    className="text-sm font-bold"
+                >
+                    {product.name}
+                </Text>
+                <Text
+                    testID="txt-product-description"
+                    accessibilityLabel="txt-product-description"
+                    nativeID="txt-product-description"
+                    className="text-gray-600 leading-4 text-xs"
+                    numberOfLines={1}
+                >
                     {product.description}
                 </Text>
             </View>
@@ -77,6 +90,9 @@ const ExploreScreen = () => {
             <View>
                 <View className="flex-row justify-between items-center ml-3 mr-3 mt-5 mb-3 p-2 rounded-xl border-[0.30px] border-gray-400">
                     <TouchableOpacity
+                        testID="btn-back"
+                        accessibilityLabel="btn-back"
+                        nativeID="btn-back"
                         className="mr-2"
                         onPress={() => {
                             if (params?.navigateBackTo) {
@@ -93,12 +109,18 @@ const ExploreScreen = () => {
                         <ChevronLeftIcon size={24} color="black" />
                     </TouchableOpacity>
                     <TextInput
+                        testID="inp-search"
+                        accessibilityLabel="inp-search"
+                        nativeID="inp-search"
                         className="flex-1"
                         placeholder="Explore"
                         value={searchTerm}
                         onChangeText={setSearchTerm}
                     />
                     <TouchableOpacity
+                        testID="btn-search"
+                        accessibilityLabel="btn-search"
+                        nativeID="btn-search"
                         onPress={() => {
                             if (filteredProducts.length !== 0) {
                                 navigation.navigate(LOADING_SCREEN, {
@@ -117,18 +139,34 @@ const ExploreScreen = () => {
                             }
                         }}
                     >
-                        <MagnifyingGlassIcon size={24} color="black" />
+                        <MagnifyingGlassIcon
+                            testID="icon-search"
+                            accessibilityLabel="icon-search"
+                            nativeID="icon-search"
+                            size={24}
+                            color="black"
+                        />
                     </TouchableOpacity>
                 </View>
 
                 {searchTerm && filteredProducts.length === 0 ? (
                     <View className="">
                         <Image
+                            testID="img-not-found"
+                            accessibilityLabel="img-not-found"
+                            nativeID="img-not-found"
                             className="h-56 w-full"
                             source={require("../../../assets/images/not-found.jpg")} // Update with the path to your image
                             resizeMode="contain"
                         />
-                        <Text className="text-center text-lg">No products found.</Text>
+                        <Text
+                            testID="txt-no-products-found"
+                            accessibilityLabel="txt-no-products-found"
+                            nativeID="txt-no-products-found"
+                            className="text-center text-lg"
+                        >
+                            No products found.
+                        </Text>
                     </View>
                 ) : (
                     <>
@@ -139,10 +177,16 @@ const ExploreScreen = () => {
                         />
                         {filteredProducts.length > 3 && !showMore && (
                             <TouchableOpacity
+                                testID="btn-more"
+                                accessibilityLabel="btn-more"
+                                nativeID="btn-more"
                                 className="items-center justify-center p-4"
                                 onPress={() => setShowMore(true)}
                             >
                                 <Text
+                                    testID="txt-more"
+                                    accessibilityLabel="txt-more"
+                                    nativeID="txt-more"
                                     className="text-center text-md text-white font-bold px-10 py-3 rounded-xl"
                                     style={{ backgroundColor: SECONDARY_COLOR }}
                                 >

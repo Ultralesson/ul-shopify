@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Text, View, ScrollView, TouchableOpacity, Keyboard } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
-import { useNavigation, useRoute } from "@react-navigation/native";
+import { useNavigation } from "@react-navigation/native";
 import * as Yup from "yup";
 
 import { EnvelopeIcon, LockClosedIcon, ArrowRightOnRectangleIcon } from "react-native-heroicons/outline";
@@ -159,17 +159,39 @@ const LoginScreen = () => {
                         </View>
 
                         <View className="flex-row items-end flex-1">
-                            <Text className="font-bold text-4xl">Login</Text>
+                            <Text
+                                testID="txt-login-heading"
+                                accessibilityLabel="txt-login-heading"
+                                nativeID="txt-login-heading"
+                                className="font-bold text-4xl"
+                            >
+                                Login
+                            </Text>
                             <View className="flex-row space-x-1 mb-1">
-                                <Text className="italic ml-2" style={{ color: QUATERNARY_COLOR }}>
+                                <Text
+                                    testID="txt-ro-subheading"
+                                    accessibilityLabel="txt-ro-subheading"
+                                    nativeID="txt-ro-subheading"
+                                    className="italic ml-2"
+                                    style={{ color: QUATERNARY_COLOR }}
+                                >
                                     to
                                 </Text>
                                 <TouchableOpacity
+                                    testID="btn-ulshopify"
+                                    accessibilityLabel="btn-ulshopify"
+                                    nativeID="btn-ulshopify"
                                     onPress={() => {
                                         navigation.navigate(HOME_TAB);
                                     }}
                                 >
-                                    <Text className="font-bold" style={{ color: QUATERNARY_COLOR }}>
+                                    <Text
+                                        testID="txt-ulshopify"
+                                        accessibilityLabel="txt-ulshopify"
+                                        nativeID="txt-ulshopify"
+                                        className="font-bold"
+                                        style={{ color: QUATERNARY_COLOR }}
+                                    >
                                         Ul-Shopify
                                     </Text>
                                 </TouchableOpacity>
@@ -186,6 +208,8 @@ const LoginScreen = () => {
                                 value={inputs.email}
                                 placeholder="Enter your email"
                                 Icon={EnvelopeIcon}
+                                iconName={"envelop"}
+                                inputName={"email"}
                                 iconSize="25"
                                 iconColor="black"
                                 error={errors.email}
@@ -203,6 +227,8 @@ const LoginScreen = () => {
                                 placeholder="Enter your password"
                                 password={true}
                                 Icon={LockClosedIcon}
+                                iconName={"lock-closed"}
+                                inputName={"password"}
                                 iconSize="25"
                                 iconColor="black"
                                 error={errors.password}
@@ -216,11 +242,20 @@ const LoginScreen = () => {
                             />
                             <View className="flex-row justify-end -mt-5">
                                 <TouchableOpacity
+                                    testID="btn-forgot-password"
+                                    accessibilityLabel="btn-forgot-password"
+                                    nativeID="btn-forgot-password"
                                     onPress={() => {
                                         navigation.navigate(FORGOT_PASSWORD_SCREEN);
                                     }}
                                 >
-                                    <Text className="font-bold" style={{ color: QUATERNARY_COLOR }}>
+                                    <Text
+                                        testID="txt-forgot-password"
+                                        accessibilityLabel="txt-forgot-password"
+                                        nativeID="txt-forgot-password"
+                                        className="font-bold"
+                                        style={{ color: QUATERNARY_COLOR }}
+                                    >
                                         Forgot Password?
                                     </Text>
                                 </TouchableOpacity>

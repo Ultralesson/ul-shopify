@@ -24,7 +24,7 @@ const LoadingScreen = ({ route }) => {
     }, [navigateTo]);
 
     return (
-        <SafeAreaView className="flex flex-1 items-center justify-center">
+        <SafeAreaView className="flex flex-1 items-center justify-center bg-white">
             <Progress.Circle
                 testID="img-progress"
                 accessibilityLabel="img-progress"

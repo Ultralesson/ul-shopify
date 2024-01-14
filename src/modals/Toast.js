@@ -40,20 +40,46 @@ const Toast = () => {
                     <View className="bg-white pt-5 pb-4 pl-5 pr-3 w-full shadow-md shadow-black rounded-xl flex-row items-center border-[0.1px] border-gray-500">
                         <View className="border h-10 mr-2" style={{ borderColor: "red" }}></View>
                         <InformationCircleIcon
+                            testID="icon-information"
+                            accessibilityLabel="icon-information"
+                            nativeID="icon-information"
                             size={ICON_SIZE_MEDIUM}
                             color={toastTemplate[alertModalState.type]?.color}
                         />
                         <View className="flex-row flex-1 justify-between ml-2 items-center">
                             <View>
-                                <Text className="font-bold">{toastTemplate[alertModalState.type]?.heading}</Text>
-                                <Text className="text-gray-400">{alertModalState.text}</Text>
+                                <Text
+                                    testID="txt-toast-heading"
+                                    accessibilityLabel="txt-toast-heading"
+                                    nativeID="txt-toast-heading"
+                                    className="font-bold"
+                                >
+                                    {toastTemplate[alertModalState.type]?.heading}
+                                </Text>
+                                <Text
+                                    testID="txt-toast-message"
+                                    accessibilityLabel="txt-toast-message"
+                                    nativeID="txt-toast-message"
+                                    className="text-gray-400"
+                                >
+                                    {alertModalState.text}
+                                </Text>
                             </View>
                             <TouchableOpacity
+                                testID="btn-cross"
+                                accessibilityLabel="btn-cross"
+                                nativeID="btn-cross"
                                 onPress={() => {
                                     dispatch(changeToastModalState({ status: false, text: null }));
                                 }}
                             >
-                                <XMarkIcon color={"gray"} size={15} />
+                                <XMarkIcon
+                                    testID="icon-cross"
+                                    accessibilityLabel="icon-cross"
+                                    nativeID="icon-cross"
+                                    color={"gray"}
+                                    size={15}
+                                />
                             </TouchableOpacity>
                         </View>
                     </View>

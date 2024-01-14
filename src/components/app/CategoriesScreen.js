@@ -12,6 +12,9 @@ const CategoryCard = ({ imageUrl, title, products }) => {
     const filteredProducts = products.filter((product) => product.category === title.toLowerCase());
     return (
         <TouchableOpacity
+            testID="ele-category"
+            accessibilityLabel="ele-category"
+            nativeID="ele-category"
             onPress={() => {
                 dispatch(hideTabBar());
                 navigation.navigate(LOADING_SCREEN, {
@@ -21,9 +24,22 @@ const CategoryCard = ({ imageUrl, title, products }) => {
             }}
         >
             <View className="ml-1 mr-1">
-                <Image source={imageUrl} className="h-24 w-28 rounded object-cover" />
+                <Image
+                    testID={`img-category-${title}`}
+                    accessibilityLabel={`img-category-${title}`}
+                    nativeID={`img-category-${title}`}
+                    source={imageUrl}
+                    className="h-24 w-28 rounded object-cover"
+                />
             </View>
-            <Text className="mt-2 bottom-1 left-1 font-medium">{title}</Text>
+            <Text
+                testID="txt-title"
+                accessibilityLabel="txt-title"
+                nativeID="txt-title"
+                className="mt-2 bottom-1 left-1 font-medium"
+            >
+                {title}
+            </Text>
         </TouchableOpacity>
     );
 };

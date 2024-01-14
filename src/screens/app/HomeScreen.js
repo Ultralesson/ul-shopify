@@ -45,6 +45,9 @@ const HomeScreen = () => {
             )}
             <View className="flex-row pb-3 items-center mx-4 space-x-2">
                 <TouchableOpacity
+                    testID="btn-shopping-bag"
+                    accessibilityLabel="btn-shopping-bag"
+                    nativeID="btn-shopping-bag"
                     onPress={() => {
                         dispatch(hideTabBar());
                         navigation.navigate(LOADING_SCREEN, {
@@ -53,6 +56,9 @@ const HomeScreen = () => {
                     }}
                 >
                     <Image
+                        testID="img-shopping-bag"
+                        accessibilityLabel="img-shopping-bag"
+                        nativeID="img-shopping-bag"
                         source={require("../../../assets/icons/shopping-bag.png")}
                         className="h-7 w-7  p-4 rounded"
                     />
@@ -90,6 +96,7 @@ const HomeScreen = () => {
                     <Image
                         testID="img-ultralesson-logo"
                         accessibilityLabel="img-ultralesson-logo"
+                        nativeID="img-ultralesson-logo"
                         source={require("../../../assets/icons/ultralesson-logo.png")}
                         className="h-10 w-14"
                     />
@@ -97,6 +104,9 @@ const HomeScreen = () => {
             </View>
             <View className="flex-row items-center space-x-2 pb-2 mx-2">
                 <TouchableOpacity
+                    testID="btn-search"
+                    accessibilityLabel="btn-search"
+                    nativeID="btn-search"
                     className="flex-row flex-1 space-x-2 bg-gray-50 rounded-md items-center"
                     onPress={() => {
                         dispatch(hideTabBar());

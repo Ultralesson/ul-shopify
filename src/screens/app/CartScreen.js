@@ -33,15 +33,34 @@ export const CartScreen = () => {
         <SafeAreaView className="bg-white flex-1">
             {basketItems.length === 0 && (
                 <View className="flex justify-center">
-                    <Image source={require("../../../assets/images/empty-cart.jpg")} className="w-full h-60" />
-                    <Text className="mx-auto text-gray-500 text-lg italic">Your Cart is Empty!!</Text>
+                    <Image
+                        testID="img-empty-cart"
+                        accessibilityLabel="img-empty-cart"
+                        nativeID="img-empty-cart"
+                        source={require("../../../assets/images/empty-cart.jpg")}
+                        className="w-full h-60"
+                    />
+                    <Text
+                        testID="txt-empty-cart-message"
+                        accessibilityLabel="txt-empty-cart-message"
+                        nativeID="txt-empty-cart-message"
+                        className="mx-auto text-gray-500 text-lg italic"
+                    >
+                        Your Cart is Empty!!
+                    </Text>
                     <TouchableOpacity
+                        testID="btn-back"
+                        accessibilityLabel="btn-back"
+                        nativeID="btn-back"
                         onPress={() => {
                             dispatch(showTabBar());
                             navigation.navigate(HOME_SCREEN);
                         }}
                     >
                         <Text
+                            testID="txt-continue-shopping"
+                            accessibilityLabel="txt-continue-shopping"
+                            nativeID="txt-continue-shopping"
                             className="mx-auto px-6 py-3 mt-3 text-white font-bold rounded-lg"
                             style={{ backgroundColor: SECONDARY_COLOR }}
                         >
@@ -54,6 +73,9 @@ export const CartScreen = () => {
             {basketItems.length > 0 && (
                 <>
                     <TouchableOpacity
+                        testID="btn-back"
+                        accessibilityLabel="btn-back"
+                        nativeID="btn-back"
                         className="ml-5 mt-3"
                         onPress={() => {
                             dispatch(showTabBar());
@@ -63,7 +85,14 @@ export const CartScreen = () => {
                         <ArrowLeftIcon size={25} color="#000000" />
                     </TouchableOpacity>
                     <View className="text-lg">
-                        <Text className="text-lg font-bold mx-auto">My Cart</Text>
+                        <Text
+                            testID="txt-my-cart"
+                            accessibilityLabel="txt-my-cart"
+                            nativeID="txt-my-cart"
+                            className="text-lg font-bold mx-auto"
+                        >
+                            My Cart
+                        </Text>
                     </View>
                     <View className="flex-1 justify-between">
                         <ScrollView>
@@ -76,6 +105,18 @@ export const CartScreen = () => {
                                         <View className="flex-row space-x-2">
                                             <View>
                                                 <Image
+                                                    testID={`img-cart-product-${product.name
+                                                        .toLowerCase()
+                                                        .split(" ")
+                                                        .join("-")}`}
+                                                    accessibilityLabel={`img-cart-product-${product.name
+                                                        .toLowerCase()
+                                                        .split(" ")
+                                                        .join("-")}`}
+                                                    nativeID={`img-cart-product-${product.name
+                                                        .toLowerCase()
+                                                        .split(" ")
+                                                        .join("-")}`}
                                                     source={{
                                                         uri: product.image_url,
                                                     }}
@@ -84,14 +125,30 @@ export const CartScreen = () => {
                                             </View>
                                             <View className="flex justify-between">
                                                 <View>
-                                                    <Text className="font-bold">{product.name}</Text>
+                                                    <Text
+                                                        testID="txt-product-name"
+                                                        accessibilityLabel="txt-product-name"
+                                                        nativeID="txt-product-name"
+                                                        className="font-bold"
+                                                    >
+                                                        {product.name}
+                                                    </Text>
 
-                                                    <Text className="font-bold" style={{ color: TERNARY_COLOR }}>
+                                                    <Text
+                                                        testID="txt-product-price"
+                                                        accessibilityLabel="txt-product-price"
+                                                        nativeID="txt-product-price"
+                                                        className="font-bold"
+                                                        style={{ color: TERNARY_COLOR }}
+                                                    >
                                                         ₹ {product.price}
                                                     </Text>
                                                 </View>
                                                 <View className="flex-row space-x-2 items-center">
                                                     <TouchableOpacity
+                                                        testID="btn-decrement"
+                                                        accessibilityLabel="btn-decrement"
+                                                        nativeID="btn-decrement"
                                                         className="bg-white px-4 rounded-lg"
                                                         onPress={() => {
                                                             dispatch(
@@ -101,10 +158,27 @@ export const CartScreen = () => {
                                                             );
                                                         }}
                                                     >
-                                                        <Text className="text-lg">-</Text>
+                                                        <Text
+                                                            testID="txt-minus"
+                                                            accessibilityLabel="txt-minus"
+                                                            nativeID="txt-minus"
+                                                            className="text-lg"
+                                                        >
+                                                            -
+                                                        </Text>
                                                     </TouchableOpacity>
-                                                    <Text className="font-bold">{product.quantity}</Text>
+                                                    <Text
+                                                        testID="txt-product-quantity"
+                                                        accessibilityLabel="txt-product-quantity"
+                                                        nativeID="txt-product-quantity"
+                                                        className="font-bold"
+                                                    >
+                                                        {product.quantity}
+                                                    </Text>
                                                     <TouchableOpacity
+                                                        testID="btn-increment"
+                                                        accessibilityLabel="btn-increment"
+                                                        nativeID="btn-increment"
                                                         className="bg-white px-4 rounded-lg"
                                                         onPress={() => {
                                                             dispatch(
@@ -114,13 +188,23 @@ export const CartScreen = () => {
                                                             );
                                                         }}
                                                     >
-                                                        <Text className="text-lg">+</Text>
+                                                        <Text
+                                                            testID="txt-plus"
+                                                            accessibilityLabel="txt-plus"
+                                                            nativeID="txt-plus"
+                                                            className="text-lg"
+                                                        >
+                                                            +
+                                                        </Text>
                                                     </TouchableOpacity>
                                                 </View>
                                             </View>
                                         </View>
                                         <View>
                                             <TouchableOpacity
+                                                testID="btn-delete"
+                                                accessibilityLabel="btn-delete"
+                                                nativeID="btn-delete"
                                                 onPress={() => {
                                                     dispatch(
                                                         deleteItem({
@@ -129,7 +213,13 @@ export const CartScreen = () => {
                                                     );
                                                 }}
                                             >
-                                                <TrashIcon size={25} color={TERNARY_COLOR} />
+                                                <TrashIcon
+                                                    testID="icon-delete"
+                                                    accessibilityLabel="icon-delete"
+                                                    nativeID="icon-delete"
+                                                    size={25}
+                                                    color={TERNARY_COLOR}
+                                                />
                                             </TouchableOpacity>
                                         </View>
                                     </View>
@@ -143,14 +233,31 @@ export const CartScreen = () => {
                                     borderColor: TERNARY_COLOR,
                                 }}
                             >
-                                <Text className="text-xs text-gray-400 mb-1">Total Price</Text>
-                                <Text className="font-bold text-md">₹ {basketTotal}</Text>
+                                <Text
+                                    testID="txt-total-price"
+                                    accessibilityLabel="txt-total-price"
+                                    nativeID="txt-total-price"
+                                    className="text-xs text-gray-400 mb-1"
+                                >
+                                    Total Price
+                                </Text>
+                                <Text
+                                    testID="txt-basket-total"
+                                    accessibilityLabel="txt-basket-total"
+                                    nativeID="txt-basket-total"
+                                    className="font-bold text-md"
+                                >
+                                    ₹ {basketTotal}
+                                </Text>
                             </View>
                             <View
                                 className="px-10 rounded-xl justify-center"
                                 style={{ backgroundColor: SECONDARY_COLOR }}
                             >
                                 <TouchableOpacity
+                                    testID="btn-place-order"
+                                    accessibilityLabel="btn-place-order"
+                                    nativeID="btn-place-order"
                                     onPress={() => {
                                         userModel("ADD_ORDER_DETAILS", {
                                             email: isAuthorized.email,
@@ -161,7 +268,14 @@ export const CartScreen = () => {
                                         });
                                     }}
                                 >
-                                    <Text className="text-lg font-bold text-white">Place Order</Text>
+                                    <Text
+                                        testID="txt-place-order"
+                                        accessibilityLabel="txt-place-order"
+                                        nativeID="txt-place-order"
+                                        className="text-lg font-bold text-white"
+                                    >
+                                        Place Order
+                                    </Text>
                                 </TouchableOpacity>
                             </View>
                         </View>

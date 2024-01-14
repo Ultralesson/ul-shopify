@@ -16,14 +16,7 @@ import {
 import CustomInput from "../../components/common/CustomInput";
 
 import { QUATERNARY_COLOR } from "../../../constants/colors";
-import {
-    HOME_TAB,
-    LOADING_SCREEN,
-    LOGIN_SCREEN,
-    OTP_SCREEN,
-    PROFILE_SCREEN,
-    REGISTRATION_SCREEN,
-} from "../../../constants/screens";
+import { HOME_TAB, LOADING_SCREEN, LOGIN_SCREEN, OTP_SCREEN, PROFILE_SCREEN } from "../../../constants/screens";
 import AuthButtonSection from "../../components/app/AuthButtonSection";
 import { useDispatch, useSelector } from "react-redux";
 import { getTempState, login } from "../../store/slices/authSlice";
@@ -160,23 +153,51 @@ const RegistrationScreen = () => {
 
                         <View className="flex-row items-center justify-between flex-1">
                             <View className="flex-row items-end">
-                                <Text className="font-bold text-4xl">Register</Text>
+                                <Text
+                                    testID="txt-register-heading"
+                                    accessibilityLabel="txt-register-heading"
+                                    nativeID="txt-register-heading"
+                                    className="font-bold text-4xl"
+                                >
+                                    Register
+                                </Text>
                                 <View className="flex-row space-x-1 mb-1">
-                                    <Text className="italic ml-2" style={{ color: QUATERNARY_COLOR }}>
+                                    <Text
+                                        testID="txt-to-subheading"
+                                        accessibilityLabel="txt-to-subheading"
+                                        nativeID="txt-to-subheading"
+                                        className="italic ml-2"
+                                        style={{ color: QUATERNARY_COLOR }}
+                                    >
                                         to
                                     </Text>
                                     <TouchableOpacity
+                                        testID="btn-ulshopify"
+                                        accessibilityLabel="btn-ulshopify"
+                                        nativeID="btn-ulshopify"
                                         onPress={() => {
                                             navigation.navigate(HOME_TAB);
                                         }}
                                     >
-                                        <Text className="font-bold" style={{ color: QUATERNARY_COLOR }}>
+                                        <Text
+                                            testID="txt-ulshopify"
+                                            accessibilityLabel="txt-ulshopify"
+                                            nativeID="txt-ulshopify"
+                                            className="font-bold"
+                                            style={{ color: QUATERNARY_COLOR }}
+                                        >
                                             Ul-Shopify
                                         </Text>
                                     </TouchableOpacity>
                                 </View>
                             </View>
-                            <UserPlusIcon size="40" color="black" />
+                            <UserPlusIcon
+                                testID="icon-user-plus"
+                                accessibilityLabel="icon-user-plus"
+                                nativeID="icon-user-plus"
+                                size="40"
+                                color="black"
+                            />
                         </View>
                     </View>
                 </View>
@@ -188,6 +209,8 @@ const RegistrationScreen = () => {
                                 value={inputs.fullName}
                                 placeholder="Enter your full name"
                                 Icon={UserIcon}
+                                iconName={"user"}
+                                inputName={"fullname"}
                                 iconSize="25"
                                 iconColor="black"
                                 error={errors.fullName}
@@ -204,6 +227,8 @@ const RegistrationScreen = () => {
                                 value={inputs.email}
                                 placeholder="Enter your email"
                                 Icon={EnvelopeIcon}
+                                iconName={"envelop"}
+                                inputName={"email"}
                                 iconSize="25"
                                 iconColor="black"
                                 error={errors.email}
@@ -221,6 +246,8 @@ const RegistrationScreen = () => {
                                 placeholder="Enter your password"
                                 password={true}
                                 Icon={LockClosedIcon}
+                                iconName={"lock-closed"}
+                                inputName={"password"}
                                 iconSize="25"
                                 iconColor="black"
                                 error={errors.password}
@@ -238,6 +265,8 @@ const RegistrationScreen = () => {
                                 placeholder="Confirm your password"
                                 password={true}
                                 Icon={ShieldCheckIcon}
+                                iconName={"shield-check"}
+                                inputName={"confirm-password"}
                                 iconSize="25"
                                 iconColor="black"
                                 error={errors.confirmPassword}
@@ -254,6 +283,8 @@ const RegistrationScreen = () => {
                                 value={inputs.mobileNumber}
                                 placeholder="Enter your mobile number"
                                 Icon={PhoneArrowDownLeftIcon}
+                                iconName={"mobile"}
+                                inputName={"mobile-number"}
                                 iconSize="25"
                                 iconColor="black"
                                 error={errors.mobileNumber}

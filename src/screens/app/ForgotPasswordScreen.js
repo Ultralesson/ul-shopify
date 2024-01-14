@@ -135,14 +135,13 @@ const ForgotPasswordScreen = () => {
                         <View className="flex-row items-center">
                             <View className="flex-1 justify-center">
                                 <CustomInput
-                                    test_id={"txt-email"}
-                                    accessibility_label={"txt-email"}
-                                    native_id={"txt-email"}
                                     customStyle={"bg-gray-100"}
                                     label="Email"
                                     value={inputs.email}
                                     placeholder="Enter your email"
                                     Icon={EnvelopeIcon}
+                                    iconName={"envelop"}
+                                    inputName={"email"}
                                     iconSize="25"
                                     iconColor="black"
                                     mode="email"
@@ -156,6 +155,9 @@ const ForgotPasswordScreen = () => {
                                 />
                             </View>
                             <TouchableOpacity
+                                testID="btn-next"
+                                nativeID="btn-next"
+                                accessibilityLabel="btn-next"
                                 className={`ml-3 ${errors.email ? "-mt-4" : ""}`}
                                 onPress={async () => {
                                     setResetButtonState(true);
@@ -168,7 +170,13 @@ const ForgotPasswordScreen = () => {
                                     }
                                 }}
                             >
-                                <ArrowRightIcon size={ICON_SIZE_SMALL} color={ICON_COLOR} />
+                                <ArrowRightIcon
+                                    testID="icon-next"
+                                    nativeID="icon-next"
+                                    accessibilityLabel="icon-next"
+                                    size={ICON_SIZE_SMALL}
+                                    color={ICON_COLOR}
+                                />
                             </TouchableOpacity>
                         </View>
                     )}
@@ -183,6 +191,8 @@ const ForgotPasswordScreen = () => {
                                 value={inputs.newPassword}
                                 placeholder="Enter your new password"
                                 Icon={LockClosedIcon}
+                                iconName={"lock-closed"}
+                                inputName={"new-password"}
                                 iconSize="25"
                                 mode="text"
                                 iconColor="black"
@@ -201,6 +211,8 @@ const ForgotPasswordScreen = () => {
                                 value={inputs.confirmPassword}
                                 placeholder="Confirm password"
                                 Icon={LockClosedIcon}
+                                iconName={"lock-closed"}
+                                inputName={"confirm-password"}
                                 iconSize="25"
                                 mode="text"
                                 iconColor="black"

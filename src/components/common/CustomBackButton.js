@@ -1,12 +1,10 @@
-import { useNavigation } from "@react-navigation/native";
 import React from "react";
 import { TouchableOpacity } from "react-native";
 import { ChevronLeftIcon } from "react-native-heroicons/outline";
 
 const CustomBackButton = ({ onBackPress }) => {
-    const navigation = useNavigation();
     return (
-        <TouchableOpacity onPress={onBackPress}>
+        <TouchableOpacity testID="btn-back" accessibilityLabel="btn-back" nativeID="btn-back" onPress={onBackPress}>
             <ChevronLeftIcon class size={30} color="black" />
         </TouchableOpacity>
     );

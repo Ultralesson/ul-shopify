@@ -1,5 +1,5 @@
 import React from "react";
-import { Text, TouchableOpacity, View } from "react-native";
+import { Text, View } from "react-native";
 import { Modal } from "react-native";
 import { SECONDARY_COLOR } from "../../../constants/colors";
 
@@ -12,12 +12,6 @@ const CustomQuitActionModal = ({ selector, positiveActonText, negativeActionText
     const navigation = useNavigation();
     const modalState = useSelector(selector);
 
-    const QUIT_MODAL = {
-        QUESTION: "txt-quit-modal-question",
-        YES_BUTTON: "btn-quit-modal-yes",
-        NO_BUTTON: "btn-quit-modal-no",
-    };
-
     return (
         <Modal transparent visible={modalState.status}>
             <View
@@ -28,8 +22,9 @@ const CustomQuitActionModal = ({ selector, positiveActonText, negativeActionText
                     <View className="mt-3 mr-5 flex-row justify-end">
                         <View className="flex-row items-center justify-center pb-5">
                             <Text
-                                testID={QUIT_MODAL.QUESTION}
-                                accessibilityLabel={QUIT_MODAL.QUESTION}
+                                testID="txt-quit-modal-question"
+                                accessibilityLabel="txt-quit-modal-question"
+                                nativeID="txt-quit-modal-question"
                                 className="text-center"
                             >
                                 {modalState.question}
@@ -38,8 +33,9 @@ const CustomQuitActionModal = ({ selector, positiveActonText, negativeActionText
                     </View>
                     <View className="flex-row gap-3">
                         <Text
-                            testID={QUIT_MODAL.YES_BUTTON}
-                            accessibilityLabel={QUIT_MODAL.YES_BUTTON}
+                            testID="btn-quit-modal-yes"
+                            accessibilityLabel="btn-quit-modal-yes"
+                            nativeID="btn-quit-modal-yes"
                             onPress={() => {
                                 dispatch(changeQuitActionModal({ question: null, status: false, screen: null }));
                                 navigation.navigate(modalState.screen);
@@ -51,8 +47,9 @@ const CustomQuitActionModal = ({ selector, positiveActonText, negativeActionText
                         </Text>
                         <View className="bg-white shadow-sm shadow-black rounded-lg">
                             <Text
-                                testID={QUIT_MODAL.NO_BUTTON}
-                                accessibilityLabel={QUIT_MODAL.NO_BUTTON}
+                                testID="btn-quit-modal-no"
+                                accessibilityLabel="btn-quit-modal-no"
+                                nativeID="btn-quit-modal-no"
                                 onPress={() => {
                                     dispatch(changeQuitActionModal({ question: null, status: false, screen: null }));
                                 }}

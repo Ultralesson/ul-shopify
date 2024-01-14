@@ -28,28 +28,68 @@ const FeatureGridRowCards = ({ product }) => {
             >
                 <View className="h-40 w-96 rounded-sm overflow-hidden">
                     <Image
-                        testID={`img-product-${title}`}
-                        accessibilityLabel={`img-product-${title}`}
-                        nativeID={`img-product-${title}`}
+                        testID={`img-product-${title.toLowerCase().split(" ").join("-")}`}
+                        accessibilityLabel={`img-product-${title.toLowerCase().split(" ").join("-")}`}
+                        nativeID={`img-product-${title.toLowerCase().split(" ").join("-")}`}
                         source={{ uri: imgUrl }}
                         className="h-full w-full"
                         resizeMode="cover"
                     />
                 </View>
                 <View className="px-2 pb-4">
-                    <Text className="font-bold text-md pt-2">{title}</Text>
-                    <Text numberOfLines={1} className="pb-2 text-xs">
+                    <Text
+                        testID="txt-product-title"
+                        accessibilityLabel="txt-product-title"
+                        nativeID="txt-product-title"
+                        className="font-bold text-md pt-2"
+                    >
+                        {title}
+                    </Text>
+                    <Text
+                        testID="txt-description"
+                        accessibilityLabel="txt-description"
+                        nativeID="txt-description"
+                        numberOfLines={1}
+                        className="pb-2 text-xs"
+                    >
                         {description}
                     </Text>
                     <View className="flex-row space-x-2">
-                        <StarIcon fill={TERNARY_COLOR} color={TERNARY_COLOR} opacity={0.5} size={22} />
-                        <Text className="text-xs pt-1 text-gray-500">
+                        <StarIcon
+                            testID="icon-rating"
+                            accessibilityLabel="icon-rating"
+                            nativeID="icon-rating"
+                            fill={TERNARY_COLOR}
+                            color={TERNARY_COLOR}
+                            opacity={0.5}
+                            size={22}
+                        />
+                        <Text
+                            testID="txt-rating-category"
+                            accessibilityLabel="txt-rating-category"
+                            nativeID="txt-rating-category"
+                            className="text-xs pt-1 text-gray-500"
+                        >
                             {rating} . {category}
                         </Text>
                     </View>
                     <View className="flex-row items-end mt-1">
-                        <Text className="text-xs mr-1 italic">₹</Text>
-                        <Text className="font-bold">{price}</Text>
+                        <Text
+                            testID="txt-rupee-symbol"
+                            accessibilityLabel="txt-rupee-symbol"
+                            nativeID="txt-rupee-symbol"
+                            className="text-xs mr-1 italic"
+                        >
+                            ₹
+                        </Text>
+                        <Text
+                            testID="txt-product-price"
+                            accessibilityLabel="txt-product-price"
+                            nativeID="txt-product-price"
+                            className="font-bold"
+                        >
+                            {price}
+                        </Text>
                     </View>
                 </View>
             </TouchableOpacity>

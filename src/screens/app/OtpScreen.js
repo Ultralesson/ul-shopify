@@ -132,18 +132,44 @@ const OtpScreen = () => {
             </View>
             <View className="flex justify-center items-center">
                 <Image
+                    testID="img-otp"
+                    accessibilityLabel="img-otp"
+                    nativeID="img-otp"
                     source={require("../../../assets/images/otp.jpg")}
                     className={`w-full object-resize ${!keyboardStatus ? "h-1/2" : "h-1/2 mb-2"}`}
                 />
                 <View className="flex-row items-end mr-5">
-                    <Text className="text-2xl font-bold" style={{ color: QUATERNARY_COLOR }}>
+                    <Text
+                        testID="txt-ulshopify"
+                        accessibilityLabel="txt-ulshopify"
+                        nativeID="txt-ulshopify"
+                        className="text-2xl font-bold"
+                        style={{ color: QUATERNARY_COLOR }}
+                    >
                         Ul-Shopify
                     </Text>
-                    <Text className="italic ml-2 font-bold">secure verifier</Text>
+                    <Text
+                        testID="txt-secure-verifier"
+                        accessibilityLabel="txt-secure-verifier"
+                        nativeID="txt-secure-verifier"
+                        className="italic ml-2 font-bold"
+                    >
+                        secure verifier
+                    </Text>
                 </View>
-                <Text className="mt-3 ml-1 mr-1 ">We have sent an OTP code to your verified mobile number</Text>
+                <Text
+                    testID="txt-send-otp-message"
+                    accessibilityLabel="txt-send-otp-message"
+                    nativeID="txt-send-otp-message"
+                    className="mt-3 ml-1 mr-1 "
+                >
+                    We have sent an OTP code to your verified mobile number
+                </Text>
                 <View className="flex-row gap-5 mt-5">
                     <TextInput
+                        testID="inp-opt-1"
+                        accessibilityLabel="inp-opt-1"
+                        nativeID="inp-opt-1"
                         value={otpInputs.otp1}
                         editable={counter === 0 ? false : true}
                         selectTextOnFocus={counter === 0 ? false : true}
@@ -159,6 +185,9 @@ const OtpScreen = () => {
                         }}
                     />
                     <TextInput
+                        testID="inp-opt-2"
+                        accessibilityLabel="inp-opt-2"
+                        nativeID="inp-opt-2"
                         value={otpInputs.otp2}
                         editable={counter === 0 ? false : true}
                         selectTextOnFocus={counter === 0 ? false : true}
@@ -174,6 +203,9 @@ const OtpScreen = () => {
                         }}
                     />
                     <TextInput
+                        testID="inp-opt-3"
+                        accessibilityLabel="inp-opt-3"
+                        nativeID="inp-opt-3"
                         value={otpInputs.otp3}
                         editable={counter === 0 ? false : true}
                         selectTextOnFocus={counter === 0 ? false : true}
@@ -189,6 +221,9 @@ const OtpScreen = () => {
                         }}
                     />
                     <TextInput
+                        testID="inp-opt-4"
+                        accessibilityLabel="inp-opt-4"
+                        nativeID="inp-opt-4"
                         value={otpInputs.otp4}
                         editable={counter === 0 ? false : true}
                         selectTextOnFocus={counter === 0 ? false : true}
@@ -203,8 +238,13 @@ const OtpScreen = () => {
                     />
                 </View>
                 <View className="flex-row gap-2 mt-5">
-                    <Text>Didn't receive OTP?</Text>
+                    <Text testID="txt-otp-question" accessibilityLabel="txt-otp-question" nativeID="txt-otp-question">
+                        Didn't receive OTP?
+                    </Text>
                     <TouchableOpacity
+                        testID="btn-resend-otp"
+                        accessibilityLabel="btn-resend-otp"
+                        nativeID="btn-resend-otp"
                         onPress={() => {
                             if (counter === 0) {
                                 setCounter(OTP_TIMEOUT);
@@ -212,13 +252,21 @@ const OtpScreen = () => {
                         }}
                     >
                         <Text
+                            testID="txt-resend-otp"
+                            accessibilityLabel="txt-resend-otp"
+                            nativeID="txt-resend-otp"
                             className="font-bold underline italic"
                             style={{ color: counter === 0 ? QUATERNARY_COLOR : SECONDARY_COLOR }}
                         >
                             Resend again
                         </Text>
                     </TouchableOpacity>
-                    <Text className={`${counter === 0 ? "opacity-0" : ""}`}>
+                    <Text
+                        testID="txt-counter"
+                        accessibilityLabel="txt-counter"
+                        nativeID="txt-counter"
+                        className={`${counter === 0 ? "opacity-0" : ""}`}
+                    >
                         {parseInt(counter / 60)
                             .toString()
                             .padStart(2, "0")}

@@ -16,6 +16,9 @@ export const FeatureRowCard = ({ product }) => {
 
     return (
         <TouchableOpacity
+            testID="ele-featured-row-card"
+            accessibilityLabel="ele-featured-row-card"
+            nativeID="ele-featured-row-card"
             className="bg-white w-60 mr-3 shadow"
             onPress={() => {
                 dispatch(hideTabBar());
@@ -26,22 +29,65 @@ export const FeatureRowCard = ({ product }) => {
                 source={{
                     uri: imgUrl,
                 }}
+                testID="ele-category"
+                accessibilityLabel="ele-category"
+                nativeID="ele-category"
                 className="h-40 w-full rounded-sm"
             />
             <View className="px-3 pb-4">
-                <Text className="font-bold text-md pt-2">{title}</Text>
-                <Text numberOfLines={1} className="pb-2 text-xs">
+                <Text
+                    testID="txt-product-title"
+                    accessibilityLabel="txt-product-title"
+                    nativeID="txt-product-title"
+                    className="font-bold text-md pt-2"
+                >
+                    {title}
+                </Text>
+                <Text
+                    testID="txt-product-description"
+                    accessibilityLabel="txt-product-description"
+                    nativeID="txt-product-description"
+                    numberOfLines={1}
+                    className="pb-2 text-xs"
+                >
                     {description}
                 </Text>
                 <View className="flex-row space-x-2">
-                    <StarIcon fill={TERNARY_COLOR} color={TERNARY_COLOR} opacity={0.5} size={22} />
-                    <Text className="text-xs pt-1 text-gray-500">
+                    <StarIcon
+                        testID="icon-rating"
+                        accessibilityLabel="icon-rating"
+                        nativeID="icon-rating"
+                        fill={TERNARY_COLOR}
+                        color={TERNARY_COLOR}
+                        opacity={0.5}
+                        size={22}
+                    />
+                    <Text
+                        testID="txt-rating-category"
+                        accessibilityLabel="txt-rating-category"
+                        nativeID="txt-rating-category"
+                        className="text-xs pt-1 text-gray-500"
+                    >
                         {rating} . {category}
                     </Text>
                 </View>
                 <View className="flex-row items-end mt-1">
-                    <Text className="text-xs mr-1 italic">₹</Text>
-                    <Text className="font-bold">{price}</Text>
+                    <Text
+                        testID="txt-rupee-symbol"
+                        accessibilityLabel="txt-rupee-symbol"
+                        nativeID="txt-rupee-symbol"
+                        className="text-xs mr-1 italic"
+                    >
+                        ₹
+                    </Text>
+                    <Text
+                        testID="txt-product-price"
+                        accessibilityLabel="txt-product-price"
+                        nativeID="txt-product-price"
+                        className="font-bold"
+                    >
+                        {price}
+                    </Text>
                 </View>
             </View>
         </TouchableOpacity>
@@ -55,8 +101,18 @@ const FeaturedRow = ({ title, description, productsList }) => {
     return (
         <View>
             <View className="mt-4 flex-row items-center justify-between px-4">
-                <Text className="font-bold text-lg">{title}</Text>
+                <Text
+                    testID="txt-featured-row-title"
+                    accessibilityLabel="txt-featured-row-title"
+                    nativeID="txt-featured-row-title"
+                    className="font-bold text-lg"
+                >
+                    {title}
+                </Text>
                 <TouchableOpacity
+                    testID="btn-next"
+                    accessibilityLabel="btn-next"
+                    nativeID="btn-next"
                     onPress={() => {
                         dispatch(hideTabBar());
                         navigation.navigate(LOADING_SCREEN, {
@@ -65,10 +121,23 @@ const FeaturedRow = ({ title, description, productsList }) => {
                         });
                     }}
                 >
-                    <ArrowRightIcon size={22} color={QUATERNARY_COLOR} />
+                    <ArrowRightIcon
+                        testID="icon-next"
+                        accessibilityLabel="icon-next"
+                        nativeID="icon-next"
+                        size={22}
+                        color={QUATERNARY_COLOR}
+                    />
                 </TouchableOpacity>
             </View>
-            <Text className="text-xs text-gray-500 px-4">{description}</Text>
+            <Text
+                testID="txt-featured-row-description"
+                accessibilityLabel="txt-featured-row-description"
+                nativeID="txt-featured-row-description"
+                className="text-xs text-gray-500 px-4"
+            >
+                {description}
+            </Text>
 
             <ScrollView
                 horizontal
@@ -82,6 +151,9 @@ const FeaturedRow = ({ title, description, productsList }) => {
                     return <FeatureRowCard key={product.product_id} product={product} />;
                 })}
                 <TouchableOpacity
+                    testID="ele-explore-more"
+                    accessibilityLabel="ele-explore-more"
+                    nativeID="ele-explore-more"
                     className="flex-1 justify-center ml-8 mr-4 items-center"
                     onPress={() => {
                         dispatch(hideTabBar());
@@ -91,8 +163,21 @@ const FeaturedRow = ({ title, description, productsList }) => {
                         });
                     }}
                 >
-                    <Text className="text-md text-gray-500 text-bold mb-2 italic">Explore More</Text>
-                    <PlusCircleIcon color={TERNARY_COLOR} size={40} />
+                    <Text
+                        testID="txt-explore-more"
+                        accessibilityLabel="txt-explore-more"
+                        nativeID="txt-explore-more"
+                        className="text-md text-gray-500 text-bold mb-2 italic"
+                    >
+                        Explore More
+                    </Text>
+                    <PlusCircleIcon
+                        testID="icon-plus-circle"
+                        accessibilityLabel="icon-plus-circle"
+                        nativeID="icon-plus-circle"
+                        color={TERNARY_COLOR}
+                        size={40}
+                    />
                 </TouchableOpacity>
             </ScrollView>
         </View>
