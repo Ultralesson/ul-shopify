@@ -74,6 +74,7 @@ const HomeTabNavigator = () => {
                         tabBarIcon: ({ size, color }) => {
                             return (
                                 <HomeIcon
+                                    accessible={true}
                                     testID="icon-home"
                                     accessibilityLabel="icon-home"
                                     nativeID="icon-home"
@@ -100,6 +101,7 @@ const HomeTabNavigator = () => {
                         tabBarIcon: ({ size, color }) => {
                             return (
                                 <ShoppingCartIcon
+                                    accessible={true}
                                     testID="icon-cart"
                                     accessibilityLabel="icon-cart"
                                     nativeID="icon-cart"
@@ -124,6 +126,7 @@ const HomeTabNavigator = () => {
                         tabBarIcon: ({ size, color }) => {
                             return (
                                 <MagnifyingGlassIcon
+                                    accessible={true}
                                     testID="icon-explore"
                                     accessibilityLabel="icon-explore"
                                     nativeID="icon-explore"
@@ -142,6 +145,7 @@ const HomeTabNavigator = () => {
                         tabBarIcon: ({ size, color }) => {
                             return (
                                 <TruckIcon
+                                    accessible={true}
                                     testID="icon-track-order"
                                     accessibilityLabel="icon-track-order"
                                     nativeID="icon-track-order"
@@ -166,6 +170,7 @@ const HomeTabNavigator = () => {
                         tabBarIcon: ({ size, color }) => {
                             return (
                                 <UserCircleIcon
+                                    accessible={true}
                                     testID="icon-profile"
                                     accessibilityLabel="icon-profile"
                                     nativeID="icon-profile"
