@@ -52,5 +52,5 @@ jobs:
       - name: Upload Artifact
         uses: actions/upload-artifact@v3
         with:
-          name: ul-shopify-debug-apk
+          name: ul-shopify-apk
           path: android/app/build/outputs/apk/debug/ul-shopify.apk
