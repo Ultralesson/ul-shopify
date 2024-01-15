@@ -190,6 +190,10 @@ In UI-Shopify, the bundle identifier for iOS and the package name for Android ar
 
 This app is designed to work seamlessly with automation tools. The locators for each element have been meticulously added to facilitate easy identification and interaction within your test scripts.
 
+## Image Credits
+
+UI-Shopify features images from [Unsplash](https://unsplash.com/), a platform offering high-quality, royalty-free images. We appreciate the contributions of the Unsplash community in enhancing our app's visual experience.
+
 ## Contributing
 
 While UI-Shopify is primarily for testing automation, contributions are welcome. If you have suggestions to enhance the testing experience, please share them.
