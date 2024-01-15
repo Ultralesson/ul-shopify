@@ -24,6 +24,18 @@ The primary purpose of UI-Shopify is to serve as a sandbox for automation purpos
 -   **Error Modal**: To ensure modals appear correctly upon errors.
 -   **Success Modal**: To confirm the success states are handled properly.
 
+## Downloading App Builds for Automation Testing
+
+To facilitate easy and efficient automation testing on simulators and emulators, pre-built app files for both iOS and Android are available. These can be downloaded from the [UI-Shopify Releases Page](https://github.com/Ultralesson/ul-shopify/releases)
+
+### Downloading the Latest Builds
+
+1. **Navigate to Releases**
+2. **Select the Latest Release**
+3. **Download App Files**: Download the `.apk` file for Android emulator and the `.app` file for iOS simulator. These files are specifically built for use in simulators and emulators.
+
+Note: Sometimes the installation of app build on respective devices fails due to version change then uninstall the existing app and try reinstalling it again.
+
 ## UI-Shopify Automation Flows
 
 UI-Shopify includes a number of user flow simulations that are essential for comprehensive automation testing. Below are the animated GIFs demonstrating each key flow within the application.
@@ -86,7 +98,7 @@ UI-Shopify is committed to ensuring user privacy and providing a reliable automa
 
 These deletion mechanisms ensure that each automated test can be conducted in a controlled environment with the ability to reset to a known state, an essential factor for consistent and reliable test results.
 
-## Preconfigured App States for Automation
+## Pre-Configured App States for Automation
 
 Upon installation, the AsyncStorage is initially empty. However, we have automated the seeding process so that when the app is first launched, it will programmatically populate the AsyncStorage with the default user credentials and a sample order. This simulates a post-registration state, allowing immediate access to the app's full functionality.
 
@@ -107,7 +119,7 @@ Upon installation, the AsyncStorage is initially empty. However, we have automat
   </tr>
 </table>
 
-#### Advantages of Preconfiguration:
+#### Advantages of Pre-Configuration:
 
 -   **Speed**: Eliminates the need for account creation in every test cycle, accelerating the testing process.
 -   **Consistency**: Provides a consistent starting point for tests, ensuring that all testers are working with the same baseline.
@@ -119,10 +131,6 @@ Similarly, for the OTP verification flow:
 
 -   **Dummy OTP**: `0000`
 -   This preloaded OTP can be used to test the OTP verification process, ensuring that testers can simulate and automate the verification flow seamlessly.
-
-Absolutely, I'll craft a section for the README that outlines how to add locators for seamless automation in React Native.
-
----
 
 ## Adding Locators for Automation Testing
 

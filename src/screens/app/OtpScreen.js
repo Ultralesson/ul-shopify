@@ -6,7 +6,7 @@ import { QUATERNARY_COLOR, SECONDARY_COLOR, TERNARY_COLOR } from "../../../const
 import { TextInput } from "react-native-gesture-handler";
 import useKeyboardStatus from "../../hooks/useKeyboardStatus";
 import CustomButton from "../../components/common/CustomButton";
-import { HOME_TAB, LOADING_SCREEN, OTP_SCREEN, PROFILE_SCREEN, PROFILE_TAB } from "../../../constants/screens";
+import { HOME_TAB, LOADING_SCREEN, PROFILE_SCREEN, PROFILE_TAB } from "../../../constants/screens";
 import { useNavigation, useRoute } from "@react-navigation/native";
 import { useDispatch, useSelector } from "react-redux";
 import {
@@ -135,8 +135,9 @@ const OtpScreen = () => {
                     testID="img-otp"
                     accessibilityLabel="img-otp"
                     nativeID="img-otp"
+                    resizeMode="contain"
                     source={require("../../../assets/images/otp.jpg")}
-                    className={`w-full object-resize ${!keyboardStatus ? "h-1/2" : "h-1/2 mb-2"}`}
+                    className={`w-full object-resize ${!keyboardStatus ? "h-1/2" : "h-40 mb-2"}`}
                 />
                 <View className="flex-row items-end mr-5">
                     <Text
