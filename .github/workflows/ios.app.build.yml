@@ -25,22 +25,25 @@ jobs:
           pod install
 
       - name: Build iOS .app for Simulator (Release Mode)
-        run: |
-          npx react-native run-ios --mode Release --no-packager --derivedDataPath ios/build
+        run: npx react-native run-ios --mode Release
 
-      - name: Rename .app for Simulator
+      - name: Locate and Rename .app for Simulator
         run: |
-          APP_PATH=$(find ios/build/Build/Products/Release-iphonesimulator -name "*.app" -type d | head -n 1)
-          echo "$APP_PATH"
+          APP_PATH=$(find $HOME/Library/Developer/Xcode/DerivedData -name "ulshopify.app" -type d | head -n 1)
+          echo "App Path: $APP_PATH"
           if [ -n "$APP_PATH" ]; then
-            mkdir -p "ios/build/Build/Products/Release-iphonesimulator/ul-shopify.app"
-            cp -R "$APP_PATH"/* "ios/build/Build/Products/Release-iphonesimulator/ul-shopify.app"
+            DEST_PATH="ios/build/Release-iphonesimulator/ul-shopify.app"
+            mkdir -p $DEST_PATH
+            cp -R "$APP_PATH"/* $DEST_PATH
+          else
+            echo "Error: .app file not found"
+            exit 1
           fi
         id: rename-app
 
       - name: Zip the .app directory
         run: |
-          cd ios/build/Build/Products/Release-iphonesimulator
+          cd ios/build/Release-iphonesimulator
           zip -r ul-shopify.app.zip ul-shopify.app
         id: zip-app
 
@@ -48,4 +51,4 @@ jobs:
         uses: actions/upload-artifact@v3
         with:
           name: ul-shopify-app
-          path: ios/build/Build/Products/Release-iphonesimulator/ul-shopify.app.zip
+          path: ios/build/Release-iphonesimulator/ul-shopify.app.zip
