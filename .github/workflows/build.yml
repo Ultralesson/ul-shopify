@@ -120,7 +120,7 @@ jobs:
         uses: actions/download-artifact@v3
         with:
           name: ul-shopify-app
-          path: ios/build/Products/Debug-iphonesimulator
+          path: ios/build/Release-iphonesimulator
 
       - name: Create Release
         id: create_release
@@ -149,6 +149,6 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.ACCESS_TOKEN }}
         with:
           upload_url: ${{ steps.create_release.outputs.upload_url }}
-          asset_path: ios/build/Products/Debug-iphonesimulator/ul-shopify.app.zip
+          asset_path: ios/build/Release-iphonesimulator/ul-shopify.app.zip
           asset_name: ul-shopify.app.zip
           asset_content_type: application/zip
