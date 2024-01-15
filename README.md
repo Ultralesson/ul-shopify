@@ -38,11 +38,11 @@ Note: Sometimes the installation of app build on respective devices fails due to
 
 ## UI-Shopify Automation Flows
 
-UI-Shopify includes a number of user flow simulations that are essential for comprehensive automation testing. Below are the animated GIFs demonstrating each key flow within the application.
+UI-Shopify includes a number of user flow simulations that are essential for comprehensive automation testing. Below are the animated GIFs demonstrating each key flow within the application. (_Refresh the page or wait for sometime, if in case gif's are not loaded_)
 
 <table>
   <tr>
-    <th>Registration Flow</th>
+    <th>E2E Registration Flow</th>
     <th>Error Toast Flow</th>
     <th>Forgotten Password Flow</th>
   </tr>
