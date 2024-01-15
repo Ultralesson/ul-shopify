@@ -47,10 +47,10 @@ jobs:
 
       - name: Rename APK
         run: |
-          mv android/app/build/outputs/apk/debug/app-debug.apk android/app/build/outputs/apk/debug/ul-shopify-debug.apk
+          mv android/app/build/outputs/apk/debug/app-debug.apk android/app/build/outputs/apk/debug/ul-shopify.apk
 
       - name: Upload Artifact
         uses: actions/upload-artifact@v3
         with:
           name: ul-shopify-debug-apk
-          path: android/app/build/outputs/apk/debug/ul-shopify-debug.apk
+          path: android/app/build/outputs/apk/debug/ul-shopify.apk
