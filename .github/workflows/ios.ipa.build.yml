@@ -1,4 +1,4 @@
-name: iOS Build Workflow
+name: iOS .ipa Build Workflow
 
 on:
   workflow_dispatch:
@@ -39,7 +39,7 @@ jobs:
                     -exportPath ios/build \
                     -archivePath ios/build/ulshopify.xcarchive
           mv ios/build/ulshopify.ipa ios/build/ul-shopify.ipa
-          
+
       - name: Upload .ipa Artifact
         uses: actions/upload-artifact@v3
         with:
