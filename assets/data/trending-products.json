@@ -1,0 +1,204 @@
+{
+    "title": "Trending Products",
+    "description": "High demand among users",
+    "products": [
+        {
+            "product_id": "clothing234",
+            "name": "Chic Summer Dress",
+            "description": "A breezy, elegant summer dress perfect for both casual and formal events. Made with lightweight, breathable fabric.",
+            "category": "clothing",
+            "brand": "Summer Breeze",
+            "price": 129.99,
+            "discounted_price": 99.99,
+            "stock_quantity": 45,
+            "image_url": "https://drive.google.com/uc?export=view&id=1X2B19mhQIf4-zttkkiTJDJh-V3qxKNzI",
+            "features": [
+                {
+                    "id": 1,
+                    "description": "Lightweight fabric"
+                },
+                {
+                    "id": 2,
+                    "description": "Elegant floral design"
+                }
+            ],
+            "rating": 4.7,
+            "reviews_count": 60,
+            "seller": {
+                "seller_id": "sellerSummer",
+                "seller_name": "SummerBreeze Fashion",
+                "seller_rating": 4.7
+            },
+            "is_featured": true,
+            "is_new_arrival": false,
+            "is_best_seller": true,
+            "is_discounted": true,
+            "is_out_of_stock": false
+        },
+        {
+            "product_id": "shoes234",
+            "name": "Urban Trekking Boots",
+            "description": "Durable and comfortable trekking boots designed for both urban and outdoor adventures. Features robust construction and stylish design.",
+            "category": "shoes",
+            "brand": "TrailWalk",
+            "price": 179.99,
+            "discounted_price": 149.99,
+            "stock_quantity": 50,
+            "image_url": "https://drive.google.com/uc?export=view&id=10vgyG8GBQP2QQ0BmdMFcqguGcjgsdakE",
+            "features": [
+                {
+                    "id": 1,
+                    "description": "Water-resistant material"
+                },
+                {
+                    "id": 2,
+                    "description": "Anti-slip sole"
+                }
+            ],
+            "rating": 4.8,
+            "reviews_count": 80,
+            "seller": {
+                "seller_id": "sellerTrail",
+                "seller_name": "TrailWalk Outdoors",
+                "seller_rating": 4.8
+            },
+            "is_featured": true,
+            "is_new_arrival": false,
+            "is_best_seller": true,
+            "is_discounted": true,
+            "is_out_of_stock": false
+        },
+        {
+            "product_id": "furniture234",
+            "name": "Minimalist Desk",
+            "description": "A sleek, modern desk designed for compact spaces. Combines functionality with a minimalist aesthetic, ideal for home offices.",
+            "category": "furniture",
+            "brand": "CleanLines",
+            "price": 259.99,
+            "discounted_price": 219.99,
+            "stock_quantity": 40,
+            "image_url": "https://drive.google.com/uc?export=view&id=1kq3l694w794q-m9LB9QqubhO54peatPo",
+            "features": [
+                {
+                    "id": 1,
+                    "description": "Compact and space-saving design"
+                },
+                {
+                    "id": 2,
+                    "description": "Robust wooden construction"
+                }
+            ],
+            "rating": 4.6,
+            "reviews_count": 50,
+            "seller": {
+                "seller_id": "sellerClean",
+                "seller_name": "CleanLines Home",
+                "seller_rating": 4.6
+            },
+            "is_featured": true,
+            "is_new_arrival": false,
+            "is_best_seller": false,
+            "is_discounted": true,
+            "is_out_of_stock": false
+        },
+        {
+            "product_id": "audio234",
+            "name": "Wireless Bluetooth Speaker",
+            "description": "Portable and powerful Bluetooth speaker with crystal clear sound quality and deep bass. Perfect for music lovers on the go.",
+            "category": "audio equipment",
+            "brand": "SoundWave",
+            "price": 99.99,
+            "discounted_price": 79.99,
+            "stock_quantity": 55,
+            "image_url": "https://drive.google.com/uc?export=view&id=1o0OaVcluNcXKj3a3ibyyHt91YPniY7uQ",
+            "features": [
+                {
+                    "id": 1,
+                    "description": "Long-lasting battery life"
+                },
+                {
+                    "id": 2,
+                    "description": "Water-resistant"
+                }
+            ],
+            "rating": 4.7,
+            "reviews_count": 150,
+            "seller": {
+                "seller_id": "sellerSoundWave",
+                "seller_name": "SoundWave Electronics",
+                "seller_rating": 4.7
+            },
+            "is_featured": true,
+            "is_new_arrival": true,
+            "is_best_seller": false,
+            "is_discounted": true,
+            "is_out_of_stock": false
+        },
+        {
+            "product_id": "clothing345",
+            "name": "Casual Linen Shirt",
+            "description": "A comfortable and stylish linen shirt, perfect for casual wear. Made with high-quality, breathable fabric.",
+            "category": "clothing",
+            "brand": "RelaxWear",
+            "price": 69.99,
+            "discounted_price": 49.99,
+            "stock_quantity": 60,
+            "image_url": "https://drive.google.com/uc?export=view&id=1TGTdkEbRbmKCyZiRgvXdhtyXrPp7G9ya",
+            "features": [
+                {
+                    "id": 1,
+                    "description": "100% natural linen"
+                },
+                {
+                    "id": 2,
+                    "description": "Light and airy feel"
+                }
+            ],
+            "rating": 4.6,
+            "reviews_count": 85,
+            "seller": {
+                "seller_id": "sellerRelax",
+                "seller_name": "RelaxWear Fashions",
+                "seller_rating": 4.6
+            },
+            "is_featured": false,
+            "is_new_arrival": true,
+            "is_best_seller": false,
+            "is_discounted": true,
+            "is_out_of_stock": false
+        },
+        {
+            "product_id": "shoes345",
+            "name": "Elegant Leather Loafers",
+            "description": "Classic leather loafers, perfect for formal and business attire. Crafted with precision for a luxurious feel.",
+            "category": "shoes",
+            "brand": "ClassicFoot",
+            "price": 149.99,
+            "discounted_price": 119.99,
+            "stock_quantity": 50,
+            "image_url": "https://drive.google.com/uc?export=view&id=1IE0efzF8xnA1rfS5COaoHLijr5GE_LO2",
+            "features": [
+                {
+                    "id": 1,
+                    "description": "Genuine leather material"
+                },
+                {
+                    "id": 2,
+                    "description": "Comfortable insole design"
+                }
+            ],
+            "rating": 4.7,
+            "reviews_count": 100,
+            "seller": {
+                "seller_id": "sellerClassic",
+                "seller_name": "ClassicFootwear",
+                "seller_rating": 4.7
+            },
+            "is_featured": false,
+            "is_new_arrival": false,
+            "is_best_seller": true,
+            "is_discounted": true,
+            "is_out_of_stock": false
+        }
+    ]
+}

@@ -1,6 +1,9 @@
 import React from "react";
 import { View, Text, TouchableOpacity, Image, ScrollView } from "react-native";
 import newArrivals from "../../../assets/data/new-arrivals.json";
+import trendingProducts from "../../../assets/data/trending-products.json";
+import topRatedProducts from "../../../assets/data/top-rated-products.json";
+import bestSellers from "../../../assets/data/best-sellers.json";
 import { useNavigation } from "@react-navigation/native";
 import { LOADING_SCREEN, PRODUCT_DISPLAY_SCREEN } from "../../../constants/screens";
 import { useDispatch } from "react-redux";
@@ -45,7 +48,12 @@ const CategoryCard = ({ imageUrl, title, products }) => {
 };
 
 const CategoryScreen = () => {
-    const allProducts = [...newArrivals.products];
+    const allProducts = [
+        ...newArrivals.products,
+        ...trendingProducts.products,
+        ...topRatedProducts.products,
+        ...bestSellers.products,
+    ];
     return (
         <ScrollView
             className

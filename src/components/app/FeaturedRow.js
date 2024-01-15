@@ -29,9 +29,9 @@ export const FeatureRowCard = ({ product }) => {
                 source={{
                     uri: imgUrl,
                 }}
-                testID="ele-category"
-                accessibilityLabel="ele-category"
-                nativeID="ele-category"
+                testID={`img-featured-row-${title.toLowerCase().split(" ").join("-")}`}
+                accessibilityLabel={`img-featured-row-${title.toLowerCase().split(" ").join("-")}`}
+                nativeID={`img-featured-row-${title.toLowerCase().split(" ").join("-")}`}
                 className="h-40 w-full rounded-sm"
             />
             <View className="px-3 pb-4">

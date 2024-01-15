@@ -8,6 +8,9 @@ import { HOME_SCREEN, LOADING_SCREEN, PRODUCT_DISPLAY_SCREEN, PRODUCT_SCREEN } f
 import { useDispatch } from "react-redux";
 import { hideTabBar, showTabBar } from "../../store/slices/appUIStateSlice";
 import newArrivals from "../../../assets/data/new-arrivals.json";
+import trendingProducts from "../../../assets/data/trending-products.json";
+import topRatedProducts from "../../../assets/data/top-rated-products.json";
+import bestSellers from "../../../assets/data/best-sellers.json";
 import { changeToastModalState } from "../../store/slices/modalsSlice";
 
 const ProductItem = ({ product }) => {
@@ -62,7 +65,12 @@ const ExploreScreen = () => {
     const dispatch = useDispatch();
     const { params } = useRoute();
 
-    const allProducts = [...newArrivals.products]; // Assuming newArrivals is an array of products
+    const allProducts = [
+        ...newArrivals.products,
+        ...trendingProducts.products,
+        ...bestSellers.products,
+        ...topRatedProducts.products,
+    ]; // Assuming newArrivals is an array of products
     const [searchTerm, setSearchTerm] = useState("");
     const [filteredProducts, setFilteredProducts] = useState([]);
 

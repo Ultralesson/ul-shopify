@@ -14,6 +14,9 @@ import { ScrollView } from "react-native-gesture-handler";
 import CategoryScreen from "../../components/app/CategoriesScreen";
 import FeaturedRow from "../../components/app/FeaturedRow";
 import newArrivals from "../../../assets/data/new-arrivals.json";
+import trendingProducts from "../../../assets/data/trending-products.json";
+import topRatedProducts from "../../../assets/data/top-rated-products.json";
+import bestSellers from "../../../assets/data/best-sellers.json";
 import { userModel } from "../../../utilities/asyncStorage";
 
 const HomeScreen = () => {
@@ -146,19 +149,19 @@ const HomeScreen = () => {
                     productsList={newArrivals.products}
                 />
                 <FeaturedRow
-                    title={"Trending Products"}
-                    description={"High demand among users"}
-                    productsList={newArrivals.products}
+                    title={trendingProducts.title}
+                    description={trendingProducts.description}
+                    productsList={trendingProducts.products}
                 />
                 <FeaturedRow
-                    title={"Top-Rated Products"}
-                    description={"Products with the highest customer ratings and positive reviews"}
-                    productsList={newArrivals.products}
+                    title={topRatedProducts.title}
+                    description={topRatedProducts.description}
+                    productsList={topRatedProducts.products}
                 />
                 <FeaturedRow
-                    title={"Best Sellers"}
-                    description={"Top-Selling Products"}
-                    productsList={newArrivals.products}
+                    title={bestSellers.title}
+                    description={bestSellers.description}
+                    productsList={bestSellers.products}
                 />
             </ScrollView>
         </SafeAreaView>

@@ -1,0 +1,171 @@
+{
+    "title": "Best Sellers",
+    "description": "Top-Selling Products",
+    "products": [
+        {
+            "product_id": "furniture456",
+            "name": "Modern Sofa Set",
+            "description": "A contemporary and chic sofa set that adds a modern touch to any living room. Comfortable and spacious seating.",
+            "category": "furniture",
+            "brand": "HouseComfort",
+            "price": 999.99,
+            "discounted_price": 899.99,
+            "stock_quantity": 20,
+            "image_url": "https://drive.google.com/uc?export=view&id=1Wm8w7-Wl67WYTiPgrOd3TcPL0L9A-wba",
+            "features": [
+                {
+                    "id": 1,
+                    "description": "High-quality fabric upholstery"
+                },
+                {
+                    "id": 2,
+                    "description": "Sturdy and durable frame"
+                }
+            ],
+            "rating": 4.6,
+            "reviews_count": 70,
+            "seller": {
+                "seller_id": "sellerHouseComfort",
+                "seller_name": "HouseComfort Furniture",
+                "seller_rating": 4.6
+            },
+            "is_featured": true,
+            "is_new_arrival": false,
+            "is_best_seller": false,
+            "is_discounted": true,
+            "is_out_of_stock": false
+        },
+        {
+            "product_id": "shoes567",
+            "name": "Classic Canvas Sneakers",
+            "description": "Timeless canvas sneakers suitable for all casual occasions. Comfortable fit with durable materials.",
+            "category": "shoes",
+            "brand": "UrbanStep",
+            "price": 89.99,
+            "discounted_price": 69.99,
+            "stock_quantity": 50,
+            "image_url": "https://drive.google.com/uc?export=view&id=1qFw05egx-Eyz-UiG-jGw_Cbv0J1BNJph",
+            "features": [
+                {
+                    "id": 1,
+                    "description": "Durable canvas material"
+                },
+                {
+                    "id": 2,
+                    "description": "Non-slip rubber sole"
+                }
+            ],
+            "rating": 4.8,
+            "reviews_count": 120,
+            "seller": {
+                "seller_id": "sellerUrban",
+                "seller_name": "UrbanStep Footwear",
+                "seller_rating": 4.8
+            },
+            "is_featured": true,
+            "is_new_arrival": true,
+            "is_best_seller": false,
+            "is_discounted": true,
+            "is_out_of_stock": false
+        },
+        {
+            "product_id": "furniture567",
+            "name": "Contemporary Bed Frame",
+            "description": "A sleek and modern bed frame designed to add a contemporary look to any bedroom. Made with high-quality materials for durability.",
+            "category": "furniture",
+            "brand": "DreamSpace",
+            "price": 399.99,
+            "discounted_price": 359.99,
+            "stock_quantity": 25,
+            "image_url": "https://drive.google.com/uc?export=view&id=12os4_yP90ucP470OMBZD0pek65Kz5eK9",
+            "features": [
+                {
+                    "id": 1,
+                    "description": "Sturdy wooden construction"
+                },
+                {
+                    "id": 2,
+                    "description": "Easy to assemble"
+                }
+            ],
+            "rating": 4.7,
+            "reviews_count": 80,
+            "seller": {
+                "seller_id": "sellerDream",
+                "seller_name": "DreamSpace Furniture",
+                "seller_rating": 4.7
+            },
+            "is_featured": false,
+            "is_new_arrival": true,
+            "is_best_seller": false,
+            "is_discounted": true,
+            "is_out_of_stock": false
+        },
+        {
+            "product_id": "toys567",
+            "name": "Deluxe Dollhouse Set",
+            "description": "An intricately designed dollhouse set that sparks imagination and creativity in children. Comes with miniature furniture and accessories.",
+            "category": "toys",
+            "brand": "LittleDreams",
+            "price": 129.99,
+            "discounted_price": 109.99,
+            "stock_quantity": 40,
+            "image_url": "https://drive.google.com/uc?export=view&id=17etirnUrNiRaUDugiwbR73V23feIIudd",
+            "features": [
+                {
+                    "id": 1,
+                    "description": "Realistic details and design"
+                },
+                {
+                    "id": 2,
+                    "description": "Includes multiple rooms and accessories"
+                }
+            ],
+            "rating": 4.9,
+            "reviews_count": 150,
+            "seller": {
+                "seller_id": "sellerLittleDreams",
+                "seller_name": "LittleDreams Toy Company",
+                "seller_rating": 4.9
+            },
+            "is_featured": false,
+            "is_new_arrival": false,
+            "is_best_seller": true,
+            "is_discounted": true,
+            "is_out_of_stock": false
+        },
+        {
+            "product_id": "audio567",
+            "name": "Portable Record Player",
+            "description": "Vintage-style record player with modern features, offering superior sound quality. Portable and compatible with various vinyl sizes.",
+            "category": "audio equipment",
+            "brand": "RetroSound",
+            "price": 199.99,
+            "discounted_price": 179.99,
+            "stock_quantity": 30,
+            "image_url": "https://drive.google.com/uc?export=view&id=15giZpA4li-CRdn7C2PUDh_IthRFxMYVg",
+            "features": [
+                {
+                    "id": 1,
+                    "description": "Built-in stereo speakers"
+                },
+                {
+                    "id": 2,
+                    "description": "USB connectivity for digital conversion"
+                }
+            ],
+            "rating": 4.7,
+            "reviews_count": 95,
+            "seller": {
+                "seller_id": "sellerRetroSound",
+                "seller_name": "RetroSound Electronics",
+                "seller_rating": 4.7
+            },
+            "is_featured": true,
+            "is_new_arrival": false,
+            "is_best_seller": false,
+            "is_discounted": true,
+            "is_out_of_stock": false
+        }
+    ]
+}

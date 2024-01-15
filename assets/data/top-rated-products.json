@@ -1,0 +1,171 @@
+{
+    "title": "Top-Rated Products",
+    "description": "Products with the highest customer ratings and positive reviews",
+    "products": [
+        {
+            "product_id": "furniture345",
+            "name": "Ergonomic Office Chair",
+            "description": "A comfortable and adjustable office chair designed to provide support during long working hours. Features a breathable mesh back and adjustable armrests.",
+            "category": "furniture",
+            "brand": "ComfortWork",
+            "price": 189.99,
+            "discounted_price": 159.99,
+            "stock_quantity": 40,
+            "image_url": "https://drive.google.com/uc?export=view&id=1vkEsbN1L_i-GfLiPgrVgrvU87CspNjzm",
+            "features": [
+                {
+                    "id": 1,
+                    "description": "Adjustable height and armrests"
+                },
+                {
+                    "id": 2,
+                    "description": "Lumbar support for back comfort"
+                }
+            ],
+            "rating": 4.8,
+            "reviews_count": 110,
+            "seller": {
+                "seller_id": "sellerComfort",
+                "seller_name": "ComfortWork Furnishings",
+                "seller_rating": 4.8
+            },
+            "is_featured": true,
+            "is_new_arrival": false,
+            "is_best_seller": true,
+            "is_discounted": true,
+            "is_out_of_stock": false
+        },
+        {
+            "product_id": "toys345",
+            "name": "Interactive Learning Tablet",
+            "description": "An educational tablet designed for children, loaded with learning apps and games to make education fun and interactive.",
+            "category": "toys",
+            "brand": "SmartKid",
+            "price": 79.99,
+            "discounted_price": 59.99,
+            "stock_quantity": 65,
+            "image_url": "https://drive.google.com/uc?export=view&id=1y3v-l_fzQ8tk5xUtKxQnpi6uC-0bzp58",
+            "features": [
+                {
+                    "id": 1,
+                    "description": "Child-friendly interface"
+                },
+                {
+                    "id": 2,
+                    "description": "Educational apps and games"
+                }
+            ],
+            "rating": 4.9,
+            "reviews_count": 140,
+            "seller": {
+                "seller_id": "sellerSmart",
+                "seller_name": "SmartKid Technologies",
+                "seller_rating": 4.9
+            },
+            "is_featured": true,
+            "is_new_arrival": true,
+            "is_best_seller": false,
+            "is_discounted": true,
+            "is_out_of_stock": false
+        },
+        {
+            "product_id": "audio345",
+            "name": "Surround Sound Home Theater System",
+            "description": "Experience cinema-quality sound at home with this surround sound system. Features multiple speakers for a fully immersive audio experience.",
+            "category": "audio equipment",
+            "brand": "AudioPro",
+            "price": 499.99,
+            "discounted_price": 449.99,
+            "stock_quantity": 30,
+            "image_url": "https://drive.google.com/uc?export=view&id=1MxefHfMI4yoQu-9Tirx8la7S_5Sc2-Uu",
+            "features": [
+                {
+                    "id": 1,
+                    "description": "5.1 channel surround sound"
+                },
+                {
+                    "id": 2,
+                    "description": "Easy setup and connectivity"
+                }
+            ],
+            "rating": 4.7,
+            "reviews_count": 90,
+            "seller": {
+                "seller_id": "sellerAudioPro",
+                "seller_name": "AudioPro Sound Systems",
+                "seller_rating": 4.7
+            },
+            "is_featured": false,
+            "is_new_arrival": false,
+            "is_best_seller": true,
+            "is_discounted": true,
+            "is_out_of_stock": false
+        },
+        {
+            "product_id": "clothing456",
+            "name": "Winter Thermal Jacket",
+            "description": "A high-quality, insulated winter jacket designed to keep you warm and comfortable in cold weather. Features a waterproof and windproof outer layer.",
+            "category": "clothing",
+            "brand": "WinterGuard",
+            "price": 199.99,
+            "discounted_price": 169.99,
+            "stock_quantity": 50,
+            "image_url": "https://drive.google.com/uc?export=view&id=1FOKnJD6sui7G7UboZiEYRVrTy3BipDBh",
+            "features": [
+                {
+                    "id": 1,
+                    "description": "Insulated interior for warmth"
+                },
+                {
+                    "id": 2,
+                    "description": "Waterproof and windproof"
+                }
+            ],
+            "rating": 4.7,
+            "reviews_count": 120,
+            "seller": {
+                "seller_id": "sellerWinter",
+                "seller_name": "WinterGuard Apparel",
+                "seller_rating": 4.7
+            },
+            "is_featured": true,
+            "is_new_arrival": false,
+            "is_best_seller": true,
+            "is_discounted": true,
+            "is_out_of_stock": false
+        },
+        {
+            "product_id": "shoes456",
+            "name": "Stylish High Heels",
+            "description": "Elegant and fashionable high heels, perfect for formal occasions or a night out. Designed for comfort and style.",
+            "category": "shoes",
+            "brand": "Elegance",
+            "price": 139.99,
+            "discounted_price": 119.99,
+            "stock_quantity": 40,
+            "image_url": "https://drive.google.com/uc?export=view&id=1D5XVlyeOLxV64utPbQAi_YneavyiDlpk",
+            "features": [
+                {
+                    "id": 1,
+                    "description": "Cushioned footbed for comfort"
+                },
+                {
+                    "id": 2,
+                    "description": "Durable and stylish design"
+                }
+            ],
+            "rating": 4.7,
+            "reviews_count": 90,
+            "seller": {
+                "seller_id": "sellerElegance",
+                "seller_name": "Elegance Footwear",
+                "seller_rating": 4.7
+            },
+            "is_featured": true,
+            "is_new_arrival": false,
+            "is_best_seller": true,
+            "is_discounted": true,
+            "is_out_of_stock": false
+        }
+    ]
+}
