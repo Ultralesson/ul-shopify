@@ -16,6 +16,7 @@ export const FeatureRowCard = ({ product }) => {
 
     return (
         <TouchableOpacity
+            accessible={true}
             testID="ele-featured-row-card"
             accessibilityLabel="ele-featured-row-card"
             nativeID="ele-featured-row-card"
@@ -26,6 +27,7 @@ export const FeatureRowCard = ({ product }) => {
             }}
         >
             <Image
+                accessible={true}
                 source={{
                     uri: imgUrl,
                 }}
@@ -34,8 +36,9 @@ export const FeatureRowCard = ({ product }) => {
                 nativeID={`img-featured-row-${title.toLowerCase().split(" ").join("-")}`}
                 className="h-40 w-full rounded-sm"
             />
-            <View className="px-3 pb-4">
+            <View accessible={false} className="px-3 pb-4">
                 <Text
+                    accessible={true}
                     testID="txt-product-title"
                     accessibilityLabel="txt-product-title"
                     nativeID="txt-product-title"
@@ -44,6 +47,7 @@ export const FeatureRowCard = ({ product }) => {
                     {title}
                 </Text>
                 <Text
+                    accessible={true}
                     testID="txt-product-description"
                     accessibilityLabel="txt-product-description"
                     nativeID="txt-product-description"
@@ -52,8 +56,9 @@ export const FeatureRowCard = ({ product }) => {
                 >
                     {description}
                 </Text>
-                <View className="flex-row space-x-2">
+                <View accessible={false} className="flex-row space-x-2">
                     <StarIcon
+                        accessible={true}
                         testID="icon-rating"
                         accessibilityLabel="icon-rating"
                         nativeID="icon-rating"
@@ -63,6 +68,7 @@ export const FeatureRowCard = ({ product }) => {
                         size={22}
                     />
                     <Text
+                        accessible={true}
                         testID="txt-rating-category"
                         accessibilityLabel="txt-rating-category"
                         nativeID="txt-rating-category"
@@ -71,8 +77,9 @@ export const FeatureRowCard = ({ product }) => {
                         {rating} . {category}
                     </Text>
                 </View>
-                <View className="flex-row items-end mt-1">
+                <View accessible={false} className="flex-row items-end mt-1">
                     <Text
+                        accessible={true}
                         testID="txt-rupee-symbol"
                         accessibilityLabel="txt-rupee-symbol"
                         nativeID="txt-rupee-symbol"
@@ -81,6 +88,7 @@ export const FeatureRowCard = ({ product }) => {
                         ₹
                     </Text>
                     <Text
+                        accessible={true}
                         testID="txt-product-price"
                         accessibilityLabel="txt-product-price"
                         nativeID="txt-product-price"
@@ -99,9 +107,10 @@ const FeaturedRow = ({ title, description, productsList }) => {
     const dispatch = useDispatch();
     const products = fetchRandomElements([...productsList], 3);
     return (
-        <View>
-            <View className="mt-4 flex-row items-center justify-between px-4">
+        <View accessible={false}>
+            <View className="mt-4 flex-row items-center justify-between px-4" accessible={false}>
                 <Text
+                    accessible={true}
                     testID="txt-featured-row-title"
                     accessibilityLabel="txt-featured-row-title"
                     nativeID="txt-featured-row-title"
@@ -110,6 +119,7 @@ const FeaturedRow = ({ title, description, productsList }) => {
                     {title}
                 </Text>
                 <TouchableOpacity
+                    accessible={true}
                     testID="btn-next"
                     accessibilityLabel="btn-next"
                     nativeID="btn-next"
@@ -140,6 +150,7 @@ const FeaturedRow = ({ title, description, productsList }) => {
             </Text>
 
             <ScrollView
+                accessible={false}
                 horizontal
                 contentContainerStyle={{
                     paddingHorizontal: 15,
@@ -151,6 +162,7 @@ const FeaturedRow = ({ title, description, productsList }) => {
                     return <FeatureRowCard key={product.product_id} product={product} />;
                 })}
                 <TouchableOpacity
+                    accessible={true}
                     testID="ele-explore-more"
                     accessibilityLabel="ele-explore-more"
                     nativeID="ele-explore-more"
@@ -164,6 +176,7 @@ const FeaturedRow = ({ title, description, productsList }) => {
                     }}
                 >
                     <Text
+                        accessible={true}
                         testID="txt-explore-more"
                         accessibilityLabel="txt-explore-more"
                         nativeID="txt-explore-more"
@@ -172,6 +185,7 @@ const FeaturedRow = ({ title, description, productsList }) => {
                         Explore More
                     </Text>
                     <PlusCircleIcon
+                        accessible={true}
                         testID="icon-plus-circle"
                         accessibilityLabel="icon-plus-circle"
                         nativeID="icon-plus-circle"
