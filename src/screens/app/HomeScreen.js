@@ -67,12 +67,7 @@ const HomeScreen = () => {
                     />
                 </TouchableOpacity>
                 <View className="flex-1">
-                    <Text
-                        testID="txt-browse-and-buy"
-                        nativeID="txt-browse-and-buy"
-                        accessibilityLabel="txt-browse-and-buy"
-                        className="font-bold text-gray-400 text-xs"
-                    >
+                    <Text testID="txt-browse-and-buy" className="font-bold text-gray-400 text-xs">
                         Browser & Buy!
                     </Text>
                     {!username ? (
