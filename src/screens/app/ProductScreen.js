@@ -83,8 +83,6 @@ export const ProductScreen = () => {
                 <TouchableOpacity
                     accessible={true}
                     testID="btn-search"
-                    accessibilityLabel="btn-search"
-                    nativeID="btn-search"
                     onPress={() => {
                         dispatch(hideTabBar());
                         navigation.navigate(EXPLORE_SCREEN, {
@@ -139,13 +137,7 @@ export const ProductScreen = () => {
 
                     <View className="bg-white" accessible={false}>
                         <View className="px-4 pt-4" accessible={false}>
-                            <Text
-                                accessible={true}
-                                testID="txt-product-name"
-                                accessibilityLabel="txt-product-name"
-                                nativeID="txt-product-name"
-                                className="text-2xl font-bold"
-                            >
+                            <Text accessible={true} testID="txt-product-name" className="text-2xl font-bold">
                                 {product.name}
                             </Text>
                             <View accessible={false} className="flex-row items-center justify-between">
@@ -232,8 +224,6 @@ export const ProductScreen = () => {
                                         <Text
                                             accessible={true}
                                             testID="txt-feature-description"
-                                            accessibilityLabel="txt-feature-description"
-                                            nativeID="txt-feature-description"
                                             className="italic text-gray-500"
                                         >
                                             {feature.description}
@@ -293,14 +283,7 @@ export const ProductScreen = () => {
                         </Text>
                     )}
 
-                    <PlusCircleIcon
-                        testID="icon-plus"
-                        accessibilityLabel="icon-plus"
-                        nativeID="icon-plus"
-                        size={30}
-                        color="#ffffff"
-                        opacity={0.9}
-                    />
+                    <PlusCircleIcon accessible={true} testID="icon-plus" size={30} color="#ffffff" opacity={0.9} />
                 </TouchableOpacity>
             </View>
         </SafeAreaView>

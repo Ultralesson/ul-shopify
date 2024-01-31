@@ -167,13 +167,7 @@ const ForgotPasswordScreen = () => {
                                     }
                                 }}
                             >
-                                <ArrowRightIcon
-                                    testID="icon-next"
-                                    nativeID="icon-next"
-                                    accessibilityLabel="icon-next"
-                                    size={ICON_SIZE_SMALL}
-                                    color={ICON_COLOR}
-                                />
+                                <ArrowRightIcon testID="icon-next" size={ICON_SIZE_SMALL} color={ICON_COLOR} />
                             </TouchableOpacity>
                         </View>
                     )}

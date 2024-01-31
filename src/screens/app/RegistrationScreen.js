@@ -183,14 +183,7 @@ const RegistrationScreen = () => {
                                     </TouchableOpacity>
                                 </View>
                             </View>
-                            <UserPlusIcon
-                                accessible={true}
-                                testID="icon-user-plus"
-                                accessibilityLabel="icon-user-plus"
-                                nativeID="icon-user-plus"
-                                size="40"
-                                color="black"
-                            />
+                            <UserPlusIcon accessible={true} testID="icon-user-plus" size="40" color="black" />
                         </View>
                     </View>
                 </View>

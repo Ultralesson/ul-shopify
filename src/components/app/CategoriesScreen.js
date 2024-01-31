@@ -15,10 +15,8 @@ const CategoryCard = ({ imageUrl, title, products }) => {
     const filteredProducts = products.filter((product) => product.category === title.toLowerCase());
     return (
         <TouchableOpacity
-            accessible={true}
+            accessible={false}
             testID="ele-category"
-            accessibilityLabel="ele-category"
-            nativeID="ele-category"
             onPress={() => {
                 dispatch(hideTabBar());
                 navigation.navigate(LOADING_SCREEN, {

@@ -34,13 +34,7 @@ const LoadingScreen = ({ route }) => {
                 indeterminate={true}
                 className="pb-3"
             />
-            <Text
-                accessible={true}
-                testID="txt-loading"
-                accessibilityLabel="txt-loading"
-                nativeID="txt-loading"
-                className="font-medium"
-            >
+            <Text accessible={true} testID="txt-loading" className="font-medium">
                 Loading...
             </Text>
         </SafeAreaView>

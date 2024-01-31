@@ -140,19 +140,16 @@ Note: However, if you encounter components missing these locators, we encourage 
 
 ### Locator Attributes
 
-When defining React Native components, use the following locator attributes:
+When defining React Native components, use the following locator attribute:
 
 -   `testID`: Used by automated test frameworks to locate the element.
--   `nativeID`: Utilized internally by React Native for native operations.
--   `accessibilityLabel`: Assists screen readers and can be used by test frameworks to locate elements.
+frameworks to locate elements.
 
 Here's an example of how to apply these locators to a `<Text>` component:
 
 ```jsx
 <Text
     testID="txt-browse-and-buy"
-    nativeID="txt-browse-and-buy"
-    accessibilityLabel="txt-browse-and-buy"
     ...other properties
 >
     Browse & Buy!

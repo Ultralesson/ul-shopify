@@ -18,7 +18,7 @@ const ProductItem = ({ product }) => {
     const dispatch = useDispatch();
     return (
         <TouchableOpacity
-            accessible={true}
+            accessible={false}
             testID="ele-auto-suggestion"
             className="p-4 flex-row items-center bg-gray-100 rounded-xl mx-3 mb-4  border-b-2 border-gray-300"
             onPress={() => {
@@ -139,13 +139,7 @@ const ExploreScreen = () => {
                             }
                         }}
                     >
-                        <MagnifyingGlassIcon
-                            testID="icon-search"
-                            accessibilityLabel="icon-search"
-                            nativeID="icon-search"
-                            size={24}
-                            color="black"
-                        />
+                        <MagnifyingGlassIcon testID="icon-search" size={24} color="black" />
                     </TouchableOpacity>
                 </View>
 
@@ -174,16 +168,12 @@ const ExploreScreen = () => {
                             <TouchableOpacity
                                 accessible={true}
                                 testID="btn-more"
-                                accessibilityLabel="btn-more"
-                                nativeID="btn-more"
                                 className="items-center justify-center p-4"
                                 onPress={() => setShowMore(true)}
                             >
                                 <Text
                                     accessible={true}
                                     testID="txt-more"
-                                    accessibilityLabel="txt-more"
-                                    nativeID="txt-more"
                                     className="text-center text-md text-white font-bold px-10 py-3 rounded-xl"
                                     style={{ backgroundColor: SECONDARY_COLOR }}
                                 >

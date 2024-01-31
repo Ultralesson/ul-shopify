@@ -18,8 +18,6 @@ export const FeatureRowCard = ({ product }) => {
         <TouchableOpacity
             accessible={false}
             testID="ele-featured-row-card"
-            accessibilityLabel="ele-featured-row-card"
-            nativeID="ele-featured-row-card"
             className="bg-white w-60 mr-3 shadow"
             onPress={() => {
                 dispatch(hideTabBar());
@@ -32,62 +30,33 @@ export const FeatureRowCard = ({ product }) => {
                     uri: imgUrl,
                 }}
                 testID={`img-featured-row-${title.toLowerCase().split(" ").join("-")}`}
-                accessibilityLabel={`img-featured-row-${title.toLowerCase().split(" ").join("-")}`}
-                nativeID={`img-featured-row-${title.toLowerCase().split(" ").join("-")}`}
                 className="h-40 w-full rounded-sm"
             />
             <View accessible={false} className="px-3 pb-4">
-                <Text accessible={true} nativeID="LL" testID="KKKKK" className="font-bold text-md pt-2">
+                <Text accessible={true} testID={`txt-${title}`} className="font-bold text-md pt-2">
                     {title}
                 </Text>
-                <Text
-                    accessible={true}
-                    testID="txt-product-description"
-                    accessibilityLabel="txt-product-description"
-                    nativeID="txt-product-description"
-                    numberOfLines={1}
-                    className="pb-2 text-xs"
-                >
+                <Text accessible={true} numberOfLines={1} className="pb-2 text-xs">
                     {description}
                 </Text>
                 <View accessible={false} className="flex-row space-x-2">
                     <StarIcon
                         accessible={true}
                         testID="icon-rating"
-                        accessibilityLabel="icon-rating"
-                        nativeID="icon-rating"
                         fill={TERNARY_COLOR}
                         color={TERNARY_COLOR}
                         opacity={0.5}
                         size={22}
                     />
-                    <Text
-                        accessible={true}
-                        testID="txt-rating-category"
-                        accessibilityLabel="txt-rating-category"
-                        nativeID="txt-rating-category"
-                        className="text-xs pt-1 text-gray-500"
-                    >
+                    <Text accessible={true} testID="txt-rating-category" className="text-xs pt-1 text-gray-500">
                         {rating} . {category}
                     </Text>
                 </View>
                 <View accessible={false} className="flex-row items-end mt-1">
-                    <Text
-                        accessible={true}
-                        testID="txt-rupee-symbol"
-                        accessibilityLabel="txt-rupee-symbol"
-                        nativeID="txt-rupee-symbol"
-                        className="text-xs mr-1 italic"
-                    >
+                    <Text accessible={true} testID="txt-rupee-symbol" className="text-xs mr-1 italic">
                         ₹
                     </Text>
-                    <Text
-                        accessible={true}
-                        testID="txt-product-price"
-                        accessibilityLabel="txt-product-price"
-                        nativeID="txt-product-price"
-                        className="font-bold"
-                    >
+                    <Text accessible={true} testID="txt-product-price" className="font-bold">
                         {price}
                     </Text>
                 </View>
@@ -103,20 +72,12 @@ const FeaturedRow = ({ title, description, productsList }) => {
     return (
         <View accessible={false}>
             <View className="mt-4 flex-row items-center justify-between px-4" accessible={false}>
-                <Text
-                    accessible={true}
-                    testID="txt-featured-row-title"
-                    accessibilityLabel="txt-featured-row-title"
-                    nativeID="txt-featured-row-title"
-                    className="font-bold text-lg"
-                >
+                <Text accessible={true} testID="txt-featured-row-title" className="font-bold text-lg">
                     {title}
                 </Text>
                 <TouchableOpacity
                     accessible={true}
                     testID="btn-next"
-                    accessibilityLabel="btn-next"
-                    nativeID="btn-next"
                     onPress={() => {
                         dispatch(hideTabBar());
                         navigation.navigate(LOADING_SCREEN, {
@@ -125,22 +86,10 @@ const FeaturedRow = ({ title, description, productsList }) => {
                         });
                     }}
                 >
-                    <ArrowRightIcon
-                        testID="icon-next"
-                        accessibilityLabel="icon-next"
-                        nativeID="icon-next"
-                        size={22}
-                        color={QUATERNARY_COLOR}
-                    />
+                    <ArrowRightIcon testID="icon-next" size={22} color={QUATERNARY_COLOR} />
                 </TouchableOpacity>
             </View>
-            <Text
-                accessible={true}
-                testID="txt-featured-row-description"
-                accessibilityLabel="txt-featured-row-description"
-                nativeID="txt-featured-row-description"
-                className="text-xs text-gray-500 px-4"
-            >
+            <Text accessible={true} testID="txt-featured-row-description" className="text-xs text-gray-500 px-4">
                 {description}
             </Text>
 

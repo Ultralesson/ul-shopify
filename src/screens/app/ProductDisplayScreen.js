@@ -17,7 +17,7 @@ const FeatureGridRowCards = ({ product }) => {
     return (
         <>
             <TouchableOpacity
-                accessible={true}
+                accessible={false}
                 testID="ele-product-card"
                 className="bg-white mb-3 border-b-2 border-gray-300"
                 onPress={() => {

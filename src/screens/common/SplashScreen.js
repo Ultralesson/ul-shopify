@@ -40,15 +40,9 @@ export const SplashScreen = () => {
                 source={require("../../../assets/icons/ultralesson-logo.png")}
             />
             <View accessible={false} className="mt-4 flex-row items-center">
-                <Text
-                    accessible={true}
-                    className="font-bold text-sm"
-                    testID="txt-launching-ul-shopify"
-                    accessibilityLabel="txt-launching-ul-shopify"
-                    nativeID="txt-launching-ul-shopify"
-                >
+                <Text accessible={true} className="font-bold text-sm" testID="txt-launching-ul-shopify">
                     Launching your{" "}
-                    <Text accessible={true} className="text-lg" style={{ color: TERNARY_COLOR }}>
+                    <Text className="text-lg" style={{ color: TERNARY_COLOR }}>
                         UL-Shopify...
                     </Text>
                 </Text>
