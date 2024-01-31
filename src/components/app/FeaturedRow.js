@@ -157,9 +157,8 @@ const FeaturedRow = ({ title, description, productsList }) => {
                     return <FeatureRowCard key={product.product_id} product={product} />;
                 })}
                 <TouchableOpacity
+                    accessible={true}
                     testID="ele-explore-more"
-                    accessibilityLabel="ele-explore-more"
-                    nativeID="ele-explore-more"
                     className="flex-1 justify-center ml-8 mr-4 items-center"
                     onPress={() => {
                         dispatch(hideTabBar());
@@ -172,20 +171,11 @@ const FeaturedRow = ({ title, description, productsList }) => {
                     <Text
                         accessible={true}
                         testID="txt-explore-more"
-                        accessibilityLabel="txt-explore-more"
-                        nativeID="txt-explore-more"
                         className="text-md text-gray-500 text-bold mb-2 italic"
                     >
                         Explore More
                     </Text>
-                    <PlusCircleIcon
-                        accessible={true}
-                        testID="icon-plus-circle"
-                        accessibilityLabel="icon-plus-circle"
-                        nativeID="icon-plus-circle"
-                        color={TERNARY_COLOR}
-                        size={40}
-                    />
+                    <PlusCircleIcon accessible={true} testID="icon-plus-circle" color={TERNARY_COLOR} size={40} />
                 </TouchableOpacity>
             </ScrollView>
         </View>

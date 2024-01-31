@@ -24,18 +24,23 @@ const LoadingScreen = ({ route }) => {
     }, [navigateTo]);
 
     return (
-        <SafeAreaView className="flex flex-1 items-center justify-center bg-white">
+        <SafeAreaView accessible={false} className="flex flex-1 items-center justify-center bg-white">
             <Progress.Circle
+                accessible={true}
                 testID="img-progress"
-                accessibilityLabel="img-progress"
-                nativeID="img-progress"
                 size={60}
                 color="#89bff8"
                 borderWidth={1.5}
                 indeterminate={true}
                 className="pb-3"
             />
-            <Text testID="txt-loading" accessibilityLabel="txt-loading" nativeID="txt-loading" className="font-medium">
+            <Text
+                accessible={true}
+                testID="txt-loading"
+                accessibilityLabel="txt-loading"
+                nativeID="txt-loading"
+                className="font-medium"
+            >
                 Loading...
             </Text>
         </SafeAreaView>

@@ -8,11 +8,10 @@ const AuthButtonSection = ({ buttonText, authQuestionText, navigateToText, navig
     const navigation = useNavigation();
 
     return (
-        <View className="mb-5 pt-3">
+        <View className="mb-5 pt-3" accessible={false}>
             <TouchableOpacity
+                accessible={true}
                 testID={`btn-${buttonText.toLowerCase().split(" ").join("-")}`}
-                accessibilityLabel={`btn-${buttonText.toLowerCase().split(" ").join("-")}`}
-                nativeID={`btn-${buttonText.toLowerCase().split(" ").join("-")}`}
                 style={{
                     backgroundColor: SECONDARY_COLOR,
                 }}
@@ -22,40 +21,32 @@ const AuthButtonSection = ({ buttonText, authQuestionText, navigateToText, navig
                 }}
             >
                 <Text
+                    accessible={true}
                     testID={`txt-${buttonText.toLowerCase().split(" ").join("-")}`}
-                    accessibilityLabel={`txt-${buttonText.toLowerCase().split(" ").join("-")}`}
-                    nativeID={`txt-${buttonText.toLowerCase().split(" ").join("-")}`}
                     className="text-lg font-bold text-center text-white"
                 >
                     {buttonText}
                 </Text>
             </TouchableOpacity>
 
-            <View className="flex-row justify-center">
-                <View className="mt-2 w-10/12 border-b-[0.23px] border-solid border-gray-400"></View>
+            <View className="flex-row justify-center" accessible={false}>
+                <View accessible={true} className="mt-2 w-10/12 border-b-[0.23px] border-solid border-gray-400"></View>
             </View>
-            <View className="flex-row justify-center mt-3">
-                <Text
-                    testID="txt-question"
-                    accessibilityLabel="txt-question"
-                    nativeID="txt-question"
-                    className="items-center font-bold"
-                >
+            <View className="flex-row justify-center mt-3" accessible={false}>
+                <Text accessible={true} testID="txt-question" className="items-center font-bold">
                     {authQuestionText}
                 </Text>
                 <TouchableOpacity
+                    accessible={true}
                     testID={`btn-${navigateToText.toLowerCase().split(" ").join("-")}`}
-                    accessibilityLabel={`btn-${navigateToText.toLowerCase().split(" ").join("-")}`}
-                    nativeID={`btn-${navigateToText.toLowerCase().split(" ").join("-")}`}
                     className="ml-2"
                     onPress={() => {
                         navigation.navigate(navigateTo);
                     }}
                 >
                     <Text
+                        accessible={true}
                         testID={`txt-${navigateToText.toLowerCase().split(" ").join("-")}`}
-                        accessibilityLabel={`txt-${navigateToText.toLowerCase().split(" ").join("-")}`}
-                        nativeID={`txt-${navigateToText.toLowerCase().split(" ").join("-")}`}
                         className="font-bold underline"
                         style={{ color: QUATERNARY_COLOR }}
                     >

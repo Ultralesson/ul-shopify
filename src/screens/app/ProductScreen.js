@@ -29,9 +29,13 @@ import { selectAuthState } from "../../store/slices/authSlice";
 
 const Label = ({ type, text }) => {
     return (
-        <View className="flex-wrap flex-row items-center pb-2">
-            <Text className="px-4 text-gray-500">{type}</Text>
-            <Text className="pt-2 pb-2 px-4 bg-blue-200 rounded-lg font-bold text-gray-700">{text}</Text>
+        <View className="flex-wrap flex-row items-center pb-2" accessible={false}>
+            <Text accessible={true} className="px-4 text-gray-500">
+                {type}
+            </Text>
+            <Text accessible={true} className="pt-2 pb-2 px-4 bg-blue-200 rounded-lg font-bold text-gray-700">
+                {text}
+            </Text>
         </View>
     );
 };
@@ -48,16 +52,16 @@ export const ProductScreen = () => {
     const isAuthorized = useSelector(selectAuthState);
 
     return (
-        <SafeAreaView className="bg-white flex-1">
+        <SafeAreaView className="bg-white flex-1" accessible={false}>
             <View
+                accessible={false}
                 className={`absolute left-5 rounded-full p-2 mt-4 bg-white z-10 ${
                     Platform.OS === "ios" ? "top-16" : "top-8"
                 }`}
             >
                 <TouchableOpacity
+                    accessible={true}
                     testID="btn-back"
-                    accessibilityLabel="btn-back"
-                    nativeID="btn-back"
                     onPress={() => {
                         dispatch(showTabBar());
                         navigation.navigate(HOME_SCREEN);
@@ -74,8 +78,10 @@ export const ProductScreen = () => {
                 style={{
                     right: 75,
                 }}
+                accessible={false}
             >
                 <TouchableOpacity
+                    accessible={true}
                     testID="btn-search"
                     accessibilityLabel="btn-search"
                     nativeID="btn-search"
@@ -93,14 +99,14 @@ export const ProductScreen = () => {
 
             {/* Shopping Cart Button */}
             <View
+                accessible={false}
                 className={`absolute right-5 p-2 rounded-full mt-4 bg-gray-50 z-10 ${
                     Platform.OS === "ios" ? "top-16" : "top-8"
                 }`}
             >
                 <TouchableOpacity
+                    accessible={true}
                     testID="btn-cart"
-                    accessibilityLabel="btn-cart"
-                    nativeID="btn-cart"
                     onPress={() => {
                         dispatch(hideTabBar());
                         navigation.navigate(LOADING_SCREEN, {
@@ -112,33 +118,29 @@ export const ProductScreen = () => {
                 </TouchableOpacity>
             </View>
             <View
+                accessible={false}
                 className={`absolute right-5 rounded-full mt-4 p-1 z-10 ${Platform.OS === "ios" ? "top-14" : "top-6"}`}
                 style={{ backgroundColor: TERNARY_COLOR }}
             >
-                <Text
-                    testID="txt-cart-count"
-                    accessibilityLabel="txt-cart-count"
-                    nativeID="txt-cart-count"
-                    className="font-bold text-xs text-white"
-                >
+                <Text accessible={true} testID="txt-cart-count" className="font-bold text-xs text-white">
                     {basketItems.length}
                 </Text>
             </View>
-            <ScrollView className="mb-5">
-                <View className="relative">
+            <ScrollView className="mb-5" accessible={false}>
+                <View className="relative" accessible={false}>
                     <Image
+                        accessible={true}
                         testID="img-product"
-                        accessibilityLabel="img-product"
-                        nativeID="img-product"
                         className="w-full h-96 bg-gray-300"
                         source={{
                             uri: product.image_url,
                         }}
                     />
 
-                    <View className="bg-white">
-                        <View className="px-4 pt-4">
+                    <View className="bg-white" accessible={false}>
+                        <View className="px-4 pt-4" accessible={false}>
                             <Text
+                                accessible={true}
                                 testID="txt-product-name"
                                 accessibilityLabel="txt-product-name"
                                 nativeID="txt-product-name"
@@ -146,49 +148,39 @@ export const ProductScreen = () => {
                             >
                                 {product.name}
                             </Text>
-                            <View className="flex-row items-center justify-between">
-                                <View className="flex-row items-center space-x-1 mt-2">
+                            <View accessible={false} className="flex-row items-center justify-between">
+                                <View accessible={false} className="flex-row items-center space-x-1 mt-2">
                                     <StarIcon
+                                        accessible={true}
                                         testID="icon-rating"
-                                        accessibilityLabel="icon-rating"
-                                        nativeID="icon-rating"
                                         size={22}
                                         opacity={0.5}
                                         color={TERNARY_COLOR}
                                         fill={TERNARY_COLOR}
                                     />
                                     <Text
+                                        accessible={true}
                                         testID="txt-rating-category"
-                                        accessibilityLabel="txt-rating-category"
-                                        nativeID="txt-rating-category"
                                         className="text-xs text-gray-400 font-bold"
                                     >
-                                        <Text className="mx-1">{product.rating}</Text> . {product.category}
+                                        <Text accessible={true} className="mx-1">
+                                            {product.rating}
+                                        </Text>{" "}
+                                        . {product.category}
                                     </Text>
                                 </View>
-                                <View className="flex-row items-end space-x-1">
-                                    <Text
-                                        testID="txt-rupee-symbol"
-                                        accessibilityLabel="txt-rupee-symbol"
-                                        nativeID="txt-rupee-symbol"
-                                        className="mb-1"
-                                    >
+                                <View accessible={false} className="flex-row items-end space-x-1">
+                                    <Text accessible={true} testID="txt-rupee-symbol" className="mb-1">
                                         ₹
                                     </Text>
-                                    <Text
-                                        testID="txt-product-price"
-                                        accessibilityLabel="txt-product-price"
-                                        nativeID="txt-product-price"
-                                        className="text-xl font-bold"
-                                    >
+                                    <Text accessible={true} testID="txt-product-price" className="text-xl font-bold">
                                         {product.price}
                                     </Text>
                                 </View>
                             </View>
                             <Text
                                 testID="txt-product-description"
-                                accessibilityLabel="txt-product-description"
-                                nativeID="txt-product-description"
+                                accessible={true}
                                 className="text-gray-500 mt-2 pb-4 leading-5"
                             >
                                 {product.description}
@@ -196,76 +188,49 @@ export const ProductScreen = () => {
                         </View>
                     </View>
 
-                    <Label
-                        testID="label-product-brand"
-                        accessibilityLabel="label-product-brand"
-                        nativeID="label-product-brand"
-                        type={"brand"}
-                        text={product.brand}
-                    />
-                    <Label
-                        testID="txt-product-seller-name"
-                        accessibilityLabel="txt-product-seller-name"
-                        nativeID="txt-product-seller-name"
-                        type={"seller"}
-                        text={product.seller.seller_name}
-                    />
+                    <Label testID="label-product-brand" type={"brand"} text={product.brand} />
+                    <Label testID="txt-product-seller-name" type={"seller"} text={product.seller.seller_name} />
 
                     <TouchableOpacity
+                        accessible={true}
                         testID="btn-display-features"
-                        accessibilityLabel="btn-display-features"
-                        nativeID="btn-display-features"
                         className="bg-white flex-row items-center space-x-2 p-4 "
                         onPress={() => {
                             setShowFeatures(!showFeatures);
                         }}
                     >
                         <InformationCircleIcon
+                            accessible={true}
                             testID="icon-information"
-                            accessibilityLabel="icon-information"
-                            nativeID="icon-information"
                             size={25}
                             color={TERNARY_COLOR}
                         />
-                        <Text
-                            testID="txt-features"
-                            accessibilityLabel="txt-features"
-                            nativeID="txt-features"
-                            className="pl-2 flex-1 text-md font-bold"
-                        >
+                        <Text accessible={true} testID="txt-features" className="pl-2 flex-1 text-md font-bold">
                             Features
                         </Text>
                         {showFeatures === false ? (
-                            <ChevronDownIcon
-                                testID="icon-down"
-                                accessibilityLabel="icon-down"
-                                nativeID="icon-down"
-                                size={25}
-                                color={TERNARY_COLOR}
-                            />
+                            <ChevronDownIcon accessible={true} testID="icon-down" size={25} color={TERNARY_COLOR} />
                         ) : (
-                            <ChevronUpIcon
-                                testID="icon-up"
-                                accessibilityLabel="icon-up"
-                                nativeID="icon-up"
-                                size={25}
-                                color={TERNARY_COLOR}
-                            />
+                            <ChevronUpIcon accessible={true} testID="icon-up" size={25} color={TERNARY_COLOR} />
                         )}
                     </TouchableOpacity>
                     {showFeatures && (
-                        <View className="bg-white pb-4 px-4">
+                        <View className="bg-white pb-4 px-4" accessible={false}>
                             {product.features.map((feature) => {
                                 return (
-                                    <View key={feature.id} className="flex-row items-center pt-4 space-x-2">
+                                    <View
+                                        accessible={false}
+                                        key={feature.id}
+                                        className="flex-row items-center pt-4 space-x-2"
+                                    >
                                         <PlusIcon
+                                            accessible={true}
                                             testID="icon-plus"
-                                            accessibilityLabel="icon-plus"
-                                            nativeID="icon-plus"
                                             size={15}
                                             color={QUATERNARY_COLOR}
                                         />
                                         <Text
+                                            accessible={true}
                                             testID="txt-feature-description"
                                             accessibilityLabel="txt-feature-description"
                                             nativeID="txt-feature-description"
@@ -281,11 +246,10 @@ export const ProductScreen = () => {
                 </View>
             </ScrollView>
 
-            <View className="mb-5">
+            <View className="mb-5" accessible={false}>
                 <TouchableOpacity
+                    accessible={true}
                     testID="btn-cart"
-                    accessibilityLabel="btn-cart"
-                    nativeID="btn-cart"
                     className="mx-5 p-3 rounded-lg flex-row"
                     style={{ backgroundColor: SECONDARY_COLOR }}
                     onPress={() => {
@@ -313,18 +277,16 @@ export const ProductScreen = () => {
                 >
                     {!isItemAddedToCart ? (
                         <Text
+                            accessible={true}
                             testID="txt-add-to-cart"
-                            accessibilityLabel="txt-add-to-cart"
-                            nativeID="txt-add-to-cart"
                             className="flex-1 text-white  font-bold text-lg text-center"
                         >
                             Add To Cart
                         </Text>
                     ) : (
                         <Text
+                            accessible={true}
                             testID="txt-go-to-cart"
-                            accessibilityLabel="txt-go-to-cart"
-                            nativeID="txt-go-to-cart"
                             className="flex-1 text-white  font-bold text-lg text-center"
                         >
                             Go To Cart

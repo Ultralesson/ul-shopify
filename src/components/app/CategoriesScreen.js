@@ -15,6 +15,7 @@ const CategoryCard = ({ imageUrl, title, products }) => {
     const filteredProducts = products.filter((product) => product.category === title.toLowerCase());
     return (
         <TouchableOpacity
+            accessible={true}
             testID="ele-category"
             accessibilityLabel="ele-category"
             nativeID="ele-category"
@@ -26,21 +27,15 @@ const CategoryCard = ({ imageUrl, title, products }) => {
                 });
             }}
         >
-            <View className="ml-1 mr-1">
+            <View className="ml-1 mr-1" accessible={false}>
                 <Image
+                    accessible={true}
                     testID={`img-category-${title}`}
-                    accessibilityLabel={`img-category-${title}`}
-                    nativeID={`img-category-${title}`}
                     source={imageUrl}
                     className="h-24 w-28 rounded object-cover"
                 />
             </View>
-            <Text
-                testID="txt-title"
-                accessibilityLabel="txt-title"
-                nativeID="txt-title"
-                className="mt-2 bottom-1 left-1 font-medium"
-            >
+            <Text accessible={true} testID="txt-title" className="mt-2 bottom-1 left-1 font-medium">
                 {title}
             </Text>
         </TouchableOpacity>
@@ -56,7 +51,7 @@ const CategoryScreen = () => {
     ];
     return (
         <ScrollView
-            className
+            accessible={false}
             contentContainerStyle={{
                 paddingHorizontal: 15,
                 paddingTop: 10,

@@ -90,9 +90,9 @@ const ForgotPasswordScreen = () => {
     useEffect(() => {}, []);
 
     return (
-        <SafeAreaView className="bg-white h-full flex-1">
-            <View className="m-3 flex-row">
-                <View className="absolute z-2">
+        <SafeAreaView className="bg-white h-full flex-1" accessible={false}>
+            <View className="m-3 flex-row" accessible={false}>
+                <View className="absolute z-2" accessible={false}>
                     <CustomBackButton
                         onBackPress={() => {
                             // Reset the data
@@ -104,36 +104,34 @@ const ForgotPasswordScreen = () => {
                 </View>
             </View>
 
-            <View className={`w-full h-48 -z-10  ${isKeyboardVisible ? "h-1/3" : ""}`}>
+            <View accessible={false} className={`w-full h-48 -z-10  ${isKeyboardVisible ? "h-1/3" : ""}`}>
                 <Image
+                    accessible={true}
                     testID="img-forgot-password"
-                    nativeID="img-forgot-password"
-                    accessibilityLabel="img-forgot-password"
                     source={require("../../../assets/images/forgotPassword.jpg")}
                     resizeMode="contain"
                     className={`w-full h-full mb-3`}
                 />
             </View>
 
-            <View className="flex-1 m-4">
-                <View className="">
-                    <View className="mb-3">
+            <View className="flex-1 m-4" accessible={false}>
+                <View accessible={false}>
+                    <View className="mb-3" accessible={false}>
                         <Text
+                            accessible={true}
                             className="text-3xl"
                             style={{ color: QUATERNARY_COLOR }}
                             testID="txt-forgot-password"
-                            nativeID="txt-forgot-password"
-                            accessibilityLabel="txt-forgot-password"
                         >
                             Forgot <Text className="text-xl font-bold">password?</Text>
                         </Text>
                     </View>
                 </View>
 
-                <View className="flex-1 h-1/2">
+                <View className="flex-1 h-1/2" accessible={false}>
                     {!hideInputs.email && (
-                        <View className="flex-row items-center">
-                            <View className="flex-1 justify-center">
+                        <View className="flex-row items-center" accessible={false}>
+                            <View className="flex-1 justify-center" accessible={false}>
                                 <CustomInput
                                     customStyle={"bg-gray-100"}
                                     label="Email"
@@ -155,9 +153,8 @@ const ForgotPasswordScreen = () => {
                                 />
                             </View>
                             <TouchableOpacity
+                                accessible={true}
                                 testID="btn-next"
-                                nativeID="btn-next"
-                                accessibilityLabel="btn-next"
                                 className={`ml-3 ${errors.email ? "-mt-4" : ""}`}
                                 onPress={async () => {
                                     setResetButtonState(true);
@@ -182,7 +179,7 @@ const ForgotPasswordScreen = () => {
                     )}
 
                     {hideInputs.newPassword && (
-                        <View className="">
+                        <View accessible={false}>
                             <CustomInput
                                 customStyle={"bg-gray-100"}
                                 password={true}
@@ -227,7 +224,7 @@ const ForgotPasswordScreen = () => {
                     )}
                     {/* Do not show the reset button when email field is displayed and also when the keyboard is shown */}
                     {displayResetButton && !isKeyboardVisible && (
-                        <View className="mb-1">
+                        <View className="mb-1" accessible={false}>
                             <CustomButton
                                 text="Reset password"
                                 disabled={true}

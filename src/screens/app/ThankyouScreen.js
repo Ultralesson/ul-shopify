@@ -12,48 +12,38 @@ export const ThankyouScreen = () => {
     const navigation = useNavigation();
     const dispatch = useDispatch();
     return (
-        <SafeAreaView className="flex-1 justify-center items-center">
+        <SafeAreaView className="flex-1 justify-center items-center" accessible={false}>
             <Animatable.Image
+                accessible={true}
+                testID="img-success"
                 source={require("../../../assets/images/success.jpg")}
                 animation="slideInUp"
                 iterationCount={1}
                 className="h-10 w-10"
             />
-            <Text
-                testID="txt-thanks-shopping"
-                accessibilityLabel="txt-thanks-shopping"
-                nativeID="txt-thanks-shopping"
-                className="text-lg my-2 text-center mb-6"
-            >
+            <Text accessible={true} testID="txt-thanks-shopping" className="text-lg my-2 text-center mb-6">
                 Thanks for Shopping in UL-Shopify
             </Text>
-            <Text testID="txt-confirmed-order" accessibilityLabel="txt-confirmed-order" nativeID="txt-confirmed-order">
+            <Text accessible={true} testID="txt-confirmed-order">
                 Your order has been confirmed
             </Text>
-            <View className="flex-row space-x-4 mt-3">
+            <View className="flex-row space-x-4 mt-3" accessible={false}>
                 <TouchableOpacity
+                    accessible={true}
                     testID="btn-order-details"
-                    accessibilityLabel="btn-order-details"
-                    nativeID="btn-order-details"
                     className="px-6 mt-2 py-4 rounded-xl"
                     style={{ backgroundColor: SECONDARY_COLOR }}
                     onPress={() => {
                         navigation.navigate(TRACK_ORDER_SCREEN);
                     }}
                 >
-                    <Text
-                        testID="txt-order-details"
-                        accessibilityLabel="txt-order-details"
-                        nativeID="txt-order-details"
-                        className="text-white font-bold"
-                    >
+                    <Text accessible={true} testID="txt-order-details" className="text-white font-bold">
                         Order Details
                     </Text>
                 </TouchableOpacity>
                 <TouchableOpacity
                     testID="btn-continue-shopping"
-                    accessibilityLabel="btn-continue-shopping"
-                    nativeID="btn-continue-shopping"
+                    accessible={true}
                     className="px-6 mt-2 py-4 rounded-xl "
                     style={{ backgroundColor: SECONDARY_COLOR }}
                     onPress={() => {
@@ -61,12 +51,7 @@ export const ThankyouScreen = () => {
                         navigation.navigate(HOME_SCREEN);
                     }}
                 >
-                    <Text
-                        testID="txt-continue-shopping"
-                        accessibilityLabel="txt-continue-shopping"
-                        nativeID="txt-continue-shopping"
-                        className="text-white font-bold"
-                    >
+                    <Text accessible={true} testID="txt-continue-shopping" className="text-white font-bold">
                         Continue Shopping
                     </Text>
                 </TouchableOpacity>

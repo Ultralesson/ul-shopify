@@ -139,11 +139,11 @@ const RegistrationScreen = () => {
     }, []);
 
     return (
-        <SafeAreaView>
-            <View className="p-3 h-full">
-                <View className="mt-5">
-                    <View className="flex-row">
-                        <View className="mr-3 flex-row items-center">
+        <SafeAreaView accessible={false}>
+            <View className="p-3 h-full" accessible={false}>
+                <View className="mt-5" accessible={false}>
+                    <View className="flex-row" accessible={false}>
+                        <View className="mr-3 flex-row items-center" accessible={false}>
                             <CustomBackButton
                                 onBackPress={() => {
                                     navigation.navigate(PROFILE_SCREEN);
@@ -151,38 +151,30 @@ const RegistrationScreen = () => {
                             />
                         </View>
 
-                        <View className="flex-row items-center justify-between flex-1">
-                            <View className="flex-row items-end">
-                                <Text
-                                    testID="txt-register-heading"
-                                    accessibilityLabel="txt-register-heading"
-                                    nativeID="txt-register-heading"
-                                    className="font-bold text-4xl"
-                                >
+                        <View className="flex-row items-center justify-between flex-1" accessible={false}>
+                            <View className="flex-row items-end" accessible={false}>
+                                <Text testID="txt-register-heading" accessible={true} className="font-bold text-4xl">
                                     Register
                                 </Text>
-                                <View className="flex-row space-x-1 mb-1">
+                                <View className="flex-row space-x-1 mb-1" accessible={false}>
                                     <Text
+                                        accessible={true}
                                         testID="txt-to-subheading"
-                                        accessibilityLabel="txt-to-subheading"
-                                        nativeID="txt-to-subheading"
                                         className="italic ml-2"
                                         style={{ color: QUATERNARY_COLOR }}
                                     >
                                         to
                                     </Text>
                                     <TouchableOpacity
+                                        accessible={true}
                                         testID="btn-ulshopify"
-                                        accessibilityLabel="btn-ulshopify"
-                                        nativeID="btn-ulshopify"
                                         onPress={() => {
                                             navigation.navigate(HOME_TAB);
                                         }}
                                     >
                                         <Text
+                                            accessible={true}
                                             testID="txt-ulshopify"
-                                            accessibilityLabel="txt-ulshopify"
-                                            nativeID="txt-ulshopify"
                                             className="font-bold"
                                             style={{ color: QUATERNARY_COLOR }}
                                         >
@@ -192,6 +184,7 @@ const RegistrationScreen = () => {
                                 </View>
                             </View>
                             <UserPlusIcon
+                                accessible={true}
                                 testID="icon-user-plus"
                                 accessibilityLabel="icon-user-plus"
                                 nativeID="icon-user-plus"
@@ -201,9 +194,9 @@ const RegistrationScreen = () => {
                         </View>
                     </View>
                 </View>
-                <View className="flex-1 justify-between">
-                    <View className="flex-1">
-                        <ScrollView className="mt-6 flex-1" showsVerticalScrollIndicator={false}>
+                <View className="flex-1 justify-between" accessible={false}>
+                    <View className="flex-1" accessible={false}>
+                        <ScrollView className="mt-6 flex-1" showsVerticalScrollIndicator={false} accessible={false}>
                             <CustomInput
                                 label="Full Name"
                                 value={inputs.fullName}

@@ -18,9 +18,8 @@ const ProductItem = ({ product }) => {
     const dispatch = useDispatch();
     return (
         <TouchableOpacity
+            accessible={true}
             testID="ele-auto-suggestion"
-            accessibilityLabel="ele-auto-suggestion"
-            nativeID="ele-auto-suggestion"
             className="p-4 flex-row items-center bg-gray-100 rounded-xl mx-3 mb-4  border-b-2 border-gray-300"
             onPress={() => {
                 dispatch(hideTabBar());
@@ -31,25 +30,18 @@ const ProductItem = ({ product }) => {
             }}
         >
             <Image
+                accessible={true}
                 testID={`img-product-${product.name.toLowerCase().split(" ").join("-")}`}
-                accessibilityLabel={`img-product-${product.name.toLowerCase().split(" ").join("-")}`}
-                nativeID={`img-product-${product.name.toLowerCase().split(" ").join("-")}`}
                 source={{ uri: product.image_url }}
                 style={{ width: 50, height: 50, borderRadius: 25, marginRight: 10 }}
             />
-            <View className="flex-1">
-                <Text
-                    testID="txt-product-name"
-                    accessibilityLabel="txt-product-name"
-                    nativeID="txt-product-name"
-                    className="text-sm font-bold"
-                >
+            <View className="flex-1" accessible={false}>
+                <Text accessible={true} testID="txt-product-name" className="text-sm font-bold">
                     {product.name}
                 </Text>
                 <Text
+                    accessible={true}
                     testID="txt-product-description"
-                    accessibilityLabel="txt-product-description"
-                    nativeID="txt-product-description"
                     className="text-gray-600 leading-4 text-xs"
                     numberOfLines={1}
                 >
@@ -94,13 +86,15 @@ const ExploreScreen = () => {
     }, [searchTerm]);
 
     return (
-        <SafeAreaView className="bg-white flex-1">
-            <View>
-                <View className="flex-row justify-between items-center ml-3 mr-3 mt-5 mb-3 p-2 rounded-xl border-[0.30px] border-gray-400">
+        <SafeAreaView className="bg-white flex-1" accessible={false}>
+            <View accessible={false}>
+                <View
+                    accessible={false}
+                    className="flex-row justify-between items-center ml-3 mr-3 mt-5 mb-3 p-2 rounded-xl border-[0.30px] border-gray-400"
+                >
                     <TouchableOpacity
+                        accessible={true}
                         testID="btn-back"
-                        accessibilityLabel="btn-back"
-                        nativeID="btn-back"
                         className="mr-2"
                         onPress={() => {
                             if (params?.navigateBackTo) {
@@ -117,18 +111,16 @@ const ExploreScreen = () => {
                         <ChevronLeftIcon size={24} color="black" />
                     </TouchableOpacity>
                     <TextInput
+                        accessible={true}
                         testID="inp-search"
-                        accessibilityLabel="inp-search"
-                        nativeID="inp-search"
                         className="flex-1"
                         placeholder="Explore"
                         value={searchTerm}
                         onChangeText={setSearchTerm}
                     />
                     <TouchableOpacity
+                        accessible={true}
                         testID="btn-search"
-                        accessibilityLabel="btn-search"
-                        nativeID="btn-search"
                         onPress={() => {
                             if (filteredProducts.length !== 0) {
                                 navigation.navigate(LOADING_SCREEN, {
@@ -158,33 +150,29 @@ const ExploreScreen = () => {
                 </View>
 
                 {searchTerm && filteredProducts.length === 0 ? (
-                    <View className="">
+                    <View accessible={false}>
                         <Image
+                            accessible={true}
                             testID="img-not-found"
-                            accessibilityLabel="img-not-found"
-                            nativeID="img-not-found"
                             className="h-56 w-full"
                             source={require("../../../assets/images/not-found.jpg")} // Update with the path to your image
                             resizeMode="contain"
                         />
-                        <Text
-                            testID="txt-no-products-found"
-                            accessibilityLabel="txt-no-products-found"
-                            nativeID="txt-no-products-found"
-                            className="text-center text-lg"
-                        >
+                        <Text accessible={true} testID="txt-no-products-found" className="text-center text-lg">
                             No products found.
                         </Text>
                     </View>
                 ) : (
                     <>
                         <FlatList
+                            accessible={false}
                             data={displayedProducts}
                             keyExtractor={(item) => item.product_id}
                             renderItem={({ item }) => <ProductItem product={item} />}
                         />
                         {filteredProducts.length > 3 && !showMore && (
                             <TouchableOpacity
+                                accessible={true}
                                 testID="btn-more"
                                 accessibilityLabel="btn-more"
                                 nativeID="btn-more"
@@ -192,6 +180,7 @@ const ExploreScreen = () => {
                                 onPress={() => setShowMore(true)}
                             >
                                 <Text
+                                    accessible={true}
                                     testID="txt-more"
                                     accessibilityLabel="txt-more"
                                     nativeID="txt-more"
