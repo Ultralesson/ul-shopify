@@ -72,7 +72,7 @@ jobs:
       - name: Install CocoaPods dependencies
         run: |
           cd ios
-          sudo gem install cocoapods
+          sudo gem install cocoapods -v 1.14.3
           pod install
 
       - name: Build iOS .app for Simulator (Release Mode)
