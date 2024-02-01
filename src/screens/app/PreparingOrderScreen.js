@@ -21,20 +21,22 @@ export const PreparingOrderScreen = () => {
     }, [navigation]);
 
     return (
-        <SafeAreaView className="flex-1 justify-center items-center" style={{ backgroundColor: PRIMARY_COLOR }}>
+        <SafeAreaView
+            accessible={false}
+            className="flex-1 justify-center items-center"
+            style={{ backgroundColor: PRIMARY_COLOR }}
+        >
             <Animatable.Image
+                accessible={true}
                 testID="img-preparing-order"
-                accessibilityLabel="img-preparing-order"
-                nativeID="img-preparing-order"
                 source={require("../../../assets/gifs/preparing-order.gif")}
                 animation="slideInUp"
                 iterationCount={1}
                 className="h-96 w-full"
             />
             <Animatable.Text
+                accessible={true}
                 testID="txt-preparing-order-wait-message"
-                accessibilityLabel="txt-preparing-order-wait-message"
-                nativeID="txt-preparing-order-wait-message"
                 animation="slideInUp"
                 iterationCount={1}
                 className="text-lg my-2 text-center mb-6"
@@ -42,9 +44,8 @@ export const PreparingOrderScreen = () => {
                 Hang tight! We're wrapping up your order...
             </Animatable.Text>
             <Progress.Circle
+                accessible={true}
                 testID="img-progress"
-                accessibilityLabel="img-progress"
-                nativeID="img-progress"
                 size={60}
                 indeterminate={true}
                 color={TERNARY_COLOR}

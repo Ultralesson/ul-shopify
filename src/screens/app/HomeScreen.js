@@ -35,7 +35,7 @@ const HomeScreen = () => {
     }, []);
 
     return (
-        <SafeAreaView className="bg-white pt-5">
+        <SafeAreaView className="bg-white pt-5" accessible={false}>
             {/* Keeping the modals on the very top, as they don't effect other page components */}
             {isAuthorized.type === "register" && (
                 <CustomMessageModal
@@ -46,11 +46,10 @@ const HomeScreen = () => {
                     messages={["Registration is successful", "Welcome to Ul-Shopify"]}
                 />
             )}
-            <View className="flex-row pb-3 items-center mx-4 space-x-2">
+            <View className="flex-row pb-3 items-center mx-4 space-x-2" accessible={false}>
                 <TouchableOpacity
+                    accessible={true}
                     testID="btn-shopping-bag"
-                    accessibilityLabel="btn-shopping-bag"
-                    nativeID="btn-shopping-bag"
                     onPress={() => {
                         dispatch(hideTabBar());
                         navigation.navigate(LOADING_SCREEN, {
@@ -59,77 +58,52 @@ const HomeScreen = () => {
                     }}
                 >
                     <Image
+                        accessible={true}
                         testID="img-shopping-bag"
-                        accessibilityLabel="img-shopping-bag"
-                        nativeID="img-shopping-bag"
                         source={require("../../../assets/icons/shopping-bag.png")}
                         className="h-7 w-7  p-4 rounded"
                     />
                 </TouchableOpacity>
-                <View className="flex-1">
-                    <Text
-                        testID="txt-browse-and-buy"
-                        nativeID="txt-browse-and-buy"
-                        accessibilityLabel="txt-browse-and-buy"
-                        className="font-bold text-gray-400 text-xs"
-                    >
+                <View className="flex-1" accessible={false}>
+                    <Text accessible={true} testID="txt-browse-and-buy" className="font-bold text-gray-400 text-xs">
                         Browser & Buy!
                     </Text>
                     {!username ? (
-                        <Text
-                            testID="txt-welcome-back"
-                            nativeID="txt-welcome-back"
-                            accessibilityLabel="txt-welcome-back"
-                            className="font-bold text-xl"
-                        >
+                        <Text accessible={true} testID="txt-welcome-back" className="font-bold text-xl">
                             Welcome Back!!
                         </Text>
                     ) : (
-                        <Text
-                            testID="txt-username"
-                            nativeID="txt-username"
-                            accessibilityLabel="txt-username"
-                            className="font-bold text-xl"
-                        >
+                        <Text accessible={true} testID="txt-username" className="font-bold text-xl">
                             {username.charAt(0).toUpperCase() + username.slice(1)}
                         </Text>
                     )}
                 </View>
-                <View className="pr-1">
+                <View className="pr-1" accessible={false}>
                     <Image
+                        accessible={true}
                         testID="img-ultralesson-logo"
-                        accessibilityLabel="img-ultralesson-logo"
-                        nativeID="img-ultralesson-logo"
                         source={require("../../../assets/icons/ultralesson-logo.png")}
                         className="h-10 w-14"
                     />
                 </View>
             </View>
-            <View className="flex-row items-center space-x-2 pb-2 mx-2">
+            <View className="flex-row items-center space-x-2 pb-2 mx-2" accessible={false}>
                 <TouchableOpacity
+                    accessible={true}
                     testID="btn-search"
-                    accessibilityLabel="btn-search"
-                    nativeID="btn-search"
                     className="flex-row flex-1 space-x-2 bg-gray-50 rounded-md items-center"
                     onPress={() => {
                         dispatch(hideTabBar());
                         navigation.navigate(EXPLORE_SCREEN);
                     }}
                 >
-                    <View className="flex-row flex-1 space-x-2 bg-gray-200 p-2 rounded-md items-center">
-                        <MagnifyingGlassIcon
-                            testID="img-search-icon"
-                            accessibilityLabel="img-search-icon"
-                            nativeID="img-search-icon"
-                            color={TERNARY_COLOR}
-                        />
+                    <View
+                        accessible={false}
+                        className="flex-row flex-1 space-x-2 bg-gray-200 p-2 rounded-md items-center"
+                    >
+                        <MagnifyingGlassIcon accessible={true} testID="img-search-icon" color={TERNARY_COLOR} />
 
-                        <Text
-                            testID="txt-search-for-more"
-                            nativeID="txt-search-for-more"
-                            accessibilityLabel="txt-search-for-more"
-                            className="text-gray-400"
-                        >
+                        <Text testID="txt-search-for-more" accessible={true} className="text-gray-400">
                             Search for more!!
                         </Text>
                     </View>
@@ -137,6 +111,7 @@ const HomeScreen = () => {
             </View>
 
             <ScrollView
+                accessible={false}
                 className="bg-gray-100 mb-5"
                 contentContainerStyle={{
                     paddingBottom: 100,

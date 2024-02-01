@@ -136,7 +136,7 @@ const LoginScreen = () => {
     }, []);
 
     return (
-        <SafeAreaView>
+        <SafeAreaView accessible={false}>
             <CustomToast text={"Password is wrong"} />
             {selectPasswordResetState && (
                 <CustomMessageModal
@@ -147,10 +147,10 @@ const LoginScreen = () => {
                     messages={["Your password has been reset", "Successfully"]}
                 />
             )}
-            <View className="p-3 h-full">
-                <View className="mt-5">
-                    <View className="flex-row">
-                        <View className="mr-3 flex-row items-center">
+            <View className="p-3 h-full" accessible={false}>
+                <View className="mt-5" accessible={false}>
+                    <View className="flex-row" accessible={false}>
+                        <View className="mr-3 flex-row items-center" accessible={false}>
                             <CustomBackButton
                                 onBackPress={() => {
                                     navigation.navigate(PROFILE_SCREEN);
@@ -158,37 +158,29 @@ const LoginScreen = () => {
                             />
                         </View>
 
-                        <View className="flex-row items-end flex-1">
-                            <Text
-                                testID="txt-login-heading"
-                                accessibilityLabel="txt-login-heading"
-                                nativeID="txt-login-heading"
-                                className="font-bold text-4xl"
-                            >
+                        <View className="flex-row items-end flex-1" accessible={false}>
+                            <Text accessible={true} testID="txt-login-heading" className="font-bold text-4xl">
                                 Login
                             </Text>
-                            <View className="flex-row space-x-1 mb-1">
+                            <View className="flex-row space-x-1 mb-1" accessible={false}>
                                 <Text
+                                    accessible={true}
                                     testID="txt-ro-subheading"
-                                    accessibilityLabel="txt-ro-subheading"
-                                    nativeID="txt-ro-subheading"
                                     className="italic ml-2"
                                     style={{ color: QUATERNARY_COLOR }}
                                 >
                                     to
                                 </Text>
                                 <TouchableOpacity
+                                    accessible={true}
                                     testID="btn-ulshopify"
-                                    accessibilityLabel="btn-ulshopify"
-                                    nativeID="btn-ulshopify"
                                     onPress={() => {
                                         navigation.navigate(HOME_TAB);
                                     }}
                                 >
                                     <Text
+                                        accessible={true}
                                         testID="txt-ulshopify"
-                                        accessibilityLabel="txt-ulshopify"
-                                        nativeID="txt-ulshopify"
                                         className="font-bold"
                                         style={{ color: QUATERNARY_COLOR }}
                                     >
@@ -200,9 +192,9 @@ const LoginScreen = () => {
                         <ArrowRightOnRectangleIcon size="40" color="black" />
                     </View>
                 </View>
-                <View className="flex-1 justify-between">
-                    <ScrollView className="flex-1">
-                        <View className="mt-6 flex-1" showsVerticalScrollIndicator={false}>
+                <View className="flex-1 justify-between" accessible={false}>
+                    <ScrollView className="flex-1" accessible={false}>
+                        <View className="mt-6 flex-1" showsVerticalScrollIndicator={false} accessible={false}>
                             <CustomInput
                                 label="Email"
                                 value={inputs.email}
@@ -240,19 +232,17 @@ const LoginScreen = () => {
                                     handleErrors(undefined, "password");
                                 }}
                             />
-                            <View className="flex-row justify-end -mt-5">
+                            <View className="flex-row justify-end -mt-5" accessible={false}>
                                 <TouchableOpacity
+                                    accessible={true}
                                     testID="btn-forgot-password"
-                                    accessibilityLabel="btn-forgot-password"
-                                    nativeID="btn-forgot-password"
                                     onPress={() => {
                                         navigation.navigate(FORGOT_PASSWORD_SCREEN);
                                     }}
                                 >
                                     <Text
+                                        accessible={true}
                                         testID="txt-forgot-password"
-                                        accessibilityLabel="txt-forgot-password"
-                                        nativeID="txt-forgot-password"
                                         className="font-bold"
                                         style={{ color: QUATERNARY_COLOR }}
                                     >

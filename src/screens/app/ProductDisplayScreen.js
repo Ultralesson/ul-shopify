@@ -17,77 +17,48 @@ const FeatureGridRowCards = ({ product }) => {
     return (
         <>
             <TouchableOpacity
+                accessible={false}
                 testID="ele-product-card"
-                accessibilityLabel="ele-product-card"
-                nativeID="ele-product-card"
                 className="bg-white mb-3 border-b-2 border-gray-300"
                 onPress={() => {
                     dispatch(hideTabBar());
                     navigation.navigate(LOADING_SCREEN, { navigateTo: PRODUCT_SCREEN, product });
                 }}
             >
-                <View className="h-40 w-96 rounded-sm overflow-hidden">
+                <View accessible={false} className="h-40 w-96 rounded-sm overflow-hidden">
                     <Image
+                        accessible={true}
                         testID={`img-product-${title.toLowerCase().split(" ").join("-")}`}
-                        accessibilityLabel={`img-product-${title.toLowerCase().split(" ").join("-")}`}
-                        nativeID={`img-product-${title.toLowerCase().split(" ").join("-")}`}
                         source={{ uri: imgUrl }}
                         className="h-full w-full"
                         resizeMode="cover"
                     />
                 </View>
-                <View className="px-2 pb-4">
-                    <Text
-                        testID="txt-product-title"
-                        accessibilityLabel="txt-product-title"
-                        nativeID="txt-product-title"
-                        className="font-bold text-md pt-2"
-                    >
+                <View className="px-2 pb-4" accessible={false}>
+                    <Text accessible={true} testID="txt-product-title" className="font-bold text-md pt-2">
                         {title}
                     </Text>
-                    <Text
-                        testID="txt-description"
-                        accessibilityLabel="txt-description"
-                        nativeID="txt-description"
-                        numberOfLines={1}
-                        className="pb-2 text-xs"
-                    >
+                    <Text accessible={true} testID="txt-description" numberOfLines={1} className="pb-2 text-xs">
                         {description}
                     </Text>
-                    <View className="flex-row space-x-2">
+                    <View accessible={false} className="flex-row space-x-2">
                         <StarIcon
+                            accessible={true}
                             testID="icon-rating"
-                            accessibilityLabel="icon-rating"
-                            nativeID="icon-rating"
                             fill={TERNARY_COLOR}
                             color={TERNARY_COLOR}
                             opacity={0.5}
                             size={22}
                         />
-                        <Text
-                            testID="txt-rating-category"
-                            accessibilityLabel="txt-rating-category"
-                            nativeID="txt-rating-category"
-                            className="text-xs pt-1 text-gray-500"
-                        >
+                        <Text accessible={true} testID="txt-rating-category" className="text-xs pt-1 text-gray-500">
                             {rating} . {category}
                         </Text>
                     </View>
-                    <View className="flex-row items-end mt-1">
-                        <Text
-                            testID="txt-rupee-symbol"
-                            accessibilityLabel="txt-rupee-symbol"
-                            nativeID="txt-rupee-symbol"
-                            className="text-xs mr-1 italic"
-                        >
+                    <View accessible={false} className="flex-row items-end mt-1">
+                        <Text accessible={true} testID="txt-rupee-symbol" className="text-xs mr-1 italic">
                             ₹
                         </Text>
-                        <Text
-                            testID="txt-product-price"
-                            accessibilityLabel="txt-product-price"
-                            nativeID="txt-product-price"
-                            className="font-bold"
-                        >
+                        <Text accessible={true} testID="txt-product-price" className="font-bold">
                             {price}
                         </Text>
                     </View>
@@ -168,6 +139,7 @@ export const ProductDisplayScreen = () => {
     // Render the filter drawer
     const renderFilterDrawer = () => (
         <Modal
+            accessible={false}
             animationType="slide"
             transparent={true}
             visible={isFilterDrawerVisible}
@@ -175,39 +147,27 @@ export const ProductDisplayScreen = () => {
                 setFilterDrawerVisible(!isFilterDrawerVisible);
             }}
         >
-            <View style={{ flex: 1 }}>
-                <ScrollView className="bg-white p-4">
-                    <Text
-                        testID="txt-filters-heading"
-                        accessibilityLabel="txt-filters-heading"
-                        nativeID="txt-filters-heading"
-                        className="text-center font-bold text-xl"
-                    >
+            <View style={{ flex: 1 }} accessible={false}>
+                <ScrollView className="bg-white p-4" accessible={false}>
+                    <Text accessible={true} testID="txt-filters-heading" className="text-center font-bold text-xl">
                         Filters
                     </Text>
                     {/* Brand Filters */}
-                    <Text
-                        testID="txt-brand-heading"
-                        accessibilityLabel="txt-brand-heading"
-                        nativeID="txt-brand-heading"
-                        className="text-lg font-bold mb-2"
-                    >
+                    <Text testID="txt-brand-heading" accessible={true} className="text-lg font-bold mb-2">
                         Brand
                     </Text>
                     {/* Replace this with actual brand names */}
                     {uniqueBrands.map((brand) => (
                         <TouchableOpacity
+                            accessible={true}
                             testID="btn-brand-name"
-                            accessibilityLabel="btn-brand-name"
-                            nativeID="btn-brand-name"
                             key={brand}
                             className="flex-row items-center mb-2"
                             onPress={() => toggleBrandFilter(brand)}
                         >
                             <CheckBox
+                                accessible={true}
                                 testID="chk-brand-name"
-                                accessibilityLabel="chk-brand-name"
-                                nativeID="chk-brand-name"
                                 style={{
                                     borderColor: QUATERNARY_COLOR,
                                     borderWidth: 1,
@@ -215,40 +175,28 @@ export const ProductDisplayScreen = () => {
                                 value={brandFilters.includes(brand)}
                                 onValueChange={() => toggleBrandFilter(brand)}
                             />
-                            <Text
-                                testID="txt-brand-name"
-                                accessibilityLabel="txt-brand-name"
-                                nativeID="txt-brand-name"
-                                className="ml-2 text-gray-500"
-                            >
+                            <Text accessible={true} testID="txt-brand-name" className="ml-2 text-gray-500">
                                 {brand}
                             </Text>
                         </TouchableOpacity>
                     ))}
 
                     {/* Category Filters */}
-                    <Text
-                        testID="txt-category-heading"
-                        accessibilityLabel="txt-category-heading"
-                        nativeID="txt-category-heading"
-                        className="text-lg font-bold mb-2"
-                    >
+                    <Text accessible={true} testID="txt-category-heading" className="text-lg font-bold mb-2">
                         Category
                     </Text>
                     {/* Replace this with actual category names */}
                     {uniqueCategories.map((category) => (
                         <TouchableOpacity
+                            accessible={true}
                             testID="btn-category-name"
-                            accessibilityLabel="btn-category-name"
-                            nativeID="btn-category-name"
                             key={category}
                             className="flex-row items-center mb-2"
                             onPress={() => toggleCategoryFilter(category)}
                         >
                             <CheckBox
+                                accessible={true}
                                 testID="chk-category-name"
-                                accessibilityLabel="chk-category-name"
-                                nativeID="chk-category-name"
                                 style={{
                                     borderColor: QUATERNARY_COLOR,
                                     borderWidth: 1,
@@ -256,23 +204,17 @@ export const ProductDisplayScreen = () => {
                                 value={categoryFilters.includes(category)}
                                 onValueChange={() => toggleCategoryFilter(category)}
                             />
-                            <Text
-                                testID="txt-category-name"
-                                accessibilityLabel="txt-category-name"
-                                nativeID="txt-category-name"
-                                className="ml-2 text-gray-500"
-                            >
+                            <Text accessible={true} testID="txt-category-name" className="ml-2 text-gray-500">
                                 {category}
                             </Text>
                         </TouchableOpacity>
                     ))}
 
                     {/* Price Range Filters */}
-                    <View className="flex-row justify-between mt-3">
+                    <View className="flex-row justify-between mt-3" accessible={false}>
                         <TextInput
+                            accessible={true}
                             testID="inp-minimum-price"
-                            accessibilityLabel="inp-minimum-price"
-                            nativeID="inp-minimum-price"
                             className="p-2 rounded"
                             style={{
                                 borderColor: TERNARY_COLOR,
@@ -284,9 +226,8 @@ export const ProductDisplayScreen = () => {
                             onChangeText={(value) => handlePriceChange("min", value)}
                         />
                         <TextInput
+                            accessible={true}
                             testID="inp-maximum-price"
-                            accessibilityLabel="inp-maximum-price"
-                            nativeID="inp-maximum-price"
                             className="p-2 rounded"
                             style={{
                                 borderColor: TERNARY_COLOR,
@@ -301,9 +242,8 @@ export const ProductDisplayScreen = () => {
 
                     {/* Apply Button */}
                     <TouchableOpacity
+                        accessible={true}
                         testID="btn-apply-filters"
-                        accessibilityLabel="btn-apply-filters"
-                        nativeID="btn-apply-filters"
                         className="mt-4 p-2 rounded"
                         style={{
                             backgroundColor: SECONDARY_COLOR,
@@ -314,9 +254,8 @@ export const ProductDisplayScreen = () => {
                         }}
                     >
                         <Text
+                            accessible={true}
                             testID="txt-apply-filters"
-                            accessibilityLabel="txt-apply-filters"
-                            nativeID="txt-apply-filters"
                             className="text-center text-white font-bold my-1"
                         >
                             Apply Filters
@@ -325,16 +264,14 @@ export const ProductDisplayScreen = () => {
 
                     {/* Close Button */}
                     <TouchableOpacity
+                        accessible={true}
                         testID="btn-close-filters"
-                        accessibilityLabel="btn-close-filters"
-                        nativeID="btn-close-filters"
                         className="mt-2 p-2 rounded"
                         onPress={() => setFilterDrawerVisible(false)}
                     >
                         <Text
+                            accessible={true}
                             testID="txt-close-filters"
-                            accessibilityLabel="txt-close-filters"
-                            nativeID="txt-close-filters"
                             className="text-center text-gray-500 text-md"
                         >
                             Close
@@ -346,14 +283,13 @@ export const ProductDisplayScreen = () => {
     );
 
     return (
-        <SafeAreaView className=" bg-white flex-1">
-            <View className="flex-row items-center justify-between">
-                <View className="flex-row items-center">
-                    <View className="mx-3">
+        <SafeAreaView className=" bg-white flex-1" accessible={false}>
+            <View className="flex-row items-center justify-between" accessible={false}>
+                <View className="flex-row items-center" accessible={false}>
+                    <View className="mx-3" accessible={false}>
                         <TouchableOpacity
+                            accessible={true}
                             testID="icon-back"
-                            accessibilityLabel="icon-back"
-                            nativeID="icon-back"
                             onPress={() => {
                                 dispatch(showTabBar());
                                 navigation.navigate(HOME_SCREEN);
@@ -362,11 +298,10 @@ export const ProductDisplayScreen = () => {
                             <ArrowLeftIcon size={25} color="#000000" />
                         </TouchableOpacity>
                     </View>
-                    <View>
+                    <View accessible={false}>
                         <Text
+                            accessible={true}
                             testID="txt-product-display-heading"
-                            accessibilityLabel="txt-product-display-heading"
-                            nativeID="txt-product-display-heading"
                             className="font-bold pt-2 text-xl pb-3"
                         >
                             {title ? title : "Explore More!!"}
@@ -374,9 +309,8 @@ export const ProductDisplayScreen = () => {
                     </View>
                 </View>
                 <TouchableOpacity
+                    accessible={true}
                     testID="icon-filters"
-                    accessibilityLabel="icon-filters"
-                    nativeID="icon-filters"
                     onPress={() => setFilterDrawerVisible(true)}
                     className="pr-2"
                 >
@@ -385,16 +319,14 @@ export const ProductDisplayScreen = () => {
             </View>
             {filtersActive && ( // Only display the "Clear Filters" button if filters are active
                 <TouchableOpacity
+                    accessible={true}
                     testID="btn-clear-filters"
-                    accessibilityLabel="btn-clear-filters"
-                    nativeID="btn-clear-filters"
                     onPress={clearFilters}
                     className="items-end mb-3 mr-3"
                 >
                     <Text
+                        accessible={true}
                         testID="txt-clear-filters"
-                        accessibilityLabel="txt-clear-filters"
-                        nativeID="txt-clear-filters"
                         className="text-center px-8 py-2 rounded-xl font-bold text-white"
                         style={{ backgroundColor: SECONDARY_COLOR }}
                     >
@@ -404,28 +336,22 @@ export const ProductDisplayScreen = () => {
             )}
             {renderFilterDrawer()}
             {products.length === 0 ? (
-                <View className="">
+                <View accessible={false}>
                     <Image
+                        accessible={true}
                         testID="img-not-found"
-                        accessibilityLabel="img-not-found"
-                        nativeID="img-not-found"
                         className="h-56 w-full"
                         source={require("../../../assets/images/not-found.jpg")} // Update with the path to your image
                         resizeMode="contain"
                     />
-                    <Text
-                        testID="txt-no-products-found"
-                        accessibilityLabel="txt-no-products-found"
-                        nativeID="txt-no-products-found"
-                        className="text-center text-lg"
-                    >
+                    <Text accessible={true} testID="txt-no-products-found" className="text-center text-lg">
                         No products found.
                     </Text>
                 </View>
             ) : (
-                <ScrollView className="">
-                    <View className="px-4">
-                        <View className="flex-row flex-wrap justify-between">
+                <ScrollView accessible={false}>
+                    <View className="px-4" accessible={false}>
+                        <View className="flex-row flex-wrap justify-between" accessible={false}>
                             {filteredProducts.map((product) => (
                                 <FeatureGridRowCards key={product.product_id} product={product} />
                             ))}

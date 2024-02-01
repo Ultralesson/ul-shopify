@@ -10,35 +10,28 @@ const CustomMessageModal = ({ gifOrImage, selector, resetState, typeOfMessage, m
     const modalState = useSelector(selector);
 
     return (
-        <Modal
-            testID="modal-message"
-            accessibilityLabel="modal-message"
-            nativeID="modal-message"
-            transparent
-            visible={modalState}
-        >
+        <Modal accessible={false} testID="modal-message" transparent visible={modalState}>
             <View
+                accessible={false}
                 className="flex-1 justify-center items-center"
                 style={{ backgroundColor: "rgba(128, 128, 128, 0.5)" }}
             >
-                <View className="bg-white rounded-xl">
-                    <View className="mt-3 mr-5 flex-row justify-end">
+                <View className="bg-white rounded-xl" accessible={false}>
+                    <View className="mt-3 mr-5 flex-row justify-end" accessible={false}>
                         <TouchableOpacity
+                            accessible={true}
                             testID="btn-modal-cross"
-                            accessibilityLabel="btn-modal-cross"
-                            nativeID="btn-modal-cross"
                             onPress={() => dispatch(resetState())}
                         >
                             <XMarkIcon size="30" color="black" />
                         </TouchableOpacity>
                     </View>
-                    <View className="rounded-lg pl-16 pr-16 pb-16">
-                        <View className="flex-row justify-center">
+                    <View className="rounded-lg pl-16 pr-16 pb-16" accessible={false}>
+                        <View className="flex-row justify-center" accessible={false}>
                             {typeOfMessage === "success" && (
                                 <Animatable.Image
+                                    accessible={true}
                                     testID="img-modal"
-                                    accessibilityLabel="img-modal"
-                                    nativeID="img-modal"
                                     source={gifOrImage}
                                     animation="slideInUp"
                                     iterationCount={1}
@@ -46,16 +39,10 @@ const CustomMessageModal = ({ gifOrImage, selector, resetState, typeOfMessage, m
                                 />
                             )}
                         </View>
-                        <View className="flex items-center">
+                        <View className="flex items-center" accessible={false}>
                             {messages.map((message, index) => {
                                 return (
-                                    <Text
-                                        testID="txt-modal-message"
-                                        accessibilityLabel="txt-modal-message"
-                                        nativeID="txt-modal-message"
-                                        key={index}
-                                        className="mt-4"
-                                    >
+                                    <Text accessible={true} testID="txt-modal-message" key={index} className="mt-4">
                                         {message}
                                     </Text>
                                 );
