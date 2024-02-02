@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Text, View, ScrollView, TouchableOpacity, Keyboard } from "react-native";
+import { Text, View, ScrollView, TouchableOpacity, Keyboard, Platform } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { useNavigation } from "@react-navigation/native";
 import * as Yup from "yup";
@@ -13,7 +13,6 @@ import {
     FORGOT_PASSWORD_SCREEN,
     HOME_TAB,
     LOADING_SCREEN,
-    LOGIN_SCREEN,
     OTP_SCREEN,
     PROFILE_SCREEN,
     REGISTRATION_SCREEN,
@@ -31,7 +30,6 @@ import {
 import CustomMessageModal from "../../components/common/CustomMessageModal";
 import { userModel } from "../../../utilities/asyncStorage";
 import CustomToast from "../../modals/Toast";
-import { login } from "../../store/slices/authSlice";
 
 const LoginScreen = () => {
     const navigation = useNavigation();
@@ -159,13 +157,25 @@ const LoginScreen = () => {
                         </View>
 
                         <View className="flex-row items-end flex-1" accessible={false}>
-                            <Text accessible={true} testID="txt-login-heading" className="font-bold text-4xl">
+                            <Text
+                                accessible={true}
+                                testID={
+                                    Platform.OS === "android"
+                                        ? "com.ultralesson.ulshopify:id/txt-login-heading"
+                                        : "txt-login-heading"
+                                }
+                                className="font-bold text-4xl"
+                            >
                                 Login
                             </Text>
                             <View className="flex-row space-x-1 mb-1" accessible={false}>
                                 <Text
                                     accessible={true}
-                                    testID="txt-ro-subheading"
+                                    testID={
+                                        Platform.OS === "android"
+                                            ? "com.ultralesson.ulshopify:id/txt-ro-subheading"
+                                            : "txt-ro-subheading"
+                                    }
                                     className="italic ml-2"
                                     style={{ color: QUATERNARY_COLOR }}
                                 >
@@ -173,14 +183,22 @@ const LoginScreen = () => {
                                 </Text>
                                 <TouchableOpacity
                                     accessible={true}
-                                    testID="btn-ulshopify"
+                                    testID={
+                                        Platform.OS === "android"
+                                            ? "com.ultralesson.ulshopify:id/btn-ulshopify"
+                                            : "btn-ulshopify"
+                                    }
                                     onPress={() => {
                                         navigation.navigate(HOME_TAB);
                                     }}
                                 >
                                     <Text
                                         accessible={true}
-                                        testID="txt-ulshopify"
+                                        testID={
+                                            Platform.OS === "android"
+                                                ? "com.ultralesson.ulshopify:id/txt-ulshopify"
+                                                : "txt-ulshopify"
+                                        }
                                         className="font-bold"
                                         style={{ color: QUATERNARY_COLOR }}
                                     >
@@ -235,14 +253,22 @@ const LoginScreen = () => {
                             <View className="flex-row justify-end -mt-5" accessible={false}>
                                 <TouchableOpacity
                                     accessible={true}
-                                    testID="btn-forgot-password"
+                                    testID={
+                                        Platform.OS === "android"
+                                            ? "com.ultralesson.ulshopify:id/btn-forgot-password"
+                                            : "btn-forgot-password"
+                                    }
                                     onPress={() => {
                                         navigation.navigate(FORGOT_PASSWORD_SCREEN);
                                     }}
                                 >
                                     <Text
                                         accessible={true}
-                                        testID="txt-forgot-password"
+                                        testID={
+                                            Platform.OS === "android"
+                                                ? "com.ultralesson.ulshopify:id/txt-forgot-password"
+                                                : "txt-forgot-password"
+                                        }
                                         className="font-bold"
                                         style={{ color: QUATERNARY_COLOR }}
                                     >

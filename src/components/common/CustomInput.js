@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Text, TextInput, View, TouchableOpacity } from "react-native";
+import { Text, TextInput, View, TouchableOpacity, Platform } from "react-native";
 import { EyeIcon, EyeSlashIcon } from "react-native-heroicons/outline";
 import { QUATERNARY_COLOR } from "../../../constants/colors";
 
@@ -26,7 +26,11 @@ const CustomInput = ({
         <View className="mb-5" accessible={false}>
             <Text
                 accessible={true}
-                testID={`label-${label.toLowerCase().split(" ").join("-")}`}
+                testID={
+                    Platform.OS === "android"
+                        ? `com.ultralesson.ulshopify:id/label-${label.toLowerCase().split(" ").join("-")}`
+                        : `label-${label.toLowerCase().split(" ").join("-")}`
+                }
                 className="mb-2 font-bold"
                 style={{ color: QUATERNARY_COLOR }}
             >
@@ -39,12 +43,23 @@ const CustomInput = ({
                     isFocused ? "border-[0.23px] border-solid border-gray-600" : ""
                 } ${customStyle ? customStyle : ""} `}
             >
-                <Icon accessible={true} testID={`icon-${iconName}`} size={iconSize} color={iconColor} />
+                <Icon
+                    accessible={true}
+                    testID={
+                        Platform.OS === "android" ? `com.ultralesson.ulshopify:id/icon-${iconName}` : `icon-${iconName}`
+                    }
+                    size={iconSize}
+                    color={iconColor}
+                />
                 <View accessible={true} className="ml-3 border-[0.20px] border-solid border-gray-500 border-1"></View>
                 <View className="flex-1 flex-row justify-between" accessible={false}>
                     <TextInput
                         accessible={true}
-                        testID={`inp-${inputName.toLowerCase().split(" ").join("-")}`}
+                        testID={
+                            Platform.OS === "android"
+                                ? `com.ultralesson.ulshopify:id/inp-${inputName.toLowerCase().split(" ").join("-")}`
+                                : `inp-${inputName.toLowerCase().split(" ").join("-")}`
+                        }
                         className="ml-2 flex-1"
                         value={value}
                         placeholder={placeholder}
@@ -63,17 +78,32 @@ const CustomInput = ({
                     {password && (
                         <TouchableOpacity
                             accessible={true}
-                            testID="btn-display-hide-password"
+                            testID={
+                                Platform.OS === "android"
+                                    ? "com.ultralesson.ulshopify:id/btn-display-hide-password"
+                                    : "btn-display-hide-password"
+                            }
                             activeOpacity={1}
                             onPress={() => {
                                 setHidePassword(!hidePassword);
                             }}
                         >
                             {hidePassword ? (
-                                <EyeIcon accessible={true} testID="icon-eye" size={iconSize} color={iconColor} />
+                                <EyeIcon
+                                    accessible={true}
+                                    testID={
+                                        Platform.OS === "android" ? "com.ultralesson.ulshopify:id/icon-eye" : "icon-eye"
+                                    }
+                                    size={iconSize}
+                                    color={iconColor}
+                                />
                             ) : (
                                 <EyeSlashIcon
-                                    testID="icon-eye-slash"
+                                    testID={
+                                        Platform.OS === "android"
+                                            ? "com.ultralesson.ulshopify:id/icon-eye-slash"
+                                            : "icon-eye-slash"
+                                    }
                                     accessible={true}
                                     size={iconSize}
                                     color={iconColor}
@@ -87,7 +117,11 @@ const CustomInput = ({
             {error && (
                 <Text
                     accessible={true}
-                    testID={`txt-${error.toLowerCase().split(" ").join("-")}`}
+                    testID={
+                        Platform.OS === "android"
+                            ? `com.ultralesson.ulshopify:id/txt-${error.toLowerCase().split(" ").join("-")}`
+                            : `txt-${error.toLowerCase().split(" ").join("-")}`
+                    }
                     className="text-red-500"
                 >
                     {error}

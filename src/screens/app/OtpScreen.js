@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from "react";
-import { View, Text, Image, TouchableOpacity, Keyboard } from "react-native";
+import { View, Text, Image, TouchableOpacity, Keyboard, Platform } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import CustomBackButton from "../../components/common/CustomBackButton";
 import { QUATERNARY_COLOR, SECONDARY_COLOR, TERNARY_COLOR } from "../../../constants/colors";
@@ -133,7 +133,7 @@ const OtpScreen = () => {
             <View className="flex justify-center items-center" accessible={false}>
                 <Image
                     accessible={true}
-                    testID="img-otp"
+                    testID={Platform.OS === "android" ? "com.ultralesson.ulshopify:id/img-otp" : "img-otp"}
                     resizeMode="contain"
                     source={require("../../../assets/images/otp.jpg")}
                     className={`w-full object-resize ${!keyboardStatus ? "h-1/2" : "h-40 mb-2"}`}
@@ -141,23 +141,41 @@ const OtpScreen = () => {
                 <View className="flex-row items-end mr-5" accessible={false}>
                     <Text
                         accessible={true}
-                        testID="txt-ulshopify"
+                        testID={
+                            Platform.OS === "android" ? "com.ultralesson.ulshopify:id/txt-ulshopify" : "txt-ulshopify"
+                        }
                         className="text-2xl font-bold"
                         style={{ color: QUATERNARY_COLOR }}
                     >
                         Ul-Shopify
                     </Text>
-                    <Text accessible={true} testID="txt-secure-verifier" className="italic ml-2 font-bold">
+                    <Text
+                        accessible={true}
+                        testID={
+                            Platform.OS === "android"
+                                ? "com.ultralesson.ulshopify:id/txt-secure-verifier"
+                                : "txt-secure-verifier"
+                        }
+                        className="italic ml-2 font-bold"
+                    >
                         secure verifier
                     </Text>
                 </View>
-                <Text accessible={true} testID="txt-send-otp-message" className="mt-3 ml-1 mr-1 ">
+                <Text
+                    accessible={true}
+                    testID={
+                        Platform.OS === "android"
+                            ? "com.ultralesson.ulshopify:id/txt-send-otp-message"
+                            : "txt-send-otp-message"
+                    }
+                    className="mt-3 ml-1 mr-1 "
+                >
                     We have sent an OTP code to your verified mobile number
                 </Text>
                 <View className="flex-row gap-5 mt-5" accessible={false}>
                     <TextInput
                         accessible={true}
-                        testID="inp-opt-1"
+                        testID={Platform.OS === "android" ? "com.ultralesson.ulshopify:id/inp-opt-1" : "inp-opt-1"}
                         value={otpInputs.otp1}
                         editable={counter === 0 ? false : true}
                         selectTextOnFocus={counter === 0 ? false : true}
@@ -174,7 +192,7 @@ const OtpScreen = () => {
                     />
                     <TextInput
                         accessible={true}
-                        testID="inp-opt-2"
+                        testID={Platform.OS === "android" ? "com.ultralesson.ulshopify:id/inp-opt-2" : "inp-opt-2"}
                         value={otpInputs.otp2}
                         editable={counter === 0 ? false : true}
                         selectTextOnFocus={counter === 0 ? false : true}
@@ -191,7 +209,7 @@ const OtpScreen = () => {
                     />
                     <TextInput
                         accessible={true}
-                        testID="inp-opt-3"
+                        testID={Platform.OS === "android" ? "com.ultralesson.ulshopify:id/inp-opt-3" : "inp-opt-3"}
                         value={otpInputs.otp3}
                         editable={counter === 0 ? false : true}
                         selectTextOnFocus={counter === 0 ? false : true}
@@ -208,7 +226,7 @@ const OtpScreen = () => {
                     />
                     <TextInput
                         accessible={true}
-                        testID="inp-opt-4"
+                        testID={Platform.OS === "android" ? "com.ultralesson.ulshopify:id/inp-opt-4" : "inp-opt-4"}
                         value={otpInputs.otp4}
                         editable={counter === 0 ? false : true}
                         selectTextOnFocus={counter === 0 ? false : true}
@@ -223,12 +241,19 @@ const OtpScreen = () => {
                     />
                 </View>
                 <View className="flex-row gap-2 mt-5" accessible={false}>
-                    <Text accessible={true} testID="txt-otp-question">
+                    <Text
+                        accessible={true}
+                        testID={
+                            Platform.OS === "android"
+                                ? "com.ultralesson.ulshopify:id/txt-otp-question"
+                                : "txt-otp-question"
+                        }
+                    >
                         Didn't receive OTP?
                     </Text>
                     <TouchableOpacity
                         accessible={true}
-                        testID="btn-resend-otp"
+                        testID={Platform.OS === "android" ? "com.ultralesson.ulshopify:id/btn-resend-otp" : ""}
                         onPress={() => {
                             if (counter === 0) {
                                 setCounter(OTP_TIMEOUT);
@@ -237,14 +262,22 @@ const OtpScreen = () => {
                     >
                         <Text
                             accessible={true}
-                            testID="txt-resend-otp"
+                            testID={
+                                Platform.OS === "android"
+                                    ? "com.ultralesson.ulshopify:id/txt-resend-otp"
+                                    : "txt-resend-otp"
+                            }
                             className="font-bold underline italic"
                             style={{ color: counter === 0 ? QUATERNARY_COLOR : SECONDARY_COLOR }}
                         >
                             Resend again
                         </Text>
                     </TouchableOpacity>
-                    <Text accessible={true} testID="txt-counter" className={`${counter === 0 ? "opacity-0" : ""}`}>
+                    <Text
+                        accessible={true}
+                        testID={Platform.OS === "android" ? "com.ultralesson.ulshopify:id/txt-counter" : "txt-counter"}
+                        className={`${counter === 0 ? "opacity-0" : ""}`}
+                    >
                         {parseInt(counter / 60)
                             .toString()
                             .padStart(2, "0")}

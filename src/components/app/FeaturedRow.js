@@ -1,5 +1,5 @@
 import React from "react";
-import { View, Text, TouchableOpacity, Image } from "react-native";
+import { View, Text, TouchableOpacity, Image, Platform } from "react-native";
 import { ScrollView } from "react-native-gesture-handler";
 import { ArrowRightIcon, PlusCircleIcon, StarIcon } from "react-native-heroicons/outline";
 import { QUATERNARY_COLOR, TERNARY_COLOR } from "../../../constants/colors";
@@ -17,7 +17,11 @@ export const FeatureRowCard = ({ product }) => {
     return (
         <TouchableOpacity
             accessible={false}
-            testID="ele-featured-row-card"
+            testID={
+                Platform.OS === "android"
+                    ? "com.ultralesson.ulshopify:id/ele-featured-row-card"
+                    : "ele-featured-row-card"
+            }
             className="bg-white w-60 mr-3 shadow"
             onPress={() => {
                 dispatch(hideTabBar());
@@ -29,34 +33,76 @@ export const FeatureRowCard = ({ product }) => {
                 source={{
                     uri: imgUrl,
                 }}
-                testID={`img-featured-row-${title.toLowerCase().split(" ").join("-")}`}
+                testID={
+                    Platform.OS === "android"
+                        ? `com.ultralesson.ulshopify:id/img-featured-row-${title.toLowerCase().split(" ").join("-")}`
+                        : `img-featured-row-${title.toLowerCase().split(" ").join("-")}`
+                }
                 className="h-40 w-full rounded-sm"
             />
             <View accessible={false} className="px-3 pb-4">
-                <Text accessible={true} testID={`txt-${title}`} className="font-bold text-md pt-2">
+                <Text
+                    accessible={true}
+                    testID={Platform.OS === "android" ? `com.ultralesson.ulshopify:id/txt-${title}` : `txt-${title}`}
+                    className="font-bold text-md pt-2"
+                >
                     {title}
                 </Text>
-                <Text accessible={true} numberOfLines={1} className="pb-2 text-xs">
+
+                <Text
+                    accessible={true}
+                    testID={
+                        Platform.OS === "android"
+                            ? `com.ultralesson.ulshopify:id/txt-${description}`
+                            : `txt-${description}`
+                    }
+                    numberOfLines={1}
+                    className="pb-2 text-xs"
+                >
                     {description}
                 </Text>
                 <View accessible={false} className="flex-row space-x-2">
                     <StarIcon
                         accessible={true}
-                        testID="icon-rating"
+                        testID={Platform.OS === "android" ? "com.ultralesson.ulshopify:id/icon-rating" : "icon-rating"}
                         fill={TERNARY_COLOR}
                         color={TERNARY_COLOR}
                         opacity={0.5}
                         size={22}
                     />
-                    <Text accessible={true} testID="txt-rating-category" className="text-xs pt-1 text-gray-500">
+                    <Text
+                        accessible={true}
+                        testID={
+                            Platform.OS === "android"
+                                ? "com.ultralesson.ulshopify:id/txt-rating-category"
+                                : "txt-rating-category"
+                        }
+                        className="text-xs pt-1 text-gray-500"
+                    >
                         {rating} . {category}
                     </Text>
                 </View>
                 <View accessible={false} className="flex-row items-end mt-1">
-                    <Text accessible={true} testID="txt-rupee-symbol" className="text-xs mr-1 italic">
+                    <Text
+                        accessible={true}
+                        testID={
+                            Platform.OS === "android"
+                                ? "com.ultralesson.ulshopify:id/txt-rupee-symbol"
+                                : "txt-rupee-symbol"
+                        }
+                        className="text-xs mr-1 italic"
+                    >
                         ₹
                     </Text>
-                    <Text accessible={true} testID="txt-product-price" className="font-bold">
+                    <Text
+                        accessible={true}
+                        testID={
+                            Platform.OS === "android"
+                                ? "com.ultralesson.ulshopify:id/txt-product-price"
+                                : "txt-product-price"
+                        }
+                        className="font-bold"
+                    >
                         {price}
                     </Text>
                 </View>
@@ -72,12 +118,20 @@ const FeaturedRow = ({ title, description, productsList }) => {
     return (
         <View accessible={false}>
             <View className="mt-4 flex-row items-center justify-between px-4" accessible={false}>
-                <Text accessible={true} testID="txt-featured-row-title" className="font-bold text-lg">
+                <Text
+                    accessible={true}
+                    testID={
+                        Platform.OS === "android"
+                            ? "com.ultralesson.ulshopify:id/txt-featured-row-title"
+                            : "txt-featured-row-title"
+                    }
+                    className="font-bold text-lg"
+                >
                     {title}
                 </Text>
                 <TouchableOpacity
                     accessible={true}
-                    testID="btn-next"
+                    testID={Platform.OS === "android" ? "com.ultralesson.ulshopify:id/btn-next" : "btn-next"}
                     onPress={() => {
                         dispatch(hideTabBar());
                         navigation.navigate(LOADING_SCREEN, {
@@ -86,10 +140,22 @@ const FeaturedRow = ({ title, description, productsList }) => {
                         });
                     }}
                 >
-                    <ArrowRightIcon testID="icon-next" size={22} color={QUATERNARY_COLOR} />
+                    <ArrowRightIcon
+                        testID={Platform.OS === "android" ? "com.ultralesson.ulshopify:id/icon-next" : "icon-next"}
+                        size={22}
+                        color={QUATERNARY_COLOR}
+                    />
                 </TouchableOpacity>
             </View>
-            <Text accessible={true} testID="txt-featured-row-description" className="text-xs text-gray-500 px-4">
+            <Text
+                accessible={true}
+                testID={
+                    Platform.OS === "android"
+                        ? "com.ultralesson.ulshopify:id/txt-featured-row-description"
+                        : "txt-featured-row-description"
+                }
+                className="text-xs text-gray-500 px-4"
+            >
                 {description}
             </Text>
 
@@ -107,7 +173,9 @@ const FeaturedRow = ({ title, description, productsList }) => {
                 })}
                 <TouchableOpacity
                     accessible={true}
-                    testID="ele-explore-more"
+                    testID={
+                        Platform.OS === "android" ? "com.ultralesson.ulshopify:id/ele-explore-more" : "ele-explore-more"
+                    }
                     className="flex-1 justify-center ml-8 mr-4 items-center"
                     onPress={() => {
                         dispatch(hideTabBar());
@@ -119,12 +187,25 @@ const FeaturedRow = ({ title, description, productsList }) => {
                 >
                     <Text
                         accessible={true}
-                        testID="txt-explore-more"
+                        testID={
+                            Platform.OS === "android"
+                                ? "com.ultralesson.ulshopify:id/txt-explore-more"
+                                : "txt-explore-more"
+                        }
                         className="text-md text-gray-500 text-bold mb-2 italic"
                     >
                         Explore More
                     </Text>
-                    <PlusCircleIcon accessible={true} testID="icon-plus-circle" color={TERNARY_COLOR} size={40} />
+                    <PlusCircleIcon
+                        accessible={true}
+                        testID={
+                            Platform.OS === "android"
+                                ? "com.ultralesson.ulshopify:id/icon-plus-circle"
+                                : "icon-plus-circle"
+                        }
+                        color={TERNARY_COLOR}
+                        size={40}
+                    />
                 </TouchableOpacity>
             </ScrollView>
         </View>

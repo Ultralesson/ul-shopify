@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { ScrollView, View, Text, Image, TouchableOpacity, Modal, TextInput } from "react-native";
+import { ScrollView, View, Text, Image, TouchableOpacity, Modal, TextInput, Platform } from "react-native";
 import { useNavigation, useRoute } from "@react-navigation/native";
 import { useDispatch } from "react-redux";
 import { AdjustmentsVerticalIcon, ArrowLeftIcon, StarIcon } from "react-native-heroicons/outline";
@@ -8,6 +8,7 @@ import { QUATERNARY_COLOR, SECONDARY_COLOR, TERNARY_COLOR } from "../../../const
 import { SafeAreaView } from "react-native-safe-area-context";
 import { hideTabBar, showTabBar } from "../../store/slices/appUIStateSlice";
 import CheckBox from "expo-checkbox";
+import { locatorTemplate } from "../../../utilities/locatorTemplate";
 
 const FeatureGridRowCards = ({ product }) => {
     const { name: title, description, category, rating, image_url: imgUrl, price } = product;
@@ -18,7 +19,7 @@ const FeatureGridRowCards = ({ product }) => {
         <>
             <TouchableOpacity
                 accessible={false}
-                testID="ele-product-card"
+                testID={locatorTemplate("ele-product-card")}
                 className="bg-white mb-3 border-b-2 border-gray-300"
                 onPress={() => {
                     dispatch(hideTabBar());
@@ -28,37 +29,54 @@ const FeatureGridRowCards = ({ product }) => {
                 <View accessible={false} className="h-40 w-96 rounded-sm overflow-hidden">
                     <Image
                         accessible={true}
-                        testID={`img-product-${title.toLowerCase().split(" ").join("-")}`}
+                        testID={locatorTemplate(`img-product-${title.toLowerCase().split(" ").join("-")}`)}
                         source={{ uri: imgUrl }}
                         className="h-full w-full"
                         resizeMode="cover"
                     />
                 </View>
                 <View className="px-2 pb-4" accessible={false}>
-                    <Text accessible={true} testID="txt-product-title" className="font-bold text-md pt-2">
+                    <Text
+                        accessible={true}
+                        testID={locatorTemplate("txt-product-title")}
+                        className="font-bold text-md pt-2"
+                    >
                         {title}
                     </Text>
-                    <Text accessible={true} testID="txt-description" numberOfLines={1} className="pb-2 text-xs">
+                    <Text
+                        accessible={true}
+                        testID={locatorTemplate("txt-description")}
+                        numberOfLines={1}
+                        className="pb-2 text-xs"
+                    >
                         {description}
                     </Text>
                     <View accessible={false} className="flex-row space-x-2">
                         <StarIcon
                             accessible={true}
-                            testID="icon-rating"
+                            testID={locatorTemplate("icon-rating")}
                             fill={TERNARY_COLOR}
                             color={TERNARY_COLOR}
                             opacity={0.5}
                             size={22}
                         />
-                        <Text accessible={true} testID="txt-rating-category" className="text-xs pt-1 text-gray-500">
+                        <Text
+                            accessible={true}
+                            testID={locatorTemplate("txt-rating-category")}
+                            className="text-xs pt-1 text-gray-500"
+                        >
                             {rating} . {category}
                         </Text>
                     </View>
                     <View accessible={false} className="flex-row items-end mt-1">
-                        <Text accessible={true} testID="txt-rupee-symbol" className="text-xs mr-1 italic">
+                        <Text
+                            accessible={true}
+                            testID={locatorTemplate("txt-rupee-symbol")}
+                            className="text-xs mr-1 italic"
+                        >
                             ₹
                         </Text>
-                        <Text accessible={true} testID="txt-product-price" className="font-bold">
+                        <Text accessible={true} testID={locatorTemplate("txt-product-price")} className="font-bold">
                             {price}
                         </Text>
                     </View>
@@ -149,25 +167,33 @@ export const ProductDisplayScreen = () => {
         >
             <View style={{ flex: 1 }} accessible={false}>
                 <ScrollView className="bg-white p-4" accessible={false}>
-                    <Text accessible={true} testID="txt-filters-heading" className="text-center font-bold text-xl">
+                    <Text
+                        accessible={true}
+                        testID={locatorTemplate("txt-filters-heading")}
+                        className="text-center font-bold text-xl"
+                    >
                         Filters
                     </Text>
                     {/* Brand Filters */}
-                    <Text testID="txt-brand-heading" accessible={true} className="text-lg font-bold mb-2">
+                    <Text
+                        testID={locatorTemplate("txt-brand-heading")}
+                        accessible={true}
+                        className="text-lg font-bold mb-2"
+                    >
                         Brand
                     </Text>
                     {/* Replace this with actual brand names */}
                     {uniqueBrands.map((brand) => (
                         <TouchableOpacity
                             accessible={true}
-                            testID="btn-brand-name"
+                            testID={locatorTemplate("btn-brand-name")}
                             key={brand}
                             className="flex-row items-center mb-2"
                             onPress={() => toggleBrandFilter(brand)}
                         >
                             <CheckBox
                                 accessible={true}
-                                testID="chk-brand-name"
+                                testID={locatorTemplate("chk-brand-name")}
                                 style={{
                                     borderColor: QUATERNARY_COLOR,
                                     borderWidth: 1,
@@ -182,21 +208,25 @@ export const ProductDisplayScreen = () => {
                     ))}
 
                     {/* Category Filters */}
-                    <Text accessible={true} testID="txt-category-heading" className="text-lg font-bold mb-2">
+                    <Text
+                        accessible={true}
+                        testID={locatorTemplate("txt-category-heading")}
+                        className="text-lg font-bold mb-2"
+                    >
                         Category
                     </Text>
                     {/* Replace this with actual category names */}
                     {uniqueCategories.map((category) => (
                         <TouchableOpacity
                             accessible={true}
-                            testID="btn-category-name"
+                            testID={locatorTemplate("btn-category-name")}
                             key={category}
                             className="flex-row items-center mb-2"
                             onPress={() => toggleCategoryFilter(category)}
                         >
                             <CheckBox
                                 accessible={true}
-                                testID="chk-category-name"
+                                testID={locatorTemplate("chk-category-name")}
                                 style={{
                                     borderColor: QUATERNARY_COLOR,
                                     borderWidth: 1,
@@ -204,7 +234,11 @@ export const ProductDisplayScreen = () => {
                                 value={categoryFilters.includes(category)}
                                 onValueChange={() => toggleCategoryFilter(category)}
                             />
-                            <Text accessible={true} testID="txt-category-name" className="ml-2 text-gray-500">
+                            <Text
+                                accessible={true}
+                                testID={locatorTemplate("txt-category-name")}
+                                className="ml-2 text-gray-500"
+                            >
                                 {category}
                             </Text>
                         </TouchableOpacity>
@@ -214,7 +248,7 @@ export const ProductDisplayScreen = () => {
                     <View className="flex-row justify-between mt-3" accessible={false}>
                         <TextInput
                             accessible={true}
-                            testID="inp-minimum-price"
+                            testID={locatorTemplate("inp-minimum-price")}
                             className="p-2 rounded"
                             style={{
                                 borderColor: TERNARY_COLOR,
@@ -227,7 +261,7 @@ export const ProductDisplayScreen = () => {
                         />
                         <TextInput
                             accessible={true}
-                            testID="inp-maximum-price"
+                            testID={locatorTemplate("inp-maximum-price")}
                             className="p-2 rounded"
                             style={{
                                 borderColor: TERNARY_COLOR,
@@ -243,7 +277,7 @@ export const ProductDisplayScreen = () => {
                     {/* Apply Button */}
                     <TouchableOpacity
                         accessible={true}
-                        testID="btn-apply-filters"
+                        testID={locatorTemplate("btn-apply-filters")}
                         className="mt-4 p-2 rounded"
                         style={{
                             backgroundColor: SECONDARY_COLOR,
@@ -255,7 +289,7 @@ export const ProductDisplayScreen = () => {
                     >
                         <Text
                             accessible={true}
-                            testID="txt-apply-filters"
+                            testID={locatorTemplate("txt-apply-filters")}
                             className="text-center text-white font-bold my-1"
                         >
                             Apply Filters
@@ -265,13 +299,13 @@ export const ProductDisplayScreen = () => {
                     {/* Close Button */}
                     <TouchableOpacity
                         accessible={true}
-                        testID="btn-close-filters"
+                        testID={locatorTemplate("btn-close-filters")}
                         className="mt-2 p-2 rounded"
                         onPress={() => setFilterDrawerVisible(false)}
                     >
                         <Text
                             accessible={true}
-                            testID="txt-close-filters"
+                            testID={locatorTemplate("txt-close-filters")}
                             className="text-center text-gray-500 text-md"
                         >
                             Close
@@ -289,7 +323,7 @@ export const ProductDisplayScreen = () => {
                     <View className="mx-3" accessible={false}>
                         <TouchableOpacity
                             accessible={true}
-                            testID="icon-back"
+                            testID={locatorTemplate("icon-back")}
                             onPress={() => {
                                 dispatch(showTabBar());
                                 navigation.navigate(HOME_SCREEN);
@@ -301,7 +335,7 @@ export const ProductDisplayScreen = () => {
                     <View accessible={false}>
                         <Text
                             accessible={true}
-                            testID="txt-product-display-heading"
+                            testID={locatorTemplate("txt-product-display-heading")}
                             className="font-bold pt-2 text-xl pb-3"
                         >
                             {title ? title : "Explore More!!"}
@@ -310,7 +344,7 @@ export const ProductDisplayScreen = () => {
                 </View>
                 <TouchableOpacity
                     accessible={true}
-                    testID="icon-filters"
+                    testID={locatorTemplate("icon-filters")}
                     onPress={() => setFilterDrawerVisible(true)}
                     className="pr-2"
                 >
@@ -320,13 +354,13 @@ export const ProductDisplayScreen = () => {
             {filtersActive && ( // Only display the "Clear Filters" button if filters are active
                 <TouchableOpacity
                     accessible={true}
-                    testID="btn-clear-filters"
+                    testID={locatorTemplate("btn-clear-filters")}
                     onPress={clearFilters}
                     className="items-end mb-3 mr-3"
                 >
                     <Text
                         accessible={true}
-                        testID="txt-clear-filters"
+                        testID={locatorTemplate("txt-clear-filters")}
                         className="text-center px-8 py-2 rounded-xl font-bold text-white"
                         style={{ backgroundColor: SECONDARY_COLOR }}
                     >
@@ -339,12 +373,16 @@ export const ProductDisplayScreen = () => {
                 <View accessible={false}>
                     <Image
                         accessible={true}
-                        testID="img-not-found"
+                        testID={locatorTemplate("img-not-found")}
                         className="h-56 w-full"
                         source={require("../../../assets/images/not-found.jpg")} // Update with the path to your image
                         resizeMode="contain"
                     />
-                    <Text accessible={true} testID="txt-no-products-found" className="text-center text-lg">
+                    <Text
+                        accessible={true}
+                        testID={locatorTemplate("txt-no-products-found")}
+                        className="text-center text-lg"
+                    >
                         No products found.
                     </Text>
                 </View>

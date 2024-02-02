@@ -1,6 +1,6 @@
 import { useNavigation } from "@react-navigation/native";
 import React, { useEffect, useState } from "react";
-import { Image, Text, TouchableOpacity, View } from "react-native";
+import { Image, Text, TouchableOpacity, View, Platform } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import CustomMessageModal from "../../components/common/CustomMessageModal";
 import { changeRegistrationModalState, selectRegistrationModalState } from "../../store/slices/modalsSlice";
@@ -49,7 +49,9 @@ const HomeScreen = () => {
             <View className="flex-row pb-3 items-center mx-4 space-x-2" accessible={false}>
                 <TouchableOpacity
                     accessible={true}
-                    testID="btn-shopping-bag"
+                    testID={
+                        Platform.OS === "android" ? "com.ultralesson.ulshopify:id/btn-shopping-bag" : "btn-shopping-bag"
+                    }
                     onPress={() => {
                         dispatch(hideTabBar());
                         navigation.navigate(LOADING_SCREEN, {
@@ -59,21 +61,47 @@ const HomeScreen = () => {
                 >
                     <Image
                         accessible={true}
-                        testID="img-shopping-bag"
+                        testID={
+                            Platform.OS === "android"
+                                ? "com.ultralesson.ulshopify:id/img-shopping-bag"
+                                : "img-shopping-bag"
+                        }
                         source={require("../../../assets/icons/shopping-bag.png")}
                         className="h-7 w-7  p-4 rounded"
                     />
                 </TouchableOpacity>
                 <View className="flex-1" accessible={false}>
-                    <Text accessible={true} testID="txt-browse-and-buy" className="font-bold text-gray-400 text-xs">
+                    <Text
+                        accessible={true}
+                        testID={
+                            Platform.OS === "android"
+                                ? "com.ultralesson.ulshopify:id/txt-browse-and-buy"
+                                : "txt-browse-and-buy"
+                        }
+                        className="font-bold text-gray-400 text-xs"
+                    >
                         Browser & Buy!
                     </Text>
                     {!username ? (
-                        <Text accessible={true} testID="txt-welcome-back" className="font-bold text-xl">
+                        <Text
+                            accessible={true}
+                            testID={
+                                Platform.OS === "android"
+                                    ? "com.ultralesson.ulshopify:id/txt-welcome-back"
+                                    : "txt-welcome-back"
+                            }
+                            className="font-bold text-xl"
+                        >
                             Welcome Back!!
                         </Text>
                     ) : (
-                        <Text accessible={true} testID="txt-username" className="font-bold text-xl">
+                        <Text
+                            accessible={true}
+                            testID={
+                                Platform.OS === "android" ? "com.ultralesson.ulshopify:id/txt-username" : "txt-username"
+                            }
+                            className="font-bold text-xl"
+                        >
                             {username.charAt(0).toUpperCase() + username.slice(1)}
                         </Text>
                     )}
@@ -81,7 +109,11 @@ const HomeScreen = () => {
                 <View className="pr-1" accessible={false}>
                     <Image
                         accessible={true}
-                        testID="img-ultralesson-logo"
+                        testID={
+                            Platform.OS === "android"
+                                ? "com.ultralesson.ulshopify:id/img-ultralesson-logo"
+                                : "img-ultralesson-logo"
+                        }
                         source={require("../../../assets/icons/ultralesson-logo.png")}
                         className="h-10 w-14"
                     />
@@ -90,7 +122,7 @@ const HomeScreen = () => {
             <View className="flex-row items-center space-x-2 pb-2 mx-2" accessible={false}>
                 <TouchableOpacity
                     accessible={true}
-                    testID="btn-search"
+                    testID={Platform.OS === "android" ? "com.ultralesson.ulshopify:id/btn-search" : "btn-search"}
                     className="flex-row flex-1 space-x-2 bg-gray-50 rounded-md items-center"
                     onPress={() => {
                         dispatch(hideTabBar());
@@ -101,9 +133,25 @@ const HomeScreen = () => {
                         accessible={false}
                         className="flex-row flex-1 space-x-2 bg-gray-200 p-2 rounded-md items-center"
                     >
-                        <MagnifyingGlassIcon accessible={true} testID="img-search-icon" color={TERNARY_COLOR} />
+                        <MagnifyingGlassIcon
+                            accessible={true}
+                            testID={
+                                Platform.OS === "android"
+                                    ? "com.ultralesson.ulshopify:id/img-search-icon"
+                                    : "img-search-icon"
+                            }
+                            color={TERNARY_COLOR}
+                        />
 
-                        <Text testID="txt-search-for-more" accessible={true} className="text-gray-400">
+                        <Text
+                            testID={
+                                Platform.OS === "android"
+                                    ? "com.ultralesson.ulshopify:id/txt-search-for-more"
+                                    : "txt-search-for-more"
+                            }
+                            accessible={true}
+                            className="text-gray-400"
+                        >
                             Search for more!!
                         </Text>
                     </View>

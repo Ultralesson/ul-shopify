@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { Image, ScrollView, Text, View, TouchableOpacity } from "react-native";
+import { Image, ScrollView, Text, View, TouchableOpacity, Platform } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { useDispatch, useSelector } from "react-redux";
 import { HOME_SCREEN, PREPARING_ORDER_SCREEN } from "../../../constants/screens";
@@ -35,20 +35,26 @@ export const CartScreen = () => {
                 <View className="flex justify-center" accessible={false}>
                     <Image
                         accessible={true}
-                        testID="img-empty-cart"
+                        testID={
+                            Platform.OS === "android" ? "com.ultralesson.ulshopify:id/img-empty-cart" : "img-empty-cart"
+                        }
                         source={require("../../../assets/images/empty-cart.jpg")}
                         className="w-full h-60"
                     />
                     <Text
                         accessible={true}
-                        testID="txt-empty-cart-message"
+                        testID={
+                            Platform.OS === "android"
+                                ? "com.ultralesson.ulshopify:id/txt-empty-cart-message"
+                                : "txt-empty-cart-message"
+                        }
                         className="mx-auto text-gray-500 text-lg italic"
                     >
                         Your Cart is Empty!!
                     </Text>
                     <TouchableOpacity
                         accessible={true}
-                        testID="btn-back"
+                        testID={Platform.OS === "android" ? "com.ultralesson.ulshopify:id/btn-back" : "btn-back"}
                         onPress={() => {
                             dispatch(showTabBar());
                             navigation.navigate(HOME_SCREEN);
@@ -56,7 +62,11 @@ export const CartScreen = () => {
                     >
                         <Text
                             accessible={true}
-                            testID="txt-continue-shopping"
+                            testID={
+                                Platform.OS === "android"
+                                    ? "com.ultralesson.ulshopify:id/txt-continue-shopping"
+                                    : "txt-continue-shopping"
+                            }
                             className="mx-auto px-6 py-3 mt-3 text-white font-bold rounded-lg"
                             style={{ backgroundColor: SECONDARY_COLOR }}
                         >
@@ -70,7 +80,7 @@ export const CartScreen = () => {
                 <>
                     <TouchableOpacity
                         accessible={true}
-                        testID="btn-back"
+                        testID={Platform.OS === "android" ? "com.ultralesson.ulshopify:id/btn-back" : "btn-back"}
                         className="ml-5 mt-3"
                         onPress={() => {
                             dispatch(showTabBar());
@@ -80,7 +90,13 @@ export const CartScreen = () => {
                         <ArrowLeftIcon size={25} color="#000000" />
                     </TouchableOpacity>
                     <View className="text-lg" accessible={false}>
-                        <Text accessible={true} testID="txt-my-cart" className="text-lg font-bold mx-auto">
+                        <Text
+                            accessible={true}
+                            testID={
+                                Platform.OS === "android" ? "com.ultralesson.ulshopify:id/txt-my-cart" : "txt-my-cart"
+                            }
+                            className="text-lg font-bold mx-auto"
+                        >
                             My Cart
                         </Text>
                     </View>
@@ -97,10 +113,17 @@ export const CartScreen = () => {
                                             <View accessible={false}>
                                                 <Image
                                                     accessible={true}
-                                                    testID={`img-cart-product-${product.name
-                                                        .toLowerCase()
-                                                        .split(" ")
-                                                        .join("-")}`}
+                                                    testID={
+                                                        Platform.OS === "android"
+                                                            ? `com.ultralesson.ulshopify:id/img-cart-product-${product.name
+                                                                  .toLowerCase()
+                                                                  .split(" ")
+                                                                  .join("-")}`
+                                                            : `img-cart-product-${product.name
+                                                                  .toLowerCase()
+                                                                  .split(" ")
+                                                                  .join("-")}`
+                                                    }
                                                     source={{
                                                         uri: product.image_url,
                                                     }}
@@ -111,7 +134,11 @@ export const CartScreen = () => {
                                                 <View accessible={false}>
                                                     <Text
                                                         accessible={true}
-                                                        testID="txt-product-name"
+                                                        testID={
+                                                            Platform.OS === "android"
+                                                                ? "com.ultralesson.ulshopify:id/txt-product-name"
+                                                                : "txt-product-name"
+                                                        }
                                                         className="font-bold"
                                                     >
                                                         {product.name}
@@ -119,7 +146,11 @@ export const CartScreen = () => {
 
                                                     <Text
                                                         accessible={true}
-                                                        testID="txt-product-price"
+                                                        testID={
+                                                            Platform.OS === "android"
+                                                                ? "com.ultralesson.ulshopify:id/txt-product-price"
+                                                                : "txt-product-price"
+                                                        }
                                                         className="font-bold"
                                                         style={{ color: TERNARY_COLOR }}
                                                     >
@@ -129,7 +160,11 @@ export const CartScreen = () => {
                                                 <View accessible={false} className="flex-row space-x-2 items-center">
                                                     <TouchableOpacity
                                                         accessible={true}
-                                                        testID="btn-decrement"
+                                                        testID={
+                                                            Platform.OS === "android"
+                                                                ? "com.ultralesson.ulshopify:id/btn-decrement"
+                                                                : "btn-decrement"
+                                                        }
                                                         className="bg-white px-4 rounded-lg"
                                                         onPress={() => {
                                                             dispatch(
@@ -139,20 +174,36 @@ export const CartScreen = () => {
                                                             );
                                                         }}
                                                     >
-                                                        <Text accessible={true} testID="txt-minus" className="text-lg">
+                                                        <Text
+                                                            accessible={true}
+                                                            testID={
+                                                                Platform.OS === "android"
+                                                                    ? "com.ultralesson.ulshopify:id/txt-minus"
+                                                                    : "txt-minus"
+                                                            }
+                                                            className="text-lg"
+                                                        >
                                                             -
                                                         </Text>
                                                     </TouchableOpacity>
                                                     <Text
                                                         accessible={true}
-                                                        testID="txt-product-quantity"
+                                                        testID={
+                                                            Platform.OS === "android"
+                                                                ? "com.ultralesson.ulshopify:id/txt-product-quantity"
+                                                                : "txt-product-quantity"
+                                                        }
                                                         className="font-bold"
                                                     >
                                                         {product.quantity}
                                                     </Text>
                                                     <TouchableOpacity
                                                         accessible={true}
-                                                        testID="btn-increment"
+                                                        testID={
+                                                            Platform.OS === "android"
+                                                                ? "com.ultralesson.ulshopify:id/btn-increment"
+                                                                : "btn-increment"
+                                                        }
                                                         className="bg-white px-4 rounded-lg"
                                                         onPress={() => {
                                                             dispatch(
@@ -162,7 +213,15 @@ export const CartScreen = () => {
                                                             );
                                                         }}
                                                     >
-                                                        <Text accessible={true} testID="txt-plus" className="text-lg">
+                                                        <Text
+                                                            accessible={true}
+                                                            testID={
+                                                                Platform.OS === "android"
+                                                                    ? "com.ultralesson.ulshopify:id/txt-plus"
+                                                                    : "txt-plus"
+                                                            }
+                                                            className="text-lg"
+                                                        >
                                                             +
                                                         </Text>
                                                     </TouchableOpacity>
@@ -172,7 +231,11 @@ export const CartScreen = () => {
                                         <View accessible={false}>
                                             <TouchableOpacity
                                                 accessible={true}
-                                                testID="btn-delete"
+                                                testID={
+                                                    Platform.OS === "android"
+                                                        ? "com.ultralesson.ulshopify:id/btn-delete"
+                                                        : "btn-delete"
+                                                }
                                                 onPress={() => {
                                                     dispatch(
                                                         deleteItem({
@@ -183,7 +246,11 @@ export const CartScreen = () => {
                                             >
                                                 <TrashIcon
                                                     accessible={true}
-                                                    testID="icon-delete"
+                                                    testID={
+                                                        Platform.OS === "android"
+                                                            ? "com.ultralesson.ulshopify:id/icon-delete"
+                                                            : "icon-delete"
+                                                    }
                                                     size={25}
                                                     color={TERNARY_COLOR}
                                                 />
@@ -201,10 +268,26 @@ export const CartScreen = () => {
                                     borderColor: TERNARY_COLOR,
                                 }}
                             >
-                                <Text accessible={true} testID="txt-total-price" className="text-xs text-gray-400 mb-1">
+                                <Text
+                                    accessible={true}
+                                    testID={
+                                        Platform.OS === "android"
+                                            ? "com.ultralesson.ulshopify:id/txt-total-price"
+                                            : "txt-total-price"
+                                    }
+                                    className="text-xs text-gray-400 mb-1"
+                                >
                                     Total Price
                                 </Text>
-                                <Text accessible={true} testID="txt-basket-total" className="font-bold text-md">
+                                <Text
+                                    accessible={true}
+                                    testID={
+                                        Platform.OS === "android"
+                                            ? "com.ultralesson.ulshopify:id/txt-basket-total"
+                                            : "txt-basket-total"
+                                    }
+                                    className="font-bold text-md"
+                                >
                                     ₹ {basketTotal}
                                 </Text>
                             </View>
@@ -215,7 +298,11 @@ export const CartScreen = () => {
                             >
                                 <TouchableOpacity
                                     accessible={true}
-                                    testID="btn-place-order"
+                                    testID={
+                                        Platform.OS === "android"
+                                            ? "com.ultralesson.ulshopify:id/btn-place-order"
+                                            : "btn-place-order"
+                                    }
                                     onPress={() => {
                                         userModel("ADD_ORDER_DETAILS", {
                                             email: isAuthorized.email,
@@ -228,7 +315,11 @@ export const CartScreen = () => {
                                 >
                                     <Text
                                         accessible={true}
-                                        testID="txt-place-order"
+                                        testID={
+                                            Platform.OS === "android"
+                                                ? "com.ultralesson.ulshopify:id/txt-place-order"
+                                                : "txt-place-order"
+                                        }
                                         className="text-lg font-bold text-white"
                                     >
                                         Place Order

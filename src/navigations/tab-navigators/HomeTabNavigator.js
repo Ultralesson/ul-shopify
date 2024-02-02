@@ -28,6 +28,7 @@ import TrackOrderStackNavigator from "../stack-navigators/TrackOrderStackNavigat
 import { useSelector } from "react-redux";
 import { selectIsTabBarVisible } from "../../store/slices/appUIStateSlice";
 import { selectBasketItems } from "../../store/slices/basketSlice";
+import { Platform } from "react-native";
 
 const Tab = createBottomTabNavigator();
 
@@ -72,7 +73,18 @@ const HomeTabNavigator = () => {
                     options={{
                         tabBarLabel: "Home",
                         tabBarIcon: ({ size, color }) => {
-                            return <HomeIcon accessible={true} testID="icon-home" size={size} color={color} />;
+                            return (
+                                <HomeIcon
+                                    accessible={true}
+                                    testID={
+                                        Platform.OS === "android"
+                                            ? "com.ultralesson.ulshopify:id/icon-home"
+                                            : "icon-home"
+                                    }
+                                    size={size}
+                                    color={color}
+                                />
+                            );
                         },
                     }}
                     listeners={({ navigation, route }) => ({
@@ -90,7 +102,18 @@ const HomeTabNavigator = () => {
                             color: "gray",
                         },
                         tabBarIcon: ({ size, color }) => {
-                            return <ShoppingCartIcon accessible={true} testID="icon-cart" size={size} color={color} />;
+                            return (
+                                <ShoppingCartIcon
+                                    accessible={true}
+                                    testID={
+                                        Platform.OS === "android"
+                                            ? "com.ultralesson.ulshopify:id/icon-cart"
+                                            : "icon-cart"
+                                    }
+                                    size={size}
+                                    color={color}
+                                />
+                            );
                         },
                     }}
                     listeners={({ navigation, route }) => ({
@@ -109,7 +132,11 @@ const HomeTabNavigator = () => {
                             return (
                                 <MagnifyingGlassIcon
                                     accessible={true}
-                                    testID="icon-explore"
+                                    testID={
+                                        Platform.OS === "android"
+                                            ? "com.ultralesson.ulshopify:id/icon-explore"
+                                            : "icon-explore"
+                                    }
                                     size={size}
                                     color={color}
                                 />
@@ -123,7 +150,18 @@ const HomeTabNavigator = () => {
                     options={{
                         tabBarLabel: "Track",
                         tabBarIcon: ({ size, color }) => {
-                            return <TruckIcon accessible={true} testID="icon-track-order" size={size} color={color} />;
+                            return (
+                                <TruckIcon
+                                    accessible={true}
+                                    testID={
+                                        Platform.OS === "android"
+                                            ? "com.ultralesson.ulshopify:id/icon-track-order"
+                                            : "icon-track-order"
+                                    }
+                                    size={size}
+                                    color={color}
+                                />
+                            );
                         },
                     }}
                     listeners={({ navigation, route }) => ({
@@ -139,7 +177,18 @@ const HomeTabNavigator = () => {
                             display: getTabBarVisibility(route),
                         },
                         tabBarIcon: ({ size, color }) => {
-                            return <UserCircleIcon accessible={true} testID="icon-profile" size={size} color={color} />;
+                            return (
+                                <UserCircleIcon
+                                    accessible={true}
+                                    testID={
+                                        Platform.OS === "android"
+                                            ? "com.ultralesson.ulshopify:id/icon-profile"
+                                            : "icon-profile"
+                                    }
+                                    size={size}
+                                    color={color}
+                                />
+                            );
                         },
                     })}
                     listeners={({ navigation, route }) => ({

@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Text, View, Image, TouchableOpacity, ScrollView } from "react-native";
+import { Text, View, Image, TouchableOpacity, ScrollView, Platform } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { useDispatch, useSelector } from "react-redux";
 import { selectAuthState } from "../../store/slices/authSlice";
@@ -18,7 +18,11 @@ const OrderDetailCard = ({ order }) => {
             <View accessible={false}>
                 <Image
                     accessible={true}
-                    testID="img-ordered-product"
+                    testID={
+                        Platform.OS === "android"
+                            ? "com.ultralesson.ulshopify:id/img-ordered-product"
+                            : "img-ordered-product"
+                    }
                     source={{ uri: order.image_url }}
                     className="h-20 w-20 rounded-xl mr-4"
                     style={{ width: 80, height: 80 }}
@@ -26,21 +30,41 @@ const OrderDetailCard = ({ order }) => {
                 />
             </View>
             <View className="flex-1" accessible={false}>
-                <Text accessible={true} testID="txt-order-name" className="font-bold text-md mb-2">
+                <Text
+                    accessible={true}
+                    testID={
+                        Platform.OS === "android" ? "com.ultralesson.ulshopify:id/txt-order-name" : "txt-order-name"
+                    }
+                    className="font-bold text-md mb-2"
+                >
                     {order.name}
                 </Text>
-                <Text accessible={true} testID="txt-order-price" className="text-sm font-bold">
+                <Text
+                    accessible={true}
+                    testID={
+                        Platform.OS === "android" ? "com.ultralesson.ulshopify:id/txt-order-price" : "txt-order-price"
+                    }
+                    className="text-sm font-bold"
+                >
                     ₹ {order.price.toFixed(2)}{" "}
                     <Text className="text-xs font-light italic text-gray-500">x {order.quantity}</Text>
                 </Text>
-                <Text accessible={true} testID="txt-purchased-on" className="text-sm text-gray-500">
+                <Text
+                    accessible={true}
+                    testID={
+                        Platform.OS === "android" ? "com.ultralesson.ulshopify:id/txt-purchased-on" : "txt-purchased-on"
+                    }
+                    className="text-sm text-gray-500"
+                >
                     Purchased On: {formattedDate}
                 </Text>
             </View>
             <View accessible={false} className="ml-1 justify-center">
                 <Text
                     accessible={true}
-                    testID="txt-order-status"
+                    testID={
+                        Platform.OS === "android" ? "com.ultralesson.ulshopify:id/txt-order-status" : "txt-order-status"
+                    }
                     className="text-white font-bold px-4 py-2 rounded-lg"
                     style={{ backgroundColor: SECONDARY_COLOR }}
                 >
@@ -73,7 +97,7 @@ const TrackOrderScreen = () => {
                     <View accessible={false} className="items-center mr-3">
                         <TouchableOpacity
                             accessible={true}
-                            testID="btn-back"
+                            testID={Platform.OS === "android" ? "com.ultralesson.ulshopify:id/btn-back" : "btn-back"}
                             onPress={() => {
                                 dispatch(showTabBar());
                                 navigation.navigate(HOME_SCREEN);
@@ -84,7 +108,15 @@ const TrackOrderScreen = () => {
                     </View>
                     {isAuthorized.status && (
                         <View accessible={false}>
-                            <Text accessible={true} testID="txt-track-your-order" className="font-bold text-xl">
+                            <Text
+                                accessible={true}
+                                testID={
+                                    Platform.OS === "android"
+                                        ? "com.ultralesson.ulshopify:id/txt-track-your-order"
+                                        : "txt-track-your-order"
+                                }
+                                className="font-bold text-xl"
+                            >
                                 Track Your Order
                             </Text>
                         </View>
@@ -98,14 +130,22 @@ const TrackOrderScreen = () => {
                                     <View accessible={false} className="h-full">
                                         <Image
                                             accessible={true}
-                                            testID="img-empty-orders"
+                                            testID={
+                                                Platform.OS === "android"
+                                                    ? "com.ultralesson.ulshopify:id/img-empty-orders"
+                                                    : "img-empty-orders"
+                                            }
                                             source={require("../../../assets/images/empty.png")}
                                             resizeMode="contain"
                                             className="w-full"
                                         />
                                         <Text
                                             accessible={true}
-                                            testID="txt-empty-orders"
+                                            testID={
+                                                Platform.OS === "android"
+                                                    ? "com.ultralesson.ulshopify:id/txt-empty-orders"
+                                                    : "txt-empty-orders"
+                                            }
                                             className="text-center font-bold text-xl"
                                         >
                                             Your order list empty!!
@@ -123,17 +163,29 @@ const TrackOrderScreen = () => {
                     <View accessible={false} className="flex justify-center items-center px-4">
                         <Image
                             accessible={true}
-                            testID="img-order-details"
+                            testID={
+                                Platform.OS === "android"
+                                    ? "com.ultralesson.ulshopify:id/img-order-details"
+                                    : "img-order-details"
+                            }
                             source={require("../../../assets/images/order-details.jpg")} // Replace with your image path
                             style={{ width: 200, height: 200, marginBottom: 20 }}
                             resizeMode="contain"
                         />
-                        <Text accessible={true} testID="txt-track-order-login-message" className="font-bold text-md">
+                        <Text
+                            accessible={true}
+                            testID={
+                                Platform.OS === "android"
+                                    ? "com.ultralesson.ulshopify:id/txt-track-order-login-message"
+                                    : "txt-track-order-login-message"
+                            }
+                            className="font-bold text-md"
+                        >
                             Log in to view and track your orders.
                         </Text>
                         <TouchableOpacity
                             accessible={true}
-                            testID="btn-login"
+                            testID={Platform.OS === "android" ? "com.ultralesson.ulshopify:id/btn-login" : "btn-login"}
                             onPress={() => {
                                 dispatch(hideTabBar());
                                 navigation.navigate(PROFILE_SCREEN);
@@ -141,7 +193,9 @@ const TrackOrderScreen = () => {
                         >
                             <Text
                                 accessible={true}
-                                testID="txt-login"
+                                testID={
+                                    Platform.OS === "android" ? "com.ultralesson.ulshopify:id/txt-login" : "txt-login"
+                                }
                                 className="text-white font-bold px-10 py-4 rounded-lg mt-10"
                                 style={{ backgroundColor: SECONDARY_COLOR }}
                             >

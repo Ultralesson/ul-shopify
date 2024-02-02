@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Text, View, ScrollView, Keyboard, TouchableOpacity } from "react-native";
+import { Text, View, ScrollView, Keyboard, TouchableOpacity, Platform } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { useNavigation } from "@react-navigation/native";
 import * as Yup from "yup";
@@ -153,13 +153,25 @@ const RegistrationScreen = () => {
 
                         <View className="flex-row items-center justify-between flex-1" accessible={false}>
                             <View className="flex-row items-end" accessible={false}>
-                                <Text testID="txt-register-heading" accessible={true} className="font-bold text-4xl">
+                                <Text
+                                    testID={
+                                        Platform.OS === "android"
+                                            ? "com.ultralesson.ulshopify:id/txt-register-heading"
+                                            : "txt-register-heading"
+                                    }
+                                    accessible={true}
+                                    className="font-bold text-4xl"
+                                >
                                     Register
                                 </Text>
                                 <View className="flex-row space-x-1 mb-1" accessible={false}>
                                     <Text
                                         accessible={true}
-                                        testID="txt-to-subheading"
+                                        testID={
+                                            Platform.OS === "android"
+                                                ? "com.ultralesson.ulshopify:id/txt-to-subheading"
+                                                : "txt-to-subheading"
+                                        }
                                         className="italic ml-2"
                                         style={{ color: QUATERNARY_COLOR }}
                                     >
@@ -167,14 +179,22 @@ const RegistrationScreen = () => {
                                     </Text>
                                     <TouchableOpacity
                                         accessible={true}
-                                        testID="btn-ulshopify"
+                                        testID={
+                                            Platform.OS === "android"
+                                                ? "com.ultralesson.ulshopify:id/btn-ulshopify"
+                                                : "btn-ulshopify"
+                                        }
                                         onPress={() => {
                                             navigation.navigate(HOME_TAB);
                                         }}
                                     >
                                         <Text
                                             accessible={true}
-                                            testID="txt-ulshopify"
+                                            testID={
+                                                Platform.OS === "android"
+                                                    ? "com.ultralesson.ulshopify:id/txt-ulshopify"
+                                                    : "txt-ulshopify"
+                                            }
                                             className="font-bold"
                                             style={{ color: QUATERNARY_COLOR }}
                                         >
@@ -183,7 +203,16 @@ const RegistrationScreen = () => {
                                     </TouchableOpacity>
                                 </View>
                             </View>
-                            <UserPlusIcon accessible={true} testID="icon-user-plus" size="40" color="black" />
+                            <UserPlusIcon
+                                accessible={true}
+                                testID={
+                                    Platform.OS === "android"
+                                        ? "com.ultralesson.ulshopify:id/icon-user-plus"
+                                        : "icon-user-plus"
+                                }
+                                size="40"
+                                color="black"
+                            />
                         </View>
                     </View>
                 </View>

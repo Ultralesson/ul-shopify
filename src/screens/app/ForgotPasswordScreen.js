@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { LOGIN_SCREEN } from "../../../constants/screens";
 import { SafeAreaView } from "react-native-safe-area-context";
-import { Image, Keyboard, Text, View, TouchableOpacity } from "react-native";
+import { Image, Keyboard, Text, View, TouchableOpacity, Platform } from "react-native";
 import CustomInput from "../../components/common/CustomInput";
 import { ArrowRightIcon, EnvelopeIcon, LockClosedIcon } from "react-native-heroicons/outline";
 import { ICON_SIZE_SMALL } from "../../../constants/sizes";
@@ -107,7 +107,11 @@ const ForgotPasswordScreen = () => {
             <View accessible={false} className={`w-full h-48 -z-10  ${isKeyboardVisible ? "h-1/3" : ""}`}>
                 <Image
                     accessible={true}
-                    testID="img-forgot-password"
+                    testID={
+                        Platform.OS === "android"
+                            ? "com.ultralesson.ulshopify:id/img-forgot-password"
+                            : "img-forgot-password"
+                    }
                     source={require("../../../assets/images/forgotPassword.jpg")}
                     resizeMode="contain"
                     className={`w-full h-full mb-3`}
@@ -154,7 +158,9 @@ const ForgotPasswordScreen = () => {
                             </View>
                             <TouchableOpacity
                                 accessible={true}
-                                testID="btn-next"
+                                testID={
+                                    Platform.OS === "android" ? "com.ultralesson.ulshopify:id/btn-next" : "btn-next"
+                                }
                                 className={`ml-3 ${errors.email ? "-mt-4" : ""}`}
                                 onPress={async () => {
                                     setResetButtonState(true);
@@ -167,7 +173,15 @@ const ForgotPasswordScreen = () => {
                                     }
                                 }}
                             >
-                                <ArrowRightIcon testID="icon-next" size={ICON_SIZE_SMALL} color={ICON_COLOR} />
+                                <ArrowRightIcon
+                                    testID={
+                                        Platform.OS === "android"
+                                            ? "com.ultralesson.ulshopify:id/icon-next"
+                                            : "icon-next"
+                                    }
+                                    size={ICON_SIZE_SMALL}
+                                    color={ICON_COLOR}
+                                />
                             </TouchableOpacity>
                         </View>
                     )}

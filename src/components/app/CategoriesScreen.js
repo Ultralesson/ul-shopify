@@ -1,5 +1,5 @@
 import React from "react";
-import { View, Text, TouchableOpacity, Image, ScrollView } from "react-native";
+import { View, Text, TouchableOpacity, Image, ScrollView, Platform } from "react-native";
 import newArrivals from "../../../assets/data/new-arrivals.json";
 import trendingProducts from "../../../assets/data/trending-products.json";
 import topRatedProducts from "../../../assets/data/top-rated-products.json";
@@ -16,7 +16,7 @@ const CategoryCard = ({ imageUrl, title, products }) => {
     return (
         <TouchableOpacity
             accessible={false}
-            testID="ele-category"
+            testID={Platform.OS === "android" ? "com.ultralesson.ulshopify:id/ele-category" : "ele-category"}
             onPress={() => {
                 dispatch(hideTabBar());
                 navigation.navigate(LOADING_SCREEN, {
@@ -28,12 +28,20 @@ const CategoryCard = ({ imageUrl, title, products }) => {
             <View className="ml-1 mr-1" accessible={false}>
                 <Image
                     accessible={true}
-                    testID={`img-category-${title}`}
+                    testID={
+                        Platform.OS === "android"
+                            ? `com.ultralesson.ulshopify:id/img-category-${title}`
+                            : `img-category-${title}`
+                    }
                     source={imageUrl}
                     className="h-24 w-28 rounded object-cover"
                 />
             </View>
-            <Text accessible={true} testID="txt-title" className="mt-2 bottom-1 left-1 font-medium">
+            <Text
+                accessible={true}
+                testID={Platform.OS === "android" ? "com.ultralesson.ulshopify:id/txt-title" : "txt-title"}
+                className="mt-2 bottom-1 left-1 font-medium"
+            >
                 {title}
             </Text>
         </TouchableOpacity>

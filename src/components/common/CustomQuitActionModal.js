@@ -1,5 +1,5 @@
 import React from "react";
-import { Text, View } from "react-native";
+import { Platform, Text, View } from "react-native";
 import { Modal } from "react-native";
 import { SECONDARY_COLOR } from "../../../constants/colors";
 
@@ -22,7 +22,15 @@ const CustomQuitActionModal = ({ selector, positiveActonText, negativeActionText
                 <View accessible={false} className="bg-white rounded-xl p-12 pt-5 shadow-md shadow-black">
                     <View accessible={false} className="mt-3 mr-5 flex-row justify-end">
                         <View accessible={false} className="flex-row items-center justify-center pb-5">
-                            <Text accessible={true} testID="txt-quit-modal-question" className="text-center">
+                            <Text
+                                accessible={true}
+                                testID={
+                                    Platform.OS === "android"
+                                        ? "com.ultralesson.ulshopify:id/txt-quit-modal-question"
+                                        : "txt-quit-modal-question"
+                                }
+                                className="text-center"
+                            >
                                 {modalState.question}
                             </Text>
                         </View>
@@ -30,7 +38,11 @@ const CustomQuitActionModal = ({ selector, positiveActonText, negativeActionText
                     <View accessible={false} className="flex-row gap-3">
                         <Text
                             accessible={true}
-                            testID="btn-quit-modal-yes"
+                            testID={
+                                Platform.OS === "android"
+                                    ? "com.ultralesson.ulshopify:id/btn-quit-modal-yes"
+                                    : "btn-quit-modal-yes"
+                            }
                             onPress={() => {
                                 dispatch(changeQuitActionModal({ question: null, status: false, screen: null }));
                                 navigation.navigate(modalState.screen);
@@ -43,7 +55,11 @@ const CustomQuitActionModal = ({ selector, positiveActonText, negativeActionText
                         <View accessible={false} className="bg-white shadow-sm shadow-black rounded-lg">
                             <Text
                                 accessible={true}
-                                testID="btn-quit-modal-no"
+                                testID={
+                                    Platform.OS === "android"
+                                        ? "com.ultralesson.ulshopify:id/btn-quit-modal-no"
+                                        : "btn-quit-modal-no"
+                                }
                                 onPress={() => {
                                     dispatch(changeQuitActionModal({ question: null, status: false, screen: null }));
                                 }}

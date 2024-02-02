@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Text, TextInput, View, TouchableOpacity, FlatList, Image } from "react-native";
+import { Text, TextInput, View, TouchableOpacity, FlatList, Image, Platform } from "react-native";
 import { ChevronLeftIcon, MagnifyingGlassIcon } from "react-native-heroicons/outline";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { SECONDARY_COLOR } from "../../../constants/colors";
@@ -19,7 +19,9 @@ const ProductItem = ({ product }) => {
     return (
         <TouchableOpacity
             accessible={false}
-            testID="ele-auto-suggestion"
+            testID={
+                Platform.OS === "android" ? "com.ultralesson.ulshopify:id/ele-auto-suggestion" : "ele-auto-suggestion"
+            }
             className="p-4 flex-row items-center bg-gray-100 rounded-xl mx-3 mb-4  border-b-2 border-gray-300"
             onPress={() => {
                 dispatch(hideTabBar());
@@ -31,17 +33,31 @@ const ProductItem = ({ product }) => {
         >
             <Image
                 accessible={true}
-                testID={`img-product-${product.name.toLowerCase().split(" ").join("-")}`}
+                testID={
+                    Platform.OS === "android"
+                        ? `com.ultralesson.ulshopify:id/img-product-${product.name.toLowerCase().split(" ").join("-")}`
+                        : `img-product-${product.name.toLowerCase().split(" ").join("-")}`
+                }
                 source={{ uri: product.image_url }}
                 style={{ width: 50, height: 50, borderRadius: 25, marginRight: 10 }}
             />
             <View className="flex-1" accessible={false}>
-                <Text accessible={true} testID="txt-product-name" className="text-sm font-bold">
+                <Text
+                    accessible={true}
+                    testID={
+                        Platform.OS === "android" ? "com.ultralesson.ulshopify:id/txt-product-name" : "txt-product-name"
+                    }
+                    className="text-sm font-bold"
+                >
                     {product.name}
                 </Text>
                 <Text
                     accessible={true}
-                    testID="txt-product-description"
+                    testID={
+                        Platform.OS === "android"
+                            ? "com.ultralesson.ulshopify:id/txt-product-description"
+                            : "txt-product-description"
+                    }
                     className="text-gray-600 leading-4 text-xs"
                     numberOfLines={1}
                 >
@@ -94,7 +110,7 @@ const ExploreScreen = () => {
                 >
                     <TouchableOpacity
                         accessible={true}
-                        testID="btn-back"
+                        testID={Platform.OS === "android" ? "com.ultralesson.ulshopify:id/btn-back" : "btn-back"}
                         className="mr-2"
                         onPress={() => {
                             if (params?.navigateBackTo) {
@@ -112,7 +128,7 @@ const ExploreScreen = () => {
                     </TouchableOpacity>
                     <TextInput
                         accessible={true}
-                        testID="inp-search"
+                        testID={Platform.OS === "android" ? "com.ultralesson.ulshopify:id/inp-search" : "inp-search"}
                         className="flex-1"
                         placeholder="Explore"
                         value={searchTerm}
@@ -120,7 +136,7 @@ const ExploreScreen = () => {
                     />
                     <TouchableOpacity
                         accessible={true}
-                        testID="btn-search"
+                        testID={Platform.OS === "android" ? "com.ultralesson.ulshopify:id/btn-search" : "btn-search"}
                         onPress={() => {
                             if (filteredProducts.length !== 0) {
                                 navigation.navigate(LOADING_SCREEN, {
@@ -139,7 +155,13 @@ const ExploreScreen = () => {
                             }
                         }}
                     >
-                        <MagnifyingGlassIcon testID="icon-search" size={24} color="black" />
+                        <MagnifyingGlassIcon
+                            testID={
+                                Platform.OS === "android" ? "com.ultralesson.ulshopify:id/icon-search" : "icon-search"
+                            }
+                            size={24}
+                            color="black"
+                        />
                     </TouchableOpacity>
                 </View>
 
@@ -147,12 +169,24 @@ const ExploreScreen = () => {
                     <View accessible={false}>
                         <Image
                             accessible={true}
-                            testID="img-not-found"
+                            testID={
+                                Platform.OS === "android"
+                                    ? "com.ultralesson.ulshopify:id/img-not-found"
+                                    : "img-not-found"
+                            }
                             className="h-56 w-full"
                             source={require("../../../assets/images/not-found.jpg")} // Update with the path to your image
                             resizeMode="contain"
                         />
-                        <Text accessible={true} testID="txt-no-products-found" className="text-center text-lg">
+                        <Text
+                            accessible={true}
+                            testID={
+                                Platform.OS === "android"
+                                    ? "com.ultralesson.ulshopify:id/txt-no-products-found"
+                                    : "txt-no-products-found"
+                            }
+                            className="text-center text-lg"
+                        >
                             No products found.
                         </Text>
                     </View>
@@ -167,13 +201,17 @@ const ExploreScreen = () => {
                         {filteredProducts.length > 3 && !showMore && (
                             <TouchableOpacity
                                 accessible={true}
-                                testID="btn-more"
+                                testID={
+                                    Platform.OS === "android" ? "com.ultralesson.ulshopify:id/btn-more" : "btn-more"
+                                }
                                 className="items-center justify-center p-4"
                                 onPress={() => setShowMore(true)}
                             >
                                 <Text
                                     accessible={true}
-                                    testID="txt-more"
+                                    testID={
+                                        Platform.OS === "android" ? "com.ultralesson.ulshopify:id/txt-more" : "txt-more"
+                                    }
                                     className="text-center text-md text-white font-bold px-10 py-3 rounded-xl"
                                     style={{ backgroundColor: SECONDARY_COLOR }}
                                 >

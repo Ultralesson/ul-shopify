@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { Text, TouchableOpacity, View } from "react-native";
+import { Platform, Text, TouchableOpacity, View } from "react-native";
 import { Modal } from "react-native";
 import { ICON_SIZE_MEDIUM } from "../../constants/sizes";
 
@@ -44,27 +44,58 @@ const Toast = () => {
                         <View accessible={true} className="border h-10 mr-2" style={{ borderColor: "red" }}></View>
                         <InformationCircleIcon
                             accessible={true}
-                            testID="icon-information"
+                            testID={
+                                Platform.OS === "android"
+                                    ? "com.ultralesson.ulshopify:id/icon-information"
+                                    : "icon-information"
+                            }
                             size={ICON_SIZE_MEDIUM}
                             color={toastTemplate[alertModalState.type]?.color}
                         />
                         <View className="flex-row flex-1 justify-between ml-2 items-center" accessible={false}>
                             <View accessible={false}>
-                                <Text accessible={true} testID="txt-toast-heading" className="font-bold">
+                                <Text
+                                    accessible={true}
+                                    testID={
+                                        Platform.OS === "android"
+                                            ? "com.ultralesson.ulshopify:id/txt-toast-heading"
+                                            : "txt-toast-heading"
+                                    }
+                                    className="font-bold"
+                                >
                                     {toastTemplate[alertModalState.type]?.heading}
                                 </Text>
-                                <Text accessible={true} testID="txt-toast-message" className="text-gray-400">
+                                <Text
+                                    accessible={true}
+                                    testID={
+                                        Platform.OS === "android"
+                                            ? "com.ultralesson.ulshopify:id/txt-toast-message"
+                                            : "txt-toast-message"
+                                    }
+                                    className="text-gray-400"
+                                >
                                     {alertModalState.text}
                                 </Text>
                             </View>
                             <TouchableOpacity
                                 accessible={true}
-                                testID="btn-cross"
+                                testID={
+                                    Platform.OS === "android" ? "com.ultralesson.ulshopify:id/btn-cross" : "btn-cross"
+                                }
                                 onPress={() => {
                                     dispatch(changeToastModalState({ status: false, text: null }));
                                 }}
                             >
-                                <XMarkIcon accessible={true} testID="icon-cross" color={"gray"} size={15} />
+                                <XMarkIcon
+                                    accessible={true}
+                                    testID={
+                                        Platform.OS === "android"
+                                            ? "com.ultralesson.ulshopify:id/icon-cross"
+                                            : "icon-cross"
+                                    }
+                                    color={"gray"}
+                                    size={15}
+                                />
                             </TouchableOpacity>
                         </View>
                     </View>

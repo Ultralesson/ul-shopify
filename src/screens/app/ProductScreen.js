@@ -30,10 +30,18 @@ import { selectAuthState } from "../../store/slices/authSlice";
 const Label = ({ type, text }) => {
     return (
         <View className="flex-wrap flex-row items-center pb-2" accessible={false}>
-            <Text accessible={true} className="px-4 text-gray-500">
+            <Text
+                accessible={true}
+                testID={Platform.OS === "android" ? `com.ultralesson.ulshopify:id/txt-${type}` : `txt-${type}`}
+                className="px-4 text-gray-500"
+            >
                 {type}
             </Text>
-            <Text accessible={true} className="pt-2 pb-2 px-4 bg-blue-200 rounded-lg font-bold text-gray-700">
+            <Text
+                accessible={true}
+                testID={Platform.OS === "android" ? `com.ultralesson.ulshopify:id/txt-${text}` : `txt-${text}`}
+                className="pt-2 pb-2 px-4 bg-blue-200 rounded-lg font-bold text-gray-700"
+            >
                 {text}
             </Text>
         </View>
@@ -61,7 +69,7 @@ export const ProductScreen = () => {
             >
                 <TouchableOpacity
                     accessible={true}
-                    testID="btn-back"
+                    testID={Platform.OS === "android" ? "com.ultralesson.ulshopify:id/btn-back" : "btn-back"}
                     onPress={() => {
                         dispatch(showTabBar());
                         navigation.navigate(HOME_SCREEN);
@@ -82,7 +90,7 @@ export const ProductScreen = () => {
             >
                 <TouchableOpacity
                     accessible={true}
-                    testID="btn-search"
+                    testID={Platform.OS === "android" ? "com.ultralesson.ulshopify:id/btn-search" : "btn-search"}
                     onPress={() => {
                         dispatch(hideTabBar());
                         navigation.navigate(EXPLORE_SCREEN, {
@@ -104,7 +112,7 @@ export const ProductScreen = () => {
             >
                 <TouchableOpacity
                     accessible={true}
-                    testID="btn-cart"
+                    testID={Platform.OS === "android" ? "com.ultralesson.ulshopify:id/btn-cart" : "btn-cart"}
                     onPress={() => {
                         dispatch(hideTabBar());
                         navigation.navigate(LOADING_SCREEN, {
@@ -120,7 +128,13 @@ export const ProductScreen = () => {
                 className={`absolute right-5 rounded-full mt-4 p-1 z-10 ${Platform.OS === "ios" ? "top-14" : "top-6"}`}
                 style={{ backgroundColor: TERNARY_COLOR }}
             >
-                <Text accessible={true} testID="txt-cart-count" className="font-bold text-xs text-white">
+                <Text
+                    accessible={true}
+                    testID={
+                        Platform.OS === "android" ? "com.ultralesson.ulshopify:id/txt-cart-count" : "txt-cart-count"
+                    }
+                    className="font-bold text-xs text-white"
+                >
                     {basketItems.length}
                 </Text>
             </View>
@@ -128,7 +142,7 @@ export const ProductScreen = () => {
                 <View className="relative" accessible={false}>
                     <Image
                         accessible={true}
-                        testID="img-product"
+                        testID={Platform.OS === "android" ? "com.ultralesson.ulshopify:id/img-product" : "img-product"}
                         className="w-full h-96 bg-gray-300"
                         source={{
                             uri: product.image_url,
@@ -137,14 +151,26 @@ export const ProductScreen = () => {
 
                     <View className="bg-white" accessible={false}>
                         <View className="px-4 pt-4" accessible={false}>
-                            <Text accessible={true} testID="txt-product-name" className="text-2xl font-bold">
+                            <Text
+                                accessible={true}
+                                testID={
+                                    Platform.OS === "android"
+                                        ? "com.ultralesson.ulshopify:id/txt-product-name"
+                                        : "txt-product-name"
+                                }
+                                className="text-2xl font-bold"
+                            >
                                 {product.name}
                             </Text>
                             <View accessible={false} className="flex-row items-center justify-between">
                                 <View accessible={false} className="flex-row items-center space-x-1 mt-2">
                                     <StarIcon
                                         accessible={true}
-                                        testID="icon-rating"
+                                        testID={
+                                            Platform.OS === "android"
+                                                ? "com.ultralesson.ulshopify:id/icon-rating"
+                                                : "icon-rating"
+                                        }
                                         size={22}
                                         opacity={0.5}
                                         color={TERNARY_COLOR}
@@ -152,7 +178,11 @@ export const ProductScreen = () => {
                                     />
                                     <Text
                                         accessible={true}
-                                        testID="txt-rating-category"
+                                        testID={
+                                            Platform.OS === "android"
+                                                ? "com.ultralesson.ulshopify:id/txt-rating-category"
+                                                : "txt-rating-category"
+                                        }
                                         className="text-xs text-gray-400 font-bold"
                                     >
                                         <Text accessible={true} className="mx-1">
@@ -162,16 +192,36 @@ export const ProductScreen = () => {
                                     </Text>
                                 </View>
                                 <View accessible={false} className="flex-row items-end space-x-1">
-                                    <Text accessible={true} testID="txt-rupee-symbol" className="mb-1">
+                                    <Text
+                                        accessible={true}
+                                        testID={
+                                            Platform.OS === "android"
+                                                ? "com.ultralesson.ulshopify:id/txt-rupee-symbol"
+                                                : "txt-rupee-symbol"
+                                        }
+                                        className="mb-1"
+                                    >
                                         ₹
                                     </Text>
-                                    <Text accessible={true} testID="txt-product-price" className="text-xl font-bold">
+                                    <Text
+                                        accessible={true}
+                                        testID={
+                                            Platform.OS === "android"
+                                                ? "com.ultralesson.ulshopify:id/txt-product-price"
+                                                : "txt-product-price"
+                                        }
+                                        className="text-xl font-bold"
+                                    >
                                         {product.price}
                                     </Text>
                                 </View>
                             </View>
                             <Text
-                                testID="txt-product-description"
+                                testID={
+                                    Platform.OS === "android"
+                                        ? "com.ultralesson.ulshopify:id/txt-product-description"
+                                        : "txt-product-description"
+                                }
                                 accessible={true}
                                 className="text-gray-500 mt-2 pb-4 leading-5"
                             >
@@ -180,12 +230,32 @@ export const ProductScreen = () => {
                         </View>
                     </View>
 
-                    <Label testID="label-product-brand" type={"brand"} text={product.brand} />
-                    <Label testID="txt-product-seller-name" type={"seller"} text={product.seller.seller_name} />
+                    <Label
+                        testID={
+                            Platform.OS === "android"
+                                ? "com.ultralesson.ulshopify:id/label-product-brand"
+                                : "label-product-brand"
+                        }
+                        type={"brand"}
+                        text={product.brand}
+                    />
+                    <Label
+                        testID={
+                            Platform.OS === "android"
+                                ? "com.ultralesson.ulshopify:id/txt-product-seller-name"
+                                : "txt-product-seller-name"
+                        }
+                        type={"seller"}
+                        text={product.seller.seller_name}
+                    />
 
                     <TouchableOpacity
                         accessible={true}
-                        testID="btn-display-features"
+                        testID={
+                            Platform.OS === "android"
+                                ? "com.ultralesson.ulshopify:id/btn-display-features"
+                                : "btn-display-features"
+                        }
                         className="bg-white flex-row items-center space-x-2 p-4 "
                         onPress={() => {
                             setShowFeatures(!showFeatures);
@@ -193,17 +263,39 @@ export const ProductScreen = () => {
                     >
                         <InformationCircleIcon
                             accessible={true}
-                            testID="icon-information"
+                            testID={
+                                Platform.OS === "android"
+                                    ? "com.ultralesson.ulshopify:id/icon-information"
+                                    : "icon-information"
+                            }
                             size={25}
                             color={TERNARY_COLOR}
                         />
-                        <Text accessible={true} testID="txt-features" className="pl-2 flex-1 text-md font-bold">
+                        <Text
+                            accessible={true}
+                            testID={
+                                Platform.OS === "android" ? "com.ultralesson.ulshopify:id/txt-features" : "txt-features"
+                            }
+                            className="pl-2 flex-1 text-md font-bold"
+                        >
                             Features
                         </Text>
                         {showFeatures === false ? (
-                            <ChevronDownIcon accessible={true} testID="icon-down" size={25} color={TERNARY_COLOR} />
+                            <ChevronDownIcon
+                                accessible={true}
+                                testID={
+                                    Platform.OS === "android" ? "com.ultralesson.ulshopify:id/icon-down" : "icon-down"
+                                }
+                                size={25}
+                                color={TERNARY_COLOR}
+                            />
                         ) : (
-                            <ChevronUpIcon accessible={true} testID="icon-up" size={25} color={TERNARY_COLOR} />
+                            <ChevronUpIcon
+                                accessible={true}
+                                testID={Platform.OS === "android" ? "com.ultralesson.ulshopify:id/icon-up" : "icon-up"}
+                                size={25}
+                                color={TERNARY_COLOR}
+                            />
                         )}
                     </TouchableOpacity>
                     {showFeatures && (
@@ -217,13 +309,21 @@ export const ProductScreen = () => {
                                     >
                                         <PlusIcon
                                             accessible={true}
-                                            testID="icon-plus"
+                                            testID={
+                                                Platform.OS === "android"
+                                                    ? "com.ultralesson.ulshopify:id/icon-plus"
+                                                    : "icon-plus"
+                                            }
                                             size={15}
                                             color={QUATERNARY_COLOR}
                                         />
                                         <Text
                                             accessible={true}
-                                            testID="txt-feature-description"
+                                            testID={
+                                                Platform.OS === "android"
+                                                    ? "com.ultralesson.ulshopify:id/txt-feature-description"
+                                                    : "txt-feature-description"
+                                            }
                                             className="italic text-gray-500"
                                         >
                                             {feature.description}
@@ -239,7 +339,7 @@ export const ProductScreen = () => {
             <View className="mb-5" accessible={false}>
                 <TouchableOpacity
                     accessible={true}
-                    testID="btn-cart"
+                    testID={Platform.OS === "android" ? "com.ultralesson.ulshopify:id/btn-cart" : "btn-cart"}
                     className="mx-5 p-3 rounded-lg flex-row"
                     style={{ backgroundColor: SECONDARY_COLOR }}
                     onPress={() => {
@@ -268,7 +368,11 @@ export const ProductScreen = () => {
                     {!isItemAddedToCart ? (
                         <Text
                             accessible={true}
-                            testID="txt-add-to-cart"
+                            testID={
+                                Platform.OS === "android"
+                                    ? "com.ultralesson.ulshopify:id/txt-add-to-cart"
+                                    : "txt-add-to-cart"
+                            }
                             className="flex-1 text-white  font-bold text-lg text-center"
                         >
                             Add To Cart
@@ -276,14 +380,24 @@ export const ProductScreen = () => {
                     ) : (
                         <Text
                             accessible={true}
-                            testID="txt-go-to-cart"
+                            testID={
+                                Platform.OS === "android"
+                                    ? "com.ultralesson.ulshopify:id/txt-go-to-cart"
+                                    : "txt-go-to-cart"
+                            }
                             className="flex-1 text-white  font-bold text-lg text-center"
                         >
                             Go To Cart
                         </Text>
                     )}
 
-                    <PlusCircleIcon accessible={true} testID="icon-plus" size={30} color="#ffffff" opacity={0.9} />
+                    <PlusCircleIcon
+                        accessible={true}
+                        testID={Platform.OS === "android" ? "com.ultralesson.ulshopify:id/icon-plus" : "icon-plus"}
+                        size={30}
+                        color="#ffffff"
+                        opacity={0.9}
+                    />
                 </TouchableOpacity>
             </View>
         </SafeAreaView>

@@ -1,5 +1,5 @@
 import React from "react";
-import { Text, TouchableOpacity } from "react-native";
+import { Platform, Text, TouchableOpacity } from "react-native";
 import { PRIMARY_COLOR, SECONDARY_COLOR } from "../../../constants/colors";
 
 const CustomButton = ({ text, disabled, navigateTo }) => {
@@ -8,7 +8,11 @@ const CustomButton = ({ text, disabled, navigateTo }) => {
             accessible={true}
             className="ml-4 mr-4"
             onPress={navigateTo}
-            testID={`btn-${text.toLowerCase().split(" ").join("-")}`}
+            testID={
+                Platform.OS === "android"
+                    ? `com.ultralesson.ulshopify:id/btn-${text.toLowerCase().split(" ").join("-")}`
+                    : `btn-${text.toLowerCase().split(" ").join("-")}`
+            }
         >
             <Text
                 accessible={true}
@@ -17,7 +21,11 @@ const CustomButton = ({ text, disabled, navigateTo }) => {
                     backgroundColor: disabled ? SECONDARY_COLOR : PRIMARY_COLOR,
                     color: disabled ? "white" : "gray",
                 }}
-                testID={`txt-${text.toLowerCase().split(" ").join("-")}`}
+                testID={
+                    Platform.OS === "android"
+                        ? `com.ultralesson.ulshopify:id/txt-${text.toLowerCase().split(" ").join("-")}`
+                        : `txt-${text.toLowerCase().split(" ").join("-")}`
+                }
             >
                 {text}
             </Text>

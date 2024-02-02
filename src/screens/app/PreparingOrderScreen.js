@@ -5,6 +5,7 @@ import * as Progress from "react-native-progress";
 import { PRIMARY_COLOR, TERNARY_COLOR } from "../../../constants/colors";
 import { useNavigation } from "@react-navigation/native";
 import { THANKYOU_SCREEN } from "../../../constants/screens";
+import { Platform } from "react-native";
 
 export const PreparingOrderScreen = () => {
     const navigation = useNavigation();
@@ -28,7 +29,11 @@ export const PreparingOrderScreen = () => {
         >
             <Animatable.Image
                 accessible={true}
-                testID="img-preparing-order"
+                testID={
+                    Platform.OS === "android"
+                        ? "com.ultralesson.ulshopify:id/img-preparing-order"
+                        : "img-preparing-order"
+                }
                 source={require("../../../assets/gifs/preparing-order.gif")}
                 animation="slideInUp"
                 iterationCount={1}
@@ -36,7 +41,11 @@ export const PreparingOrderScreen = () => {
             />
             <Animatable.Text
                 accessible={true}
-                testID="txt-preparing-order-wait-message"
+                testID={
+                    Platform.OS === "android"
+                        ? "com.ultralesson.ulshopify:id/txt-preparing-order-wait-message"
+                        : "txt-preparing-order-wait-message"
+                }
                 animation="slideInUp"
                 iterationCount={1}
                 className="text-lg my-2 text-center mb-6"
@@ -45,7 +54,7 @@ export const PreparingOrderScreen = () => {
             </Animatable.Text>
             <Progress.Circle
                 accessible={true}
-                testID="img-progress"
+                testID={Platform.OS === "android" ? "com.ultralesson.ulshopify:id/img-progress" : "img-progress"}
                 size={60}
                 indeterminate={true}
                 color={TERNARY_COLOR}
