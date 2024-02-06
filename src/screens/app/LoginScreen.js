@@ -173,7 +173,7 @@ const LoginScreen = () => {
                                     accessible={true}
                                     testID={
                                         Platform.OS === "android"
-                                            ? "com.ultralesson.ulshopify:id/txt-ro-subheading"
+                                            ? "com.ultralesson.ulshopify:id/txt-to-subheading"
                                             : "txt-ro-subheading"
                                     }
                                     className="italic ml-2"

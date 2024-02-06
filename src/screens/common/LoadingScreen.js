@@ -19,7 +19,7 @@ const LoadingScreen = ({ route }) => {
                 navigation.navigate(navigateTo, {
                     ...otherParams, // Apart from the navigateTo param if we have other params then we pass onto navigateTo screen
                 });
-            }, randomNumber(3, 7) * 1000);
+            }, randomNumber(3, 5) * 1000);
         }
     }, [navigateTo]);
 

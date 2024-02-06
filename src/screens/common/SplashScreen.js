@@ -25,11 +25,11 @@ export const SplashScreen = () => {
             dispatch(toggleSplashScreenDisplay());
             navigation.navigate(HOME_TAB);
             navigation.navigate(HOME_SCREEN);
-        }, randomNumber(3, 7) * 1000);
+        }, randomNumber(3, 5) * 1000);
     }, []);
 
     return (
-        <View className="flex-1 items-center justify-center" accessible={false}>
+        <View className="flex-1 items-center justify-center bg-white" accessible={false}>
             <Animatable.Image
                 accessible={true}
                 testID="icon-ul"

@@ -72,6 +72,7 @@ const ExploreScreen = () => {
     const navigation = useNavigation();
     const dispatch = useDispatch();
     const { params } = useRoute();
+    const [input, setInput] = useState("");
 
     const allProducts = [
         ...newArrivals.products,
@@ -87,6 +88,7 @@ const ExploreScreen = () => {
     const displayedProducts = showMore ? filteredProducts : filteredProducts.slice(0, 3);
 
     useEffect(() => {
+        console.log(searchTerm);
         if (searchTerm) {
             const results = allProducts.filter(
                 (product) =>
@@ -131,8 +133,11 @@ const ExploreScreen = () => {
                         testID={Platform.OS === "android" ? "com.ultralesson.ulshopify:id/inp-search" : "inp-search"}
                         className="flex-1"
                         placeholder="Explore"
-                        value={searchTerm}
-                        onChangeText={setSearchTerm}
+                        value={input}
+                        onChangeText={(text) => {
+                            setInput(text);
+                            setSearchTerm(text);
+                        }}
                     />
                     <TouchableOpacity
                         accessible={true}

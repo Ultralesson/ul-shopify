@@ -8,7 +8,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { selectAuthState } from "../../store/slices/authSlice";
 import { EXPLORE_SCREEN, HOME_TAB, LOADING_SCREEN, WEBVIEW_SCREEN } from "../../../constants/screens";
 import { MagnifyingGlassIcon } from "react-native-heroicons/outline";
-import { TERNARY_COLOR } from "../../../constants/colors";
+import { QUATERNARY_COLOR, TERNARY_COLOR } from "../../../constants/colors";
 import { hideTabBar, showTabBar } from "../../store/slices/appUIStateSlice";
 import { ScrollView } from "react-native-gesture-handler";
 import CategoryScreen from "../../components/app/CategoriesScreen";
@@ -18,6 +18,7 @@ import trendingProducts from "../../../assets/data/trending-products.json";
 import topRatedProducts from "../../../assets/data/top-rated-products.json";
 import bestSellers from "../../../assets/data/best-sellers.json";
 import { userModel } from "../../../utilities/asyncStorage";
+import { locatorTemplate } from "../../../utilities/locatorTemplate";
 
 const HomeScreen = () => {
     const navigation = useNavigation();
@@ -80,7 +81,7 @@ const HomeScreen = () => {
                         }
                         className="font-bold text-gray-400 text-xs"
                     >
-                        Browser & Buy!
+                        Browse & Buy!
                     </Text>
                     {!username ? (
                         <Text
@@ -121,7 +122,7 @@ const HomeScreen = () => {
             </View>
             <View className="flex-row items-center space-x-2 pb-2 mx-2" accessible={false}>
                 <TouchableOpacity
-                    accessible={true}
+                    accessible={false}
                     testID={Platform.OS === "android" ? "com.ultralesson.ulshopify:id/btn-search" : "btn-search"}
                     className="flex-row flex-1 space-x-2 bg-gray-50 rounded-md items-center"
                     onPress={() => {
@@ -186,6 +187,19 @@ const HomeScreen = () => {
                     description={bestSellers.description}
                     productsList={bestSellers.products}
                 />
+
+                <View accessible={false}>
+                    <Text
+                        accessible={true}
+                        testID={locatorTemplate("txt-footer")}
+                        className="mx-auto mt-3 mb-1"
+                        style={{
+                            color: QUATERNARY_COLOR,
+                        }}
+                    >
+                        @All rights reserved to Ultralesson
+                    </Text>
+                </View>
             </ScrollView>
         </SafeAreaView>
     );
